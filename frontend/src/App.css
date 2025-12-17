@@ -4441,7 +4441,7 @@ animation: dots 1.5s steps(3, end) infinite;
     top: 100%;
     right: 0;
     width: 100%;
-    background: #fff;
+    background: #03440c;
     flex-direction: column;
     align-items: center;
     padding: 1.5rem 0;
