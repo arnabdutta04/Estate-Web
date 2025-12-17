@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import api from '../utils/api';
 import PropertyCard from '../components/PropertyCard';
+import LoadingSpinner from '../components/LoadingSpinner';
+
 
 const Properties = () => {
   const [properties, setProperties] = useState([]);
@@ -180,7 +182,14 @@ const Properties = () => {
     fetchProperties(filters, page);
     window.scrollTo(0, 0);
   };
-
+  if (loading) {
+  return (
+    <LoadingSpinner 
+      text="Loading Properties"
+      subtext="Finding your dream home"
+    />
+  );
+}
   return (
     <div className='properties-page'>
       <div className='container'>

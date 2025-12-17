@@ -1,40 +1,64 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { FaHome, FaUser, FaSignOutAlt, FaSignInAlt } from 'react-icons/fa';
+import {
+  FaHome,
+  FaUser,
+  FaSignOutAlt,
+  FaSignInAlt,
+  FaBars,
+  FaTimes
+} from 'react-icons/fa';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
+    setMenuOpen(false);
     navigate('/');
   };
 
   return (
     <nav className="navbar">
       <div className="container">
-        <Link to="/" className="logo">
+        <Link to="/" className="logo" onClick={() => setMenuOpen(false)}>
           <FaHome /> RealEstate Pro
         </Link>
-        
-        <ul className="nav-links">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/properties">Properties</Link></li>
-          <li><Link to="/brokers">Brokers</Link></li>
-          
+
+        {/* MOBILE MENU ICON */}
+        <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </div>
+
+        <ul className={`nav-links ${menuOpen ? 'active' : ''}`}>
+          <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
+          <li><Link to="/properties" onClick={() => setMenuOpen(false)}>Properties</Link></li>
+          <li><Link to="/brokers" onClick={() => setMenuOpen(false)}>Brokers</Link></li>
+
           {user ? (
             <>
-              <li><Link to="/dashboard"><FaUser /> {user.name}</Link></li>
-              <li><button onClick={handleLogout} className="btn-logout">
-                <FaSignOutAlt /> Logout
-              </button></li>
+              <li>
+                <Link to="/dashboard" onClick={() => setMenuOpen(false)}>
+                  <FaUser /> {user.name}
+                </Link>
+              </li>
+              <li>
+                <button onClick={handleLogout} className="btn-logout">
+                  <FaSignOutAlt /> Logout
+                </button>
+              </li>
             </>
           ) : (
             <>
-              <li><Link to="/login"><FaSignInAlt /> Login</Link></li>
-              <li><Link to="/register" className="btn-register">Register</Link></li>
+              <li><Link to="/login" onClick={() => setMenuOpen(false)}>
+                <FaSignInAlt /> Login
+              </Link></li>
+              <li><Link to="/register" className="btn-register" onClick={() => setMenuOpen(false)}>
+                Register
+              </Link></li>
             </>
           )}
         </ul>

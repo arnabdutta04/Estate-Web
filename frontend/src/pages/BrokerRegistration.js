@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import { FaHome, FaPlus, FaEdit, FaTrash, FaEye, FaCheckCircle, FaClock, FaTimesCircle, FaChartLine } from 'react-icons/fa';
+import LoadingSpinner from '../components/LoadingSpinner';
+
 
 const BrokerDashboard = () => {
   const navigate = useNavigate();
@@ -106,7 +108,13 @@ const BrokerDashboard = () => {
       </div>
     );
   }
-
+  {isSubmitting && (
+       <LoadingSpinner 
+         text="Processing Registration"
+         subtext="Please wait..."
+         overlay={true}
+       />
+     )}
   return (
     <div className="broker-dashboard-page">
       <div className="container">

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const Register = () => {
     role: 'customer'
   });
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // ✅ ADD THIS LINE
   const { register } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -21,17 +23,29 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setIsLoading(true); // ✅ START LOADING
     
     try {
       await register(formData);
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
+    } finally {
+      setIsLoading(false); // ✅ STOP LOADING
     }
   };
 
   return (
     <div className="auth-page">
+      {/* ✅ LOADING SPINNER GOES HERE - INSIDE THE RETURN */}
+      {isLoading && (
+        <LoadingSpinner 
+          text="Creating Account"
+          subtext="Setting up your profile..."
+          overlay={true}
+        />
+      )}
+
       <div className="auth-container">
         <h2>Create Your Account</h2>
         {error && <div className="error-message">{error}</div>}
@@ -90,7 +104,9 @@ const Register = () => {
             </select>
           </div>
 
-          <button type="submit" className="btn-primary">Register</button>
+          <button type="submit" className="btn-primary" disabled={isLoading}>
+            {isLoading ? 'Creating Account...' : 'Register'}
+          </button>
         </form>
 
         <p className="auth-link">

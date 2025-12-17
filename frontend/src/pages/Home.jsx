@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CityAutocomplete from '../components/CityAutocomplete';
 import { FaSearch, FaHome, FaHandshake, FaChartLine } from 'react-icons/fa';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const Home = () => {
   const [searchFilters, setSearchFilters] = useState({
@@ -30,7 +31,7 @@ const Home = () => {
   const handleSuggestionClick = (filter) => {
     navigate(`/properties?${new URLSearchParams(filter).toString()}`);
   };
-
+  <LoadingSpinner text="Your Text" subtext="Your Subtext" />
   return (
     <div className="home-page">
 
@@ -156,7 +157,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
     </div>
   );
 };

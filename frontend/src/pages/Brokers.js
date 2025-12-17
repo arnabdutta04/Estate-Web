@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
-import { FaStar, FaMapMarkerAlt, FaPhone, FaEnvelope, FaBuilding, FaBriefcase, FaCheckCircle, FaFilter, FaSearch } from 'react-icons/fa';
+import { FaStar, FaMapMarkerAlt, FaPhone, FaEnvelope, FaBuilding, FaBriefcase, FaCheckCircle, FaFilter, FaSearch, FaHome } from 'react-icons/fa';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const Brokers = () => {
   const [brokers, setBrokers] = useState([]);
@@ -17,14 +18,14 @@ const Brokers = () => {
   const specializations = [...new Set(brokers.flatMap(b => b.specialization || []))];
 
   useEffect(() => {
-  filterBrokers();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [searchTerm, selectedCity, selectedSpecialization, brokers]);
+    filterBrokers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchTerm, selectedCity, selectedSpecialization, brokers]);
 
- useEffect(() => {
-  fetchBrokers();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
+  useEffect(() => {
+    fetchBrokers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const fetchBrokers = async () => {
     try {
@@ -73,10 +74,15 @@ const Brokers = () => {
     setSelectedSpecialization('');
   };
 
-  if (loading) {
-    return <div className="loading">Loading brokers...</div>;
+  // Updated loading component to match Properties.js style
+if (loading) {
+    return (
+      <LoadingSpinner 
+        text="Finding Top Brokers"
+        subtext="Connecting you with verified professionals"
+      />
+    );
   }
-
   return (
     <div className="brokers-page">
       <div className="container">
