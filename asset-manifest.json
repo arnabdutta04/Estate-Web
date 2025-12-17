@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Estate-Web/static/css/main.76826b90.css",
+    "main.js": "/Estate-Web/static/js/main.e11f561c.js",
+    "index.html": "/Estate-Web/index.html",
+    "main.76826b90.css.map": "/Estate-Web/static/css/main.76826b90.css.map",
+    "main.e11f561c.js.map": "/Estate-Web/static/js/main.e11f561c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.76826b90.css",
+    "static/js/main.e11f561c.js"
+  ]
+}
