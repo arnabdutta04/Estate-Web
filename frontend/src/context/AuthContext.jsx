@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
         const { data } = await api.get('/auth/profile');
         setUser(data);
       } catch (error) {
+        console.error('Error checking user login:', error);
         localStorage.removeItem('token');
       }
     }
@@ -25,17 +26,27 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (userData) => {
-    const { data } = await api.post('/auth/register', userData);
-    localStorage.setItem('token', data.token);
-    setUser(data);
-    return data;
+    try {
+      const { data } = await api.post('/auth/register', userData);
+      localStorage.setItem('token', data.token);
+      setUser(data.user || data);
+      return data;
+    } catch (error) {
+      console.error('Registration error:', error);
+      throw error;
+    }
   };
 
   const login = async (credentials) => {
-    const { data } = await api.post('/auth/login', credentials);
-    localStorage.setItem('token', data.token);
-    setUser(data);
-    return data;
+    try {
+      const { data } = await api.post('/auth/login', credentials);
+      localStorage.setItem('token', data.token);
+      setUser(data.user || data);
+      return data;
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
+    }
   };
 
   const logout = () => {

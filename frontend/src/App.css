@@ -4354,37 +4354,6 @@ html {
   .price-value {
     width: 100%;
   }
-}
-/* Loading Animation */ 
-.loading-container { 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  justify-content: center;
-  padding: 5rem 2rem; 
-  min-height: 400px; 
-} 
-.loading-icon { 
-font-size: 4rem;
-color: var(--gold); 
-animation: rotateHouse 2s linear infinite; 
-margin-bottom: 1.5rem; 
-filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.3));
-} 
-@keyframes rotateHouse {
-   0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); } 
-} 
-.loading-text 
-{ font-size: 1.3rem; 
-color: var(--text-dark); 
-font-weight: 600; 
-font-family: 'Playfair Display', 
-serif; margin-bottom: 0.5rem; 
-}
- .loading-subtext {
-  font-size: 1rem; 
-  color: var(--text-light); 
 } /* Loading Animation */ 
 .loading-container { 
 display: flex; 
@@ -4407,7 +4376,7 @@ min-height: 400px;
 .loading-subtext { 
 font-size: 1rem; 
 color: var(--text-light); 
-} /* Loading dots animation */ 
+}  
 .loading-dots::after { 
 content: '.'; 
 animation: dots 1.5s steps(3, end) infinite; 
@@ -4456,4 +4425,24 @@ animation: dots 1.5s steps(3, end) infinite;
   .nav-links.active {
     display: flex;
   }
+.phone-input-wrapper {
+  display: flex;
+  gap: 8px;
+}
 
+.country-select {
+  width: 140px;
+  flex-shrink: 0;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  fontSize: 1rem;
+}
+
+.phone-number-input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  fontSize: 1rem;
+}
