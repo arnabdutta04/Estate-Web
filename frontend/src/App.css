@@ -4428,6 +4428,7 @@ animation: dots 1.5s steps(3, end) infinite;
   display: none;
   font-size: 1.8rem;
   cursor: pointer;
+  color: #FFD700; /* Gold color */
 }
 
 @media (max-width: 768px) {
@@ -4451,3 +4452,8 @@ animation: dots 1.5s steps(3, end) infinite;
     display: flex;
   }
 }
+
+  .nav-links.active {
+    display: flex;
+  }
+
