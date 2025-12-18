@@ -34,8 +34,8 @@ const Login = () => {
       {/* Loading Spinner Overlay */}
       {isLoading && (
         <LoadingSpinner 
-          text="Logging In"
-          subtext="Please wait..."
+          text="Creating Account"
+          subtext="First request may take up to 60 seconds (free server waking up)..."
           overlay={true}
           size="large"
         />

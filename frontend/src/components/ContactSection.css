@@ -71,7 +71,7 @@
 .contact-heading {
   font-size: 3.5rem;
   font-weight: 400;
-  color: #8b6f47;
+  color: #297532;
   margin-bottom: 12px;
   line-height: 1.2;
   position: relative;
@@ -85,7 +85,7 @@
   left: 0;
   width: 60px;
   height: 3px;
-  background: linear-gradient(90deg, #a8824b, transparent);
+  background: linear-gradient(90deg, #318a3f, transparent);
   animation: expandWidth 1s ease-out 0.3s both;
 }
 
@@ -96,7 +96,7 @@
 
 .contact-subtitle {
   font-size: 1.1rem;
-  color: #6b5d52;
+  color: #2d683b;
   margin-bottom: 32px;
   font-style: italic;
   opacity: 0;
@@ -110,7 +110,7 @@
 
 .contact-description {
   font-size: 1rem;
-  color: #6b5d52;
+  color: #155c29;
   line-height: 1.8;
   margin-bottom: 48px;
   max-width: 400px;

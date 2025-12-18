@@ -69,19 +69,19 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setIsLoading(true);
-    
-    try {
-      await register(formData);
-      navigate('/dashboard');
-    } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  e.preventDefault();
+  setError('');
+  setIsLoading(true);
+  
+  try {
+    await register(formData);
+    navigate('/dashboard');
+  } catch (err) {
+    setError(err.response?.data?.message || 'Registration failed. Please try again.');
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <div className="auth-page">
