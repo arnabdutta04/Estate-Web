@@ -1,5 +1,4 @@
-const Property = require('../models/Property');
-const Broker = require('../models/Broker');
+const { pool } = require('../config/db');
 
 // @desc    Get all properties with filters
 // @route   GET /api/properties
@@ -21,46 +20,98 @@ exports.getProperties = async (req, res) => {
       limit = 12
     } = req.query;
 
-    // Build filter object
-    let filter = { status: 'available' };
+    // Build WHERE clause
+    let whereConditions = ["status = 'available'"];
+    let params = [];
+    let paramIndex = 1;
 
-    if (propertyType) filter.propertyType = propertyType;
-    if (listingType) filter.listingType = listingType;
-    if (city) filter['location.city'] = new RegExp(city, 'i');
-    if (condition) filter.condition = condition;
-    if (bedrooms) filter['specifications.bedrooms'] = { $gte: parseInt(bedrooms) };
-    if (bathrooms) filter['specifications.bathrooms'] = { $gte: parseInt(bathrooms) };
-
-    // Price range
-    if (minPrice || maxPrice) {
-      filter.price = {};
-      if (minPrice) filter.price.$gte = parseInt(minPrice);
-      if (maxPrice) filter.price.$lte = parseInt(maxPrice);
+    if (propertyType) {
+      whereConditions.push(`property_type = $${paramIndex}`);
+      params.push(propertyType);
+      paramIndex++;
     }
 
-    // Area range
-    if (minArea || maxArea) {
-      filter['specifications.area'] = {};
-      if (minArea) filter['specifications.area'].$gte = parseInt(minArea);
-      if (maxArea) filter['specifications.area'].$lte = parseInt(maxArea);
+    if (listingType) {
+      whereConditions.push(`listing_type = $${paramIndex}`);
+      params.push(listingType);
+      paramIndex++;
     }
 
-    const properties = await Property.find(filter)
-      .populate('broker', 'company licenseNumber rating')
-      .populate('owner', 'name email phone')
-      .sort({ createdAt: -1 })
-      .limit(limit * 1)
-      .skip((page - 1) * limit);
+    if (city) {
+      whereConditions.push(`city ILIKE $${paramIndex}`);
+      params.push(`%${city}%`);
+      paramIndex++;
+    }
 
-    const count = await Property.countDocuments(filter);
+    if (condition) {
+      whereConditions.push(`condition = $${paramIndex}`);
+      params.push(condition);
+      paramIndex++;
+    }
+
+    if (bedrooms) {
+      whereConditions.push(`bedrooms >= $${paramIndex}`);
+      params.push(parseInt(bedrooms));
+      paramIndex++;
+    }
+
+    if (bathrooms) {
+      whereConditions.push(`bathrooms >= $${paramIndex}`);
+      params.push(parseInt(bathrooms));
+      paramIndex++;
+    }
+
+    if (minPrice) {
+      whereConditions.push(`price >= $${paramIndex}`);
+      params.push(parseInt(minPrice));
+      paramIndex++;
+    }
+
+    if (maxPrice) {
+      whereConditions.push(`price <= $${paramIndex}`);
+      params.push(parseInt(maxPrice));
+      paramIndex++;
+    }
+
+    if (minArea) {
+      whereConditions.push(`square_feet >= $${paramIndex}`);
+      params.push(parseInt(minArea));
+      paramIndex++;
+    }
+
+    if (maxArea) {
+      whereConditions.push(`square_feet <= $${paramIndex}`);
+      params.push(parseInt(maxArea));
+      paramIndex++;
+    }
+
+    const whereClause = whereConditions.join(' AND ');
+    const offset = (page - 1) * limit;
+
+    // Get properties
+    const query = `
+      SELECT * FROM properties 
+      WHERE ${whereClause}
+      ORDER BY created_at DESC
+      LIMIT $${paramIndex} OFFSET $${paramIndex + 1}
+    `;
+    params.push(parseInt(limit), offset);
+
+    const result = await pool.query(query, params);
+
+    // Get total count
+    const countQuery = `SELECT COUNT(*) FROM properties WHERE ${whereClause}`;
+    const countResult = await pool.query(countQuery, params.slice(0, -2)); // Remove limit and offset
+    const total = parseInt(countResult.rows[0].count);
 
     res.json({
-      properties,
-      totalPages: Math.ceil(count / limit),
-      currentPage: page,
-      total: count
+      properties: result.rows,
+      totalPages: Math.ceil(total / limit),
+      currentPage: parseInt(page),
+      total
     });
   } catch (error) {
+    console.error('Error in getProperties:', error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -70,20 +121,28 @@ exports.getProperties = async (req, res) => {
 // @access  Public
 exports.getPropertyById = async (req, res) => {
   try {
-    const property = await Property.findById(req.params.id)
-      .populate('broker')
-      .populate('owner', 'name email phone');
+    const { id } = req.params;
 
-    if (!property) {
+    const result = await pool.query(
+      'SELECT * FROM properties WHERE id = $1',
+      [id]
+    );
+
+    if (result.rows.length === 0) {
       return res.status(404).json({ message: 'Property not found' });
     }
 
+    const property = result.rows[0];
+
     // Increment views
-    property.views += 1;
-    await property.save();
+    await pool.query(
+      'UPDATE properties SET views = views + 1 WHERE id = $1',
+      [id]
+    );
 
     res.json(property);
   } catch (error) {
+    console.error('Error in getPropertyById:', error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -93,24 +152,59 @@ exports.getPropertyById = async (req, res) => {
 // @access  Private (Broker only)
 exports.createProperty = async (req, res) => {
   try {
-    const broker = await Broker.findOne({ userId: req.user._id });
+    const {
+      title,
+      description,
+      property_type,
+      listing_type,
+      price,
+      address,
+      city,
+      state,
+      zipcode,
+      bedrooms,
+      bathrooms,
+      square_feet,
+      year_built,
+      condition,
+      features,
+      images,
+      furnished,
+      floors
+    } = req.body;
 
-    if (!broker) {
-      return res.status(403).json({ message: 'Only brokers can create properties' });
-    }
+    const result = await pool.query(
+      `INSERT INTO properties 
+       (title, description, property_type, listing_type, price, address, city, state, 
+        zipcode, bedrooms, bathrooms, square_feet, year_built, condition, features, 
+        images, furnished, floors, status) 
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, 'available') 
+       RETURNING *`,
+      [
+        title,
+        description,
+        property_type,
+        listing_type,
+        price,
+        address,
+        city,
+        state,
+        zipcode,
+        bedrooms,
+        bathrooms,
+        square_feet,
+        year_built,
+        condition,
+        features,
+        images,
+        furnished,
+        floors
+      ]
+    );
 
-    const property = await Property.create({
-      ...req.body,
-      broker: broker._id,
-      owner: req.user._id
-    });
-
-    // Add property to broker's properties list
-    broker.properties.push(property._id);
-    await broker.save();
-
-    res.status(201).json(property);
+    res.status(201).json(result.rows[0]);
   } catch (error) {
+    console.error('Error in createProperty:', error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -120,25 +214,69 @@ exports.createProperty = async (req, res) => {
 // @access  Private (Broker/Owner only)
 exports.updateProperty = async (req, res) => {
   try {
-    const property = await Property.findById(req.params.id);
+    const { id } = req.params;
+    const {
+      title,
+      description,
+      property_type,
+      listing_type,
+      price,
+      address,
+      city,
+      state,
+      zipcode,
+      bedrooms,
+      bathrooms,
+      square_feet,
+      year_built,
+      condition,
+      features,
+      images,
+      status,
+      furnished,
+      floors
+    } = req.body;
 
-    if (!property) {
+    const result = await pool.query(
+      `UPDATE properties 
+       SET title = $1, description = $2, property_type = $3, listing_type = $4, 
+           price = $5, address = $6, city = $7, state = $8, zipcode = $9,
+           bedrooms = $10, bathrooms = $11, square_feet = $12, year_built = $13,
+           condition = $14, features = $15, images = $16, status = $17,
+           furnished = $18, floors = $19, updated_at = CURRENT_TIMESTAMP
+       WHERE id = $20 
+       RETURNING *`,
+      [
+        title,
+        description,
+        property_type,
+        listing_type,
+        price,
+        address,
+        city,
+        state,
+        zipcode,
+        bedrooms,
+        bathrooms,
+        square_feet,
+        year_built,
+        condition,
+        features,
+        images,
+        status,
+        furnished,
+        floors,
+        id
+      ]
+    );
+
+    if (result.rows.length === 0) {
       return res.status(404).json({ message: 'Property not found' });
     }
 
-    // Check if user is owner or broker
-    if (property.owner.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ message: 'Not authorized to update this property' });
-    }
-
-    const updatedProperty = await Property.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true, runValidators: true }
-    );
-
-    res.json(updatedProperty);
+    res.json(result.rows[0]);
   } catch (error) {
+    console.error('Error in updateProperty:', error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -148,20 +286,20 @@ exports.updateProperty = async (req, res) => {
 // @access  Private (Broker/Owner only)
 exports.deleteProperty = async (req, res) => {
   try {
-    const property = await Property.findById(req.params.id);
+    const { id } = req.params;
 
-    if (!property) {
+    const result = await pool.query(
+      'DELETE FROM properties WHERE id = $1 RETURNING *',
+      [id]
+    );
+
+    if (result.rows.length === 0) {
       return res.status(404).json({ message: 'Property not found' });
     }
 
-    if (property.owner.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ message: 'Not authorized to delete this property' });
-    }
-
-    await property.deleteOne();
-
     res.json({ message: 'Property removed' });
   } catch (error) {
+    console.error('Error in deleteProperty:', error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -171,12 +309,16 @@ exports.deleteProperty = async (req, res) => {
 // @access  Public
 exports.getFeaturedProperties = async (req, res) => {
   try {
-    const properties = await Property.find({ featured: true, status: 'available' })
-      .populate('broker', 'company rating')
-      .limit(6);
+    const result = await pool.query(
+      `SELECT * FROM properties 
+       WHERE featured = true AND status = 'available' 
+       ORDER BY created_at DESC 
+       LIMIT 6`
+    );
 
-    res.json(properties);
+    res.json(result.rows);
   } catch (error) {
+    console.error('Error in getFeaturedProperties:', error);
     res.status(500).json({ message: error.message });
   }
 };
