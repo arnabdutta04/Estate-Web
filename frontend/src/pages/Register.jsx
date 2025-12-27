@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import LoadingSpinner from '../components/LoadingSpinner';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -75,7 +74,7 @@ const Register = () => {
   
   try {
     await register(formData);
-    navigate('/dashboard');
+    navigate('/');
   } catch (err) {
     setError(err.response?.data?.message || 'Registration failed. Please try again.');
   } finally {
@@ -84,15 +83,6 @@ const Register = () => {
 };
 
   return (
-    <div className="auth-page">
-      {isLoading && (
-        <LoadingSpinner 
-          text="Creating Account"
-          subtext="Setting up your profile..."
-          overlay={true}
-        />
-      )}
-
       <div className="auth-container">
         <h2>Create Your Account</h2>
         {error && <div className="error-message">{error}</div>}
@@ -197,8 +187,7 @@ const Register = () => {
           Already have an account? <Link to="/login">Login here</Link>
         </p>
       </div>
-    </div>
-  );
+    );
 };
 
 export default Register;

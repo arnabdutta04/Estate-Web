@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../utils/api';
-import LoadingSpinner from '../components/LoadingSpinner'; // ✅ ADD THIS IMPORT
+import LoadingSpinner from '../components/LoadingSpinner'; 
 import { FaBed, FaBath, FaRuler, FaMapMarkerAlt, FaCalendar, FaPhone, FaEnvelope, FaStar } from 'react-icons/fa';
 
 const PropertyDetail = () => {
@@ -23,7 +23,7 @@ const PropertyDetail = () => {
     fetchProperty();
   }, [id]);
 
-  // ✅ LOADING CHECK MOVED INSIDE COMPONENT
+
   if (loading) {
     return (
       <LoadingSpinner 
@@ -34,7 +34,6 @@ const PropertyDetail = () => {
     );
   }
 
-  // ✅ ERROR CHECK
   if (!property) {
     return <div className="error">Property not found</div>;
   }

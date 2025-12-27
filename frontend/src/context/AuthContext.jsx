@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('token');
     if (token) {
       try {
-        const { data } = await api.get('/auth/profile');
+        const { data } = await api.get('/auth/me');
         setUser(data);
       } catch (error) {
         console.error('Error checking user login:', error);
@@ -29,7 +29,8 @@ export const AuthProvider = ({ children }) => {
     try {
       const { data } = await api.post('/auth/register', userData);
       localStorage.setItem('token', data.token);
-      setUser(data.user || data);
+      localStorage.setItem('user', JSON.stringify(data));
+      setUser(data);
       return data;
     } catch (error) {
       console.error('Registration error:', error);
@@ -41,7 +42,8 @@ export const AuthProvider = ({ children }) => {
     try {
       const { data } = await api.post('/auth/login', credentials);
       localStorage.setItem('token', data.token);
-      setUser(data.user || data);
+      localStorage.setItem('user', JSON.stringify(data));
+      setUser(data);
       return data;
     } catch (error) {
       console.error('Login error:', error);

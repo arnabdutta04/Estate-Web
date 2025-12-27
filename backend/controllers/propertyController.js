@@ -1,8 +1,9 @@
-const { pool } = require('../config/db');
+const prisma = require("../prismaClient");
 
-// @desc    Get all properties with filters
-// @route   GET /api/properties
-// @access  Public
+// ===============================
+// GET PROPERTIES WITH FILTERS
+// GET /api/properties
+// ===============================
 exports.getProperties = async (req, res) => {
   try {
     const {
@@ -17,308 +18,141 @@ exports.getProperties = async (req, res) => {
       maxArea,
       condition,
       page = 1,
-      limit = 12
+      limit = 12,
     } = req.query;
 
-    // Build WHERE clause
-    let whereConditions = ["status = 'available'"];
-    let params = [];
-    let paramIndex = 1;
+    const where = {
+      status: "AVAILABLE",
+      propertyType: propertyType || undefined,
+      listingType: listingType || undefined,
+      city: city ? { contains: city, mode: "insensitive" } : undefined,
+      condition: condition || undefined,
+      bedrooms: bedrooms ? { gte: Number(bedrooms) } : undefined,
+      bathrooms: bathrooms ? { gte: Number(bathrooms) } : undefined,
+      price: {
+        gte: minPrice ? Number(minPrice) : undefined,
+        lte: maxPrice ? Number(maxPrice) : undefined,
+      },
+      area: {
+        gte: minArea ? Number(minArea) : undefined,
+        lte: maxArea ? Number(maxArea) : undefined,
+      },
+    };
 
-    if (propertyType) {
-      whereConditions.push(`property_type = $${paramIndex}`);
-      params.push(propertyType);
-      paramIndex++;
-    }
+    const properties = await prisma.property.findMany({
+      where,
+      skip: (page - 1) * Number(limit),
+      take: Number(limit),
+      orderBy: { createdAt: "desc" },
+    });
 
-    if (listingType) {
-      whereConditions.push(`listing_type = $${paramIndex}`);
-      params.push(listingType);
-      paramIndex++;
-    }
-
-    if (city) {
-      whereConditions.push(`city ILIKE $${paramIndex}`);
-      params.push(`%${city}%`);
-      paramIndex++;
-    }
-
-    if (condition) {
-      whereConditions.push(`condition = $${paramIndex}`);
-      params.push(condition);
-      paramIndex++;
-    }
-
-    if (bedrooms) {
-      whereConditions.push(`bedrooms >= $${paramIndex}`);
-      params.push(parseInt(bedrooms));
-      paramIndex++;
-    }
-
-    if (bathrooms) {
-      whereConditions.push(`bathrooms >= $${paramIndex}`);
-      params.push(parseInt(bathrooms));
-      paramIndex++;
-    }
-
-    if (minPrice) {
-      whereConditions.push(`price >= $${paramIndex}`);
-      params.push(parseInt(minPrice));
-      paramIndex++;
-    }
-
-    if (maxPrice) {
-      whereConditions.push(`price <= $${paramIndex}`);
-      params.push(parseInt(maxPrice));
-      paramIndex++;
-    }
-
-    if (minArea) {
-      whereConditions.push(`square_feet >= $${paramIndex}`);
-      params.push(parseInt(minArea));
-      paramIndex++;
-    }
-
-    if (maxArea) {
-      whereConditions.push(`square_feet <= $${paramIndex}`);
-      params.push(parseInt(maxArea));
-      paramIndex++;
-    }
-
-    const whereClause = whereConditions.join(' AND ');
-    const offset = (page - 1) * limit;
-
-    // Get properties
-    const query = `
-      SELECT * FROM properties 
-      WHERE ${whereClause}
-      ORDER BY created_at DESC
-      LIMIT $${paramIndex} OFFSET $${paramIndex + 1}
-    `;
-    params.push(parseInt(limit), offset);
-
-    const result = await pool.query(query, params);
-
-    // Get total count
-    const countQuery = `SELECT COUNT(*) FROM properties WHERE ${whereClause}`;
-    const countResult = await pool.query(countQuery, params.slice(0, -2)); // Remove limit and offset
-    const total = parseInt(countResult.rows[0].count);
+    const total = await prisma.property.count({ where });
 
     res.json({
-      properties: result.rows,
+      properties,
+      total,
       totalPages: Math.ceil(total / limit),
-      currentPage: parseInt(page),
-      total
+      currentPage: Number(page),
     });
   } catch (error) {
-    console.error('Error in getProperties:', error);
-    res.status(500).json({ message: error.message });
+    console.error("getProperties error:", error);
+    res.status(500).json({ message: "Failed to fetch properties" });
   }
 };
 
-// @desc    Get single property
-// @route   GET /api/properties/:id
-// @access  Public
+// ===============================
+// GET SINGLE PROPERTY
+// GET /api/properties/:id
+// ===============================
 exports.getPropertyById = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = Number(req.params.id);
 
-    const result = await pool.query(
-      'SELECT * FROM properties WHERE id = $1',
-      [id]
-    );
-
-    if (result.rows.length === 0) {
-      return res.status(404).json({ message: 'Property not found' });
-    }
-
-    const property = result.rows[0];
-
-    // Increment views
-    await pool.query(
-      'UPDATE properties SET views = views + 1 WHERE id = $1',
-      [id]
-    );
+    const property = await prisma.property.update({
+      where: { id },
+      data: { views: { increment: 1 } },
+    });
 
     res.json(property);
   } catch (error) {
-    console.error('Error in getPropertyById:', error);
-    res.status(500).json({ message: error.message });
+    res.status(404).json({ message: "Property not found" });
   }
 };
 
-// @desc    Create new property
-// @route   POST /api/properties
-// @access  Private (Broker only)
+// ===============================
+// CREATE PROPERTY
+// POST /api/properties
+// ===============================
 exports.createProperty = async (req, res) => {
   try {
-    const {
-      title,
-      description,
-      property_type,
-      listing_type,
-      price,
-      address,
-      city,
-      state,
-      zipcode,
-      bedrooms,
-      bathrooms,
-      square_feet,
-      year_built,
-      condition,
-      features,
-      images,
-      furnished,
-      floors
-    } = req.body;
+    const data = req.body;
 
-    const result = await pool.query(
-      `INSERT INTO properties 
-       (title, description, property_type, listing_type, price, address, city, state, 
-        zipcode, bedrooms, bathrooms, square_feet, year_built, condition, features, 
-        images, furnished, floors, status) 
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, 'available') 
-       RETURNING *`,
-      [
-        title,
-        description,
-        property_type,
-        listing_type,
-        price,
-        address,
-        city,
-        state,
-        zipcode,
-        bedrooms,
-        bathrooms,
-        square_feet,
-        year_built,
-        condition,
-        features,
-        images,
-        furnished,
-        floors
-      ]
-    );
+    const property = await prisma.property.create({
+      data: {
+        ...data,
+        status: "AVAILABLE",
+      },
+    });
 
-    res.status(201).json(result.rows[0]);
+    res.status(201).json(property);
   } catch (error) {
-    console.error('Error in createProperty:', error);
-    res.status(500).json({ message: error.message });
+    console.error("createProperty error:", error);
+    res.status(500).json({ message: "Failed to create property" });
   }
 };
 
-// @desc    Update property
-// @route   PUT /api/properties/:id
-// @access  Private (Broker/Owner only)
+// ===============================
+// UPDATE PROPERTY
+// PUT /api/properties/:id
+// ===============================
 exports.updateProperty = async (req, res) => {
   try {
-    const { id } = req.params;
-    const {
-      title,
-      description,
-      property_type,
-      listing_type,
-      price,
-      address,
-      city,
-      state,
-      zipcode,
-      bedrooms,
-      bathrooms,
-      square_feet,
-      year_built,
-      condition,
-      features,
-      images,
-      status,
-      furnished,
-      floors
-    } = req.body;
+    const id = Number(req.params.id);
 
-    const result = await pool.query(
-      `UPDATE properties 
-       SET title = $1, description = $2, property_type = $3, listing_type = $4, 
-           price = $5, address = $6, city = $7, state = $8, zipcode = $9,
-           bedrooms = $10, bathrooms = $11, square_feet = $12, year_built = $13,
-           condition = $14, features = $15, images = $16, status = $17,
-           furnished = $18, floors = $19, updated_at = CURRENT_TIMESTAMP
-       WHERE id = $20 
-       RETURNING *`,
-      [
-        title,
-        description,
-        property_type,
-        listing_type,
-        price,
-        address,
-        city,
-        state,
-        zipcode,
-        bedrooms,
-        bathrooms,
-        square_feet,
-        year_built,
-        condition,
-        features,
-        images,
-        status,
-        furnished,
-        floors,
-        id
-      ]
-    );
+    const property = await prisma.property.update({
+      where: { id },
+      data: req.body,
+    });
 
-    if (result.rows.length === 0) {
-      return res.status(404).json({ message: 'Property not found' });
-    }
-
-    res.json(result.rows[0]);
+    res.json(property);
   } catch (error) {
-    console.error('Error in updateProperty:', error);
-    res.status(500).json({ message: error.message });
+    res.status(404).json({ message: "Property not found" });
   }
 };
 
-// @desc    Delete property
-// @route   DELETE /api/properties/:id
-// @access  Private (Broker/Owner only)
+// ===============================
+// DELETE PROPERTY
+// DELETE /api/properties/:id
+// ===============================
 exports.deleteProperty = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = Number(req.params.id);
 
-    const result = await pool.query(
-      'DELETE FROM properties WHERE id = $1 RETURNING *',
-      [id]
-    );
+    await prisma.property.delete({ where: { id } });
 
-    if (result.rows.length === 0) {
-      return res.status(404).json({ message: 'Property not found' });
-    }
-
-    res.json({ message: 'Property removed' });
+    res.json({ message: "Property removed" });
   } catch (error) {
-    console.error('Error in deleteProperty:', error);
-    res.status(500).json({ message: error.message });
+    res.status(404).json({ message: "Property not found" });
   }
 };
 
-// @desc    Get featured properties
-// @route   GET /api/properties/featured
-// @access  Public
+// ===============================
+// FEATURED PROPERTIES
+// GET /api/properties/featured
+// ===============================
 exports.getFeaturedProperties = async (req, res) => {
   try {
-    const result = await pool.query(
-      `SELECT * FROM properties 
-       WHERE featured = true AND status = 'available' 
-       ORDER BY created_at DESC 
-       LIMIT 6`
-    );
+    const properties = await prisma.property.findMany({
+      where: {
+        featured: true,
+        status: "AVAILABLE",
+      },
+      take: 6,
+      orderBy: { createdAt: "desc" },
+    });
 
-    res.json(result.rows);
+    res.json(properties);
   } catch (error) {
-    console.error('Error in getFeaturedProperties:', error);
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: "Failed to fetch featured properties" });
   }
 };

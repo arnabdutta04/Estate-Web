@@ -1,31 +1,48 @@
 const { Pool } = require('pg');
+require('dotenv').config();
 
-// Create PostgreSQL connection pool
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 });
 
-// Test connection
 const connectDB = async () => {
   try {
-    const client = await pool.connect();
-    console.log('✅ PostgreSQL Connected Successfully');
-    
-    // Create tables
+    const result = await pool.query('SELECT NOW()');
+    console.log('✅ Connected to PostgreSQL database');
+    console.log('📅 Database time:', result.rows[0].now);
     await createTables();
-    
-    client.release();
   } catch (error) {
-    console.error('❌ PostgreSQL Connection Error:', error.message);
+    console.error('❌ Database connection error:');
+    console.error('Error name:', error.name);
+    console.error('Error message:', error.message);
+    console.error('Error code:', error.code);
+    console.error('Full error:', error);
+    console.error('\n💡 Check your DATABASE_URL in .env file');
     process.exit(1);
   }
 };
 
-// Create all necessary tables
 const createTables = async () => {
+  const createPropertiesTable = `
+    CREATE TABLE IF NOT EXISTS properties (
+      id SERIAL PRIMARY KEY,
+      title VARCHAR(255) NOT NULL,
+      description TEXT,
+      price DECIMAL(10, 2) NOT NULL,
+      location VARCHAR(255) NOT NULL,
+      bedrooms INTEGER,
+      bathrooms INTEGER,
+      area DECIMAL(10, 2),
+      property_type VARCHAR(100),
+      status VARCHAR(50) DEFAULT 'available',
+      images TEXT[],
+      amenities TEXT[],
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+  `;
+
   const createUsersTable = `
     CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
@@ -37,57 +54,10 @@ const createTables = async () => {
     );
   `;
 
-  const createPropertiesTable = `
-    CREATE TABLE IF NOT EXISTS properties (
-      id SERIAL PRIMARY KEY,
-      title VARCHAR(255) NOT NULL,
-      description TEXT,
-      property_type VARCHAR(100),
-      listing_type VARCHAR(50),
-      price DECIMAL(12,2) NOT NULL,
-      address TEXT,
-      city VARCHAR(100),
-      state VARCHAR(100),
-      zipcode VARCHAR(20),
-      bedrooms INTEGER,
-      bathrooms INTEGER,
-      square_feet INTEGER,
-      year_built INTEGER,
-      condition VARCHAR(50),
-      features TEXT[],
-      images TEXT[],
-      furnished VARCHAR(50),
-      floors INTEGER,
-      status VARCHAR(50) DEFAULT 'available',
-      featured BOOLEAN DEFAULT false,
-      views INTEGER DEFAULT 0,
-      user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-      broker_id INTEGER,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-  `;
-
-  const createBrokersTable = `
-    CREATE TABLE IF NOT EXISTS brokers (
-      id SERIAL PRIMARY KEY,
-      name VARCHAR(255) NOT NULL,
-      email VARCHAR(255) UNIQUE NOT NULL,
-      phone VARCHAR(50),
-      company VARCHAR(255),
-      license_number VARCHAR(100),
-      bio TEXT,
-      image_url TEXT,
-      user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-  `;
-
   try {
-    await pool.query(createUsersTable);
     await pool.query(createPropertiesTable);
-    await pool.query(createBrokersTable);
-    console.log('✅ Database tables created/verified');
+    await pool.query(createUsersTable);
+    console.log('✅ Database tables created successfully');
   } catch (error) {
     console.error('❌ Error creating tables:', error.message);
   }

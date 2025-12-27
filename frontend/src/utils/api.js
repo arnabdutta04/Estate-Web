@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Use deployed backend URL
-const API_URL = process.env.REACT_APP_API_URL || 'https://estate-backend-vxsk.onrender.com/api';
+const API_URL = "http://localhost:5001/api";
 
 const api = axios.create({
   baseURL: API_URL,

@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import LoadingSpinner from '../components/LoadingSpinner';
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -21,7 +20,7 @@ const Login = () => {
     
     try {
       await login(formData);
-      navigate('/dashboard');
+      navigate('/');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     } finally {
@@ -30,17 +29,6 @@ const Login = () => {
   };
 
   return (
-    <div className="auth-page">
-      {/* Loading Spinner Overlay */}
-      {isLoading && (
-        <LoadingSpinner 
-          text="Creating Account"
-          subtext="First request may take up to 60 seconds (free server waking up)..."
-          overlay={true}
-          size="large"
-        />
-      )}
-
       <div className="auth-container">
         <h2>Login to Your Account</h2>
         {error && <div className="error-message">{error}</div>}
@@ -77,7 +65,6 @@ const Login = () => {
           Don't have an account? <Link to="/register">Register here</Link>
         </p>
       </div>
-    </div>
   );
 };
 
