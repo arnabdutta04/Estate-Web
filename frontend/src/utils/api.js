@@ -1,14 +1,12 @@
-import axios from 'axios';
-
-// Use deployed backend URL
-const API_URL = "https://estate-backend-1-jj9m.onrender.com/api";
+import axios from "axios";
 
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: "https://estate-backend-1-jj9m.onrender.com/api",
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
+
 
 // Add token to requests
 api.interceptors.request.use(
