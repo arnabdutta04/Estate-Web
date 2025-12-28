@@ -4446,3 +4446,85 @@ animation: dots 1.5s steps(3, end) infinite;
   border-radius: 4px;
   fontSize: 1rem;
 }
+/* ===== AUTH SPLIT OVERLAY ===== */
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  display: flex;                 /* 👈 MAIN POINT */
+  align-items: center;           /* 👈 vertical center */
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.4s ease;
+}
+.auth-center {
+  width: 600px;                  /* 👈 bar size */
+  max-width: 98%;
+  padding: 34px 20px; 
+  max-height: 55vh;
+  transform: translateY(-130px);
+}
+
+.auth-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-size: 28px;
+  background: none;
+  color: #ffe600;
+  border: none;
+  cursor: pointer;
+}
+/* FIXED AUTH BUTTONS (HEADER STYLE) */
+.auth-fixed {
+  position: fixed;          
+  top: 18px;
+  right: 32px;
+  display: flex;
+  gap: 20px;
+  z-index: 1000;           
+}
+
+/* Login – text only */
+.btn-auth-text {
+  background: transparent;
+  border: none;
+  font-family: "Playfair Display", serif;
+  color: #ffe600;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Register – outline */
+.btn-auth-outline {
+  background: transparent;
+  font-family: "Playfair Display", serif;
+  border: 1.5px solid rgba(255, 251, 0, 0.85);
+  color: #ffee05;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.btn-auth-outline:hover {
+  background: rgba(255, 255, 4, 0);
+}
+
+
+/* Animations */
+@keyframes slideRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(-30%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

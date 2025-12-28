@@ -10,7 +10,34 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Brokers from './pages/Brokers';
 import './App.css';
+import ProtectedRoute from "./components/ProtectedRoute";
 
+<Routes>
+  <Route
+    path="/home"
+    element={
+      <ProtectedRoute>
+        <Home />
+      </ProtectedRoute>
+    }
+  />
+  <Route
+    path="/properties"
+    element={
+      <ProtectedRoute>
+        <Properties />
+      </ProtectedRoute>
+    }
+  />
+  <Route
+    path="/brokers"
+    element={
+      <ProtectedRoute>
+        <Brokers />
+      </ProtectedRoute>
+    }
+  />
+</Routes>
 function AppContent() {
   const location = useLocation();
   const showNavbar = location.pathname !== '/';

@@ -8,59 +8,15 @@ const pool = new Pool({
 
 const connectDB = async () => {
   try {
-    const result = await pool.query('SELECT NOW()');
-    console.log('✅ Connected to PostgreSQL database');
-    console.log('📅 Database time:', result.rows[0].now);
-    await createTables();
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('MongoDB Connected Successfully');
   } catch (error) {
-    console.error('❌ Database connection error:');
-    console.error('Error name:', error.name);
-    console.error('Error message:', error.message);
-    console.error('Error code:', error.code);
-    console.error('Full error:', error);
-    console.error('\n💡 Check your DATABASE_URL in .env file');
+    console.error('MongoDB Connection Error:', error.message);
     process.exit(1);
   }
 };
 
-const createTables = async () => {
-  const createPropertiesTable = `
-    CREATE TABLE IF NOT EXISTS properties (
-      id SERIAL PRIMARY KEY,
-      title VARCHAR(255) NOT NULL,
-      description TEXT,
-      price DECIMAL(10, 2) NOT NULL,
-      location VARCHAR(255) NOT NULL,
-      bedrooms INTEGER,
-      bathrooms INTEGER,
-      area DECIMAL(10, 2),
-      property_type VARCHAR(100),
-      status VARCHAR(50) DEFAULT 'available',
-      images TEXT[],
-      amenities TEXT[],
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-  `;
-
-  const createUsersTable = `
-    CREATE TABLE IF NOT EXISTS users (
-      id SERIAL PRIMARY KEY,
-      name VARCHAR(255) NOT NULL,
-      email VARCHAR(255) UNIQUE NOT NULL,
-      password VARCHAR(255) NOT NULL,
-      role VARCHAR(50) DEFAULT 'user',
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-  `;
-
-  try {
-    await pool.query(createPropertiesTable);
-    await pool.query(createUsersTable);
-    console.log('✅ Database tables created successfully');
-  } catch (error) {
-    console.error('❌ Error creating tables:', error.message);
-  }
-};
-
-module.exports = { pool, connectDB };
+module.exports = connectDB;

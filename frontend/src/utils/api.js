@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Use deployed backend URL
-const API_URL = "http://localhost:5001/api";
+const API_URL = "https://estate-backend-1-jj9m.onrender.com/api";
 
 const api = axios.create({
   baseURL: API_URL,

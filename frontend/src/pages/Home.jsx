@@ -1,19 +1,41 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import CityAutocomplete from '../components/CityAutocomplete';
-import { FaSearch, FaHome, FaHandshake, FaChartLine } from 'react-icons/fa';
-import LoadingSpinner from '../components/LoadingSpinner';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import CityAutocomplete from "../components/CityAutocomplete";
+import {
+  FaSearch,
+  FaHome,
+  FaHandshake,
+  FaChartLine,
+  FaUserCircle,
+  FaSignOutAlt
+} from "react-icons/fa";
 
 const Home = () => {
-  const [searchFilters, setSearchFilters] = useState({
-    city: '',
-    propertyType: '',
-    listingType: '',
-    priceRange: ''
-  });
-
   const navigate = useNavigate();
 
+  const [user, setUser] = useState(null);
+  const [showMenu, setShowMenu] = useState(false);
+
+  const [searchFilters, setSearchFilters] = useState({
+    city: "",
+    propertyType: "",
+    listingType: "",
+    priceRange: ""
+  });
+
+  /* ================= AUTH GUARD ================= */
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+
+    if (!storedUser || !token) {
+      navigate("/"); // 🔒 redirect to Welcome page
+    } else {
+      setUser(JSON.parse(storedUser));
+    }
+  }, [navigate]);
+
+  /* ================= SEARCH ================= */
   const handleFilterChange = (name, value) => {
     setSearchFilters({ ...searchFilters, [name]: value });
   };
@@ -31,11 +53,41 @@ const Home = () => {
   const handleSuggestionClick = (filter) => {
     navigate(`/properties?${new URLSearchParams(filter).toString()}`);
   };
-  <LoadingSpinner text="Your Text" subtext="Your Subtext" />
+
+  /* ================= LOGOUT ================= */
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/"); // back to Welcome
+  };
+
+  // Prevent render before auth check
+  if (!user) return null;
+
   return (
     <div className="home-page">
 
-      {/* ================= HERO SECTION ================= */}
+      {/* ================= USER HEADER ================= */}
+      <div className="user-header">
+        <div
+          className="user-info"
+          onClick={() => setShowMenu(!showMenu)}
+        >
+          <FaUserCircle size={30} />
+          <span>{user.name || "Account"}</span>
+        </div>
+
+        {showMenu && (
+          <div className="user-dropdown">
+            <p>{user.email}</p>
+            <button onClick={handleLogout}>
+              <FaSignOutAlt /> Logout
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* ================= HERO ================= */}
       <section className="hero">
         <div className="container">
           <div className="hero-content">
@@ -45,11 +97,10 @@ const Home = () => {
             </h1>
 
             <p>
-              Discover your perfect property from our extensive collection of homes,
-              apartments, and commercial spaces.
+              Discover your perfect property from our extensive collection.
             </p>
 
-            {/* Search Bar */}
+            {/* SEARCH BAR */}
             <form onSubmit={handleSearch} className="search-bar">
               <div className="search-group">
                 <label>Location</label>
@@ -65,7 +116,7 @@ const Home = () => {
                 <select
                   value={searchFilters.propertyType}
                   onChange={(e) =>
-                    handleFilterChange('propertyType', e.target.value)
+                    handleFilterChange("propertyType", e.target.value)
                   }
                 >
                   <option value="">All Types</option>
@@ -82,7 +133,7 @@ const Home = () => {
                 <select
                   value={searchFilters.priceRange}
                   onChange={(e) =>
-                    handleFilterChange('priceRange', e.target.value)
+                    handleFilterChange("priceRange", e.target.value)
                   }
                 >
                   <option value="">Max Price</option>
@@ -99,38 +150,31 @@ const Home = () => {
               </button>
             </form>
 
-            {/* Suggestions */}
+            {/* SUGGESTIONS */}
             <div className="suggestions">
               <span>Popular Searches:</span>
-              <button onClick={() => handleSuggestionClick({ city: 'Mumbai' })}>
+              <button onClick={() => handleSuggestionClick({ city: "Mumbai" })}>
                 Mumbai
               </button>
-              <button onClick={() => handleSuggestionClick({ city: 'Delhi' })}>
+              <button onClick={() => handleSuggestionClick({ city: "Delhi" })}>
                 Delhi
               </button>
-              <button onClick={() => handleSuggestionClick({ city: 'Bangalore' })}>
+              <button onClick={() => handleSuggestionClick({ city: "Bangalore" })}>
                 Bangalore
               </button>
               <button
                 onClick={() =>
-                  handleSuggestionClick({ propertyType: 'villa' })
+                  handleSuggestionClick({ propertyType: "villa" })
                 }
               >
                 Villas
-              </button>
-              <button
-                onClick={() =>
-                  handleSuggestionClick({ listingType: 'rent' })
-                }
-              >
-                For Rent
               </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ================= FEATURES SECTION ================= */}
+      {/* ================= FEATURES ================= */}
       <section className="features">
         <div className="container">
           <h2>Why Choose Us</h2>
@@ -140,23 +184,24 @@ const Home = () => {
             <div className="feature-item">
               <FaHome />
               <h3>Wide Selection</h3>
-              <p>Thousands of verified properties across multiple cities</p>
+              <p>Thousands of verified properties</p>
             </div>
 
             <div className="feature-item">
               <FaHandshake />
               <h3>Trusted Brokers</h3>
-              <p>Licensed professionals with proven track records</p>
+              <p>Licensed professionals</p>
             </div>
 
             <div className="feature-item">
               <FaChartLine />
               <h3>Transparent Pricing</h3>
-              <p>No hidden costs, complete clarity</p>
+              <p>No hidden costs</p>
             </div>
           </div>
         </div>
       </section>
+
     </div>
   );
 };

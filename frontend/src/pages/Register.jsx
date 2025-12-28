@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
-const Register = () => {
+const Register = ({ switchToLogin }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -182,10 +182,16 @@ const Register = () => {
             {isLoading ? 'Creating Account...' : 'Register'}
           </button>
         </form>
+<p className="auth-link">
+        Already have an account?{" "}
+        <span
+          onClick={switchToLogin}
+          style={{ color: "#0f3d2e", fontWeight: 600, cursor: "pointer" }}
+        >
+          Login here
+        </span>
+      </p>
 
-        <p className="auth-link">
-          Already have an account? <Link to="/login">Login here</Link>
-        </p>
       </div>
     );
 };
