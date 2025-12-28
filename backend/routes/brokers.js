@@ -7,7 +7,14 @@ const {
   createBroker,
 } = require("../controllers/brokerController");
 
-const { protect } = require("../middleware/auth");
+const { protect, authorize } = require("../middleware/auth");
+router.get(
+  "/",
+  protect,
+  authorize("BROKER"),
+  getBrokers
+);
+
 
 // Public routes
 router.get("/", getBrokers);

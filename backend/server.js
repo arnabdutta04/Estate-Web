@@ -1,6 +1,10 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const { connectDB } = require("./config/db");
+
+
+connectDB();
 
 // Load environment variables
 dotenv.config();
@@ -16,7 +20,9 @@ app.use(
 
       if (
         origin.startsWith("http://localhost:3000") ||
-        origin.startsWith("http://127.0.0.1:3000")
+        origin.startsWith("http://127.0.0.1:3000") ||
+        origin.startsWith("https://arnabdutta04.github.io") ||
+        origin.startsWith("https://arnabdutta04.github.io/Estate-Web")
       ) {
         callback(null, true);
       } else {
@@ -64,8 +70,8 @@ process.on("unhandledRejection", (reason, promise) => {
   console.error("❌ Unhandled Rejection at:", promise, "reason:", reason);
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
