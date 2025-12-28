@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Estate-Web/static/css/main.0b91890d.css",
-    "main.js": "/Estate-Web/static/js/main.9e1e4ebc.js",
+    "main.css": "/Estate-Web/static/css/main.83f2ef27.css",
+    "main.js": "/Estate-Web/static/js/main.5480fa10.js",
     "index.html": "/Estate-Web/index.html",
-    "main.0b91890d.css.map": "/Estate-Web/static/css/main.0b91890d.css.map",
-    "main.9e1e4ebc.js.map": "/Estate-Web/static/js/main.9e1e4ebc.js.map"
+    "main.83f2ef27.css.map": "/Estate-Web/static/css/main.83f2ef27.css.map",
+    "main.5480fa10.js.map": "/Estate-Web/static/js/main.5480fa10.js.map"
   },
   "entrypoints": [
-    "static/css/main.0b91890d.css",
-    "static/js/main.9e1e4ebc.js"
+    "static/css/main.83f2ef27.css",
+    "static/js/main.5480fa10.js"
   ]
 }
