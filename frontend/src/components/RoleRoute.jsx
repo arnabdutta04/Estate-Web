@@ -2,20 +2,20 @@ import { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
-const ProtectedRoute = ({ children }) => {
+const RoleRoute = ({ allowedRoles, children }) => {
   const { user, loading } = useContext(AuthContext);
 
-  // ⏳ wait for auth check
-  if (loading) {
-    return null; // or a spinner
-  }
+  if (loading) return null;
 
-  // 🔐 not logged in
   if (!user) {
     return <Navigate to="/login" replace />;
+  }
+
+  if (!allowedRoles.includes(user.role)) {
+    return <Navigate to="/home" replace />;
   }
 
   return children;
 };
 
-export default ProtectedRoute;
+export default RoleRoute;

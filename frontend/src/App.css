@@ -4451,6 +4451,7 @@ animation: dots 1.5s steps(3, end) infinite;
   position: fixed;
   inset: 0;
   overflow: hidden;
+  overflow-y: auto;
   display: flex;                 /* 👈 MAIN POINT */
   align-items: center;           /* 👈 vertical center */
   justify-content: center;

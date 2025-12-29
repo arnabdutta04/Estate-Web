@@ -71,16 +71,27 @@ const Register = ({ switchToLogin }) => {
   e.preventDefault();
   setError('');
   setIsLoading(true);
-  
+
   try {
-    await register(formData);
-    navigate('/');
+    const user = await register(formData);
+
+    // ✅ ROLE-BASED FLOW
+    if (user.role === "CUSTOMER") {
+      navigate('/');
+    }
+
+    if (user.role === "PENDING_BROKER") {
+      navigate('/broker/onboarding');
+    }
   } catch (err) {
-    setError(err.response?.data?.message || 'Registration failed. Please try again.');
+    setError(
+      err.response?.data?.message || 'Registration failed. Please try again.'
+    );
   } finally {
     setIsLoading(false);
   }
 };
+
 
   return (
       <div className="auth-container">

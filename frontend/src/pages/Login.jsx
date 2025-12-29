@@ -13,22 +13,31 @@ const Login = ({ switchToRegister }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setIsLoading(true);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
+  setIsLoading(true);
 
-    try {
-      await login(formData);
+  try {
+    const user = await login(formData);
 
-      // ✅ after login, go to home
+    // ✅ ROLE-BASED REDIRECT
+    if (user.role === "CUSTOMER") {
       navigate("/home");
-    } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
-    } finally {
-      setIsLoading(false);
+    } else if (user.role === "PENDING_BROKER") {
+      navigate("/broker/onboarding");
+    } else if (user.role === "BROKER") {
+      navigate("/broker/dashboard");
+    } else {
+      navigate("/"); // fallback safety
     }
-  };
+  } catch (err) {
+    setError(err.response?.data?.message || "Login failed");
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <div className="auth-container">
