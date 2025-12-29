@@ -135,122 +135,6 @@ html {
   }
 }
 
-/* Navbar Styles */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: rgba(15, 40, 24, 0.95);
-  backdrop-filter: blur(20px);
-  padding: 1.5rem 0;
-  z-index: 1000;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  animation: fadeInDown 0.8s ease;
-}
-
-.navbar.scrolled {
-  background: rgba(15, 40, 24, 1);
-  padding: 1rem 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.navbar .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  color: var(--gold);
-  text-decoration: none;
-  font-size: 2rem;
-  font-family: 'Playfair Display', serif;
-  font-weight: 800;
-  letter-spacing: 2px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-}
-
-.logo:hover {
-  transform: translateY(-2px);
-  text-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
-}
-
-.logo svg {
-  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
-}
-
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 3rem;
-  align-items: center;
-}
-
-.nav-links a {
-  color: var(--white);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
-  position: relative;
-  padding: 0.5rem 0;
-}
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--gold), var(--secondary-color));
-  transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after {
-  width: 100%;
-}
-
-.nav-links a:hover {
-  color: var(--gold);
-  transform: translateY(-2px);
-}
-
-.btn-logout, .btn-register {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--secondary-color) 100%);
-  color: var(--dark-bg);
-  border: none;
-  padding: 1.2rem 3.5rem;
-  border-radius: 50px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.95rem;
-  letter-spacing: 0.5px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-  position: relative;
-  overflow: hidden;
-  display: inline-flex;           
-  align-items: center;            
-  justify-content: center;        
-  text-align: center;             
-  vertical-align: middle;         
-  line-height: 1;                
-}
-
-.btn-logout:hover, .btn-register:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
-}
-
 /* Hero Section */
 .hero {
   position: relative;
@@ -2751,6 +2635,12 @@ display: none;
 .welcome-hero {
   position: relative;
 }
+.welcome-hero {
+  position: relative;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
 
 .brand-corner {
   position: absolute;
@@ -2845,31 +2735,54 @@ display: none;
   color: var(--dark-bg);
 }
 
+
 @media (max-width: 768px) {
-  .welcome-nav-links {
-    display: none;
+  .about-header h2 {
+    font-size: 32px;
+  }
+
+  .about-us-content {
+    font-size: 16px;
   }
 }
+
 .about-us-section {
   background: #fffaf2;
-  padding: 80px 20px;
+  padding: 140px 20px 140px;
+  text-align: center;
+}
+
+.about-header h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: #143c2b;
+  margin-bottom: 12px;
+}
+
+.about-subtitle {
+  font-size: 16px;
+  color: #6b7a6e;
+  margin-bottom: 60px;
 }
 
 .about-us-content {
-  max-width: 900px;
-  margin: auto;
-  font-size: 16px;
-  line-height: 1.8;
+  max-width: 820px;
+  margin: 0 auto;
+  font-size: 17px;
+  line-height: 1.9;
   color: #444;
 }
 
 .about-us-content p {
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
 .about-us-content strong {
   color: #143c2b;
+  font-weight: 600;
 }
+
 /* Brokers Page Styles */
 .brokers-page {
   padding: 10rem 0 4rem;
@@ -4478,13 +4391,14 @@ animation: dots 1.5s steps(3, end) infinite;
 }
 /* FIXED AUTH BUTTONS (HEADER STYLE) */
 .auth-fixed {
-  position: fixed;          
-  top: 18px;
-  right: 32px;
+  position: absolute;   /* NOT fixed */
+  top: 30px;
+  right: 40px;
   display: flex;
-  gap: 20px;
-  z-index: 1000;           
+  gap: 16px;
+  z-index: 5;
 }
+
 
 /* Login – text only */
 .btn-auth-text {
@@ -4528,4 +4442,49 @@ animation: dots 1.5s steps(3, end) infinite;
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+/* ============================
+   TRANSPARENT NAVBAR (WELCOME)
+   ============================ */
+.navbar.transparent {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom: none !important;
+  animation: none;
+}
+
+/* Keep text visible */
+.navbar.transparent .nav-links a {
+  color: #ffffff;
+}
+
+.navbar.transparent .nav-links a:hover {
+  color: var(--gold);
+}
+
+/* Logo same as welcome */
+.navbar.transparent .logo {
+  text-shadow: none;
+}
+
+/* ============================
+   TRANSPARENT BUTTONS
+   ============================ */
+.navbar.transparent .btn-logout,
+.navbar.transparent .btn-register {
+  background: transparent;
+  color: #ffffff;
+
+  border: 1.5px solid rgba(212, 175, 55, 0.7);
+  box-shadow: none;
+
+  padding: 0.7rem 1.8rem;
+}
+
+.navbar.transparent .btn-logout:hover,
+.navbar.transparent .btn-register:hover {
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--gold);
+  transform: translateY(-1px);
 }

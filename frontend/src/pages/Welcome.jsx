@@ -85,7 +85,7 @@ const Welcome = () => {
           <span>Propify</span>
         </div>
 
-        {/* TOP RIGHT ACTIONS */}
+        {/* TOP RIGHT BUTTONS */}
         <div className="auth-fixed">
           {!user && !authMode && (
             <>
@@ -121,16 +121,14 @@ const Welcome = () => {
               >
                 Brokers
               </button>
-              <button
-                className="btn-auth-text"
-                onClick={() => navigate("/profile")}
-              >
+              <button className="btn-auth-text">
                 <FaUser /> {user.name || "Profile"}
               </button>
               <button
                 className="btn-auth-outline"
                 onClick={() => {
                   logout();
+                  setAuthMode(null);
                   navigate("/");
                 }}
               >
@@ -180,18 +178,20 @@ const Welcome = () => {
         </div>
       </section>
 
-      {/* ================= ABOUT ================= */}
+      {/* ABOUT */}
       <section className="about-us-section">
         <div className="welcome-container">
           <h2>About Us</h2>
+          <h3>Your trusted partner in modern real estate solutions</h3>
           <p>
-            <strong>Propify</strong> is a modern real estate platform built to
-            simplify property buying, selling, and renting.
+            <strong>Propify</strong> is a modern real estate platform built to simplify property buying, selling, and renting.
+           Our goal is to empower customers and brokers with smart tools, 
+           real-time insights, and seamless communication.
           </p>
         </div>
       </section>
 
-      {/* ================= PROPERTY TYPES ================= */}
+      {/* PROPERTY TYPES */}
       <section className="property-types-section">
         <div className="welcome-container">
           <h2>Browse By Property Type</h2>
@@ -211,7 +211,7 @@ const Welcome = () => {
         </div>
       </section>
 
-      {/* ================= FEATURES ================= */}
+      {/* FEATURES */}
       <section className="welcome-features">
         <div className="welcome-container">
           <h2>Why Choose Us</h2>
@@ -229,7 +229,7 @@ const Welcome = () => {
 
       <ContactSection />
 
-      {/* ================= AUTH MODAL ================= */}
+      {/* AUTH MODAL */}
       {authMode && (
         <div className="auth-overlay">
           <button className="auth-close" onClick={() => setAuthMode(null)}>
