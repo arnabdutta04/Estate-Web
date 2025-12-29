@@ -74,6 +74,7 @@ const Register = ({ switchToLogin }) => {
 
   try {
     const user = await register(formData);
+    navigate("/"); 
 
     if (user.role === "CUSTOMER") {
       navigate('/');

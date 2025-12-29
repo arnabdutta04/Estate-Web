@@ -18,15 +18,16 @@ const Navbar = () => {
   const handleLogout = () => {
     logout();
     setMenuOpen(false);
-    navigate("/");
+    navigate("/"); // Back to Welcome (Home)
   };
 
   return (
     <nav className="navbar">
       <div className="container">
-        {/* LOGO */}
+
+        {/* LOGO → HOME / WELCOME */}
         <Link to="/" className="logo" onClick={() => setMenuOpen(false)}>
-          <FaHome /> RealEstate Pro
+          <FaHome /> Propify
         </Link>
 
         {/* MOBILE MENU ICON */}
@@ -36,44 +37,32 @@ const Navbar = () => {
 
         {/* NAV LINKS */}
         <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
+
+          {/* HOME BUTTON (ALWAYS PRESENT) */}
           <li>
-            <Link to="/home" onClick={() => setMenuOpen(false)}>
+            <Link to="/" onClick={() => setMenuOpen(false)}>
               Home
             </Link>
           </li>
 
-          <li>
-            <Link to="/properties" onClick={() => setMenuOpen(false)}>
-              Properties
-            </Link>
-          </li>
-
-          <li>
-            <Link to="/brokers" onClick={() => setMenuOpen(false)}>
-              Brokers
-            </Link>
-          </li>
-
-          {/* AUTHENTICATED USER */}
+          {/* LOGGED IN */}
           {user ? (
             <>
-              {/* CUSTOMER */}
-              {user.role === "customer" && (
-                <li>
-                  <Link to="/customer-dashboard" onClick={() => setMenuOpen(false)}>
-                    <FaUser /> My Account
-                  </Link>
-                </li>
-              )}
+              <li>
+                <Link to="/properties" onClick={() => setMenuOpen(false)}>
+                  Properties
+                </Link>
+              </li>
 
-              {/* BROKER */}
-              {user.role === "broker" && (
-                <li>
-                  <Link to="/broker-dashboard" onClick={() => setMenuOpen(false)}>
-                    <FaUser /> Broker Panel
-                  </Link>
-                </li>
-              )}
+              <li>
+                <Link to="/brokers" onClick={() => setMenuOpen(false)}>
+                  Brokers
+                </Link>
+              </li>
+
+              <li className="user-name">
+                <FaUser /> {user.name}
+              </li>
 
               <li>
                 <button onClick={handleLogout} className="btn-logout">
@@ -89,6 +78,7 @@ const Navbar = () => {
                   <FaSignInAlt /> Login
                 </Link>
               </li>
+
               <li>
                 <Link
                   to="/register"

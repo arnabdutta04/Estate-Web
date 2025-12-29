@@ -1,54 +1,41 @@
 import React from "react";
-import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
-
 import Navbar from "./components/Navbar";
-import ProtectedRoute from "./components/ProtectedRoute";
-import RoleRoute from "./components/RoleRoute";
-
 import Welcome from "./pages/Welcome";
-import Home from "./pages/Home";
 import Properties from "./pages/Properties";
 import PropertyDetail from "./pages/PropertyDetail";
+import Brokers from "./pages/Brokers";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Brokers from "./pages/Brokers";
-
+import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 
 function AppContent() {
   const location = useLocation();
-  const showNavbar = location.pathname !== "/";
+
+  const hideNavbar =
+    location.pathname === "/login" || location.pathname === "/register";
 
   return (
-    <div className="App">
-      {showNavbar && <Navbar />}
+    <>
+      {!hideNavbar && <Navbar />}
 
       <Routes>
-        {/* PUBLIC */}
+        {/* WELCOME = HOME */}
         <Route path="/" element={<Welcome />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
 
-        {/* CUSTOMER */}
-        <Route
-          path="/home"
-          element={
-            <ProtectedRoute>
-              <RoleRoute allowedRoles={["CUSTOMER", "BROKER"]}>
-                <Home />
-              </RoleRoute>
-            </ProtectedRoute>
-          }
-        />
-
+        {/* PROTECTED */}
         <Route
           path="/properties"
           element={
             <ProtectedRoute>
-              <RoleRoute allowedRoles={["CUSTOMER", "BROKER"]}>
-                <Properties />
-              </RoleRoute>
+              <Properties />
             </ProtectedRoute>
           }
         />
@@ -57,45 +44,29 @@ function AppContent() {
           path="/properties/:id"
           element={
             <ProtectedRoute>
-              <RoleRoute allowedRoles={["CUSTOMER", "BROKER"]}>
-                <PropertyDetail />
-              </RoleRoute>
+              <PropertyDetail />
             </ProtectedRoute>
           }
         />
 
-        {/* BROKER */}
         <Route
           path="/brokers"
           element={
             <ProtectedRoute>
-              <RoleRoute allowedRoles={["BROKER"]}>
-                <Brokers />
-              </RoleRoute>
+              <Brokers />
             </ProtectedRoute>
           }
         />
 
-        {/* PENDING BROKER */}
-        <Route
-          path="/broker/onboarding"
-          element={
-            <ProtectedRoute>
-              <RoleRoute allowedRoles={["PENDING_BROKER"]}>
-                <div style={{ padding: 40 }}>
-                  <h2>Complete Broker Profile</h2>
-                  <p>Please complete your broker details to activate your account.</p>
-                </div>
-              </RoleRoute>
-            </ProtectedRoute>
-          }
-        />
+        {/* AUTH */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
-    </div>
+    </>
   );
 }
 
-function App() {
+export default function App() {
   return (
     <AuthProvider>
       <Router>
@@ -104,5 +75,3 @@ function App() {
     </AuthProvider>
   );
 }
-
-export default App;

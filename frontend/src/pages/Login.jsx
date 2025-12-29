@@ -20,8 +20,7 @@ const handleSubmit = async (e) => {
 
   try {
     const user = await login(formData);
-
-    // ✅ ROLE-BASED REDIRECT
+     navigate("/"); 
     if (user.role === "CUSTOMER") {
       navigate("/home");
     } else if (user.role === "PENDING_BROKER") {
