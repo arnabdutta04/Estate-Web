@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import ContactSection from "../components/ContactSection";
 import {
   FaHome,
@@ -11,7 +12,9 @@ import {
   FaBuilding,
   FaMapMarkedAlt,
   FaChartLine,
-  FaCheckCircle
+  FaCheckCircle,
+  FaUser,
+  FaSignOutAlt
 } from "react-icons/fa";
 
 import Login from "./Login";
@@ -21,19 +24,20 @@ const Welcome = () => {
   const [scrollY] = useState(0);
   const [authMode, setAuthMode] = useState(null); // null | login | register
   const navigate = useNavigate();
+  const { user, logout } = useContext(AuthContext);
 
   useEffect(() => {
-  if (authMode) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "auto";
-  }
+    document.body.style.overflow = authMode ? "hidden" : "auto";
+    return () => (document.body.style.overflow = "auto");
+  }, [authMode]);
 
-  return () => {
-    document.body.style.overflow = "auto";
+  const handleExploreClick = () => {
+    if (!user) {
+      setAuthMode("login");
+    } else {
+      navigate("/properties");
+    }
   };
-}, [authMode]);
-
 
   const features = [
     {
@@ -62,27 +66,17 @@ const Welcome = () => {
     { icon: <FaMapMarkedAlt />, name: "Land & Plots", count: "1,500+" },
     { icon: <FaStar />, name: "Luxury Villas", count: "1,000+" }
   ];
-  const handleExploreClick = () => {
-  const token = localStorage.getItem("token");
-
-  if (!token) {
-    setAuthMode("login"); // open login overlay
-  } else {
-    navigate("/home"); // or /properties
-  }
-};
 
   return (
     <div className="welcome-page">
-
-      {/* ================= HERO SECTION ================= */}
+      {/* ================= HERO ================= */}
       <section className="welcome-hero">
         <div
           className="hero-overlay"
           style={{ transform: `translateY(${scrollY * 0.5}px)` }}
         />
 
-        {/* BRAND – TOP LEFT */}
+        {/* BRAND */}
         <div className="brand-corner">
           <img
             src={`${process.env.PUBLIC_URL}/logo-3d.png`}
@@ -91,24 +85,60 @@ const Welcome = () => {
           <span>Propify</span>
         </div>
 
-        {/* AUTH BUTTONS – FIXED LIKE HOME HEADER */}
-        {!authMode && (
-          <div className="auth-fixed">
-            <button
-              className="btn-auth-text"
-              onClick={() => setAuthMode("login")}
-            >
-              Login
-            </button>
+        {/* TOP RIGHT ACTIONS */}
+        <div className="auth-fixed">
+          {!user && !authMode && (
+            <>
+              <button
+                className="btn-auth-text"
+                onClick={() => setAuthMode("login")}
+              >
+                Login
+              </button>
+              <button
+                className="btn-auth-outline"
+                onClick={() => setAuthMode("register")}
+              >
+                Register
+              </button>
+            </>
+          )}
 
-            <button
-              className="btn-auth-outline"
-              onClick={() => setAuthMode("register")}
-            >
-              Register
-            </button>
-          </div>
-        )}
+          {user && (
+            <>
+              <button className="btn-auth-text" onClick={() => navigate("/")}>
+                Home
+              </button>
+              <button
+                className="btn-auth-text"
+                onClick={() => navigate("/properties")}
+              >
+                Properties
+              </button>
+              <button
+                className="btn-auth-text"
+                onClick={() => navigate("/brokers")}
+              >
+                Brokers
+              </button>
+              <button
+                className="btn-auth-text"
+                onClick={() => navigate("/profile")}
+              >
+                <FaUser /> {user.name || "Profile"}
+              </button>
+              <button
+                className="btn-auth-outline"
+                onClick={() => {
+                  logout();
+                  navigate("/");
+                }}
+              >
+                <FaSignOutAlt /> Logout
+              </button>
+            </>
+          )}
+        </div>
 
         {/* HERO CONTENT */}
         <div className="welcome-container">
@@ -124,13 +154,13 @@ const Welcome = () => {
           </p>
 
           <div className="welcome-cta-group">
-           <button
-             className="btn-welcome-primary"
-            onClick={handleExploreClick}
+            <button
+              className="btn-welcome-primary"
+              onClick={handleExploreClick}
             >
-           <FaSearch /> Explore Properties
-           <FaArrowRight className="arrow-icon" />
-          </button>
+              <FaSearch /> Explore Properties
+              <FaArrowRight className="arrow-icon" />
+            </button>
           </div>
 
           <div className="trust-indicators">
@@ -153,32 +183,18 @@ const Welcome = () => {
       {/* ================= ABOUT ================= */}
       <section className="about-us-section">
         <div className="welcome-container">
-          <div className="section-header">
-            <h2>About Us</h2>
-            <p>Your trusted partner in modern real estate solutions</p>
-          </div>
-
-          <div className="about-us-content">
-            <p>
-              <strong>Propify</strong> is a modern real estate platform built to
-              simplify property buying, selling, and renting.
-            </p>
-            <p>
-              Our goal is to empower customers and brokers with smart tools,
-              real-time insights, and seamless communication.
-            </p>
-          </div>
+          <h2>About Us</h2>
+          <p>
+            <strong>Propify</strong> is a modern real estate platform built to
+            simplify property buying, selling, and renting.
+          </p>
         </div>
       </section>
 
       {/* ================= PROPERTY TYPES ================= */}
       <section className="property-types-section">
         <div className="welcome-container">
-          <div className="section-header">
-            <h2>Browse By Property Type</h2>
-            <p>Explore our diverse range of properties</p>
-          </div>
-
+          <h2>Browse By Property Type</h2>
           <div className="property-types-grid">
             {propertyTypes.map((type, index) => (
               <div
@@ -189,9 +205,6 @@ const Welcome = () => {
                 <div className="type-icon">{type.icon}</div>
                 <h3>{type.name}</h3>
                 <p>{type.count} listings</p>
-                <div className="card-arrow">
-                  <FaArrowRight />
-                </div>
               </div>
             ))}
           </div>
@@ -201,11 +214,7 @@ const Welcome = () => {
       {/* ================= FEATURES ================= */}
       <section className="welcome-features">
         <div className="welcome-container">
-          <div className="section-header">
-            <h2>Why Choose Us</h2>
-            <p>Experience the future of real estate</p>
-          </div>
-
+          <h2>Why Choose Us</h2>
           <div className="features-grid">
             {features.map((feature, index) => (
               <div key={index} className="welcome-feature-card">
@@ -220,26 +229,21 @@ const Welcome = () => {
 
       <ContactSection />
 
-      {/* ================= AUTH OVERLAY ================= */}
-     {authMode && (
-  <div className="auth-overlay">
-    <button
-      className="auth-close"
-      onClick={() => setAuthMode(null)}
-    >
-      ×
-    </button>
-
-    <div className="auth-center">
-  {authMode === "login" ? (
-    <Login switchToRegister={() => setAuthMode("register")} />
-  ) : (
-    <Register switchToLogin={() => setAuthMode("login")} />
-  )}
-</div>
-
-  </div>
-)}
+      {/* ================= AUTH MODAL ================= */}
+      {authMode && (
+        <div className="auth-overlay">
+          <button className="auth-close" onClick={() => setAuthMode(null)}>
+            ×
+          </button>
+          <div className="auth-center">
+            {authMode === "login" ? (
+              <Login switchToRegister={() => setAuthMode("register")} />
+            ) : (
+              <Register switchToLogin={() => setAuthMode("login")} />
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
