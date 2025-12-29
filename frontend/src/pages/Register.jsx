@@ -75,13 +75,12 @@ const Register = ({ switchToLogin }) => {
   try {
     const user = await register(formData);
 
-    // ✅ ROLE-BASED FLOW
     if (user.role === "CUSTOMER") {
       navigate('/');
-    }
-
-    if (user.role === "PENDING_BROKER") {
+    } else if (user.role === "BROKER") {
       navigate('/broker/onboarding');
+    } else {
+      navigate('/');
     }
   } catch (err) {
     setError(
