@@ -1,4 +1,11 @@
 {
+  "name": "real-estate-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build"
+  },
   "devDependencies": {
     "gh-pages": "^6.3.0"
   },

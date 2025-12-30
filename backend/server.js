@@ -2,30 +2,38 @@ const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
 const cors = require("cors");
+const { connectDB } = require("./config/db");
 
 dotenv.config();
-const { connectDB } = require("./config/db");
 
 const app = express();
 
-/* ================= CORS (RENDER ONLY) ================= */
+/* =======================
+   ✅ CORS CONFIG (FIX)
+======================= */
 app.use(
   cors({
-    origin: "https://estate-frontend-62p7.onrender.com",
-    credentials: true,
+    origin: [
+      "https://estate-backend-oun8.onrender.com/api", // frontend Render URL
+    ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"]
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
-// Preflight
+// Handle preflight explicitly
 app.options("*", cors());
-/* ===================================================== */
 
+/* =======================
+   BODY PARSERS
+======================= */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// API routes
+/* =======================
+   API ROUTES FIRST
+======================= */
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/properties", require("./routes/properties"));
 app.use("/api/brokers", require("./routes/brokers"));
@@ -34,16 +42,22 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
-// Serve frontend if bundled
-app.use(express.static(path.join(__dirname, "public")));
+/* =======================
+   (OPTIONAL) Serve frontend
+   ONLY if backend + frontend
+   are in SAME service
+======================= */
+// app.use(express.static(path.join(__dirname, "public")));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "public", "index.html"));
+// });
 
-// React fallback
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
-
+/* =======================
+   START SERVER
+======================= */
 const PORT = process.env.PORT || 10000;
+
 app.listen(PORT, async () => {
-  console.log(`🚀 Server running on port ${PORT}`);
   await connectDB();
+  console.log(`🚀 Server running on port ${PORT}`);
 });
