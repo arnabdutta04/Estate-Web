@@ -14,7 +14,8 @@ import {
   FaChartLine,
   FaCheckCircle,
   FaUser,
-  FaSignOutAlt
+  FaSignOutAlt,
+  FaBars
 } from "react-icons/fa";
 
 import Login from "./Login";
@@ -22,7 +23,8 @@ import Register from "./Register";
 
 const Welcome = () => {
   const [scrollY] = useState(0);
-  const [authMode, setAuthMode] = useState(null); // null | login | register
+  const [authMode, setAuthMode] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false); // ✅ NEW
   const navigate = useNavigate();
   const { user, logout } = useContext(AuthContext);
 
@@ -32,11 +34,8 @@ const Welcome = () => {
   }, [authMode]);
 
   const handleExploreClick = () => {
-    if (!user) {
-      setAuthMode("login");
-    } else {
-      navigate("/properties");
-    }
+    if (!user) setAuthMode("login");
+    else navigate("/properties");
   };
 
   const features = [
@@ -69,74 +68,95 @@ const Welcome = () => {
 
   return (
     <div className="welcome-page">
-      {/* ================= HERO ================= */}
       <section className="welcome-hero">
-        <div
-          className="hero-overlay"
-          style={{ transform: `translateY(${scrollY * 0.5}px)` }}
-        />
+        <div className="hero-overlay" />
 
         {/* BRAND */}
         <div className="brand-corner">
-          <img
-            src={`${process.env.PUBLIC_URL}/logo-3d.png`}
-            alt="Propify Logo"
-          />
+          <img src={`${process.env.PUBLIC_URL}/logo-3d.png`} alt="Propify Logo" />
           <span>Propify</span>
         </div>
 
-        {/* TOP RIGHT BUTTONS */}
+        {/* ================= NAV BAR ================= */}
         <div className="auth-fixed">
-          {!user && !authMode && (
-            <>
-              <button
-                className="btn-auth-text"
-                onClick={() => setAuthMode("login")}
-              >
-                Login
-              </button>
-              <button
-                className="btn-auth-outline"
-                onClick={() => setAuthMode("register")}
-              >
-                Register
-              </button>
-            </>
-          )}
+          {/* DESKTOP NAV (UNCHANGED) */}
+          <div className="nav-desktop">
+            {!user && !authMode && (
+              <>
+                <button className="btn-auth-text" onClick={() => setAuthMode("login")}>
+                  Login
+                </button>
+                <button
+                  className="btn-auth-outline"
+                  onClick={() => setAuthMode("register")}
+                >
+                  Register
+                </button>
+              </>
+            )}
 
-          {user && (
-            <>
-              <button className="btn-auth-text" onClick={() => navigate("/")}>
-                Home
-              </button>
-              <button
-                className="btn-auth-text"
-                onClick={() => navigate("/properties")}
-              >
-                Properties
-              </button>
-              <button
-                className="btn-auth-text"
-                onClick={() => navigate("/brokers")}
-              >
-                Brokers
-              </button>
-              <button className="btn-auth-text">
-                <FaUser /> {user.name || "Profile"}
-              </button>
-              <button
-                className="btn-auth-outline"
-                onClick={() => {
-                  logout();
-                  setAuthMode(null);
-                  navigate("/");
-                }}
-              >
-                <FaSignOutAlt /> Logout
-              </button>
-            </>
-          )}
+            {user && (
+              <>
+                <button className="btn-auth-text" onClick={() => navigate("/")}>
+                  Home
+                </button>
+                <button className="btn-auth-text" onClick={() => navigate("/properties")}>
+                  Properties
+                </button>
+                <button className="btn-auth-text" onClick={() => navigate("/brokers")}>
+                  Brokers
+                </button>
+                <button className="btn-auth-text">
+                  <FaUser /> {user.name}
+                </button>
+                <button
+                  className="btn-auth-outline"
+                  onClick={() => {
+                    logout();
+                    setMenuOpen(false);
+                    navigate("/");
+                  }}
+                >
+                  <FaSignOutAlt /> Logout
+                </button>
+              </>
+            )}
+          </div>
+
+          {/* MOBILE HAMBURGER */}
+          <div className="nav-mobile-icon" onClick={() => setMenuOpen(!menuOpen)}>
+            <FaBars />
+          </div>
         </div>
+
+        {/* MOBILE MENU */}
+        {menuOpen && (
+          <div className="mobile-menu">
+            {!user && (
+              <>
+                <button onClick={() => setAuthMode("login")}>Login</button>
+                <button onClick={() => setAuthMode("register")}>Register</button>
+              </>
+            )}
+
+            {user && (
+              <>
+                <button onClick={() => navigate("/")}>Home</button>
+                <button onClick={() => navigate("/properties")}>Properties</button>
+                <button onClick={() => navigate("/brokers")}>Brokers</button>
+                <button
+                  onClick={() => {
+                    logout();
+                    setMenuOpen(false);
+                    navigate("/");
+                  }}
+                >
+                  Logout
+                </button>
+              </>
+            )}
+          </div>
+        )}
 
         {/* HERO CONTENT */}
         <div className="welcome-container">
@@ -151,78 +171,14 @@ const Welcome = () => {
             and make your real estate journey seamless and stress-free.
           </p>
 
-          <div className="welcome-cta-group">
-            <button
-              className="btn-welcome-primary"
-              onClick={handleExploreClick}
-            >
-              <FaSearch /> Explore Properties
-              <FaArrowRight className="arrow-icon" />
-            </button>
-          </div>
+          <button className="btn-welcome-primary" onClick={handleExploreClick}>
+            <FaSearch /> Explore Properties <FaArrowRight />
+          </button>
 
           <div className="trust-indicators">
-            <div className="trust-item">
-              <FaCheckCircle />
-              <span>100% Verified Listings</span>
-            </div>
-            <div className="trust-item">
-              <FaCheckCircle />
-              <span>Trusted by Smart Users</span>
-            </div>
-            <div className="trust-item">
-              <FaCheckCircle />
-              <span>24/7 Customer Support</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ABOUT */}
-      <section className="about-us-section">
-        <div className="welcome-container">
-          <h2>About Us</h2>
-          <h3>Your trusted partner in modern real estate solutions</h3>
-          <p>
-            <strong>Propify</strong> is a modern real estate platform built to simplify property buying, selling, and renting.
-           Our goal is to empower customers and brokers with smart tools, 
-           real-time insights, and seamless communication.
-          </p>
-        </div>
-      </section>
-
-      {/* PROPERTY TYPES */}
-      <section className="property-types-section">
-        <div className="welcome-container">
-          <h2>Browse By Property Type</h2>
-          <div className="property-types-grid">
-            {propertyTypes.map((type, index) => (
-              <div
-                key={index}
-                className="property-type-card"
-                onClick={() => navigate("/properties")}
-              >
-                <div className="type-icon">{type.icon}</div>
-                <h3>{type.name}</h3>
-                <p>{type.count} listings</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FEATURES */}
-      <section className="welcome-features">
-        <div className="welcome-container">
-          <h2>Why Choose Us</h2>
-          <div className="features-grid">
-            {features.map((feature, index) => (
-              <div key={index} className="welcome-feature-card">
-                <div className="feature-icon">{feature.icon}</div>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
-              </div>
-            ))}
+            <span><FaCheckCircle /> 100% Verified Listings</span>
+            <span><FaCheckCircle /> Trusted by Smart Users</span>
+            <span><FaCheckCircle /> 24/7 Customer Support</span>
           </div>
         </div>
       </section>
@@ -232,9 +188,7 @@ const Welcome = () => {
       {/* AUTH MODAL */}
       {authMode && (
         <div className="auth-overlay">
-          <button className="auth-close" onClick={() => setAuthMode(null)}>
-            ×
-          </button>
+          <button className="auth-close" onClick={() => setAuthMode(null)}>×</button>
           <div className="auth-center">
             {authMode === "login" ? (
               <Login switchToRegister={() => setAuthMode("register")} />

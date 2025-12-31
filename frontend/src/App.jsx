@@ -17,11 +17,7 @@ function AppContent() {
     <Routes>
       {/* WELCOME = HOME */}
       <Route path="/" element={<Welcome />} />
-
-      {/* 🔴 FIX: redirect /home → / */}
       <Route path="/home" element={<Navigate to="/" replace />} />
-
-      {/* PROTECTED ROUTES */}
       <Route
         path="/properties"
         element={
