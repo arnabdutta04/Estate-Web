@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 
 import Welcome from "./pages/Welcome";
@@ -17,6 +17,9 @@ function AppContent() {
     <Routes>
       {/* WELCOME = HOME */}
       <Route path="/" element={<Welcome />} />
+
+      {/* 🔴 FIX: redirect /home → / */}
+      <Route path="/home" element={<Navigate to="/" replace />} />
 
       {/* PROTECTED ROUTES */}
       <Route
@@ -46,7 +49,7 @@ function AppContent() {
         }
       />
 
-      {/* AUTH (still needed for modal fallback / deep links) */}
+      {/* AUTH */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
     </Routes>
