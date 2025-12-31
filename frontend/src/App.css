@@ -4306,27 +4306,13 @@ animation: dots 1.5s steps(3, end) infinite;
   animation: rotateHouse 2s linear infinite;
   filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.3));
 }
-/* =========================
-   MENU ICON (HAMBURGER)
-========================= */
 .menu-icon {
   display: none;
   font-size: 1.8rem;
   cursor: pointer;
-  color: #FFD700; /* Gold */
+  color: #FFD700; /* Gold color */
 }
 
-/* =========================
-   NAV LINKS (DESKTOP)
-========================= */
-.nav-links {
-  display: flex;
-  gap: 16px;
-}
-
-/* =========================
-   MOBILE STYLES
-========================= */
 @media (max-width: 768px) {
   .menu-icon {
     display: block;
@@ -4335,54 +4321,20 @@ animation: dots 1.5s steps(3, end) infinite;
   .nav-links {
     display: none;
     position: absolute;
-    top: 70px;
-    right: 20px;
-    width: auto;
-    background: #03440c;      /* menu background */
-    border-radius: 14px;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    background: #03440c;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 16px;
-    z-index: 3000;
+    align-items: center;
+    padding: 1.5rem 0;
   }
 
   .nav-links.active {
     display: flex;
+    background: none !important;
   }
 }
-
-/* =========================
-   TRANSPARENT MENU BUTTONS
-========================= */
-.nav-links button,
-.nav-links a {
-  background: transparent;      /* ✅ transparent */
-  border: none;
-  color: #FFD700;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 8px 6px;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-/* Hover / tap effect */
-.nav-links button:hover,
-.nav-links a:hover {
-  color: #ffffff;
-  transform: translateX(4px);
-}
-
-/* Divider between items */
-.nav-links button + button,
-.nav-links a + a {
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  margin-top: 6px;
-  padding-top: 10px;
-}
-
 .phone-input-wrapper {
   display: flex;
   gap: 8px;
