@@ -4332,11 +4332,13 @@ animation: dots 1.5s steps(3, end) infinite;
 
   .nav-links.active {
     display: flex;
+    background: none;
   }
 }
 
   .nav-links.active {
     display: flex;
+    background: none;
   }
 .phone-input-wrapper {
   display: flex;
