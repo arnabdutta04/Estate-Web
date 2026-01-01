@@ -836,7 +836,7 @@ animation: slideInLeft 0.8s ease;
 .header {
 display: flex;
 justify-content: space-between;
-align-items: flex-start;
+align-items: center;
 margin-bottom: 2rem;
 padding-bottom: 2rem;
 border-bottom: 2px solid var(--light-bg);
@@ -2095,7 +2095,6 @@ display: none;
   position: relative;
   display: inline-block;
 }
-
 .welcome-subtitle {
   font-size: 1.4rem;
   max-width: 800px;
