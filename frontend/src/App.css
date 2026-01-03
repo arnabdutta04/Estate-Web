@@ -4487,3 +4487,31 @@ animation: dots 1.5s steps(3, end) infinite;
   color: var(--gold);
   transform: translateY(-1px);
 }
+.properties-page,
+.brokers-page,
+.property-detail-page {
+  padding-top: 100px !important; /* Account for fixed navbar */
+}
+
+/* Override existing padding */
+.properties-page {
+  padding: 100px 0 4rem !important;
+}
+
+.brokers-page {
+  padding: 100px 0 4rem !important;
+}
+
+.property-detail-page {
+  padding: 100px 0 4rem !important;
+}
+
+/* Make sure filter sidebar doesn't overlap with navbar */
+.filter-sidebar {
+  top: 100px !important; /* Match navbar height */
+}
+
+/* City suggestions dropdown - ensure it doesn't go behind navbar */
+.city-suggestions {
+  z-index: 999 !important; /* Below navbar but above everything else */
+}

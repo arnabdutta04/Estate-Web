@@ -191,9 +191,9 @@ const Properties = () => {
   );
 }
   return (
-    <div className='properties-page'>
-      <div className='container'>
-        <h1>Browse Properties</h1>
+    <div className='properties-page' style={{ paddingTop: '80px' }}>
+    <div className='container'>
+      <h1>Browse Properties</h1>
         
         <div className='properties-layout'>
           <div className='filter-sidebar'>
