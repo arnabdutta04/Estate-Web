@@ -32,10 +32,10 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${isVisible ? 'navbar-visible' : ''}`}>
       <div className="navbar-container">
-        {/* Logo */}
+        {/* Logo with 3D Image */}
         <div className="navbar-logo">
           <Link to="/">
-            <img src="/logo-3d.png" alt="Propify Logo" className="navbar-logo-img" />
+            <img src="/logo-3d.png" alt="Propify" className="navbar-logo-img" />
             <span className="logo-text">Propify</span>
           </Link>
         </div>
@@ -75,10 +75,9 @@ const Navbar = () => {
             Brokers
           </Link>
           
-          {/* User Profile */}
+          {/* User Profile - No Icon, Just Name */}
           {user && (
             <div className="navbar-user">
-              <span className="user-icon">👤</span>
               <span className="user-name">{getUserDisplayName()}</span>
             </div>
           )}

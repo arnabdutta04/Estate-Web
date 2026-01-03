@@ -36,10 +36,15 @@
 }
 
 .navbar-logo-img {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 2px 6px rgba(255, 215, 0, 0.4));
+  transition: transform 0.3s ease;
+}
+
+.navbar-logo:hover .navbar-logo-img {
+  transform: scale(1.05) rotate(-5deg);
 }
 
 .logo-text {
@@ -47,6 +52,11 @@
   font-weight: 600;
   color: #ffd700;
   font-family: 'Playfair Display', serif;
+  transition: color 0.3s ease;
+}
+
+.navbar-logo:hover .logo-text {
+  color: #ffffff;
 }
 
 /* Navigation Menu */
@@ -86,18 +96,13 @@
   width: 100%;
 }
 
-/* User Profile */
+/* User Profile - No Icon */
 .navbar-user {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
   color: #ffd700;
   font-weight: 500;
   font-family: 'Playfair Display', serif;
-}
-
-.user-icon {
-  font-size: 1.3rem;
 }
 
 .user-name {
@@ -213,7 +218,7 @@
   }
 
   .navbar-logo-img {
-    width: 35px;
-    height: 35px;
+    width: 38px;
+    height: 38px;
   }
 }
