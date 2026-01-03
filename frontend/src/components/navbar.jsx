@@ -54,6 +54,13 @@ const Navbar = () => {
         {/* Navigation Links */}
         <div className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
           <Link 
+            to="/" 
+            className="navbar-link" 
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Home
+          </Link>
+          <Link 
             to="/properties" 
             className="navbar-link" 
             onClick={() => setIsMenuOpen(false)}
@@ -68,10 +75,14 @@ const Navbar = () => {
             Brokers
           </Link>
           
-          {/* User Profile */}
+          {/* User Profile with 3D Logo */}
           {user && (
             <div className="navbar-user">
-              <span className="user-icon">👤</span>
+              <img 
+                src="/logo-3d.png" 
+                alt="Profile" 
+                className="user-icon-img"
+              />
               <span className="user-name">{getUserDisplayName()}</span>
             </div>
           )}

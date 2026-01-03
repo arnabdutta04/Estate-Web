@@ -204,3 +204,22 @@
     font-size: 1.1rem;
   }
 }
+/* navbar.css - Add these styles at the end of your file */
+
+/* User Profile Icon Image */
+.user-icon-img {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.navbar-user:hover .user-icon-img {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* If you want the icon to be white/gold colored */
+.user-icon-img.white-gold {
+  filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(0deg) brightness(1.2);
+}
