@@ -11,7 +11,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/navbar";
-
+import Profile from "./pages/Profile";
 import "./App.css";
 
 function AppContent() {
@@ -54,7 +54,14 @@ function AppContent() {
             </ProtectedRoute>
           }
         />
-
+        <Route
+           path="/profile"
+           element={
+             <ProtectedRoute>
+               <Profile />
+             </ProtectedRoute>
+         }
+        />
         {/* AUTH */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

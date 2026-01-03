@@ -222,3 +222,11 @@
     height: 38px;
   }
 }
+.navbar-profile-link {
+  /* Same styles as navbar-link but indicates it's clickable */
+  cursor: pointer;
+}
+
+.navbar-profile-link:hover {
+  color: #ffffff !important;
+}

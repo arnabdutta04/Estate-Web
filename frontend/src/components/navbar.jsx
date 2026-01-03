@@ -75,11 +75,15 @@ const Navbar = () => {
             Brokers
           </Link>
           
-          {/* User Profile - No Icon, Just Name */}
+          {/* User Profile - Clickable */}
           {user && (
-            <div className="navbar-user">
-              <span className="user-name">{getUserDisplayName()}</span>
-            </div>
+            <Link 
+              to="/profile" 
+              className="navbar-link navbar-profile-link" 
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {getUserDisplayName()}
+            </Link>
           )}
 
           {/* Logout Button */}
