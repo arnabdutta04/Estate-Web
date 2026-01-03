@@ -1,4 +1,4 @@
-// components/navbar.jsx
+// src/components/navbar.jsx
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';

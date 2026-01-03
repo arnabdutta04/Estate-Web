@@ -1,10 +1,4 @@
 /* navbar.css */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .navbar {
   background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%);
   padding: 0.8rem 2rem;
@@ -43,7 +37,6 @@
 
 .logo-icon {
   font-size: 1.8rem;
-  filter: brightness(0) invert(1);
 }
 
 .logo-text {
