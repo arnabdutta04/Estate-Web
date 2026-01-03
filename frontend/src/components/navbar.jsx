@@ -34,8 +34,8 @@ const Navbar = () => {
       <div className="navbar-container">
         {/* Logo */}
         <div className="navbar-logo">
-          <Link to="/properties">
-            <div className="logo-icon">🏠</div>
+          <Link to="/">
+            <img src="/logo-3d.png" alt="Propify Logo" className="navbar-logo-img" />
             <span className="logo-text">Propify</span>
           </Link>
         </div>
@@ -75,14 +75,10 @@ const Navbar = () => {
             Brokers
           </Link>
           
-          {/* User Profile with 3D Logo */}
+          {/* User Profile */}
           {user && (
             <div className="navbar-user">
-              <img 
-                src="/logo-3d.png" 
-                alt="Profile" 
-                className="user-icon-img"
-              />
+              <span className="user-icon">👤</span>
               <span className="user-name">{getUserDisplayName()}</span>
             </div>
           )}
