@@ -4515,3 +4515,428 @@ animation: dots 1.5s steps(3, end) infinite;
 .city-suggestions {
   z-index: 999 !important; /* Below navbar but above everything else */
 }
+/* ============================
+   DARK MODE - WELCOME PAGE
+   ============================ */
+
+/* Welcome Hero Section */
+.dark-mode .welcome-hero {
+  background: linear-gradient(135deg, rgba(10, 25, 15, 0.95) 0%, rgba(15, 40, 24, 0.90) 100%),
+    url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920') center/cover fixed;
+}
+
+.dark-mode .welcome-title {
+  color: #f0f0f0;
+}
+
+.dark-mode .welcome-title .highlight {
+  color: var(--gold);
+}
+
+.dark-mode .welcome-subtitle {
+  color: #d0d0d0;
+}
+
+.dark-mode .welcome-badge {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.dark-mode .trust-item {
+  color: #e0e0e0;
+}
+
+.dark-mode .scroll-indicator {
+  color: #e0e0e0;
+}
+
+.dark-mode .mouse {
+  border-color: var(--gold);
+}
+
+/* Welcome Search Bar */
+.dark-mode .search-bar {
+  background: rgba(30, 30, 30, 0.95);
+  backdrop-filter: blur(20px);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.dark-mode .search-group label {
+  color: #e0e0e0;
+}
+
+.dark-mode .search-bar select,
+.dark-mode .search-bar input {
+  background: #2d2d2d;
+  color: #e0e0e0;
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.dark-mode .search-bar select:focus,
+.dark-mode .search-bar input:focus {
+  background: #3d3d3d;
+  border-color: var(--gold);
+}
+
+.dark-mode .search-bar select option {
+  background: #2d2d2d;
+  color: #e0e0e0;
+}
+
+.dark-mode .suggestion-pill {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(212, 175, 55, 0.5);
+  color: #e0e0e0;
+}
+
+.dark-mode .suggestion-pill:hover {
+  background: var(--gold);
+  color: var(--dark-bg);
+}
+
+/* Welcome Stats Section */
+.dark-mode .welcome-stats {
+  background: #0f0f0f;
+}
+
+.dark-mode .stat-card {
+  background: linear-gradient(135deg, #1a1a1a 0%, rgba(212, 175, 55, 0.05) 100%);
+}
+
+.dark-mode .stat-card:hover {
+  background: linear-gradient(135deg, #2d2d2d 0%, rgba(212, 175, 55, 0.1) 100%);
+  border-color: var(--gold);
+}
+
+.dark-mode .stat-card h3 {
+  color: var(--gold);
+}
+
+.dark-mode .stat-card p {
+  color: #e0e0e0;
+}
+
+/* Property Types Section */
+.dark-mode .property-types-section {
+  background: #1a1a1a;
+}
+
+.dark-mode .section-header h2 {
+  color: #f0f0f0;
+}
+
+.dark-mode .section-header p {
+  color: #b0b0b0;
+}
+
+.dark-mode .property-type-card {
+  background: #2d2d2d;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .property-type-card:hover {
+  background: #3d3d3d;
+  border-color: var(--gold);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode .property-type-card h3 {
+  color: #f0f0f0;
+}
+
+.dark-mode .property-type-card p {
+  color: #b0b0b0;
+}
+
+.dark-mode .card-arrow {
+  color: var(--gold);
+}
+
+/* Welcome Features Section */
+.dark-mode .welcome-features {
+  background: #0f0f0f;
+}
+
+.dark-mode .welcome-feature-card {
+  background: #1a1a1a;
+}
+
+.dark-mode .welcome-feature-card:hover {
+  background: #2d2d2d;
+  border-color: var(--gold);
+}
+
+.dark-mode .welcome-feature-card h3 {
+  color: #f0f0f0;
+}
+
+.dark-mode .welcome-feature-card p {
+  color: #b0b0b0;
+}
+
+/* Features Section (Home Page) */
+.dark-mode .features {
+  background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 100%);
+}
+
+.dark-mode .features h2 {
+  color: #f0f0f0;
+}
+
+.dark-mode .features .subtitle {
+  color: #b0b0b0;
+}
+
+.dark-mode .feature-item {
+  background: #2d2d2d;
+  border-color: rgba(212, 175, 55, 0.1);
+}
+
+.dark-mode .feature-item:hover {
+  background: #3d3d3d;
+}
+
+.dark-mode .feature-item h3 {
+  color: #f0f0f0;
+}
+
+.dark-mode .feature-item p {
+  color: #b0b0b0;
+}
+
+/* Featured Properties Section */
+.dark-mode .featured-properties {
+  background: #1a1a1a;
+}
+
+.dark-mode .featured-properties h2 {
+  color: #f0f0f0;
+}
+
+.dark-mode .featured-properties .subtitle {
+  color: #b0b0b0;
+}
+
+/* CTA Section */
+.dark-mode .welcome-cta-section {
+  background: linear-gradient(135deg, #0f2818 0%, #1a4d2e 100%);
+}
+
+.dark-mode .cta-content h2 {
+  color: #f0f0f0;
+}
+
+.dark-mode .cta-content p {
+  color: #d0d0d0;
+}
+
+/* About Us Section */
+.dark-mode .about-us-section {
+  background: #1a1a1a;
+}
+
+.dark-mode .about-header h2 {
+  color: #f0f0f0;
+}
+
+.dark-mode .about-subtitle {
+  color: #b0b0b0;
+}
+
+.dark-mode .about-us-content {
+  color: #b0b0b0;
+}
+
+.dark-mode .about-us-content strong {
+  color: var(--gold);
+}
+
+/* Welcome Navbar (if transparent) */
+.dark-mode .welcome-navbar {
+  background: rgba(15, 40, 24, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.dark-mode .navbar.transparent {
+  background: rgba(10, 25, 15, 0.8) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.dark-mode .welcome-nav-links button {
+  color: #e0e0e0;
+}
+
+.dark-mode .welcome-nav-links button:hover {
+  color: var(--gold);
+}
+
+.dark-mode .brand-corner span {
+  color: var(--gold);
+}
+
+/* Auth Fixed Buttons */
+.dark-mode .auth-fixed .btn-auth-text {
+  color: var(--gold);
+}
+
+.dark-mode .auth-fixed .btn-auth-outline {
+  border-color: rgba(255, 215, 0, 0.85);
+  color: var(--gold);
+}
+
+.dark-mode .auth-fixed .btn-auth-outline:hover {
+  background: rgba(255, 215, 0, 0.1);
+}
+
+/* Auth Overlay */
+.dark-mode .auth-overlay {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.dark-mode .auth-center {
+  background: #1a1a1a;
+}
+
+.dark-mode .auth-close {
+  color: var(--gold);
+}
+
+/* Hero Section */
+.dark-mode .hero {
+  background: linear-gradient(rgba(10, 25, 15, 0.90), rgba(15, 40, 24, 0.85)),
+    url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920') center/cover fixed;
+}
+
+.dark-mode .hero h1 {
+  color: #f0f0f0;
+}
+
+.dark-mode .hero p {
+  color: #d0d0d0;
+}
+
+/* Buttons in Dark Mode */
+.dark-mode .btn-welcome-primary,
+.dark-mode .btn-cta-primary {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--secondary-color) 100%);
+  color: var(--dark-bg);
+}
+
+.dark-mode .btn-welcome-secondary,
+.dark-mode .btn-cta-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+  border-color: #e0e0e0;
+}
+
+.dark-mode .btn-welcome-secondary:hover,
+.dark-mode .btn-cta-secondary:hover {
+  background: #e0e0e0;
+  color: var(--dark-bg);
+}
+
+/* View All Button */
+.dark-mode .btn-view-all {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--secondary-color) 100%);
+  color: var(--dark-bg);
+}
+
+/* Scroll to Top */
+.dark-mode .scroll-top {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--secondary-color) 100%);
+  color: var(--dark-bg);
+}
+
+/* Loading Spinner */
+.dark-mode .loading-icon {
+  color: var(--gold);
+}
+
+.dark-mode .loading-text,
+.dark-mode .loading-subtext {
+  color: #e0e0e0;
+}
+
+/* Badge Adjustments */
+.dark-mode .badge.sale {
+  background: linear-gradient(135deg, rgba(26, 77, 46, 0.95), rgba(15, 40, 24, 0.95));
+}
+
+.dark-mode .badge.rent {
+  background: linear-gradient(135deg, rgba(196, 145, 2, 0.95), rgba(139, 105, 20, 0.95));
+}
+
+/* Contact Text Colors */
+.dark-mode .contact-text h4 {
+  color: #f0f0f0;
+}
+
+.dark-mode .contact-text a {
+  color: var(--gold);
+}
+
+.dark-mode .contact-text a:hover {
+  color: #ffd700;
+}
+
+.dark-mode .contact-text p {
+  color: #b0b0b0;
+}
+
+/* Social Links */
+.dark-mode .social-links h4 {
+  color: #f0f0f0;
+}
+
+.dark-mode .social-icon {
+  background: #2d2d2d;
+  color: var(--gold);
+}
+
+.dark-mode .social-icon:hover {
+  border-color: var(--gold);
+}
+
+/* Price Labels */
+.dark-mode .price-labels span {
+  color: #b0b0b0;
+}
+
+.dark-mode .price-label {
+  color: #b0b0b0;
+}
+
+/* Form Messages */
+.dark-mode .form-message.success {
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.2), rgba(39, 174, 96, 0.2));
+  color: #2ecc71;
+}
+
+.dark-mode .form-message.error {
+  background: linear-gradient(135deg, rgba(231, 76, 60, 0.2), rgba(192, 57, 43, 0.2));
+  color: #e74c3c;
+}
+
+/* Error Message */
+.dark-mode .error-message {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+/* Auth Link */
+.dark-mode .auth-link {
+  color: #b0b0b0;
+}
+
+.dark-mode .auth-link a {
+  color: var(--gold);
+}
+
+.dark-mode .auth-link a:hover {
+  color: #ffd700;
+}
+
+/* Smooth Transitions */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

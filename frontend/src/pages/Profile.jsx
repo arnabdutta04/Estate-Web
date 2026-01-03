@@ -3,14 +3,14 @@ import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import api from '../utils/api';
 import './Profile.css';
+import { useTheme } from '../context/ThemeContext';
 
 const Profile = () => {
   const { user, login } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState('personal');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'system');
-
+  const { theme, changeTheme } = useTheme();
   // Personal Info State
   const [personalInfo, setPersonalInfo] = useState({
     name: user?.name || '',
@@ -182,10 +182,8 @@ const Profile = () => {
     }
   };
 
-  // Handle Theme Change
-  const handleThemeChange = (newTheme) => {
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+   const handleThemeChange = (newTheme) => {
+    changeTheme(newTheme);
   };
 
   return (
