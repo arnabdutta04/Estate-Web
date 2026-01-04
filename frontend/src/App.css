@@ -2019,11 +2019,7 @@ display: none;
   .modal-overlay {
     padding: 1rem;
   }
-}/* Welcome Page Styles */
-.welcome-page {
-  overflow-x: hidden;
 }
-
 /* Welcome Hero Section */
 .welcome-hero {
   position: relative;
