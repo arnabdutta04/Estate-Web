@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import ContactSection from "../components/ContactSection";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbar";
 import {
   FaHome,
   FaKey,
