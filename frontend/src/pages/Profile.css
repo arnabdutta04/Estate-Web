@@ -478,3 +478,183 @@ padding: 2rem;
 grid-template-columns: 1fr;
 }
 }
+/* ================= ICON STYLING ================= */
+.nav-icon {
+  font-size: 1.2rem;
+  margin-right: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+}
+
+.theme-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Update profile nav items to use flexbox */
+.profile-nav-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-align: left;
+  font-size: 1rem;
+  color: var(--text-color, #333);
+  gap: 0.75rem;
+}
+
+.profile-nav-item:hover {
+  background: rgba(244, 196, 48, 0.1);
+  border-left-color: #f4c430;
+}
+
+.profile-nav-item.active {
+  background: rgba(244, 196, 48, 0.15);
+  border-left-color: #f4c430;
+  font-weight: 600;
+}
+
+/* Theme options styling */
+.theme-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+  min-width: 150px;
+}
+
+.theme-option:hover {
+  border-color: #f4c430;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(244, 196, 48, 0.2);
+}
+
+.theme-option.active {
+  border-color: #f4c430;
+  background: rgba(244, 196, 48, 0.1);
+  box-shadow: 0 4px 12px rgba(244, 196, 48, 0.3);
+}
+
+.theme-options {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.theme-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color, #333);
+  margin-top: 0.5rem;
+}
+
+/* File input label with icon */
+.file-input-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #f4c430;
+  color: #2d5235;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.file-input-label:hover {
+  background: #ffd700;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(244, 196, 48, 0.3);
+}
+
+.file-input-label svg {
+  font-size: 1.1rem;
+}
+
+/* Theme preview boxes */
+.theme-preview {
+  width: 100px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.light-preview {
+  background: #ffffff;
+}
+
+.light-preview .preview-header {
+  height: 20px;
+  background: #f0f0f0;
+}
+
+.light-preview .preview-content {
+  height: 40px;
+  background: #ffffff;
+  border-top: 1px solid #e0e0e0;
+}
+
+.dark-preview {
+  background: #1a1a1a;
+}
+
+.dark-preview .preview-header {
+  height: 20px;
+  background: #2d2d2d;
+}
+
+.dark-preview .preview-content {
+  height: 40px;
+  background: #1a1a1a;
+  border-top: 1px solid #333;
+}
+
+.system-preview {
+  background: linear-gradient(to right, #ffffff 50%, #1a1a1a 50%);
+}
+
+.system-preview .preview-header {
+  height: 20px;
+  background: linear-gradient(to right, #f0f0f0 50%, #2d2d2d 50%);
+}
+
+.system-preview .preview-content {
+  height: 40px;
+  background: linear-gradient(to right, #ffffff 50%, #1a1a1a 50%);
+}
+
+/* Dark mode adjustments */
+.dark-mode .profile-nav-item {
+  color: #e0e0e0;
+}
+
+.dark-mode .theme-option {
+  background: #2d2d2d;
+  border-color: #404040;
+}
+
+.dark-mode .theme-option.active {
+  background: rgba(244, 196, 48, 0.2);
+  border-color: #f4c430;
+}
+
+.dark-mode .theme-label {
+  color: #e0e0e0;
+}
