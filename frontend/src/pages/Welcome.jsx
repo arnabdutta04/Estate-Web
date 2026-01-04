@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import ContactSection from "../components/ContactSection";
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
+
 import {
   FaHome,
   FaKey,
@@ -16,26 +17,13 @@ import {
   FaCheckCircle
 } from "react-icons/fa";
 
-import Login from "./Login";
-import Register from "./Register";
-
 const Welcome = () => {
   const [scrollY] = useState(0);
-  const [authMode, setAuthMode] = useState(null);
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    document.body.style.overflow = authMode ? "hidden" : "auto";
-    return () => (document.body.style.overflow = "auto");
-  }, [authMode]);
-
   const handleExploreClick = () => {
-    if (!user) {
-      setAuthMode("login");
-    } else {
-      navigate("/properties");
-    }
+    navigate("/properties"); // ProtectedRoute will handle auth
   };
 
   const features = [
@@ -68,49 +56,19 @@ const Welcome = () => {
 
   return (
     <div className="welcome-page">
-      {/* NAVBAR - Show when user is logged in */}
+      {/* NAVBAR (only when logged in) */}
       {user && <Navbar />}
 
       {/* ================= HERO ================= */}
-      <section className="welcome-hero" style={{ paddingTop: user ? '70px' : '0' }}>
+      <section
+        className="welcome-hero"
+        style={{ paddingTop: user ? "70px" : "0" }}
+      >
         <div
           className="hero-overlay"
           style={{ transform: `translateY(${scrollY * 0.5}px)` }}
         />
 
-        {/* Show brand corner and auth buttons only when NOT logged in */}
-        {!user && (
-          <>
-            <div className="brand-corner">
-              <img
-                src={`${process.env.PUBLIC_URL}/logo-3d.png`}
-                alt="Propify Logo"
-              />
-              <span>Propify</span>
-            </div>
-
-            <div className="auth-fixed">
-              {!authMode && (
-                <>
-                  <button
-                    className="btn-auth-text"
-                    onClick={() => setAuthMode("login")}
-                  >
-                    Login
-                  </button>
-                  <button
-                    className="btn-auth-outline"
-                    onClick={() => setAuthMode("register")}
-                  >
-                    Register
-                  </button>
-                </>
-              )}
-            </div>
-          </>
-        )}
-
-        {/* HERO CONTENT */}
         <div className="welcome-container">
           <h1 className="welcome-title">
             Find Your <span className="highlight">Dream Home</span>
@@ -150,20 +108,21 @@ const Welcome = () => {
         </div>
       </section>
 
-      {/* ABOUT */}
+      {/* ================= ABOUT ================= */}
       <section className="about-us-section">
         <div className="welcome-container">
           <h2>About Us</h2>
           <h3>Your trusted partner in modern real estate solutions</h3>
           <p>
-            <strong>Propify</strong> is a modern real estate platform built to simplify property buying, selling, and renting.
-           Our goal is to empower customers and brokers with smart tools, 
-           real-time insights, and seamless communication.
+            <strong>Propify</strong> is a modern real estate platform built to
+            simplify property buying, selling, and renting. Our goal is to
+            empower customers and brokers with smart tools, real-time insights,
+            and seamless communication.
           </p>
         </div>
       </section>
 
-      {/* PROPERTY TYPES */}
+      {/* ================= PROPERTY TYPES ================= */}
       <section className="property-types-section">
         <div className="welcome-container">
           <h2>Browse By Property Type</h2>
@@ -183,7 +142,7 @@ const Welcome = () => {
         </div>
       </section>
 
-      {/* FEATURES */}
+      {/* ================= FEATURES ================= */}
       <section className="welcome-features">
         <div className="welcome-container">
           <h2>Why Choose Us</h2>
@@ -200,22 +159,6 @@ const Welcome = () => {
       </section>
 
       <ContactSection />
-
-      {/* AUTH MODAL */}
-      {authMode && (
-        <div className="auth-overlay">
-          <button className="auth-close" onClick={() => setAuthMode(null)}>
-            ×
-          </button>
-          <div className="auth-center">
-            {authMode === "login" ? (
-              <Login switchToRegister={() => setAuthMode("register")} />
-            ) : (
-              <Register switchToLogin={() => setAuthMode("login")} />
-            )}
-          </div>
-        </div>
-      )}
     </div>
   );
 };

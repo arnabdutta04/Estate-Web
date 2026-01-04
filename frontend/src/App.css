@@ -4942,7 +4942,7 @@ animation: dots 1.5s steps(3, end) infinite;
   left: 0;
   right: 0;
   height: 70px;
-  background: linear-gradient(135deg, #2d5235 0%, #1e3a28 100%);
+   background: transparent !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   z-index: 1000;
   transition: all 0.3s ease;

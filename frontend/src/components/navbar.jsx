@@ -1,7 +1,12 @@
 import React, { useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { FaUser, FaSignOutAlt } from "react-icons/fa";
+import {
+  FaUser,
+  FaSignOutAlt,
+  FaSignInAlt,
+  FaUserPlus
+} from "react-icons/fa";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -35,12 +40,14 @@ const Navbar = () => {
           >
             Home
           </button>
+
           <button
             className={`nav-link ${isActive("/properties") ? "active" : ""}`}
             onClick={() => navigate("/properties")}
           >
             Properties
           </button>
+
           <button
             className={`nav-link ${isActive("/brokers") ? "active" : ""}`}
             onClick={() => navigate("/brokers")}
@@ -49,13 +56,33 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* User Section */}
+        {/* User / Auth Section */}
         <div className="navbar-user">
-          {user && (
+          {!user ? (
             <>
-              <button className="nav-link user-profile">
+              <button
+                className="nav-link login-btn"
+                onClick={() => navigate("/login")}
+              >
+                <FaSignInAlt /> Login
+              </button>
+
+              <button
+                className="nav-link register-btn"
+                onClick={() => navigate("/register")}
+              >
+                <FaUserPlus /> Register
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                className="nav-link user-profile"
+                onClick={() => navigate("/profile")}
+              >
                 <FaUser /> {user.name || "Profile"}
               </button>
+
               <button className="btn-logout" onClick={handleLogout}>
                 <FaSignOutAlt /> Logout
               </button>

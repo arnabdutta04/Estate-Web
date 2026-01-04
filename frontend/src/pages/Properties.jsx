@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import api from '../utils/api';
 import PropertyCard from '../components/PropertyCard';
 import LoadingSpinner from '../components/LoadingSpinner';
-import Navbar from '../components/navbar';
+import Navbar from '../components/Navbar';
 import PageTransition from '../components/PageTransition';
 
 const Properties = () => {

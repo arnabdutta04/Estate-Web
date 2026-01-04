@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import { FaStar, FaMapMarkerAlt, FaPhone, FaEnvelope, FaBuilding, FaBriefcase, FaCheckCircle, FaFilter, FaSearch} from 'react-icons/fa';
 import LoadingSpinner from '../components/LoadingSpinner';
-import Navbar from '../components/navbar';
+import Navbar from '../components/Navbar';
 import PageTransition from '../components/PageTransition';
 
 const Brokers = () => {
