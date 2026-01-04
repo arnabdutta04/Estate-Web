@@ -4,6 +4,8 @@ import { AuthContext } from '../context/AuthContext';
 import api from '../utils/api';
 import './Profile.css';
 import { useTheme } from '../context/ThemeContext';
+import Navbar from '../components/Navbar';
+import PageTransition from '../components/PageTransition';
 
 const Profile = () => {
   const { user, login } = useContext(AuthContext);
@@ -11,6 +13,7 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
   const { theme, changeTheme } = useTheme();
+  
   // Personal Info State
   const [personalInfo, setPersonalInfo] = useState({
     name: user?.name || '',
@@ -182,262 +185,130 @@ const Profile = () => {
     }
   };
 
-   const handleThemeChange = (newTheme) => {
+  const handleThemeChange = (newTheme) => {
     changeTheme(newTheme);
   };
 
   return (
-    <div className="profile-page">
-      <div className="container">
-        <div className="profile-header">
-          <h1>My Profile</h1>
-          <p>Manage your account settings and preferences</p>
-        </div>
-
-        <div className="profile-layout">
-          {/* Sidebar */}
-          <div className="profile-sidebar">
-            <div className="profile-avatar-section">
-              <div className="profile-avatar">
-                {previewUrl ? (
-                  <img src={previewUrl} alt="Profile" />
-                ) : (
-                  <div className="avatar-placeholder">
-                    {user?.name?.charAt(0)?.toUpperCase() || 'U'}
-                  </div>
-                )}
-              </div>
-              <h3>{user?.name || 'User'}</h3>
-              <p>{user?.email}</p>
+    <>
+      <Navbar />
+      <PageTransition>
+        <div className="profile-page">
+          <div className="container">
+            <div className="profile-header">
+              <h1>My Profile</h1>
+              <p>Manage your account settings and preferences</p>
             </div>
 
-            <nav className="profile-nav">
-              <button
-                className={`profile-nav-item ${activeTab === 'personal' ? 'active' : ''}`}
-                onClick={() => setActiveTab('personal')}
-              >
-                <span className="nav-icon">👤</span>
-                Personal Information
-              </button>
-              <button
-                className={`profile-nav-item ${activeTab === 'picture' ? 'active' : ''}`}
-                onClick={() => setActiveTab('picture')}
-              >
-                <span className="nav-icon">📷</span>
-                Profile Picture
-              </button>
-              <button
-                className={`profile-nav-item ${activeTab === 'security' ? 'active' : ''}`}
-                onClick={() => setActiveTab('security')}
-              >
-                <span className="nav-icon">🔒</span>
-                Security & Password
-              </button>
-              <button
-                className={`profile-nav-item ${activeTab === 'settings' ? 'active' : ''}`}
-                onClick={() => setActiveTab('settings')}
-              >
-                <span className="nav-icon">⚙️</span>
-                Settings
-              </button>
-            </nav>
-          </div>
-
-          {/* Main Content */}
-          <div className="profile-content">
-            {message.text && (
-              <div className={`profile-message ${message.type}`}>
-                {message.text}
-              </div>
-            )}
-
-            {/* Personal Information Tab */}
-            {activeTab === 'personal' && (
-              <div className="profile-section">
-                <h2>Personal Information</h2>
-                <p className="section-description">
-                  Update your personal details and contact information
-                </p>
-
-                <form onSubmit={handlePersonalInfoSubmit} className="profile-form">
-                  <div className="form-group">
-                    <label>Full Name</label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={personalInfo.name}
-                      onChange={handlePersonalInfoChange}
-                      placeholder="Enter your full name"
-                      required
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label>Email Address</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={personalInfo.email}
-                      onChange={handlePersonalInfoChange}
-                      placeholder="Enter your email"
-                      required
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label>Phone Number</label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={personalInfo.phone}
-                      onChange={handlePersonalInfoChange}
-                      placeholder="Enter your phone number"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label>Address</label>
-                    <textarea
-                      name="address"
-                      value={personalInfo.address}
-                      onChange={handlePersonalInfoChange}
-                      placeholder="Enter your address"
-                      rows="3"
-                    />
-                  </div>
-
-                  <button 
-                    type="submit" 
-                    className="btn-save" 
-                    disabled={loading}
-                  >
-                    {loading ? 'Saving...' : 'Save Changes'}
-                  </button>
-                </form>
-              </div>
-            )}
-
-            {/* Profile Picture Tab */}
-            {activeTab === 'picture' && (
-              <div className="profile-section">
-                <h2>Profile Picture</h2>
-                <p className="section-description">
-                  Upload a profile picture to personalize your account
-                </p>
-
-                <div className="picture-upload-section">
-                  <div className="picture-preview">
+            <div className="profile-layout">
+              {/* Sidebar */}
+              <div className="profile-sidebar">
+                <div className="profile-avatar-section">
+                  <div className="profile-avatar">
                     {previewUrl ? (
-                      <img src={previewUrl} alt="Preview" />
+                      <img src={previewUrl} alt="Profile" />
                     ) : (
-                      <div className="preview-placeholder">
+                      <div className="avatar-placeholder">
                         {user?.name?.charAt(0)?.toUpperCase() || 'U'}
                       </div>
                     )}
                   </div>
-
-                  <form onSubmit={handleProfilePictureSubmit} className="picture-form">
-                    <div className="file-input-wrapper">
-                      <input
-                        type="file"
-                        id="profilePicture"
-                        accept="image/*"
-                        onChange={handleProfilePictureChange}
-                      />
-                      <label htmlFor="profilePicture" className="file-input-label">
-                        📁 Choose Image
-                      </label>
-                    </div>
-
-                    <button 
-                      type="submit" 
-                      className="btn-save" 
-                      disabled={!profilePicture || loading}
-                    >
-                      {loading ? 'Uploading...' : 'Upload Picture'}
-                    </button>
-                  </form>
-
-                  <div className="picture-guidelines">
-                    <h4>Image Guidelines:</h4>
-                    <ul>
-                      <li>Recommended size: 400x400 pixels</li>
-                      <li>Maximum file size: 5MB</li>
-                      <li>Supported formats: JPG, PNG, GIF</li>
-                    </ul>
-                  </div>
+                  <h3>{user?.name || 'User'}</h3>
+                  <p>{user?.email}</p>
                 </div>
+
+                <nav className="profile-nav">
+                  <button
+                    className={`profile-nav-item ${activeTab === 'personal' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('personal')}
+                  >
+                    <span className="nav-icon">👤</span>
+                    Personal Information
+                  </button>
+                  <button
+                    className={`profile-nav-item ${activeTab === 'picture' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('picture')}
+                  >
+                    <span className="nav-icon">📷</span>
+                    Profile Picture
+                  </button>
+                  <button
+                    className={`profile-nav-item ${activeTab === 'security' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('security')}
+                  >
+                    <span className="nav-icon">🔒</span>
+                    Security & Password
+                  </button>
+                  <button
+                    className={`profile-nav-item ${activeTab === 'settings' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('settings')}
+                  >
+                    <span className="nav-icon">⚙️</span>
+                    Settings
+                  </button>
+                </nav>
               </div>
-            )}
 
-            {/* Security & Password Tab */}
-            {activeTab === 'security' && (
-              <div className="profile-section">
-                <h2>Security & Password</h2>
-                <p className="section-description">
-                  Change your password using OTP verification
-                </p>
-
-                <form onSubmit={handlePasswordSubmit} className="profile-form">
-                  <div className="form-group">
-                    <label>Current Password</label>
-                    <input
-                      type="password"
-                      name="currentPassword"
-                      value={passwordData.currentPassword}
-                      onChange={handlePasswordChange}
-                      placeholder="Enter current password"
-                      required
-                    />
+              {/* Main Content */}
+              <div className="profile-content">
+                {message.text && (
+                  <div className={`profile-message ${message.type}`}>
+                    {message.text}
                   </div>
+                )}
 
-                  {!otpSent && (
-                    <button 
-                      type="button" 
-                      className="btn-send-otp" 
-                      onClick={handleSendOTP}
-                      disabled={loading || !passwordData.currentPassword}
-                    >
-                      {loading ? 'Sending...' : 'Send OTP to Email'}
-                    </button>
-                  )}
+                {/* Personal Information Tab */}
+                {activeTab === 'personal' && (
+                  <div className="profile-section">
+                    <h2>Personal Information</h2>
+                    <p className="section-description">
+                      Update your personal details and contact information
+                    </p>
 
-                  {otpSent && (
-                    <>
+                    <form onSubmit={handlePersonalInfoSubmit} className="profile-form">
                       <div className="form-group">
-                        <label>OTP Code</label>
+                        <label>Full Name</label>
                         <input
                           type="text"
-                          name="otp"
-                          value={passwordData.otp}
-                          onChange={handlePasswordChange}
-                          placeholder="Enter 6-digit OTP"
-                          maxLength="6"
+                          name="name"
+                          value={personalInfo.name}
+                          onChange={handlePersonalInfoChange}
+                          placeholder="Enter your full name"
                           required
                         />
                       </div>
 
                       <div className="form-group">
-                        <label>New Password</label>
+                        <label>Email Address</label>
                         <input
-                          type="password"
-                          name="newPassword"
-                          value={passwordData.newPassword}
-                          onChange={handlePasswordChange}
-                          placeholder="Enter new password"
+                          type="email"
+                          name="email"
+                          value={personalInfo.email}
+                          onChange={handlePersonalInfoChange}
+                          placeholder="Enter your email"
                           required
                         />
                       </div>
 
                       <div className="form-group">
-                        <label>Confirm New Password</label>
+                        <label>Phone Number</label>
                         <input
-                          type="password"
-                          name="confirmPassword"
-                          value={passwordData.confirmPassword}
-                          onChange={handlePasswordChange}
-                          placeholder="Confirm new password"
-                          required
+                          type="tel"
+                          name="phone"
+                          value={personalInfo.phone}
+                          onChange={handlePersonalInfoChange}
+                          placeholder="Enter your phone number"
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label>Address</label>
+                        <textarea
+                          name="address"
+                          value={personalInfo.address}
+                          onChange={handlePersonalInfoChange}
+                          placeholder="Enter your address"
+                          rows="3"
                         />
                       </div>
 
@@ -446,69 +317,206 @@ const Profile = () => {
                         className="btn-save" 
                         disabled={loading}
                       >
-                        {loading ? 'Changing...' : 'Change Password'}
+                        {loading ? 'Saving...' : 'Save Changes'}
                       </button>
-                    </>
-                  )}
-                </form>
-              </div>
-            )}
+                    </form>
+                  </div>
+                )}
 
-            {/* Settings Tab */}
-            {activeTab === 'settings' && (
-              <div className="profile-section">
-                <h2>Appearance Settings</h2>
-                <p className="section-description">
-                  Customize your viewing experience
-                </p>
+                {/* Profile Picture Tab */}
+                {activeTab === 'picture' && (
+                  <div className="profile-section">
+                    <h2>Profile Picture</h2>
+                    <p className="section-description">
+                      Upload a profile picture to personalize your account
+                    </p>
 
-                <div className="theme-selector">
-                  <h3>Theme Preference</h3>
-                  
-                  <div className="theme-options">
-                    <div 
-                      className={`theme-option ${theme === 'light' ? 'active' : ''}`}
-                      onClick={() => handleThemeChange('light')}
-                    >
-                      <div className="theme-preview light-preview">
-                        <div className="preview-header"></div>
-                        <div className="preview-content"></div>
+                    <div className="picture-upload-section">
+                      <div className="picture-preview">
+                        {previewUrl ? (
+                          <img src={previewUrl} alt="Preview" />
+                        ) : (
+                          <div className="preview-placeholder">
+                            {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+                          </div>
+                        )}
                       </div>
-                      <span className="theme-icon">☀️</span>
-                      <span className="theme-label">Light</span>
-                    </div>
 
-                    <div 
-                      className={`theme-option ${theme === 'dark' ? 'active' : ''}`}
-                      onClick={() => handleThemeChange('dark')}
-                    >
-                      <div className="theme-preview dark-preview">
-                        <div className="preview-header"></div>
-                        <div className="preview-content"></div>
-                      </div>
-                      <span className="theme-icon">🌙</span>
-                      <span className="theme-label">Dark</span>
-                    </div>
+                      <form onSubmit={handleProfilePictureSubmit} className="picture-form">
+                        <div className="file-input-wrapper">
+                          <input
+                            type="file"
+                            id="profilePicture"
+                            accept="image/*"
+                            onChange={handleProfilePictureChange}
+                          />
+                          <label htmlFor="profilePicture" className="file-input-label">
+                            📁 Choose Image
+                          </label>
+                        </div>
 
-                    <div 
-                      className={`theme-option ${theme === 'system' ? 'active' : ''}`}
-                      onClick={() => handleThemeChange('system')}
-                    >
-                      <div className="theme-preview system-preview">
-                        <div className="preview-header"></div>
-                        <div className="preview-content"></div>
+                        <button 
+                          type="submit" 
+                          className="btn-save" 
+                          disabled={!profilePicture || loading}
+                        >
+                          {loading ? 'Uploading...' : 'Upload Picture'}
+                        </button>
+                      </form>
+
+                      <div className="picture-guidelines">
+                        <h4>Image Guidelines:</h4>
+                        <ul>
+                          <li>Recommended size: 400x400 pixels</li>
+                          <li>Maximum file size: 5MB</li>
+                          <li>Supported formats: JPG, PNG, GIF</li>
+                        </ul>
                       </div>
-                      <span className="theme-icon">💻</span>
-                      <span className="theme-label">System</span>
                     </div>
                   </div>
-                </div>
+                )}
+
+                {/* Security & Password Tab */}
+                {activeTab === 'security' && (
+                  <div className="profile-section">
+                    <h2>Security & Password</h2>
+                    <p className="section-description">
+                      Change your password using OTP verification
+                    </p>
+
+                    <form onSubmit={handlePasswordSubmit} className="profile-form">
+                      <div className="form-group">
+                        <label>Current Password</label>
+                        <input
+                          type="password"
+                          name="currentPassword"
+                          value={passwordData.currentPassword}
+                          onChange={handlePasswordChange}
+                          placeholder="Enter current password"
+                          required
+                        />
+                      </div>
+
+                      {!otpSent && (
+                        <button 
+                          type="button" 
+                          className="btn-send-otp" 
+                          onClick={handleSendOTP}
+                          disabled={loading || !passwordData.currentPassword}
+                        >
+                          {loading ? 'Sending...' : 'Send OTP to Email'}
+                        </button>
+                      )}
+
+                      {otpSent && (
+                        <>
+                          <div className="form-group">
+                            <label>OTP Code</label>
+                            <input
+                              type="text"
+                              name="otp"
+                              value={passwordData.otp}
+                              onChange={handlePasswordChange}
+                              placeholder="Enter 6-digit OTP"
+                              maxLength="6"
+                              required
+                            />
+                          </div>
+
+                          <div className="form-group">
+                            <label>New Password</label>
+                            <input
+                              type="password"
+                              name="newPassword"
+                              value={passwordData.newPassword}
+                              onChange={handlePasswordChange}
+                              placeholder="Enter new password"
+                              required
+                            />
+                          </div>
+
+                          <div className="form-group">
+                            <label>Confirm New Password</label>
+                            <input
+                              type="password"
+                              name="confirmPassword"
+                              value={passwordData.confirmPassword}
+                              onChange={handlePasswordChange}
+                              placeholder="Confirm new password"
+                              required
+                            />
+                          </div>
+
+                          <button 
+                            type="submit" 
+                            className="btn-save" 
+                            disabled={loading}
+                          >
+                            {loading ? 'Changing...' : 'Change Password'}
+                          </button>
+                        </>
+                      )}
+                    </form>
+                  </div>
+                )}
+
+                {/* Settings Tab */}
+                {activeTab === 'settings' && (
+                  <div className="profile-section">
+                    <h2>Appearance Settings</h2>
+                    <p className="section-description">
+                      Customize your viewing experience
+                    </p>
+
+                    <div className="theme-selector">
+                      <h3>Theme Preference</h3>
+                      
+                      <div className="theme-options">
+                        <div 
+                          className={`theme-option ${theme === 'light' ? 'active' : ''}`}
+                          onClick={() => handleThemeChange('light')}
+                        >
+                          <div className="theme-preview light-preview">
+                            <div className="preview-header"></div>
+                            <div className="preview-content"></div>
+                          </div>
+                          <span className="theme-icon">☀️</span>
+                          <span className="theme-label">Light</span>
+                        </div>
+
+                        <div 
+                          className={`theme-option ${theme === 'dark' ? 'active' : ''}`}
+                          onClick={() => handleThemeChange('dark')}
+                        >
+                          <div className="theme-preview dark-preview">
+                            <div className="preview-header"></div>
+                            <div className="preview-content"></div>
+                          </div>
+                          <span className="theme-icon">🌙</span>
+                          <span className="theme-label">Dark</span>
+                        </div>
+
+                        <div 
+                          className={`theme-option ${theme === 'system' ? 'active' : ''}`}
+                          onClick={() => handleThemeChange('system')}
+                        >
+                          <div className="theme-preview system-preview">
+                            <div className="preview-header"></div>
+                            <div className="preview-content"></div>
+                          </div>
+                          <span className="theme-icon">💻</span>
+                          <span className="theme-label">System</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </PageTransition>
+    </>
   );
 };
 
