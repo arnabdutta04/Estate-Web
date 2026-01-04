@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import api from '../utils/api';
 import PropertyCard from '../components/PropertyCard';
 import LoadingSpinner from '../components/LoadingSpinner';
-
+import Navbar from '../components/Navbar';
+import PageTransition from '../components/PageTransition';
 
 const Properties = () => {
   const [properties, setProperties] = useState([]);
@@ -182,206 +183,216 @@ const Properties = () => {
     fetchProperties(filters, page);
     window.scrollTo(0, 0);
   };
+
   if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingSpinner 
+          text="Loading Properties"
+          subtext="Finding your dream home"
+        />
+      </>
+    );
+  }
+
   return (
-    <LoadingSpinner 
-      text="Loading Properties"
-      subtext="Finding your dream home"
-    />
-  );
-}
-  return (
-    <div className='properties-page' style={{ paddingTop: '80px' }}>
-    <div className='container'>
-      <h1>Browse Properties</h1>
-        
-        <div className='properties-layout'>
-          <div className='filter-sidebar'>
-            <h3>Filter Properties</h3>
-            <form onSubmit={handleFilter}>
-              <div className='form-group'>
-                <label>City</label>
-                <div style={{ position: 'relative' }} ref={cityDropdownRef}>
-                  <input
-                    type='text'
-                    value={cityInput}
-                    onChange={handleCityInputChange}
-                    onFocus={handleCityInputFocus}
-                    placeholder='Search city...'
-                    autoComplete='off'
-                  />
-                  
-                  {showCitySuggestions && citySuggestions.length > 0 && (
-                    <ul className='city-suggestions'>
-                      {citySuggestions.map((city, index) => (
-                        <li
-                          key={index}
-                          onClick={() => handleCitySelect(city)}
-                        >
-                          {city}
-                        </li>
+    <>
+      <Navbar />
+      <PageTransition>
+        <div className='properties-page'>
+          <div className='container'>
+            <h1>Browse Properties</h1>
+            
+            <div className='properties-layout'>
+              <div className='filter-sidebar'>
+                <h3>Filter Properties</h3>
+                <form onSubmit={handleFilter}>
+                  <div className='form-group'>
+                    <label>City</label>
+                    <div style={{ position: 'relative' }} ref={cityDropdownRef}>
+                      <input
+                        type='text'
+                        value={cityInput}
+                        onChange={handleCityInputChange}
+                        onFocus={handleCityInputFocus}
+                        placeholder='Search city...'
+                        autoComplete='off'
+                      />
+                      
+                      {showCitySuggestions && citySuggestions.length > 0 && (
+                        <ul className='city-suggestions'>
+                          {citySuggestions.map((city, index) => (
+                            <li
+                              key={index}
+                              onClick={() => handleCitySelect(city)}
+                            >
+                              {city}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className='form-group'>
+                    <label>Property Type</label>
+                    <select name='propertyType' value={filters.propertyType} onChange={handleFilterChange}>
+                      <option value=''>All Types</option>
+                      <option value='apartment'>Apartment</option>
+                      <option value='villa'>Villa</option>
+                      <option value='house'>House</option>
+                      <option value='flat'>Flat</option>
+                      <option value='commercial'>Commercial</option>
+                    </select>
+                  </div>
+
+                  <div className='form-group'>
+                    <label>Listing Type</label>
+                    <select name='listingType' value={filters.listingType} onChange={handleFilterChange}>
+                      <option value=''>All</option>
+                      <option value='sale'>For Sale</option>
+                      <option value='rent'>For Rent</option>
+                    </select>
+                  </div>
+
+                  <div className='form-group'>
+                    <label>Price Range</label>
+                    
+                    <div className="price-display">
+                      <div className="price-value">
+                        <span className="price-label">Min</span>
+                        <span className="price-amount">{formatPrice(priceRange.min)}</span>
+                      </div>
+                      <div className="price-separator">-</div>
+                      <div className="price-value">
+                        <span className="price-label">Max</span>
+                        <span className="price-amount">{formatPrice(priceRange.max)}</span>
+                      </div>
+                    </div>
+
+                    <div className="slider-container">
+                      <div className="slider-track">
+                        <div 
+                          className="slider-range"
+                          style={{
+                            left: `${(priceRange.min / 10000000) * 100}%`,
+                            width: `${((priceRange.max - priceRange.min) / 10000000) * 100}%`
+                          }}
+                        ></div>
+                      </div>
+
+                      <input
+                        type="range"
+                        min="0"
+                        max="10000000"
+                        step="100000"
+                        value={priceRange.min}
+                        onChange={handleMinPriceChange}
+                        className="slider slider-min"
+                      />
+
+                      <input
+                        type="range"
+                        min="0"
+                        max="10000000"
+                        step="100000"
+                        value={priceRange.max}
+                        onChange={handleMaxPriceChange}
+                        className="slider slider-max"
+                      />
+                    </div>
+
+                    <div className="price-labels">
+                      <span>₹0</span>
+                      <span>₹2.5L</span>
+                      <span>₹5L</span>
+                      <span>₹7.5L</span>
+                      <span>₹1Cr+</span>
+                    </div>
+                  </div>
+
+                  <div className='form-group'>
+                    <label>Bedrooms</label>
+                    <select name='bedrooms' value={filters.bedrooms} onChange={handleFilterChange}>
+                      <option value=''>Any</option>
+                      <option value='1'>1+</option>
+                      <option value='2'>2+</option>
+                      <option value='3'>3+</option>
+                      <option value='4'>4+</option>
+                    </select>
+                  </div>
+
+                  <div className='form-group'>
+                    <label>Bathrooms</label>
+                    <select name='bathrooms' value={filters.bathrooms} onChange={handleFilterChange}>
+                      <option value=''>Any</option>
+                      <option value='1'>1+</option>
+                      <option value='2'>2+</option>
+                      <option value='3'>3+</option>
+                    </select>
+                  </div>
+
+                  <div className='form-group'>
+                    <label>Condition</label>
+                    <select name='condition' value={filters.condition} onChange={handleFilterChange}>
+                      <option value=''>All Conditions</option>
+                      <option value='new'>New</option>
+                      <option value='excellent'>Excellent</option>
+                      <option value='good'>Good</option>
+                      <option value='fair'>Fair</option>
+                    </select>
+                  </div>
+
+                  <button type='submit' className='btn-filter'>Apply Filters</button>
+                  <button type='button' onClick={handleReset} className='btn-reset'>Reset</button>
+                </form>
+              </div>
+              
+              <div className='properties-content'>
+                {loading ? (
+                  <div className="loading-container">
+                    <div className="loading-icon">🏠</div>
+                    <p className="loading-text">Searching Properties<span className="loading-dots"></span></p>
+                    <p className="loading-subtext">Finding the perfect match for you</p>
+                  </div>
+                ) : properties.length === 0 ? (
+                  <div className='no-results'>
+                    <h2>No properties found</h2>
+                    <p>Try adjusting your filters to see more results</p>
+                  </div>
+                ) : (
+                  <>
+                    <div className='results-info'>
+                      <p>Found <strong>{properties.length}</strong> properties</p>
+                    </div>
+                    <div className='properties-grid'>
+                      {properties.map(property => (
+                        <PropertyCard key={property._id} property={property} />
                       ))}
-                    </ul>
-                  )}
-                </div>
-              </div>
+                    </div>
 
-              <div className='form-group'>
-                <label>Property Type</label>
-                <select name='propertyType' value={filters.propertyType} onChange={handleFilterChange}>
-                  <option value=''>All Types</option>
-                  <option value='apartment'>Apartment</option>
-                  <option value='villa'>Villa</option>
-                  <option value='house'>House</option>
-                  <option value='flat'>Flat</option>
-                  <option value='commercial'>Commercial</option>
-                </select>
-              </div>
-
-              <div className='form-group'>
-                <label>Listing Type</label>
-                <select name='listingType' value={filters.listingType} onChange={handleFilterChange}>
-                  <option value=''>All</option>
-                  <option value='sale'>For Sale</option>
-                  <option value='rent'>For Rent</option>
-                </select>
-              </div>
-
-              <div className='form-group'>
-                <label>Price Range</label>
-                
-                <div className="price-display">
-                  <div className="price-value">
-                    <span className="price-label">Min</span>
-                    <span className="price-amount">{formatPrice(priceRange.min)}</span>
-                  </div>
-                  <div className="price-separator">-</div>
-                  <div className="price-value">
-                    <span className="price-label">Max</span>
-                    <span className="price-amount">{formatPrice(priceRange.max)}</span>
-                  </div>
-                </div>
-
-                <div className="slider-container">
-                  <div className="slider-track">
-                    <div 
-                      className="slider-range"
-                      style={{
-                        left: `${(priceRange.min / 10000000) * 100}%`,
-                        width: `${((priceRange.max - priceRange.min) / 10000000) * 100}%`
-                      }}
-                    ></div>
-                  </div>
-
-                  <input
-                    type="range"
-                    min="0"
-                    max="10000000"
-                    step="100000"
-                    value={priceRange.min}
-                    onChange={handleMinPriceChange}
-                    className="slider slider-min"
-                  />
-
-                  <input
-                    type="range"
-                    min="0"
-                    max="10000000"
-                    step="100000"
-                    value={priceRange.max}
-                    onChange={handleMaxPriceChange}
-                    className="slider slider-max"
-                  />
-                </div>
-
-                <div className="price-labels">
-                  <span>₹0</span>
-                  <span>₹2.5L</span>
-                  <span>₹5L</span>
-                  <span>₹7.5L</span>
-                  <span>₹1Cr+</span>
-                </div>
-              </div>
-
-              <div className='form-group'>
-                <label>Bedrooms</label>
-                <select name='bedrooms' value={filters.bedrooms} onChange={handleFilterChange}>
-                  <option value=''>Any</option>
-                  <option value='1'>1+</option>
-                  <option value='2'>2+</option>
-                  <option value='3'>3+</option>
-                  <option value='4'>4+</option>
-                </select>
-              </div>
-
-              <div className='form-group'>
-                <label>Bathrooms</label>
-                <select name='bathrooms' value={filters.bathrooms} onChange={handleFilterChange}>
-                  <option value=''>Any</option>
-                  <option value='1'>1+</option>
-                  <option value='2'>2+</option>
-                  <option value='3'>3+</option>
-                </select>
-              </div>
-
-              <div className='form-group'>
-                <label>Condition</label>
-                <select name='condition' value={filters.condition} onChange={handleFilterChange}>
-                  <option value=''>All Conditions</option>
-                  <option value='new'>New</option>
-                  <option value='excellent'>Excellent</option>
-                  <option value='good'>Good</option>
-                  <option value='fair'>Fair</option>
-                </select>
-              </div>
-
-              <button type='submit' className='btn-filter'>Apply Filters</button>
-              <button type='button' onClick={handleReset} className='btn-reset'>Reset</button>
-            </form>
-          </div>
-          
-          <div className='properties-content'>
-            {loading ? (
-              <div className="loading-container">
-                <div className="loading-icon">🏠</div>
-                <p className="loading-text">Searching Properties<span className="loading-dots"></span></p>
-                <p className="loading-subtext">Finding the perfect match for you</p>
-              </div>
-            ) : properties.length === 0 ? (
-              <div className='no-results'>
-                <h2>No properties found</h2>
-                <p>Try adjusting your filters to see more results</p>
-              </div>
-            ) : (
-              <>
-                <div className='results-info'>
-                  <p>Found <strong>{properties.length}</strong> properties</p>
-                </div>
-                <div className='properties-grid'>
-                  {properties.map(property => (
-                    <PropertyCard key={property._id} property={property} />
-                  ))}
-                </div>
-
-                {pagination.totalPages > 1 && (
-                  <div className='pagination'>
-                    {Array.from({ length: pagination.totalPages }, (_, i) => (
-                      <button
-                        key={i + 1}
-                        onClick={() => handlePageChange(i + 1)}
-                        className={pagination.currentPage === i + 1 ? 'active' : ''}
-                      >
-                        {i + 1}
-                      </button>
-                    ))}
-                  </div>
+                    {pagination.totalPages > 1 && (
+                      <div className='pagination'>
+                        {Array.from({ length: pagination.totalPages }, (_, i) => (
+                          <button
+                            key={i + 1}
+                            onClick={() => handlePageChange(i + 1)}
+                            className={pagination.currentPage === i + 1 ? 'active' : ''}
+                          >
+                            {i + 1}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </>
                 )}
-              </>
-            )}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </PageTransition>
+    </>
   );
 };
 

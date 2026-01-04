@@ -1,96 +1,66 @@
-// src/components/navbar.jsx
-import React, { useState, useEffect, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import './navbar.css';
+import React, { useContext } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { FaUser, FaSignOutAlt } from "react-icons/fa";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, logout } = useContext(AuthContext);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    // Trigger slide-down animation on mount
-    setTimeout(() => {
-      setIsVisible(true);
-    }, 100);
-  }, []);
 
   const handleLogout = () => {
     logout();
-    setIsMenuOpen(false);
-    navigate('/login');
+    navigate("/");
   };
 
-  // Get user display name
-  const getUserDisplayName = () => {
-    if (!user) return 'User';
-    return user.name || user.username || user.email?.split('@')[0] || 'User';
-  };
+  const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className={`navbar ${isVisible ? 'navbar-visible' : ''}`}>
+    <nav className="navbar-fixed">
       <div className="navbar-container">
-        {/* Logo with 3D Image */}
-        <div className="navbar-logo">
-          <Link to="/">
-            <img src="/logo-3d.png" alt="Propify" className="navbar-logo-img" />
-            <span className="logo-text">Propify</span>
-          </Link>
+        {/* Logo Section */}
+        <div className="navbar-brand" onClick={() => navigate("/")}>
+          <img
+            src={`${process.env.PUBLIC_URL}/logo-3d.png`}
+            alt="Propify Logo"
+          />
+          <span>Propify</span>
         </div>
 
-        {/* Hamburger Menu for Mobile */}
-        <button 
-          className="navbar-toggle"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
         {/* Navigation Links */}
-        <div className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
-          <Link 
-            to="/" 
-            className="navbar-link" 
-            onClick={() => setIsMenuOpen(false)}
+        <div className="navbar-links">
+          <button
+            className={`nav-link ${isActive("/") ? "active" : ""}`}
+            onClick={() => navigate("/")}
           >
             Home
-          </Link>
-          <Link 
-            to="/properties" 
-            className="navbar-link" 
-            onClick={() => setIsMenuOpen(false)}
+          </button>
+          <button
+            className={`nav-link ${isActive("/properties") ? "active" : ""}`}
+            onClick={() => navigate("/properties")}
           >
             Properties
-          </Link>
-          <Link 
-            to="/brokers" 
-            className="navbar-link" 
-            onClick={() => setIsMenuOpen(false)}
+          </button>
+          <button
+            className={`nav-link ${isActive("/brokers") ? "active" : ""}`}
+            onClick={() => navigate("/brokers")}
           >
             Brokers
-          </Link>
-          
-          {/* User Profile - Clickable */}
-          {user && (
-            <Link 
-              to="/profile" 
-              className="navbar-link navbar-profile-link" 
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {getUserDisplayName()}
-            </Link>
-          )}
-
-          {/* Logout Button */}
-          <button className="logout-btn" onClick={handleLogout}>
-            <span className="logout-icon">🚪</span>
-            <span>Logout</span>
           </button>
+        </div>
+
+        {/* User Section */}
+        <div className="navbar-user">
+          {user && (
+            <>
+              <button className="nav-link user-profile">
+                <FaUser /> {user.name || "Profile"}
+              </button>
+              <button className="btn-logout" onClick={handleLogout}>
+                <FaSignOutAlt /> Logout
+              </button>
+            </>
+          )}
         </div>
       </div>
     </nav>

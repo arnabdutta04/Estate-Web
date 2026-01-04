@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import ContactSection from "../components/ContactSection";
+import Navbar from "../components/Navbar";
 import {
   FaHome,
   FaKey,
@@ -12,9 +13,7 @@ import {
   FaBuilding,
   FaMapMarkedAlt,
   FaChartLine,
-  FaCheckCircle,
-  FaUser,
-  FaSignOutAlt
+  FaCheckCircle
 } from "react-icons/fa";
 
 import Login from "./Login";
@@ -22,9 +21,9 @@ import Register from "./Register";
 
 const Welcome = () => {
   const [scrollY] = useState(0);
-  const [authMode, setAuthMode] = useState(null); // null | login | register
+  const [authMode, setAuthMode] = useState(null);
   const navigate = useNavigate();
-  const { user, logout } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     document.body.style.overflow = authMode ? "hidden" : "auto";
@@ -69,74 +68,47 @@ const Welcome = () => {
 
   return (
     <div className="welcome-page">
+      {/* NAVBAR - Show when user is logged in */}
+      {user && <Navbar />}
+
       {/* ================= HERO ================= */}
-      <section className="welcome-hero">
+      <section className="welcome-hero" style={{ paddingTop: user ? '70px' : '0' }}>
         <div
           className="hero-overlay"
           style={{ transform: `translateY(${scrollY * 0.5}px)` }}
         />
 
-        {/* BRAND */}
-        <div className="brand-corner">
-          <img
-            src={`${process.env.PUBLIC_URL}/logo-3d.png`}
-            alt="Propify Logo"
-          />
-          <span>Propify</span>
-        </div>
+        {/* Show brand corner and auth buttons only when NOT logged in */}
+        {!user && (
+          <>
+            <div className="brand-corner">
+              <img
+                src={`${process.env.PUBLIC_URL}/logo-3d.png`}
+                alt="Propify Logo"
+              />
+              <span>Propify</span>
+            </div>
 
-        {/* TOP RIGHT BUTTONS */}
-        <div className="auth-fixed">
-          {!user && !authMode && (
-            <>
-              <button
-                className="btn-auth-text"
-                onClick={() => setAuthMode("login")}
-              >
-                Login
-              </button>
-              <button
-                className="btn-auth-outline"
-                onClick={() => setAuthMode("register")}
-              >
-                Register
-              </button>
-            </>
-          )}
-
-          {user && (
-            <>
-              <button className="btn-auth-text" onClick={() => navigate("/")}>
-                Home
-              </button>
-              <button
-                className="btn-auth-text"
-                onClick={() => navigate("/properties")}
-              >
-                Properties
-              </button>
-              <button
-                className="btn-auth-text"
-                onClick={() => navigate("/brokers")}
-              >
-                Brokers
-              </button>
-              <button className="btn-auth-text">
-                <FaUser /> {user.name || "Profile"}
-              </button>
-              <button
-                className="btn-auth-outline"
-                onClick={() => {
-                  logout();
-                  setAuthMode(null);
-                  navigate("/");
-                }}
-              >
-                <FaSignOutAlt /> Logout
-              </button>
-            </>
-          )}
-        </div>
+            <div className="auth-fixed">
+              {!authMode && (
+                <>
+                  <button
+                    className="btn-auth-text"
+                    onClick={() => setAuthMode("login")}
+                  >
+                    Login
+                  </button>
+                  <button
+                    className="btn-auth-outline"
+                    onClick={() => setAuthMode("register")}
+                  >
+                    Register
+                  </button>
+                </>
+              )}
+            </div>
+          </>
+        )}
 
         {/* HERO CONTENT */}
         <div className="welcome-container">
