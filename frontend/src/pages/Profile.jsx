@@ -6,6 +6,16 @@ import './Profile.css';
 import { useTheme } from '../context/ThemeContext';
 import Navbar from '../components/Navbar';
 import PageTransition from '../components/PageTransition';
+import { 
+  FaUser, 
+  FaCamera, 
+  FaLock, 
+  FaCog, 
+  FaSun, 
+  FaMoon, 
+  FaDesktop,
+  FaImage 
+} from 'react-icons/fa';
 
 const Profile = () => {
   const { user, login } = useContext(AuthContext);
@@ -64,7 +74,7 @@ const Profile = () => {
 
     try {
       const { data } = await api.put('/auth/update-profile', personalInfo);
-      login(data.user); // Update user in context
+      login(data.user);
       setMessage({ type: 'success', text: 'Profile updated successfully!' });
     } catch (error) {
       setMessage({ 
@@ -222,28 +232,28 @@ const Profile = () => {
                     className={`profile-nav-item ${activeTab === 'personal' ? 'active' : ''}`}
                     onClick={() => setActiveTab('personal')}
                   >
-                    <span className="nav-icon">👤</span>
+                    <FaUser className="nav-icon" />
                     Personal Information
                   </button>
                   <button
                     className={`profile-nav-item ${activeTab === 'picture' ? 'active' : ''}`}
                     onClick={() => setActiveTab('picture')}
                   >
-                    <span className="nav-icon">📷</span>
+                    <FaCamera className="nav-icon" />
                     Profile Picture
                   </button>
                   <button
                     className={`profile-nav-item ${activeTab === 'security' ? 'active' : ''}`}
                     onClick={() => setActiveTab('security')}
                   >
-                    <span className="nav-icon">🔒</span>
+                    <FaLock className="nav-icon" />
                     Security & Password
                   </button>
                   <button
                     className={`profile-nav-item ${activeTab === 'settings' ? 'active' : ''}`}
                     onClick={() => setActiveTab('settings')}
                   >
-                    <span className="nav-icon">⚙️</span>
+                    <FaCog className="nav-icon" />
                     Settings
                   </button>
                 </nav>
@@ -351,7 +361,7 @@ const Profile = () => {
                             onChange={handleProfilePictureChange}
                           />
                           <label htmlFor="profilePicture" className="file-input-label">
-                            📁 Choose Image
+                            <FaImage /> Choose Image
                           </label>
                         </div>
 
@@ -480,7 +490,7 @@ const Profile = () => {
                             <div className="preview-header"></div>
                             <div className="preview-content"></div>
                           </div>
-                          <span className="theme-icon">☀️</span>
+                          <FaSun className="theme-icon" />
                           <span className="theme-label">Light</span>
                         </div>
 
@@ -492,7 +502,7 @@ const Profile = () => {
                             <div className="preview-header"></div>
                             <div className="preview-content"></div>
                           </div>
-                          <span className="theme-icon">🌙</span>
+                          <FaMoon className="theme-icon" />
                           <span className="theme-label">Dark</span>
                         </div>
 
@@ -504,7 +514,7 @@ const Profile = () => {
                             <div className="preview-header"></div>
                             <div className="preview-content"></div>
                           </div>
-                          <span className="theme-icon">💻</span>
+                          <FaDesktop className="theme-icon" />
                           <span className="theme-label">System</span>
                         </div>
                       </div>
