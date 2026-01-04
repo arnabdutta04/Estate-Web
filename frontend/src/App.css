@@ -4942,8 +4942,8 @@ animation: dots 1.5s steps(3, end) infinite;
   left: 0;
   right: 0;
   height: 70px;
-   background: transparent !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  background: transparent !important;
+  box-shadow: none;
   z-index: 1000;
   transition: all 0.3s ease;
 }
