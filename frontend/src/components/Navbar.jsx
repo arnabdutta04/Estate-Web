@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import {
@@ -12,6 +12,35 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, loading, logout } = useContext(AuthContext);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Scroll detection effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 50;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Check initial scroll position
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [scrolled]);
+
+  // DEBUG: Check what user value is
+  console.log("🔍 Navbar Debug:");
+  console.log("User:", user);
+  console.log("User type:", typeof user);
+  console.log("Is user null?", user === null);
+  console.log("Is user undefined?", user === undefined);
+  console.log("!user result:", !user);
+  console.log("Loading:", loading);
 
   const handleLogout = () => {
     logout();
@@ -21,10 +50,10 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="navbar-fixed" style={{ display: 'block', visibility: 'visible' }}>
-      <div className="navbar-container" style={{ display: 'flex', visibility: 'visible' }}>
+    <nav className={`navbar-fixed ${scrolled ? 'scrolled' : ''}`}>
+      <div className="navbar-container">
         {/* Logo Section */}
-        <div className="navbar-brand" onClick={() => navigate("/")} style={{ display: 'flex', visibility: 'visible' }}>
+        <div className="navbar-brand" onClick={() => navigate("/")}>
           <img
             src={`${process.env.PUBLIC_URL}/logo-3d.png`}
             alt="Propify Logo"
@@ -33,7 +62,7 @@ const Navbar = () => {
         </div>
 
         {/* Navigation Links */}
-        <div className="navbar-links" style={{ display: 'flex', visibility: 'visible' }}>
+        <div className="navbar-links">
           <button
             className={`nav-link ${isActive("/") ? "active" : ""}`}
             onClick={() => navigate("/")}
@@ -57,13 +86,12 @@ const Navbar = () => {
         </div>
 
         {/* User / Auth Section */}
-        <div className="navbar-user" style={{ display: 'flex', visibility: 'visible' }}>
+        <div className="navbar-user">
           {!loading && !user ? (
             <>
               <button
                 className="nav-link login-btn"
                 onClick={() => navigate("/login")}
-                style={{ display: 'block', visibility: 'visible' }}
               >
                 <FaSignInAlt /> Login
               </button>
@@ -71,7 +99,6 @@ const Navbar = () => {
               <button
                 className="nav-link register-btn"
                 onClick={() => navigate("/register")}
-                style={{ display: 'block', visibility: 'visible' }}
               >
                 <FaUserPlus /> Register
               </button>

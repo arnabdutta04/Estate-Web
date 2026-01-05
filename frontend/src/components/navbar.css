@@ -5,11 +5,19 @@
   left: 0;
   right: 0;
   height: 70px;
-  background: linear-gradient(135deg, #2d5235 0%, #1e3a28 100%);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  background: transparent;
   z-index: 1000;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border-bottom: 1px solid transparent;
+}
+
+/* Navbar when scrolled */
+.navbar-fixed.scrolled {
+  background: rgba(45, 82, 53, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(244, 196, 48, 0.2);
 }
 
 .navbar-container {
