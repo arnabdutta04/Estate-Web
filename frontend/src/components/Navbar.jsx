@@ -13,15 +13,6 @@ const Navbar = () => {
   const location = useLocation();
   const { user, loading, logout } = useContext(AuthContext);
 
-  // DEBUG: Check what user value is
-  console.log("🔍 Navbar Debug:");
-  console.log("User:", user);
-  console.log("User type:", typeof user);
-  console.log("Is user null?", user === null);
-  console.log("Is user undefined?", user === undefined);
-  console.log("!user result:", !user);
-  console.log("Loading:", loading);
-
   const handleLogout = () => {
     logout();
     navigate("/");
@@ -30,10 +21,10 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="navbar-fixed">
-      <div className="navbar-container">
+    <nav className="navbar-fixed" style={{ display: 'block', visibility: 'visible' }}>
+      <div className="navbar-container" style={{ display: 'flex', visibility: 'visible' }}>
         {/* Logo Section */}
-        <div className="navbar-brand" onClick={() => navigate("/")}>
+        <div className="navbar-brand" onClick={() => navigate("/")} style={{ display: 'flex', visibility: 'visible' }}>
           <img
             src={`${process.env.PUBLIC_URL}/logo-3d.png`}
             alt="Propify Logo"
@@ -42,7 +33,7 @@ const Navbar = () => {
         </div>
 
         {/* Navigation Links */}
-        <div className="navbar-links">
+        <div className="navbar-links" style={{ display: 'flex', visibility: 'visible' }}>
           <button
             className={`nav-link ${isActive("/") ? "active" : ""}`}
             onClick={() => navigate("/")}
@@ -66,12 +57,13 @@ const Navbar = () => {
         </div>
 
         {/* User / Auth Section */}
-        <div className="navbar-user">
+        <div className="navbar-user" style={{ display: 'flex', visibility: 'visible' }}>
           {!loading && !user ? (
             <>
               <button
                 className="nav-link login-btn"
                 onClick={() => navigate("/login")}
+                style={{ display: 'block', visibility: 'visible' }}
               >
                 <FaSignInAlt /> Login
               </button>
@@ -79,6 +71,7 @@ const Navbar = () => {
               <button
                 className="nav-link register-btn"
                 onClick={() => navigate("/register")}
+                style={{ display: 'block', visibility: 'visible' }}
               >
                 <FaUserPlus /> Register
               </button>
