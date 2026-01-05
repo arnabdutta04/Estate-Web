@@ -56,13 +56,13 @@ const Welcome = () => {
 
   return (
     <div className="welcome-page">
-      {/* NAVBAR (only when logged in) */}
-      {user && <Navbar />}
+      {/* NAVBAR - ALWAYS VISIBLE */}
+      <Navbar />
 
       {/* ================= HERO ================= */}
       <section
         className="welcome-hero"
-        style={{ paddingTop: user ? "70px" : "0" }}
+        style={{ paddingTop: "70px" }}
       >
         <div
           className="hero-overlay"
