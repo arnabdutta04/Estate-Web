@@ -11,7 +11,16 @@ import {
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, logout } = useContext(AuthContext);
+  const { user, loading, logout } = useContext(AuthContext);
+
+  // DEBUG: Check what user value is
+  console.log("🔍 Navbar Debug:");
+  console.log("User:", user);
+  console.log("User type:", typeof user);
+  console.log("Is user null?", user === null);
+  console.log("Is user undefined?", user === undefined);
+  console.log("!user result:", !user);
+  console.log("Loading:", loading);
 
   const handleLogout = () => {
     logout();
@@ -58,7 +67,7 @@ const Navbar = () => {
 
         {/* User / Auth Section */}
         <div className="navbar-user">
-          {!user ? (
+          {!loading && !user ? (
             <>
               <button
                 className="nav-link login-btn"
@@ -74,7 +83,7 @@ const Navbar = () => {
                 <FaUserPlus /> Register
               </button>
             </>
-          ) : (
+          ) : !loading && user ? (
             <>
               <button
                 className="nav-link user-profile"
@@ -87,7 +96,7 @@ const Navbar = () => {
                 <FaSignOutAlt /> Logout
               </button>
             </>
-          )}
+          ) : null}
         </div>
       </div>
     </nav>
