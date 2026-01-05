@@ -139,20 +139,23 @@
 }
 
 /* ================= PHONE INPUT ================= */
+/* ================= PHONE INPUT ================= */
 .phone-input-wrapper {
   display: flex;
   gap: 0.75rem;
+  align-items: center;
 }
 
 .country-code-select {
-  width: 120px;
+  width: 110px;
   flex-shrink: 0;
+  padding: 0.875rem 0.5rem;
 }
 
 .phone-input-wrapper input {
   flex: 1;
+  min-width: 0; /* Allows input to shrink if needed */
 }
-
 /* ================= SUBMIT BUTTON ================= */
 .auth-modal-submit {
   width: 100%;
