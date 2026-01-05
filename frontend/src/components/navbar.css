@@ -9,6 +9,7 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   z-index: 1000;
   transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
 }
 
 .navbar-container {
