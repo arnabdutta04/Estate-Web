@@ -367,10 +367,10 @@ const Properties = () => {
                       <p>Found <strong>{properties.length}</strong> properties</p>
                     </div>
                     <div className='properties-grid'>
-                      {properties.map(property => (
-                        <PropertyCard key={property._id} property={property} />
-                      ))}
-                    </div>
+                    {properties.map((property, index) => (
+                     <PropertyCard key={property._id} property={property} index={index} />
+                     ))}
+                   </div>
 
                     {pagination.totalPages > 1 && (
                       <div className='pagination'>

@@ -2,9 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaBed, FaBath, FaRuler, FaMapMarkerAlt, FaCalendar } from 'react-icons/fa';
 
-const PropertyCard = ({ property }) => {
+const PropertyCard = ({ property, index }) => {
+  // Format the number badge (01, 02, 03, etc.)
+  const cardNumber = `AI ${String(index + 1).padStart(2, '0')}`;
+  
   return (
-    <div className="property-card">
+    <div className="property-card" data-number={cardNumber}>
       <div className="property-image">
         <img src={property.images[0] || '/placeholder.jpg'} alt={property.title} />
         <span className={`badge ${property.listingType}`}>
@@ -32,11 +35,13 @@ const PropertyCard = ({ property }) => {
         <div className="property-footer">
           <span className="price">
             ₹{property.price.toLocaleString()}
-           {property.listingType === 'rent' && '/month'}
-        </span>
-           <Link to={`/properties/${property._id}`} className="btn-view">View Details</Link>
+            {property.listingType === 'rent' && '/month'}
+          </span>
+          <Link to={`/properties/${property._id}`} className="btn-view">View Details</Link>
         </div>
       </div>
-    </div>);
+    </div>
+  );
 };
+
 export default PropertyCard;
