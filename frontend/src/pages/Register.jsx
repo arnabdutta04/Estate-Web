@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { FaTimes } from "react-icons/fa";
-import "./AuthModal.css";
+import "./Auth.css";
 
 const Register = () => {
   const navigate = useNavigate();
