@@ -325,3 +325,9 @@
   pointer-events: none;
   background: transparent;
 }
+.hero,
+.hero-section,
+.home-hero {
+  padding-top: 70px;     /* navbar height */
+  box-sizing: border-box;
+}
