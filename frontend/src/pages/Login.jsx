@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import Navbar from "../components/Navbar";
-import "./Auth.css";
+import { FaTimes } from "react-icons/fa";
+import "./AuthModal.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -34,53 +34,58 @@ const Login = () => {
     }
   };
 
+  const handleClose = () => {
+    navigate("/");
+  };
+
   return (
-    <>
-      <Navbar />
-      <div className="auth-page">
-        <div className="auth-container">
-          <div className="auth-card">
-            <h1 className="auth-title">Login to Your Account</h1>
+    <div className="auth-modal-overlay">
+      <div className="auth-modal-container">
+        <button className="auth-close-btn" onClick={handleClose}>
+          <FaTimes />
+        </button>
 
-            {error && <div className="auth-error">{error}</div>}
+        <div className="auth-modal-card">
+          <h1 className="auth-modal-title">Login to Your Account</h1>
 
-            <form onSubmit={handleSubmit} className="auth-form">
-              <div className="form-group">
-                <label>Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
+          {error && <div className="auth-modal-error">{error}</div>}
 
-              <div className="form-group">
-                <label>Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder="Enter your password"
-                  required
-                />
-              </div>
+          <form onSubmit={handleSubmit} className="auth-modal-form">
+            <div className="auth-form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Enter your email"
+                required
+              />
+            </div>
 
-              <button type="submit" className="auth-submit-btn" disabled={loading}>
-                {loading ? "Logging in..." : "Login"}
-              </button>
-            </form>
+            <div className="auth-form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter your password"
+                required
+              />
+            </div>
 
-            <p className="auth-footer">
-              Don't have an account? <Link to="/register">Register here</Link>
-            </p>
-          </div>
+            <button type="submit" className="auth-modal-submit" disabled={loading}>
+              {loading ? "Logging in..." : "Login"}
+            </button>
+          </form>
+
+          <p className="auth-modal-footer">
+            Don't have an account? <Link to="/register">Register here</Link>
+          </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,65 +1,123 @@
-/* ================= AUTH PAGE ================= */
-.auth-page {
-  min-height: 100vh;
-  padding-top: 70px;
-  background: linear-gradient(135deg, #2d5235 0%, #1e3a28 100%);
+/* ================= MODAL OVERLAY ================= */
+.auth-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px 20px 50px;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
 }
 
-.auth-container {
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ================= MODAL CONTAINER ================= */
+.auth-modal-container {
+  position: relative;
   width: 100%;
   max-width: 500px;
-  margin: 0 auto;
+  animation: slideUp 0.4s ease;
 }
 
-.auth-card {
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= CLOSE BUTTON ================= */
+.auth-close-btn {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  z-index: 10000;
+  color: #2d5235;
+  font-size: 1.2rem;
+}
+
+.auth-close-btn:hover {
+  background: #f4c430;
+  transform: rotate(90deg);
+  color: white;
+}
+
+/* ================= MODAL CARD ================= */
+.auth-modal-card {
   background: white;
   border-radius: 20px;
-  padding: 3rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 2.5rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+  max-height: 85vh;
+  overflow-y: auto;
 }
 
-.auth-title {
-  font-size: 2rem;
+.auth-modal-title {
+  font-size: 1.875rem;
   font-weight: 700;
   color: #2d5235;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   text-align: left;
 }
 
-.auth-error {
+.auth-modal-error {
   background: #fee;
   color: #c33;
-  padding: 1rem;
+  padding: 0.875rem;
   border-radius: 8px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   font-size: 0.9rem;
 }
 
-/* ================= FORM STYLING ================= */
-.auth-form {
+/* ================= FORM ================= */
+.auth-modal-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
-.form-group {
+.auth-form-group {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.form-group label {
-  font-size: 1rem;
+.auth-form-group label {
+  font-size: 0.95rem;
   font-weight: 600;
   color: #2d5235;
 }
 
-.form-group input,
-.form-group select {
+.auth-form-group input,
+.auth-form-group select {
   width: 100%;
   padding: 0.875rem 1rem;
   border: 2px solid #e0e0e0;
@@ -69,34 +127,34 @@
   background: white;
 }
 
-.form-group input:focus,
-.form-group select:focus {
+.auth-form-group input:focus,
+.auth-form-group select:focus {
   outline: none;
   border-color: #f4c430;
   box-shadow: 0 0 0 3px rgba(244, 196, 48, 0.1);
 }
 
-.form-group input::placeholder {
+.auth-form-group input::placeholder {
   color: #999;
 }
 
 /* ================= PHONE INPUT ================= */
-.phone-input-group {
+.phone-input-wrapper {
   display: flex;
   gap: 0.75rem;
 }
 
-.country-code {
+.country-code-select {
   width: 120px;
   flex-shrink: 0;
 }
 
-.phone-input-group input {
+.phone-input-wrapper input {
   flex: 1;
 }
 
 /* ================= SUBMIT BUTTON ================= */
-.auth-submit-btn {
+.auth-modal-submit {
   width: 100%;
   padding: 1rem;
   background: #2d5235;
@@ -110,78 +168,90 @@
   margin-top: 0.5rem;
 }
 
-.auth-submit-btn:hover:not(:disabled) {
+.auth-modal-submit:hover:not(:disabled) {
   background: #1e3a28;
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(45, 82, 53, 0.3);
 }
 
-.auth-submit-btn:disabled {
+.auth-modal-submit:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-/* ================= FOOTER LINK ================= */
-.auth-footer {
+/* ================= FOOTER ================= */
+.auth-modal-footer {
   text-align: center;
-  margin-top: 1.5rem;
+  margin-top: 1.25rem;
   color: #666;
   font-size: 0.95rem;
 }
 
-.auth-footer a {
+.auth-modal-footer a {
   color: #2d5235;
   font-weight: 600;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
-.auth-footer a:hover {
+.auth-modal-footer a:hover {
   color: #f4c430;
   text-decoration: underline;
 }
 
+/* ================= SCROLLBAR ================= */
+.auth-modal-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.auth-modal-card::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.auth-modal-card::-webkit-scrollbar-thumb {
+  background: #2d5235;
+  border-radius: 10px;
+}
+
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
-  .auth-card {
+  .auth-modal-card {
     padding: 2rem 1.5rem;
   }
 
-  .auth-title {
+  .auth-modal-title {
     font-size: 1.5rem;
   }
 
-  .form-group input,
-  .form-group select {
-    padding: 0.75rem;
-    font-size: 0.95rem;
-  }
-
-  .auth-submit-btn {
-    padding: 0.875rem;
-    font-size: 1rem;
+  .auth-close-btn {
+    top: -10px;
+    right: -10px;
+    width: 35px;
+    height: 35px;
   }
 }
 
 @media (max-width: 480px) {
-  .auth-page {
-    padding: 90px 15px 30px;
+  .auth-modal-overlay {
+    padding: 15px;
   }
 
-  .auth-card {
+  .auth-modal-card {
     padding: 1.5rem 1rem;
+    max-height: 90vh;
   }
 
-  .auth-title {
+  .auth-modal-title {
     font-size: 1.25rem;
   }
 
-  .phone-input-group {
+  .phone-input-wrapper {
     flex-direction: column;
     gap: 0.5rem;
   }
 
-  .country-code {
+  .country-code-select {
     width: 100%;
   }
 }
