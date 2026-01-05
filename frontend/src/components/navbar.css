@@ -318,3 +318,10 @@
     font-size: 0.8rem;
   }
 }
+/* ================= NAVBAR SAFE ZONE ================= */
+.navbar-spacer {
+  height: 70px;          /* SAME as navbar height */
+  width: 100%;
+  pointer-events: none;
+  background: transparent;
+}

@@ -56,7 +56,7 @@ const Navbar = () => {
           />
           <span>Propify</span>
         </div>
-
+        <div class="navbar-spacer"></div>
         {/* Navigation Links */}
         <div className="navbar-links">
           <button
