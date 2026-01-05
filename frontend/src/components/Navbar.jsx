@@ -20,27 +20,21 @@ const Navbar = () => {
       const isScrolled = window.scrollY > 50;
       if (isScrolled !== scrolled) {
         setScrolled(isScrolled);
+        console.log('🔄 Scroll state changed:', isScrolled); // Debug log
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // Add scroll listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Check initial scroll position
     handleScroll();
 
+    // Cleanup
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [scrolled]);
-
-  // DEBUG: Check what user value is
-  console.log("🔍 Navbar Debug:");
-  console.log("User:", user);
-  console.log("User type:", typeof user);
-  console.log("Is user null?", user === null);
-  console.log("Is user undefined?", user === undefined);
-  console.log("!user result:", !user);
-  console.log("Loading:", loading);
 
   const handleLogout = () => {
     logout();
@@ -48,6 +42,8 @@ const Navbar = () => {
   };
 
   const isActive = (path) => location.pathname === path;
+
+  console.log('🎨 Navbar scrolled state:', scrolled); // Debug log
 
   return (
     <nav className={`navbar-fixed ${scrolled ? 'scrolled' : ''}`}>

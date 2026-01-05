@@ -1,23 +1,24 @@
-/* ================= FIXED NAVBAR ================= */
+/* ================= FIXED NAVBAR - TRANSPARENT BY DEFAULT ================= */
 .navbar-fixed {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 70px;
-  background: transparent;
+  background: transparent !important; /* Force transparent */
   z-index: 1000;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border-bottom: 1px solid transparent;
+  box-shadow: none; /* No shadow by default */
 }
 
-/* Navbar when scrolled */
+/* Navbar when scrolled - ADD THIS CLASS VIA JAVASCRIPT */
 .navbar-fixed.scrolled {
-  background: rgba(45, 82, 53, 0.95);
+  background: rgba(45, 82, 53, 0.95) !important;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  border-bottom: 1px solid rgba(244, 196, 48, 0.2);
+  border-bottom: 1px solid rgba(244, 196, 48, 0.25);
 }
 
 .navbar-container {
@@ -47,7 +48,7 @@
   width: 45px;
   height: 45px;
   object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .navbar-brand span {
@@ -55,7 +56,7 @@
   font-weight: 700;
   color: #f4c430;
   letter-spacing: 0.5px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* ================= NAVIGATION LINKS ================= */
@@ -78,7 +79,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .nav-link:hover {
@@ -118,10 +119,12 @@
   padding: 0.5rem 1rem;
   border-radius: 8px;
   transition: all 0.3s ease;
+  color: #f4c430;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .user-profile:hover {
-  background: rgba(244, 196, 48, 0.1);
+  background: rgba(244, 196, 48, 0.15);
 }
 
 .user-profile svg {
@@ -143,7 +146,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .login-btn:hover,
@@ -185,7 +188,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .btn-logout:hover {
