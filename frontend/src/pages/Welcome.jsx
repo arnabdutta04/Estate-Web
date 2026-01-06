@@ -15,10 +15,10 @@ import {
   FaMapMarkedAlt,
   FaChartLine,
   FaCheckCircle,
-  FaTrendingUp,
   FaPercentage,
   FaCalendarAlt,
-  FaChartBar
+  FaChartBar,
+  FaArrowTrendUp as FaTrendingUp
 } from "react-icons/fa";
 
 const Welcome = () => {
