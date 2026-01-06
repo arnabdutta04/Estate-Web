@@ -29,24 +29,13 @@ function AppContent() {
         <Route path="/" element={<Welcome />} />
         <Route path="/home" element={<Navigate to="/" replace />} />
         
-        <Route
-          path="/properties"
-          element={
-            <ProtectedRoute>
-              <Properties />
-            </ProtectedRoute>
-          }
-        />
+        {/* PUBLIC ROUTE - No login required to view properties */}
+        <Route path="/properties" element={<Properties />} />
 
-        <Route
-          path="/properties/:id"
-          element={
-            <ProtectedRoute>
-              <PropertyDetail />
-            </ProtectedRoute>
-          }
-        />
+        {/* PUBLIC ROUTE - No login required to view property details */}
+        <Route path="/properties/:id" element={<PropertyDetail />} />
 
+        {/* PROTECTED ROUTES - Login required */}
         <Route
           path="/brokers"
           element={

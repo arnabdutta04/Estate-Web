@@ -22,8 +22,15 @@ const Welcome = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
+  // Updated: Allow all users to view properties (no auth check)
   const handleExploreClick = () => {
-    navigate("/properties"); // ProtectedRoute will handle auth
+    navigate("/properties"); // Navigate directly without auth requirement
+  };
+
+  // Updated: Handle property type click for all users
+  const handlePropertyTypeClick = (propertyType) => {
+    // Navigate to properties page, optionally with filter parameter
+    navigate("/properties", { state: { filter: propertyType } });
   };
 
   const features = [
@@ -48,10 +55,10 @@ const Welcome = () => {
   ];
 
   const propertyTypes = [
-    { icon: <FaHome />, name: "Residential", count: "5,000+" },
-    { icon: <FaBuilding />, name: "Commercial", count: "2,500+" },
-    { icon: <FaMapMarkedAlt />, name: "Land & Plots", count: "1,500+" },
-    { icon: <FaStar />, name: "Luxury Villas", count: "1,000+" }
+    { icon: <FaHome />, name: "Residential", count: "5,000+", filter: "residential" },
+    { icon: <FaBuilding />, name: "Commercial", count: "2,500+", filter: "commercial" },
+    { icon: <FaMapMarkedAlt />, name: "Land & Plots", count: "1,500+", filter: "land" },
+    { icon: <FaStar />, name: "Luxury Villas", count: "1,000+", filter: "luxury" }
   ];
 
   return (
@@ -131,7 +138,7 @@ const Welcome = () => {
               <div
                 key={index}
                 className="property-type-card"
-                onClick={() => navigate("/properties")}
+                onClick={() => handlePropertyTypeClick(type.filter)}
               >
                 <div className="type-icon">{type.icon}</div>
                 <h3>{type.name}</h3>
