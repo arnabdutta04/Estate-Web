@@ -15,6 +15,7 @@ const Register = () => {
     password: "",
     role: "customer",
   });
+  const [countryCode, setCountryCode] = useState("+91");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -28,7 +29,9 @@ const Register = () => {
     setLoading(true);
 
     try {
-      await register(formData);
+      // Combine country code with phone number
+      const phoneWithCode = countryCode + formData.phone;
+      await register({ ...formData, phone: phoneWithCode });
       navigate("/properties");
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
@@ -81,15 +84,27 @@ const Register = () => {
             <div className="auth-form-group">
               <label>Phone Number</label>
               <div className="phone-input-wrapper">
-                <select className="country-code-select">
+                <select 
+                  className="country-select"
+                  value={countryCode}
+                  onChange={(e) => setCountryCode(e.target.value)}
+                >
                   <option value="+91">IN +91</option>
+                  <option value="+1">US +1</option>
+                  <option value="+44">UK +44</option>
+                  <option value="+61">AU +61</option>
+                  <option value="+86">CN +86</option>
+                  <option value="+81">JP +81</option>
                 </select>
                 <input
                   type="tel"
                   name="phone"
+                  className="phone-number-input"
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder="9876543210"
+                  placeholder="Enter your phone number"
+                  pattern="[0-9]{10}"
+                  maxLength="10"
                   required
                 />
               </div>
@@ -103,6 +118,7 @@ const Register = () => {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Create a strong password"
+                minLength="6"
                 required
               />
             </div>

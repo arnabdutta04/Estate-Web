@@ -4676,26 +4676,114 @@ animation: dots 1.5s steps(3, end) infinite;
   .nav-links.active {
     display: flex;
   }
+/* ================= PHONE INPUT FIX (REGISTER PAGE) ================= */
 .phone-input-wrapper {
   display: flex;
-  gap: 8px;
+  gap: 12px;
+  width: 100%;
 }
 
 .country-select {
   width: 140px;
   flex-shrink: 0;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  fontSize: 1rem;
+  padding: 0.9rem 0.75rem;
+  border: 2px solid rgba(26, 77, 46, 0.2);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  background: var(--white);
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.country-select:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+  transform: translateY(-2px);
 }
 
 .phone-number-input {
   flex: 1;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  fontSize: 1rem;
+  min-width: 0;
+  padding: 0.9rem 1rem;
+  border: 2px solid rgba(26, 77, 46, 0.2);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  background: var(--white);
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.phone-number-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+  transform: translateY(-2px);
+}
+
+.phone-number-input::placeholder {
+  color: #b8b5b0;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Dark Mode - Phone Input */
+.dark-mode .country-select,
+.dark-mode .phone-number-input {
+  background: #2d2d2d;
+  border-color: rgba(212, 175, 55, 0.2);
+  color: #e0e0e0;
+}
+
+.dark-mode .country-select:focus,
+.dark-mode .phone-number-input:focus {
+  background: #3d3d3d;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
+}
+
+.dark-mode .phone-number-input::placeholder {
+  color: #6b6b6b;
+}
+
+.dark-mode .country-select option {
+  background: #2d2d2d;
+  color: #e0e0e0;
+  padding: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .phone-input-wrapper {
+    gap: 8px;
+  }
+  
+  .country-select {
+    width: 110px;
+    padding: 0.8rem 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .phone-number-input {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .phone-input-wrapper {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .country-select {
+    width: 100%;
+  }
 }
 /* ===== AUTH SPLIT OVERLAY ===== */
 .auth-overlay {
