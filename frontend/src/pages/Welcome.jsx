@@ -14,7 +14,11 @@ import {
   FaBuilding,
   FaMapMarkedAlt,
   FaChartLine,
-  FaCheckCircle
+  FaCheckCircle,
+  FaTrendingUp,
+  FaPercentage,
+  FaCalendarAlt,
+  FaChartBar
 } from "react-icons/fa";
 
 const Welcome = () => {
@@ -25,6 +29,11 @@ const Welcome = () => {
   // Updated: Allow all users to view properties (no auth check)
   const handleExploreClick = () => {
     navigate("/properties"); // Navigate directly without auth requirement
+  };
+
+  // Navigate to Explore page
+  const handleExplorePageClick = () => {
+    navigate("/explore");
   };
 
   // Updated: Handle property type click for all users
@@ -61,6 +70,29 @@ const Welcome = () => {
     { icon: <FaStar />, name: "Luxury Villas", count: "1,000+", filter: "luxury" }
   ];
 
+  const exploreFeatures = [
+    {
+      icon: <FaChartBar />,
+      title: "Market Analytics",
+      description: "5-year property appreciation trends across all major cities"
+    },
+    {
+      icon: <FaTrendingUp />,
+      title: "Growth Insights",
+      description: "City-wise YoY growth data with demand indicators"
+    },
+    {
+      icon: <FaPercentage />,
+      title: "Investment Guide",
+      description: "Best time to buy, rental yields, and price appreciation"
+    },
+    {
+      icon: <FaCalendarAlt />,
+      title: "Real-time Data",
+      description: "Live market updates and property valuation insights"
+    }
+  ];
+
   return (
     <div className="welcome-page">
       {/* NAVBAR - ALWAYS VISIBLE */}
@@ -93,7 +125,7 @@ const Welcome = () => {
               className="btn-welcome-primary"
               onClick={handleExploreClick}
             >
-              <FaSearch /> Explore Properties
+              <FaSearch /> Start
               <FaArrowRight className="arrow-icon" />
             </button>
           </div>
@@ -145,6 +177,58 @@ const Welcome = () => {
                 <p>{type.count} listings</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= MARKET INSIGHTS & EXPLORE SECTION ================= */}
+      <section className="explore-preview-section">
+        <div className="welcome-container">
+          <div className="explore-preview-header">
+            <h2>Make Smarter Investment Decisions</h2>
+            <p>Access comprehensive market analytics, growth trends, and investment insights all in one place</p>
+          </div>
+
+          <div className="explore-features-grid">
+            {exploreFeatures.map((feature, index) => (
+              <div key={index} className="explore-preview-card">
+                <div className="explore-preview-icon">{feature.icon}</div>
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="explore-stats-banner">
+            <div className="stat-item">
+              <div className="stat-number">18.3%</div>
+              <div className="stat-label">Avg. YoY Growth</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">6 Cities</div>
+              <div className="stat-label">Market Coverage</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">5 Years</div>
+              <div className="stat-label">Historical Data</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">10K+</div>
+              <div className="stat-label">Active Listings</div>
+            </div>
+          </div>
+
+          <div className="explore-cta-wrapper">
+            <button
+              className="btn-explore-page"
+              onClick={handleExplorePageClick}
+            >
+              <FaChartLine /> View Market Analytics
+              <FaArrowRight className="arrow-icon" />
+            </button>
+            <p className="explore-cta-note">
+              Get detailed insights on property appreciation, city-wise growth, and broker benefits
+            </p>
           </div>
         </div>
       </section>

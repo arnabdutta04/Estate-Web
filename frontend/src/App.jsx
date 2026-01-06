@@ -7,6 +7,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import Welcome from "./pages/Welcome";
 import Properties from "./pages/Properties";
 import PropertyDetail from "./pages/PropertyDetail";
+import Explore from "./pages/Explore";
 import Brokers from "./pages/Brokers";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -34,6 +35,9 @@ function AppContent() {
 
         {/* PUBLIC ROUTE - No login required to view property details */}
         <Route path="/properties/:id" element={<PropertyDetail />} />
+
+        {/* PUBLIC ROUTE - Explore page with market insights */}
+        <Route path="/explore" element={<Explore />} />
 
         {/* PROTECTED ROUTES - Login required */}
         <Route
