@@ -5381,3 +5381,14 @@ animation: dots 1.5s steps(3, end) infinite;
     font-size: 0.8rem;
   }
 }
+:root {
+  --primary-color: #1a4d2e;
+  --secondary-color: #d4af37;
+  --gold: #d4af37;
+  --dark-bg: #0f2818;
+  --light-bg: #f6f8f7;
+  --white: #ffffff;
+
+  --text-dark: #1f2937;
+  --text-light: #6b7280;
+}
