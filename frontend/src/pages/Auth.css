@@ -285,7 +285,26 @@
     gap: 0.5rem;
   }
 
-  .country-code-select {
-    width: 100%;
-  }
+ .country-select {
+  width: 100%;
+}
+
+/* ===== FIX PHONE INPUT WIDTH OVERRIDE ===== */
+
+.auth-form-group .phone-input-wrapper {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.auth-form-group .phone-input-wrapper select {
+  width: 90px;          /* small country box */
+  flex-shrink: 0;
+}
+
+.auth-form-group .phone-input-wrapper input {
+  width: auto;          /* cancel width:100% */
+  flex: 1;              /* big phone input */
+  min-width: 0;
+}
 }
