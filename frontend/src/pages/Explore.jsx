@@ -13,7 +13,6 @@ import {
   FaTimes,
   FaMapMarkedAlt,
   FaChartLine,
-  FaArrowTrendUp as FaTrendingUp,
   FaUsers,
   FaHandshake,
   FaShieldAlt,
@@ -24,6 +23,7 @@ import {
   FaArrowRight
 } from "react-icons/fa";
 import "./Explore.css";
+import { FaArrowTrendUp as FaTrendingUp } from "react-icons/fa6";
 
 const Explore = () => {
   const navigate = useNavigate();

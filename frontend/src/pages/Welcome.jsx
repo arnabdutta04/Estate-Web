@@ -18,8 +18,8 @@ import {
   FaPercentage,
   FaCalendarAlt,
   FaChartBar,
-  FaArrowTrendUp as FaTrendingUp
 } from "react-icons/fa";
+import { FaArrowTrendUp as FaTrendingUp } from "react-icons/fa6";
 
 const Welcome = () => {
   const [scrollY] = useState(0);
