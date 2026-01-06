@@ -1481,74 +1481,7 @@ box-shadow: 0 4px 15px rgba(26, 77, 46, 0.3);
 transform: translateY(-3px);
 box-shadow: 0 6px 20px rgba(26, 77, 46, 0.5);
 }
-/* Auth Pages */
-.auth-page {
-min-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
-background: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-color) 100%);
-padding: 2rem 0;
-position: relative;
-overflow: hidden;
-}
-.auth-page::before {
-content: '';
-position: absolute;
-top: -50%;
-right: -50%;
-width: 100%;
-height: 100%;
-background: radial-gradient(circle, rgba(212, 175, 55, 0.1), transparent 70%);
-animation: pulse 10s infinite;
-}
-.auth-container {
-background: var(--white);
-padding: 4rem;
-border-radius: 25px;
-box-shadow: 0 20px 80px rgba(0, 0, 0, 0.4);
-width: 100%;
-max-width: 500px;
-z-index: 1;
-animation: scaleIn 0.8s ease;
-border: 2px solid rgba(212, 175, 55, 0.3);
-}
-.auth-container h2 {
-text-align: center;
-margin-bottom: 2.5rem;
-color: var(--dark-bg);
-font-size: 2.2rem;
-font-family: 'Playfair Display', serif;
-}
-.error-message {
-background: linear-gradient(135deg, #e74c3c, #c0392b);
-color: white;
-padding: 1.2rem;
-border-radius: 12px;
-margin-bottom: 1.5rem;
-text-align: center;
-font-weight: 500;
-animation: shake 0.5s;
-}
-@keyframes shake {
-0%, 100% { transform: translateX(0); }
-25% { transform: translateX(-10px); }
-75% { transform: translateX(10px); }
-}
-.auth-link {
-text-align: center;
-margin-top: 2rem;
-color: var(--text-light);
-}
-.auth-link a {
-color: var(--primary-color);
-text-decoration: none;
-font-weight: 600;
-transition: all 0.3s ease;
-}
-.auth-link a:hover {
-color: var(--gold);
-}
+
 /* Pagination */
 .pagination {
 display: flex;
@@ -1671,9 +1604,6 @@ grid-template-columns: 1fr;
 display: none;
 }
 .main-details {
-padding: 2rem;
-}
-.auth-container {
 padding: 2rem;
 }
 }
@@ -2042,66 +1972,6 @@ display: none;
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
 }
-
-/* Modal Styles */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-  padding: 2rem;
-  animation: fadeIn 0.3s ease;
-}
-
-.modal-content {
-  background: var(--white);
-  border-radius: 25px;
-  max-width: 1000px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  animation: scaleIn 0.3s ease;
-  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.3);
-}
-
-.broker-details-modal {
-  padding: 3rem;
-}
-
-.modal-close {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  background: var(--light-bg);
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  color: var(--text-dark);
-  font-weight: bold;
-  z-index: 1;
-}
-
-.modal-close:hover {
-  background: var(--gold);
-  color: var(--dark-bg);
-  transform: rotate(90deg);
-}
-
 .broker-details-modal h2 {
   font-size: 2.2rem;
   color: var(--dark-bg);
@@ -2258,25 +2128,6 @@ display: none;
   margin: 0;
 }
 
-/* Scrollbar Styling for Modal */
-.modal-content::-webkit-scrollbar {
-  width: 10px;
-}
-
-.modal-content::-webkit-scrollbar-track {
-  background: var(--light-bg);
-  border-radius: 10px;
-}
-
-.modal-content::-webkit-scrollbar-thumb {
-  background: var(--gold);
-  border-radius: 10px;
-}
-
-.modal-content::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary-color);
-}
-
 /* Responsive Design for Admin Page */
 @media (max-width: 1024px) {
   .broker-details-grid {
@@ -2357,10 +2208,6 @@ display: none;
 
   .verification-actions {
     grid-template-columns: 1fr;
-  }
-
-  .modal-overlay {
-    padding: 1rem;
   }
 }
 /* Welcome Hero Section */
@@ -4677,60 +4524,6 @@ animation: dots 1.5s steps(3, end) infinite;
     display: flex;
   }
 /* ================= PHONE INPUT FIX (REGISTER PAGE) ================= */
-.phone-input-wrapper {
-  display: flex;
-  gap: 12px;
-  width: 100%;
-}
-
-.country-select {
-  width: 140px;
-  flex-shrink: 0;
-  padding: 0.9rem 0.75rem;
-  border: 2px solid rgba(26, 77, 46, 0.2);
-  border-radius: 12px;
-  font-size: 1rem;
-  font-family: 'Inter', sans-serif;
-  background: var(--white);
-  color: var(--text-dark);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-
-.country-select:focus {
-  outline: none;
-  border-color: var(--gold);
-  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
-  transform: translateY(-2px);
-}
-
-.phone-number-input {
-  flex: 1;
-  min-width: 0;
-  padding: 0.9rem 1rem;
-  border: 2px solid rgba(26, 77, 46, 0.2);
-  border-radius: 12px;
-  font-size: 1rem;
-  font-family: 'Inter', sans-serif;
-  background: var(--white);
-  color: var(--text-dark);
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-
-.phone-number-input:focus {
-  outline: none;
-  border-color: var(--gold);
-  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
-  transform: translateY(-2px);
-}
-
-.phone-number-input::placeholder {
-  color: #b8b5b0;
-  font-style: italic;
-  font-weight: 400;
-}
 
 /* Dark Mode - Phone Input */
 .dark-mode .country-select,
@@ -4784,45 +4577,6 @@ animation: dots 1.5s steps(3, end) infinite;
   .country-select {
     width: 100%;
   }
-}
-/* ===== AUTH SPLIT OVERLAY ===== */
-.auth-overlay {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  overflow-y: auto;
-  display: flex;                 /* 👈 MAIN POINT */
-  align-items: center;           /* 👈 vertical center */
-  justify-content: center;
-  z-index: 9999;
-  animation: fadeIn 0.4s ease;
-}
-.auth-center {
-  width: 600px;                  /* 👈 bar size */
-  max-width: 98%;
-  padding: 34px 20px; 
-  max-height: 55vh;
-  transform: translateY(-130px);
-}
-
-.auth-close {
-  position: absolute;
-  top: 20px;
-  right: 24px;
-  font-size: 28px;
-  background: none;
-  color: #ffe600;
-  border: none;
-  cursor: pointer;
-}
-/* FIXED AUTH BUTTONS (HEADER STYLE) */
-.auth-fixed {
-  position: absolute;   /* NOT fixed */
-  top: 30px;
-  right: 40px;
-  display: flex;
-  gap: 16px;
-  z-index: 5;
 }
 
 

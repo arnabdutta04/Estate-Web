@@ -140,6 +140,7 @@
 
 .phone-input-wrapper {
   display: flex;
+  flex-direction: row;
   gap: 12px;
   width: 100%;
 }
@@ -272,7 +273,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 360px) {
   .auth-modal-overlay {
     padding: 15px;
   }
@@ -305,6 +306,24 @@
 .auth-form-group .phone-input-wrapper input {
   width: auto;          /* cancel width:100% */
   flex: 1;              /* big phone input */
+  min-width: 0;
+}
+/* ===== FIX PHONE INPUT WIDTH OVERRIDE ===== */
+
+.auth-form-group .phone-input-wrapper {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.auth-form-group .phone-input-wrapper select {
+  width: 90px;
+  flex-shrink: 0;
+}
+
+.auth-form-group .phone-input-wrapper input {
+  width: auto;
+  flex: 1;
   min-width: 0;
 }
 }
