@@ -1,17 +1,21 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { useTheme } from "../context/ThemeContext";
 import {
   FaUser,
   FaSignOutAlt,
   FaSignInAlt,
-  FaUserPlus
+  FaUserPlus,
+  FaMoon,
+  FaSun
 } from "react-icons/fa";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, loading, logout } = useContext(AuthContext);
+  const { theme, changeTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
 
   // Scroll detection effect
@@ -20,21 +24,25 @@ const Navbar = () => {
       const isScrolled = window.scrollY > 50;
       if (isScrolled !== scrolled) {
         setScrolled(isScrolled);
-        console.log('🔄 Scroll state changed:', isScrolled); // Debug log
       }
     };
 
-    // Add scroll listener
     window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // Check initial scroll position
     handleScroll();
 
-    // Cleanup
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [scrolled]);
+
+  // Toggle between light and dark theme
+  const toggleDarkMode = () => {
+    if (theme === 'dark') {
+      changeTheme('light');
+    } else {
+      changeTheme('dark');
+    }
+  };
 
   const handleLogout = () => {
     logout();
@@ -43,7 +51,9 @@ const Navbar = () => {
 
   const isActive = (path) => location.pathname === path;
 
-  console.log('🎨 Navbar scrolled state:', scrolled); // Debug log
+  // Check if currently in dark mode
+  const isDarkMode = theme === 'dark' || 
+    (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   return (
     <nav className={`navbar-fixed ${scrolled ? 'scrolled' : ''}`}>
@@ -56,7 +66,7 @@ const Navbar = () => {
           />
           <span>Propify</span>
         </div>
-        <div class="navbar-spacer"></div>
+
         {/* Navigation Links */}
         <div className="navbar-links">
           <button
@@ -83,17 +93,27 @@ const Navbar = () => {
 
         {/* User / Auth Section */}
         <div className="navbar-user">
+          {/* Dark Mode Toggle */}
+          <button
+            className="theme-toggle"
+            onClick={toggleDarkMode}
+            aria-label="Toggle dark mode"
+            title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          >
+            {isDarkMode ? <FaSun /> : <FaMoon />}
+          </button>
+
           {!loading && !user ? (
             <>
               <button
-                className="nav-link login-btn"
+                className="login-btn"
                 onClick={() => navigate("/login")}
               >
                 <FaSignInAlt /> Login
               </button>
 
               <button
-                className="nav-link register-btn"
+                className="register-btn"
                 onClick={() => navigate("/register")}
               >
                 <FaUserPlus /> Register
@@ -102,7 +122,7 @@ const Navbar = () => {
           ) : !loading && user ? (
             <>
               <button
-                className="nav-link user-profile"
+                className="user-profile"
                 onClick={() => navigate("/profile")}
               >
                 <FaUser /> {user.name || "Profile"}
