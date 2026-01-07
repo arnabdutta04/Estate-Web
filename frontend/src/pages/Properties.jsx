@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import api from '../utils/api';
 import PropertyCard from '../components/PropertyCard';
-import LoadingSpinner from '../components/LoadingSpinner';
 import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
 import { FaChevronDown } from 'react-icons/fa';
@@ -141,19 +140,6 @@ const Properties = () => {
     fetchProperties(filters, page);
     window.scrollTo(0, 0);
   };
-
-  if (loading) {
-    return (
-      <>
-        <Navbar />
-        <LoadingSpinner 
-          text="Loading Properties"
-          subtext="Finding your dream home"
-        />
-      </>
-    );
-  }
-
   return (
     <>
       <Navbar />

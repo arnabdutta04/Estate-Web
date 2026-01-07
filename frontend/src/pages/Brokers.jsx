@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import { FaStar, FaMapMarkerAlt, FaPhone, FaEnvelope, FaBuilding, FaBriefcase, FaCheckCircle, FaSearch } from 'react-icons/fa';
-import LoadingSpinner from '../components/LoadingSpinner';
 import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
 
@@ -68,18 +67,6 @@ const Brokers = () => {
     setSelectedCity('');
     setSelectedSpecialization('');
   };
-
-  if (loading) {
-    return (
-      <>
-        <Navbar />
-        <LoadingSpinner 
-          text="Finding Top Brokers"
-          subtext="Connecting you with verified professionals"
-        />
-      </>
-    );
-  }
 
   return (
     <>
