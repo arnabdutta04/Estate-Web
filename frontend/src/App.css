@@ -3146,7 +3146,7 @@ display: none;
 
 @media (max-width: 768px) {
   .how-it-works-section {
-    padding: 5rem 0;
+    padding: 0rem 0;
   }
 
   .how-it-works-header h2 {
