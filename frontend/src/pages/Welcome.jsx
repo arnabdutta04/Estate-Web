@@ -129,47 +129,9 @@ const handleExplorePageClick = () => {
               Donec vel fringilla augue, ac interdum enim.
             </p>
           </div>
-
-          {/* Search Box */}
-          <div className="hero-search-box-modern">
-            <div className="search-field-modern">
-              <label className="search-label-modern">Location</label>
-              <select className="search-select-modern">
-                <option>Los Angeles</option>
-                <option>New York</option>
-                <option>Chicago</option>
-                <option>Miami</option>
-              </select>
-            </div>
-
-            <div className="search-field-modern">
-              <label className="search-label-modern">Property type</label>
-              <select className="search-select-modern">
-                <option>Apartment</option>
-                <option>House</option>
-                <option>Villa</option>
-                <option>Commercial</option>
-              </select>
-            </div>
-
-            <div className="search-field-modern">
-              <label className="search-label-modern">Price Range</label>
-              <select className="search-select-modern">
-                <option>Max Price</option>
-                <option>$100k - $300k</option>
-                <option>$300k - $500k</option>
-                <option>$500k+</option>
-              </select>
-            </div>
-
-            <button className="search-btn-modern" onClick={handleExploreClick}>
-              <FaSearch /> Search
-            </button>
-          </div>
-
           {/* Suggestions */}
           <div className="hero-suggestions-modern">
-            <span className="suggestion-label-modern">Suggestion:</span>
+            <span className="suggestion-label-modern">Let's see</span>
             <button className="suggestion-tag-modern">Apartment</button>
             <button className="suggestion-tag-modern">Duplexes</button>
             <button className="suggestion-tag-modern">Mannor</button>
