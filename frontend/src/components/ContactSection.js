@@ -1,11 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  FaEnvelope,
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedinIn
-} from "react-icons/fa";
+import React, { useState } from "react";
+import { FaEnvelope, FaPaperPlane } from "react-icons/fa";
 import "./ContactSection.css";
 
 const ContactSection = () => {
@@ -17,22 +11,6 @@ const ContactSection = () => {
   });
 
   const [status, setStatus] = useState(null);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -55,17 +33,21 @@ const ContactSection = () => {
   };
 
   return (
-    <section ref={sectionRef} className="contact-section slide-in" id="contact">
+    <section className="contact-section" id="contact">
       <div className="container">
         <div className="contact-layout">
           
           {/* LEFT SIDE */}
           <div className="contact-info">
-            <h1 className="contact-heading">Get in Touch</h1>
-            <p className="contact-subtitle">I'd like to hear from you!</p>
+            <div className="hero-badge-contact">
+              <div className="badge-pulse"></div>
+              <span>Available 24/7</span>
+            </div>
+            
+            <h1 className="contact-heading">Let's chat.</h1>
             
             <p className="contact-description">
-              If you have any inquiries or just want to say hi, please use the contact form!
+              Tell us about your project, and we'll get back to you within 24 hours. Whether you're looking to buy, sell, or rent, we're here to help make your real estate journey seamless.
             </p>
 
             <div className="contact-details">
@@ -75,21 +57,6 @@ const ContactSection = () => {
                   arnabdutta453@gmail.com
                 </a>
               </div>
-            </div>
-
-            <div className="social-links-minimal">
-              <a href="#" className="social-icon-minimal" aria-label="Facebook">
-                <FaFacebookF />
-              </a>
-              <a href="#" className="social-icon-minimal" aria-label="Twitter">
-                <FaTwitter />
-              </a>
-              <a href="#" className="social-icon-minimal" aria-label="Instagram">
-                <FaInstagram />
-              </a>
-              <a href="#" className="social-icon-minimal" aria-label="LinkedIn">
-                <FaLinkedinIn />
-              </a>
             </div>
           </div>
 
@@ -104,6 +71,7 @@ const ContactSection = () => {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleChange}
+                    placeholder="John"
                     required
                   />
                 </div>
@@ -114,6 +82,7 @@ const ContactSection = () => {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleChange}
+                    placeholder="Doe"
                     required
                   />
                 </div>
@@ -126,6 +95,7 @@ const ContactSection = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
+                  placeholder="john.doe@example.com"
                   required
                 />
               </div>
@@ -137,13 +107,14 @@ const ContactSection = () => {
                   value={formData.message}
                   onChange={handleChange}
                   rows="5"
+                  placeholder="Tell us about your property needs..."
                   required
                 />
               </div>
 
               {status === "success" && (
                 <div className="form-message success">
-                  ✓ Message sent successfully!
+                  ✓ Message sent successfully! We'll get back to you soon.
                 </div>
               )}
 
@@ -152,7 +123,13 @@ const ContactSection = () => {
                 className="submit-btn-minimal"
                 disabled={status === "sending"}
               >
-                {status === "sending" ? "Sending..." : "Send"}
+                {status === "sending" ? (
+                  "Sending..."
+                ) : (
+                  <>
+                    <FaPaperPlane /> Send Message
+                  </>
+                )}
               </button>
             </form>
           </div>
