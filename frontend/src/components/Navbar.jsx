@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import "/navbar.css";
 import {
   FaUser,
   FaSignOutAlt,
