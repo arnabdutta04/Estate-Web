@@ -97,6 +97,90 @@ const Welcome = () => {
     <div className="welcome-page">
       {/* NAVBAR - ALWAYS VISIBLE */}
       <Navbar />
+      {/* ================= HERO ================= */}
+      <section
+        className="welcome-hero"
+        style={{ paddingTop: "70px" }}
+      >
+        <div
+          className="hero-overlay"
+          style={{ transform: `translateY(${scrollY * 0.5}px)` }}
+        />
+
+        <div className="welcome-container">
+          <h1 className="welcome-title">
+            Find Your <span className="highlight">Dream Home</span>
+            <br />
+            Where Memories Begin
+          </h1>
+
+          <p className="welcome-subtitle">
+            Discover thousands of properties, connect with verified brokers,
+            and make your real estate journey seamless and stress-free.
+          </p>
+
+          <div className="welcome-cta-group">
+            <button
+              className="btn-welcome-primary"
+              onClick={handleExploreClick}
+            >
+              <FaSearch /> Start
+              <FaArrowRight className="arrow-icon" />
+            </button>
+          </div>
+
+          <div className="trust-indicators">
+            <div className="trust-item">
+              <FaCheckCircle />
+              <span>100% Verified Listings</span>
+            </div>
+            <div className="trust-item">
+              <FaCheckCircle />
+              <span>Trusted by Smart Users</span>
+            </div>
+            <div className="trust-item">
+              <FaCheckCircle />
+              <span>24/7 Customer Support</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= ABOUT ================= */}
+      <section className="about-us-section">
+        <div className="welcome-container">
+          <h2>About Us</h2>
+          <h3>Your trusted partner in modern real estate solutions</h3>
+          <p>
+            <strong>Propify</strong> is a modern real estate platform built to
+            simplify property buying, selling, and renting. Our goal is to
+            empower customers and brokers with smart tools, real-time insights,
+            and seamless communication.
+          </p>
+        </div>
+      </section>
+
+      {/* ================= PROPERTY TYPES ================= */}
+      <section className="property-types-section">
+        <div className="welcome-container">
+          <h2>Browse By Property Type</h2>
+          <div className="property-types-grid">
+            {propertyTypes.map((type, index) => (
+              <div
+                key={index}
+                className="property-type-card"
+                onClick={() => handlePropertyTypeClick(type.filter)}
+              >
+                <div className="type-icon">{type.icon}</div>
+                <h3>{type.name}</h3>
+                <p>{type.count} listings</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= MARKET INSIGHTS & EXPLORE SECTION ================= */}
       <section className="explore-showcase-section">
   <div className="showcase-container">
     <div className="showcase-header">
@@ -344,141 +428,6 @@ const Welcome = () => {
     </div>
   </div>
 </section>
-      {/* ================= HERO ================= */}
-      <section
-        className="welcome-hero"
-        style={{ paddingTop: "70px" }}
-      >
-        <div
-          className="hero-overlay"
-          style={{ transform: `translateY(${scrollY * 0.5}px)` }}
-        />
-
-        <div className="welcome-container">
-          <h1 className="welcome-title">
-            Find Your <span className="highlight">Dream Home</span>
-            <br />
-            Where Memories Begin
-          </h1>
-
-          <p className="welcome-subtitle">
-            Discover thousands of properties, connect with verified brokers,
-            and make your real estate journey seamless and stress-free.
-          </p>
-
-          <div className="welcome-cta-group">
-            <button
-              className="btn-welcome-primary"
-              onClick={handleExploreClick}
-            >
-              <FaSearch /> Start
-              <FaArrowRight className="arrow-icon" />
-            </button>
-          </div>
-
-          <div className="trust-indicators">
-            <div className="trust-item">
-              <FaCheckCircle />
-              <span>100% Verified Listings</span>
-            </div>
-            <div className="trust-item">
-              <FaCheckCircle />
-              <span>Trusted by Smart Users</span>
-            </div>
-            <div className="trust-item">
-              <FaCheckCircle />
-              <span>24/7 Customer Support</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= ABOUT ================= */}
-      <section className="about-us-section">
-        <div className="welcome-container">
-          <h2>About Us</h2>
-          <h3>Your trusted partner in modern real estate solutions</h3>
-          <p>
-            <strong>Propify</strong> is a modern real estate platform built to
-            simplify property buying, selling, and renting. Our goal is to
-            empower customers and brokers with smart tools, real-time insights,
-            and seamless communication.
-          </p>
-        </div>
-      </section>
-
-      {/* ================= PROPERTY TYPES ================= */}
-      <section className="property-types-section">
-        <div className="welcome-container">
-          <h2>Browse By Property Type</h2>
-          <div className="property-types-grid">
-            {propertyTypes.map((type, index) => (
-              <div
-                key={index}
-                className="property-type-card"
-                onClick={() => handlePropertyTypeClick(type.filter)}
-              >
-                <div className="type-icon">{type.icon}</div>
-                <h3>{type.name}</h3>
-                <p>{type.count} listings</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ================= MARKET INSIGHTS & EXPLORE SECTION ================= */}
-      <section className="explore-preview-section">
-        <div className="welcome-container">
-          <div className="explore-preview-header">
-            <h2>Make Smarter Investment Decisions</h2>
-            <p>Access comprehensive market analytics, growth trends, and investment insights all in one place</p>
-          </div>
-
-          <div className="explore-features-grid">
-            {exploreFeatures.map((feature, index) => (
-              <div key={index} className="explore-preview-card">
-                <div className="explore-preview-icon">{feature.icon}</div>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="explore-stats-banner">
-            <div className="stat-item">
-              <div className="stat-number">18.3%</div>
-              <div className="stat-label">Avg. YoY Growth</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">6 Cities</div>
-              <div className="stat-label">Market Coverage</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">5 Years</div>
-              <div className="stat-label">Historical Data</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">10K+</div>
-              <div className="stat-label">Active Listings</div>
-            </div>
-          </div>
-
-          <div className="explore-cta-wrapper">
-            <button
-              className="btn-explore-page"
-              onClick={handleExplorePageClick}
-            >
-              <FaChartLine /> View Market Analytics
-              <FaArrowRight className="arrow-icon" />
-            </button>
-            <p className="explore-cta-note">
-              Get detailed insights on property appreciation, city-wise growth, and broker benefits
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* ================= FEATURES ================= */}
       <section className="welcome-features">
         <div className="welcome-container">
