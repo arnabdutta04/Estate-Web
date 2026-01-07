@@ -63,17 +63,17 @@ const Navbar = () => {
           </button>
 
           <button
-            className={`nav-link-glass ${isActive("/explore") ? "active" : ""}`}
-            onClick={() => navigate("/explore")}
+            className={`nav-link-glass ${isActive("/Broker") ? "active" : ""}`}
+            onClick={() => navigate("/Broker")}
           >
-            About
+            Profile
           </button>
 
           <button
             className={`nav-link-glass ${isActive("/brokers") ? "active" : ""}`}
             onClick={() => navigate("/brokers")}
           >
-            Blogs
+            Broker
           </button>
         </div>
 
@@ -84,7 +84,7 @@ const Navbar = () => {
               className="cta-btn-glass"
               onClick={() => navigate("/login")}
             >
-              Let's Talk <FaArrowRight />
+              Login <FaArrowRight />
             </button>
           ) : !loading && user ? (
             <>
