@@ -106,49 +106,76 @@ const handleExplorePageClick = () => {
       {/* NAVBAR - ALWAYS VISIBLE */}
       <Navbar />
       {/* ================= HERO ================= */}
-      <section
-        className="welcome-hero"
-        style={{ paddingTop: "70px" }}
-      >
-        <div
-          className="hero-overlay"
-          style={{ transform: `translateY(${scrollY * 0.5}px)` }}
-        />
+      {/* ================= HERO ================= */}
+      <section className="modern-hero">
+        <div className="hero-content-wrapper">
+          {/* Left Side - Text Content */}
+          <div className="hero-left">
+            <h1 className="modern-hero-title">
+              Connecting you <span className="title-light">to the</span>
+              <br />
+              <span className="title-light">home</span> you love
+            </h1>
 
-        <div className="welcome-container">
-          <h1 className="welcome-title">
-            Find Your <span className="highlight">Dream Home</span>
-            <br />
-            Where Memories Begin
-          </h1>
+            {/* Search Bar */}
+            <div className="hero-search-bar">
+              <div className="search-tabs">
+                <button className="search-tab active">Buy</button>
+                <button className="search-tab">Rent</button>
+                <button className="search-tab">Sell</button>
+              </div>
+              <div className="search-input-wrapper">
+                <FaMapMarkedAlt className="search-icon" />
+                <input 
+                  type="text" 
+                  placeholder="Address, School, City or Market" 
+                  className="hero-search-input"
+                />
+                <button className="hero-search-btn" onClick={handleExploreClick}>
+                  <FaSearch />
+                </button>
+              </div>
+            </div>
 
-          <p className="welcome-subtitle">
-            Discover thousands of properties, connect with verified brokers,
-            and make your real estate journey seamless and stress-free.
-          </p>
-
-          <div className="welcome-cta-group">
-            <button
-              className="btn-welcome-primary"
-              onClick={handleExploreClick}
-            >
-              <FaSearch /> {user ? "Browse Properties" : "Get Started Now"}
-              <FaArrowRight className="arrow-icon" />
-            </button>
+            {/* Quote */}
+            <p className="hero-quote">
+              "Turning your dreams into reality, one home at a time. 
+              Let us guide you to your perfect place."
+            </p>
           </div>
 
-          <div className="trust-indicators">
-            <div className="trust-item">
-              <FaCheckCircle />
-              <span>100% Verified Listings</span>
-            </div>
-            <div className="trust-item">
-              <FaCheckCircle />
-              <span>Trusted by Smart Users</span>
-            </div>
-            <div className="trust-item">
-              <FaCheckCircle />
-              <span>24/7 Customer Support</span>
+          {/* Right Side - Property Card */}
+          <div className="hero-right">
+            <div className="property-showcase-card">
+              <div className="property-showcase-image">
+                <img 
+                  src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800" 
+                  alt="Luxury Property" 
+                />
+                <div className="property-showcase-overlay">
+                  <button className="carousel-btn prev">
+                    <FaArrowRight style={{ transform: 'rotate(180deg)' }} />
+                  </button>
+                  <button className="carousel-btn next">
+                    <FaArrowRight />
+                  </button>
+                </div>
+              </div>
+              <div className="property-showcase-details">
+                <h3>Bismillah House</h3>
+                <p>Contemporary home featuring exceptional interior design.</p>
+                <div className="property-showcase-footer">
+                  <span className="property-showcase-price">USD 560,000</span>
+                  <div className="property-showcase-actions">
+                    <button className="showcase-action-btn">
+                      <FaArrowRight style={{ transform: 'rotate(180deg)' }} />
+                    </button>
+                    <button className="showcase-action-btn primary">
+                      <FaArrowRight />
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
