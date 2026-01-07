@@ -146,94 +146,77 @@ const handleExplorePageClick = () => {
           </div>
         </div>
       </section>
-    {/* ================= HOW IT WORKS SECTION ================= */}
-<section className="how-it-works-section">
-  <div className="how-it-works-container">
-    <div className="how-it-works-header">
-      <h2>How It Works</h2>
-      <p className="how-it-works-title">
-        The Journey of <span className="highlight">Finding Your Dream Property</span>
-      </p>
-      <p className="how-it-works-subtitle">
-        Simple, transparent, and efficient - from search to ownership
-      </p>
-    </div>
+   {/* ================= HOW IT WORKS - NEXIUM STYLE ================= */}
+      <section className="how-it-works-nexium">
+        <div className="nexium-works-container">
+          {/* Header Section */}
+          <div className="nexium-works-header">
+            <div className="header-left-text">
+              <p className="small-caption">Dolor quis dolor justo nunc in.</p>
+              <p className="small-caption">Arcu aliquet velit ultricies</p>
+              <p className="small-caption">lectus sem. Cras praesent mus</p>
+            </div>
+            
+            <div className="header-main-title">
+              <h2>How It Works</h2>
+              <p className="subtitle-nexium">
+                The Journey of Finding Your Dream Property
+              </p>
+            </div>
 
-    <div className="steps-grid">
-      {/* Step 1 */}
-      <div className="step-card">
-        <div className="step-number">01</div>
-        <div className="step-content">
-          <h3 className="step-title">Create Your Account</h3>
-          <p className="step-description">
-            Sign up in minutes with verified credentials. Access exclusive listings and personalized recommendations instantly.
-          </p>
+            <div className="header-right-text">
+              <p className="description-text">
+                Egestas quisque viverra adipiscing at dictus dolor
+                vitae potenti quis. Praesent mi eu malesuada blis.
+                Consectetur ullamcorper in donec donec.
+              </p>
+            </div>
+          </div>
+
+          {/* Decorative Line */}
+          <div className="nexium-divider-line"></div>
+
+          {/* Main Content Area with Images */}
+          <div className="nexium-works-content">
+            <div className="content-left-title">
+              <h3>Simple, transparent,<br />and efficient</h3>
+            </div>
+
+            {/* Property Images */}
+            <div className="property-images-grid">
+              <div className="property-image-item">
+                <img 
+                  src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600" 
+                  alt="Modern Villa" 
+                />
+              </div>
+              <div className="property-image-item">
+                <img 
+                  src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600" 
+                  alt="Luxury Property" 
+                />
+              </div>
+            </div>
+
+            <div className="content-right-text">
+              <p className="side-description">
+                Egestas quisque viverra adipiscing at dictus dolor
+                vitae potenti quis. Praesent mi eu malesuada blis.
+                Consectetur ullamcorper in donec donec.
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="nexium-works-footer">
+            <h3>Ready to start your property journey?</h3>
+            <button className="nexium-cta-btn">
+              Explore Properties <span className="arrow-icon">→</span>
+            </button>
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* Step 2 */}
-      <div className="step-card">
-        <div className="step-number">02</div>
-        <div className="step-content">
-          <h3 className="step-title">Explore Properties</h3>
-          <p className="step-description">
-            Browse thousands of verified listings with advanced filters. View detailed analytics, market trends, and neighborhood insights.
-          </p>
-        </div>
-      </div>
-
-      {/* Step 3 */}
-      <div className="step-card">
-        <div className="step-number">03</div>
-        <div className="step-content">
-          <h3 className="step-title">Connect with Brokers</h3>
-          <p className="step-description">
-            Get matched with certified real estate professionals. Schedule viewings and receive expert guidance throughout your journey.
-          </p>
-        </div>
-      </div>
-
-      {/* Step 4 */}
-      <div className="step-card">
-        <div className="step-number">04</div>
-        <div className="step-content">
-          <h3 className="step-title">Schedule Viewings</h3>
-          <p className="step-description">
-            Book property visits at your convenience. Experience virtual tours or in-person walkthroughs with ease.
-          </p>
-        </div>
-      </div>
-
-      {/* Step 5 */}
-      <div className="step-card">
-        <div className="step-number">05</div>
-        <div className="step-content">
-          <h3 className="step-title">Secure Documentation</h3>
-          <p className="step-description">
-            All legal paperwork handled professionally. Verified documents, transparent pricing, and complete compliance guaranteed.
-          </p>
-        </div>
-      </div>
-
-      {/* Step 6 */}
-      <div className="step-card">
-        <div className="step-number">06</div>
-        <div className="step-content">
-          <h3 className="step-title">Move into Your Home</h3>
-          <p className="step-description">
-            Complete the transaction seamlessly. Get your keys and start creating memories in your dream property.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div className="how-it-works-cta">
-      <p>Ready to start your property journey?</p>
-    </div>
-  </div>
-</section>
-
-      {/* ================= PROPERTY TYPES ================= */}
       {/* ================= PROPERTY TYPES ================= */}
       <section className="property-types-elegant">
         <div className="elegant-container">
