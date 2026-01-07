@@ -1,12 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import "./Navbar.css"; // FIXED: Changed from "/navbar.css" to "./Navbar.css"
+import "./navbar.css"; 
 import {
   FaUser,
   FaSignOutAlt,
-  FaSignInAlt,
-  FaUserPlus,
   FaArrowRight
 } from "react-icons/fa";
 
