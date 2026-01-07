@@ -2923,7 +2923,7 @@ display: none;
 
 /* ==================== HOW IT WORKS SECTION ==================== */
 .how-it-works-section {
-  padding: 8rem 0;
+  padding: 0rem 0;
   background: #f8f6f3;
   position: relative;
   overflow: hidden;
