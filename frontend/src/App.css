@@ -141,7 +141,7 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: linear-gradient(135deg, #0f2818, #1a4d2e);
   padding: 8rem 2rem 4rem;
   overflow: hidden;
 }
@@ -165,14 +165,14 @@ html {
   font-size: 5rem;
   font-weight: 800;
   line-height: 1.1;
-  color: #1a1a1a;
+  color: #ffffff;
   margin-bottom: 3rem;
   font-family: 'Playfair Display', serif;
 }
 
 .modern-hero-title .title-light {
   font-weight: 400;
-  color: #6c757d;
+  color: #fffb02;
 }
 
 /* Hero Search Bar */
