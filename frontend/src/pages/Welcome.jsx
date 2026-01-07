@@ -106,7 +106,6 @@ const handleExplorePageClick = () => {
       {/* NAVBAR - ALWAYS VISIBLE */}
       <Navbar />
       {/* ================= HERO ================= */}
-      {/* ================= HERO ================= */}
       <section className="modern-hero">
         <div className="hero-content-wrapper">
           {/* Left Side - Text Content */}
@@ -119,11 +118,6 @@ const handleExplorePageClick = () => {
 
             {/* Search Bar */}
             <div className="hero-search-bar">
-              <div className="search-tabs">
-                <button className="search-tab active">Buy</button>
-                <button className="search-tab">Rent</button>
-                <button className="search-tab">Sell</button>
-              </div>
               <div className="search-input-wrapper">
                 <FaMapMarkedAlt className="search-icon" />
                 <input 
@@ -153,26 +147,13 @@ const handleExplorePageClick = () => {
                   alt="Luxury Property" 
                 />
                 <div className="property-showcase-overlay">
-                  <button className="carousel-btn prev">
-                    <FaArrowRight style={{ transform: 'rotate(180deg)' }} />
-                  </button>
-                  <button className="carousel-btn next">
-                    <FaArrowRight />
-                  </button>
                 </div>
               </div>
               <div className="property-showcase-details">
                 <h3>Bismillah House</h3>
                 <p>Contemporary home featuring exceptional interior design.</p>
                 <div className="property-showcase-footer">
-                  <span className="property-showcase-price">USD 560,000</span>
                   <div className="property-showcase-actions">
-                    <button className="showcase-action-btn">
-                      <FaArrowRight style={{ transform: 'rotate(180deg)' }} />
-                    </button>
-                    <button className="showcase-action-btn primary">
-                      <FaArrowRight />
-                    </button>
                   </div>
                 </div>
               </div>
