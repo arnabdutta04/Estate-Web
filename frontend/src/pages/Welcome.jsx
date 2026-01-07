@@ -108,56 +108,50 @@ const handleExplorePageClick = () => {
       {/* ================= HERO ================= */}
       <section className="modern-hero">
         <div className="hero-content-wrapper">
-          {/* Left Side - Text Content */}
-          <div className="hero-left">
-            <h1 className="modern-hero-title">
-              Connecting you <span className="title-light">to the</span>
-              <br />
-              <span className="title-light">home</span> you love
-            </h1>
+          {/* Split Image Background with Text Overlay */}
+          <div className="hero-split-container">
+            {/* Left Image */}
+            <div className="hero-split-image left">
+              <img 
+                src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800" 
+                alt="Modern Architecture" 
+              />
+            </div>
 
-            {/* Search Bar */}
-            <div className="hero-search-bar">
-              <div className="search-input-wrapper">
-                <FaMapMarkedAlt className="search-icon" />
-                <input 
-                  type="text" 
-                  placeholder="Address, School, City or Market" 
-                  className="hero-search-input"
-                />
-                <button className="hero-search-btn" onClick={handleExploreClick}>
-                  <FaSearch />
+            {/* Right Image */}
+            <div className="hero-split-image right">
+              <img 
+                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800" 
+                alt="Luxury Property" 
+              />
+            </div>
+
+            {/* Centered Text Overlay */}
+            <div className="hero-text-overlay">
+              <h1 className="hero-split-title">
+                <span className="title-line">CONNECTING</span>
+                <span className="title-line">YOU TO HOME</span>
+              </h1>
+              
+              <p className="hero-split-subtitle">
+                Turning your dreams into reality, one home at a time.<br />
+                Let us guide you to your perfect place.
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="hero-split-actions">
+                <button className="btn-hero-primary" onClick={handleExploreClick}>
+                  <FaSearch /> Explore Properties
+                </button>
+                <button className="btn-hero-secondary" onClick={handleExplorePageClick}>
+                  <FaChartLine /> Market Insights
                 </button>
               </div>
             </div>
 
-            {/* Quote */}
-            <p className="hero-quote">
-              "Turning your dreams into reality, one home at a time. 
-              Let us guide you to your perfect place."
-            </p>
-          </div>
-
-          {/* Right Side - Property Card */}
-          <div className="hero-right">
-            <div className="property-showcase-card">
-              <div className="property-showcase-image">
-                <img 
-                  src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800" 
-                  alt="Luxury Property" 
-                />
-                <div className="property-showcase-overlay">
-                </div>
-              </div>
-              <div className="property-showcase-details">
-                <h3>Bismillah House</h3>
-                <p>Contemporary home featuring exceptional interior design.</p>
-                <div className="property-showcase-footer">
-                  <div className="property-showcase-actions">
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Decorative Border Lines */}
+            <div className="hero-border-top"></div>
+            <div className="hero-border-bottom"></div>
           </div>
         </div>
       </section>
