@@ -27,20 +27,28 @@ const Welcome = () => {
   const { user } = useContext(AuthContext);
 
   // Updated: Allow all users to view properties (no auth check)
-  const handleExploreClick = () => {
-    navigate("/properties"); // Navigate directly without auth requirement
-  };
+ // PROTECTED - Requires login
+const handleExploreClick = () => {
+  if (user) {
+    navigate("/properties");
+  } else {
+    navigate("/login");
+  }
+};
 
-  // Navigate to Explore page
-  const handleExplorePageClick = () => {
-    navigate("/explore");
-  };
-
-  // Updated: Handle property type click for all users
-  const handlePropertyTypeClick = (propertyType) => {
-    // Navigate to properties page, optionally with filter parameter
+// PROTECTED - Requires login
+const handlePropertyTypeClick = (propertyType) => {
+  if (user) {
     navigate("/properties", { state: { filter: propertyType } });
-  };
+  } else {
+    navigate("/login");
+  }
+};
+
+// PUBLIC - No login required
+const handleExplorePageClick = () => {
+  navigate("/explore");
+};
 
   const features = [
     {
@@ -124,7 +132,7 @@ const Welcome = () => {
               className="btn-welcome-primary"
               onClick={handleExploreClick}
             >
-              <FaSearch /> Start
+              <FaSearch /> {user ? "Browse Properties" : "Login to Browse"}
               <FaArrowRight className="arrow-icon" />
             </button>
           </div>
@@ -145,20 +153,98 @@ const Welcome = () => {
           </div>
         </div>
       </section>
+    {/* ================= HOW IT WORKS SECTION ================= */}
+<section className="how-it-works-section">
+  <div className="how-it-works-container">
+    <div className="how-it-works-header">
+      <h2>How It Works</h2>
+      <p className="how-it-works-title">
+        The Journey of <span className="highlight">Finding Your Dream Property</span>
+      </p>
+      <p className="how-it-works-subtitle">
+        Simple, transparent, and efficient - from search to ownership
+      </p>
+    </div>
 
-      {/* ================= ABOUT ================= */}
-      <section className="about-us-section">
-        <div className="welcome-container">
-          <h2>About Us</h2>
-          <h3>Your trusted partner in modern real estate solutions</h3>
-          <p>
-            <strong>Propify</strong> is a modern real estate platform built to
-            simplify property buying, selling, and renting. Our goal is to
-            empower customers and brokers with smart tools, real-time insights,
-            and seamless communication.
+    <div className="steps-grid">
+      {/* Step 1 */}
+      <div className="step-card">
+        <div className="step-number">01</div>
+        <div className="step-content">
+          <h3 className="step-title">Create Your Account</h3>
+          <p className="step-description">
+            Sign up in minutes with verified credentials. Access exclusive listings and personalized recommendations instantly.
           </p>
         </div>
-      </section>
+      </div>
+
+      {/* Step 2 */}
+      <div className="step-card">
+        <div className="step-number">02</div>
+        <div className="step-content">
+          <h3 className="step-title">Explore Properties</h3>
+          <p className="step-description">
+            Browse thousands of verified listings with advanced filters. View detailed analytics, market trends, and neighborhood insights.
+          </p>
+        </div>
+      </div>
+
+      {/* Step 3 */}
+      <div className="step-card">
+        <div className="step-number">03</div>
+        <div className="step-content">
+          <h3 className="step-title">Connect with Brokers</h3>
+          <p className="step-description">
+            Get matched with certified real estate professionals. Schedule viewings and receive expert guidance throughout your journey.
+          </p>
+        </div>
+      </div>
+
+      {/* Step 4 */}
+      <div className="step-card">
+        <div className="step-number">04</div>
+        <div className="step-content">
+          <h3 className="step-title">Schedule Viewings</h3>
+          <p className="step-description">
+            Book property visits at your convenience. Experience virtual tours or in-person walkthroughs with ease.
+          </p>
+        </div>
+      </div>
+
+      {/* Step 5 */}
+      <div className="step-card">
+        <div className="step-number">05</div>
+        <div className="step-content">
+          <h3 className="step-title">Secure Documentation</h3>
+          <p className="step-description">
+            All legal paperwork handled professionally. Verified documents, transparent pricing, and complete compliance guaranteed.
+          </p>
+        </div>
+      </div>
+
+      {/* Step 6 */}
+      <div className="step-card">
+        <div className="step-number">06</div>
+        <div className="step-content">
+          <h3 className="step-title">Move into Your Home</h3>
+          <p className="step-description">
+            Complete the transaction seamlessly. Get your keys and start creating memories in your dream property.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div className="how-it-works-cta">
+      <p>Ready to start your property journey?</p>
+      <button 
+        className="btn-start-journey"
+        onClick={handleExploreClick}
+      >
+        Get Started Now <FaArrowRight />
+      </button>
+    </div>
+  </div>
+</section>
 
       {/* ================= PROPERTY TYPES ================= */}
       <section className="property-types-section">
@@ -170,16 +256,34 @@ const Welcome = () => {
                 key={index}
                 className="property-type-card"
                 onClick={() => handlePropertyTypeClick(type.filter)}
+                style={{ cursor: 'pointer', position: 'relative' }}
               >
                 <div className="type-icon">{type.icon}</div>
                 <h3>{type.name}</h3>
                 <p>{type.count} listings</p>
+                {!user && (
+                  <div style={{ 
+                    marginTop: '1rem',
+                    padding: '0.5rem 1rem',
+                    background: 'rgba(212, 175, 55, 0.1)',
+                    borderRadius: '20px',
+                    border: '2px solid #d4af37',
+                    fontSize: '0.85rem',
+                    color: '#d4af37',
+                    fontWeight: 700,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    justifyContent: 'center'
+                  }}>
+                    🔒 Login Required
+                  </div>
+                )}
               </div>
             ))}
           </div>
         </div>
       </section>
-
       {/* ================= MARKET INSIGHTS & EXPLORE SECTION ================= */}
       <section className="explore-showcase-section">
   <div className="showcase-container">
@@ -443,7 +547,6 @@ const Welcome = () => {
           </div>
         </div>
       </section>
-
       <ContactSection />
     </div>
   );
