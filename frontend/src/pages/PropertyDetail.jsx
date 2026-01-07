@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../utils/api';
-import LoadingSpinner from '../components/LoadingSpinner'; 
 import { FaBed, FaBath, FaRuler, FaMapMarkerAlt, FaCalendar, FaPhone, FaEnvelope, FaStar } from 'react-icons/fa';
 
 const PropertyDetail = () => {
@@ -22,17 +21,6 @@ const PropertyDetail = () => {
 
     fetchProperty();
   }, [id]);
-
-
-  if (loading) {
-    return (
-      <LoadingSpinner 
-        text="Loading Property Details"
-        subtext="Preparing detailed information"
-        size="large"
-      />
-    );
-  }
 
   if (!property) {
     return <div className="error">Property not found</div>;
