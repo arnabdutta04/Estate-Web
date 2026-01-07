@@ -647,17 +647,120 @@ const handleExplorePageClick = () => {
   </div>
 </section>
       {/* ================= FEATURES ================= */}
-      <section className="welcome-features">
-        <div className="welcome-container">
-          <h2>Why Choose Us</h2>
-          <div className="features-grid">
-            {features.map((feature, index) => (
-              <div key={index} className="welcome-feature-card">
-                <div className="feature-icon">{feature.icon}</div>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
+      {/* ================= WHY CHOOSE US - SPLIT DESIGN ================= */}
+      <section className="features-split-section">
+        {/* Feature 1 - Yellow/Green with Images */}
+        <div className="feature-split yellow-green">
+          <div className="feature-split-content">
+            <div className="feature-split-text">
+              <h2 className="feature-split-title">
+                Verified Brokers with Expert Market Knowledge
+              </h2>
+              <p className="feature-split-description">
+                Connect with certified real estate professionals who understand your needs. 
+                Our verified brokers bring years of experience and deep market insights. 
+                They guide you through every step with transparency and expertise.
+              </p>
+              <button className="feature-discover-btn">
+                <FaHandshake /> Discover More
+              </button>
+            </div>
+            <div className="feature-split-images">
+              <div className="feature-image-wrapper">
+                <img 
+                  src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600" 
+                  alt="Modern Property" 
+                />
               </div>
-            ))}
+              <div className="feature-image-wrapper">
+                <img 
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600" 
+                  alt="Luxury Home" 
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Feature 2 - Dark with Aerial Image */}
+        <div className="feature-split dark">
+          <div className="feature-split-content reverse">
+            <div className="feature-split-text-dark">
+              <h2 className="feature-split-title-dark">
+                Easy Transactions with Complete Transparency
+              </h2>
+              <button className="feature-category-btn">
+                <FaKey /> Seamless Process
+              </button>
+              <p className="feature-split-description-dark">
+                Experience hassle-free buying, selling, and renting with our streamlined process. 
+                Every transaction is backed by verified documentation, clear pricing, and complete 
+                legal compliance for your peace of mind.
+              </p>
+            </div>
+            <div className="feature-split-images-large">
+              <div className="feature-image-large">
+                <img 
+                  src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1200" 
+                  alt="Aerial Property View" 
+                />
+                <div className="feature-image-caption">
+                  Experience premium properties with verified documentation and transparent pricing
+                </div>
+              </div>
+              <div className="feature-navigation-arrows">
+                <button className="feature-nav-arrow left">
+                  <FaArrowRight style={{ transform: 'rotate(180deg)' }} />
+                </button>
+                <button className="feature-nav-arrow right">
+                  <FaArrowRight />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Feature 3 - Light with Chart/Insights */}
+        <div className="feature-split light-gray">
+          <div className="feature-split-content">
+            <div className="feature-split-text-light">
+              <h2 className="feature-split-title-light">
+                Real-Time Market Insights and Data Analytics
+              </h2>
+              <p className="feature-split-description-light">
+                Access comprehensive market data and property valuations. Make informed 
+                investment decisions backed by real-time trends, growth projections, and 
+                detailed neighborhood analytics across all major cities.
+              </p>
+              <button className="feature-explore-btn">
+                <FaChartLine /> View Market Data
+              </button>
+            </div>
+            <div className="feature-split-visual">
+              <div className="feature-stats-card">
+                <div className="stat-item-feature">
+                  <FaChartLine className="stat-icon-feature" />
+                  <div className="stat-content-feature">
+                    <div className="stat-value-feature">+18.3%</div>
+                    <div className="stat-label-feature">Avg. Price Growth</div>
+                  </div>
+                </div>
+                <div className="stat-item-feature">
+                  <FaCheckCircle className="stat-icon-feature" />
+                  <div className="stat-content-feature">
+                    <div className="stat-value-feature">9,000+</div>
+                    <div className="stat-label-feature">Verified Listings</div>
+                  </div>
+                </div>
+                <div className="stat-item-feature">
+                  <FaMapMarkedAlt className="stat-icon-feature" />
+                  <div className="stat-content-feature">
+                    <div className="stat-value-feature">6 Cities</div>
+                    <div className="stat-label-feature">Market Coverage</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
