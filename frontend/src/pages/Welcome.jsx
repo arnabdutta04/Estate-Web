@@ -132,7 +132,7 @@ const handleExplorePageClick = () => {
               className="btn-welcome-primary"
               onClick={handleExploreClick}
             >
-              <FaSearch /> {user ? "Browse Properties" : "Login to Browse"}
+              <FaSearch /> {user ? "Browse Properties" : "Get Started Now"}
               <FaArrowRight className="arrow-icon" />
             </button>
           </div>
@@ -236,12 +236,6 @@ const handleExplorePageClick = () => {
 
     <div className="how-it-works-cta">
       <p>Ready to start your property journey?</p>
-      <button 
-        className="btn-start-journey"
-        onClick={handleExploreClick}
-      >
-        Get Started Now <FaArrowRight />
-      </button>
     </div>
   </div>
 </section>
