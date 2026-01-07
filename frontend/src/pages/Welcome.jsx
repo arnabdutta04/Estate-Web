@@ -116,21 +116,6 @@ const handleExplorePageClick = () => {
           <div className="hero-overlay"></div>
         </div>
 
-        {/* Navigation Bar */}
-        <nav className="hero-navbar-modern">
-          <div className="navbar-wrapper-modern">
-            {/* Logo */}
-            <div className="navbar-logo-modern">
-              <h2>PROPIFY</h2>
-            </div>
-
-            {/* CTA Button */}
-            <button className="navbar-cta-btn-modern" onClick={() => navigate('/contact')}>
-              Let's Talk <FaArrowRight />
-            </button>
-          </div>
-        </nav>
-
         {/* Hero Content */}
         <div className="hero-content-modern">
           <div className="hero-text-wrapper-modern">
@@ -419,7 +404,6 @@ const handleExplorePageClick = () => {
           </div>
         </div>
       </section>
-      {/* ================= MARKET INSIGHTS & EXPLORE SECTION ================= */}
      {/* ================= MARKET INSIGHTS - CLEAN DESIGN ================= */}
       <section className="market-insights-clean">
         <div className="insights-container-clean">
