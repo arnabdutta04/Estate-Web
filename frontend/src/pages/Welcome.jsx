@@ -105,44 +105,99 @@ const handleExplorePageClick = () => {
     <div className="welcome-page">
       {/* NAVBAR - ALWAYS VISIBLE */}
       <Navbar />
-      {/* ================= HERO ================= */}
-      <section className="nexium-hero">
-        <div className="nexium-hero-wrapper">
-          {/* Split Image Background */}
-          <div className="nexium-split-container">
-            {/* Left Image */}
-            <div className="nexium-split-image left">
-              <img 
-                src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800" 
-                alt="Modern Architecture" 
-              />
+   {/* ================= MODERN HERO SECTION ================= */}
+      <section className="hero-modern-full">
+        {/* Background Image */}
+        <div className="hero-background-image">
+          <img 
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600" 
+            alt="Luxury Property Aerial View"
+          />
+          <div className="hero-overlay"></div>
+        </div>
+
+        {/* Navigation Bar */}
+        <nav className="hero-navbar-modern">
+          <div className="navbar-wrapper-modern">
+            {/* Logo */}
+            <div className="navbar-logo-modern">
+              <h2>PROPIFY</h2>
             </div>
 
-            {/* Right Image */}
-            <div className="nexium-split-image right">
-              <img 
-                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800" 
-                alt="Luxury Property" 
-              />
+            {/* Navigation Links */}
+            <div className="navbar-links-modern">
+              <Link to="/" className="nav-link-modern active">Home</Link>
+              <Link to="/properties" className="nav-link-modern">Properties</Link>
+              <Link to="/explore" className="nav-link-modern">About</Link>
+              <Link to="/contact" className="nav-link-modern">Blogs</Link>
             </div>
 
-            {/* Centered Text Overlay */}
-            <div className="nexium-text-overlay">
-              <h1 className="nexium-hero-title">
-                <span className="nexium-title-line">PROP</span>
-                <span className="nexium-title-line">IFY</span>
-              </h1>
-              
-              <p className="nexium-hero-subtitle">
-                Egestas quisque viverra adipiscing at dictus dolor<br />
-                vitae potenti quis. Praesent mi eu malesuada blis.<br />
-                Consectetur ullamcorper in donec donec.
-              </p>
+            {/* CTA Button */}
+            <button className="navbar-cta-btn-modern" onClick={() => navigate('/contact')}>
+              Let's Talk <FaArrowRight />
+            </button>
+          </div>
+        </nav>
+
+        {/* Hero Content */}
+        <div className="hero-content-modern">
+          <div className="hero-text-wrapper-modern">
+            <h1 className="hero-title-modern">
+              Let us find a place<br />
+              you can <span className="highlight-yellow">call home</span>
+            </h1>
+            <p className="hero-description-modern">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere rutrum 
+              dui eu malesuada. Cras id est rhoncus tortor bibendum commodo pretium ac mi. 
+              Donec vel fringilla augue, ac interdum enim.
+            </p>
+          </div>
+
+          {/* Search Box */}
+          <div className="hero-search-box-modern">
+            <div className="search-field-modern">
+              <label className="search-label-modern">Location</label>
+              <select className="search-select-modern">
+                <option>Los Angeles</option>
+                <option>New York</option>
+                <option>Chicago</option>
+                <option>Miami</option>
+              </select>
             </div>
 
-            {/* Decorative Border Lines */}
-            <div className="nexium-border-top"></div>
-            <div className="nexium-border-bottom"></div>
+            <div className="search-field-modern">
+              <label className="search-label-modern">Property type</label>
+              <select className="search-select-modern">
+                <option>Apartment</option>
+                <option>House</option>
+                <option>Villa</option>
+                <option>Commercial</option>
+              </select>
+            </div>
+
+            <div className="search-field-modern">
+              <label className="search-label-modern">Price Range</label>
+              <select className="search-select-modern">
+                <option>Max Price</option>
+                <option>$100k - $300k</option>
+                <option>$300k - $500k</option>
+                <option>$500k+</option>
+              </select>
+            </div>
+
+            <button className="search-btn-modern" onClick={handleExploreClick}>
+              <FaSearch /> Search
+            </button>
+          </div>
+
+          {/* Suggestions */}
+          <div className="hero-suggestions-modern">
+            <span className="suggestion-label-modern">Suggestion:</span>
+            <button className="suggestion-tag-modern">Apartment</button>
+            <button className="suggestion-tag-modern">Duplexes</button>
+            <button className="suggestion-tag-modern">Mannor</button>
+            <button className="suggestion-tag-modern">Commercial</button>
+            <button className="suggestion-tag-modern">Swimming pool</button>
           </div>
         </div>
       </section>
