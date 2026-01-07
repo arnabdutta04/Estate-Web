@@ -5,7 +5,8 @@ import {
   FaUser,
   FaSignOutAlt,
   FaSignInAlt,
-  FaUserPlus
+  FaUserPlus,
+  FaArrowRight
 } from "react-icons/fa";
 
 const Navbar = () => {
@@ -20,17 +21,12 @@ const Navbar = () => {
       const isScrolled = window.scrollY > 50;
       if (isScrolled !== scrolled) {
         setScrolled(isScrolled);
-        console.log('🔄 Scroll state changed:', isScrolled); // Debug log
       }
     };
 
-    // Add scroll listener
     window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // Check initial scroll position
     handleScroll();
 
-    // Cleanup
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -43,72 +39,63 @@ const Navbar = () => {
 
   const isActive = (path) => location.pathname === path;
 
-  console.log('🎨 Navbar scrolled state:', scrolled); // Debug log
-
   return (
-    <nav className={`navbar-fixed ${scrolled ? 'scrolled' : ''}`}>
-      <div className="navbar-container">
+    <nav className="navbar-glass-modern">
+      <div className="navbar-glass-wrapper">
         {/* Logo Section */}
-        <div className="navbar-brand" onClick={() => navigate("/")}>
-          <img
-            src={`${process.env.PUBLIC_URL}/logo-3d.png`}
-            alt="Propify Logo"
-          />
-          <span>Propify</span>
+        <div className="navbar-logo-glass" onClick={() => navigate("/")}>
+          <span className="logo-text-glass">PROPIFY</span>
         </div>
-        <div class="navbar-spacer"></div>
+
         {/* Navigation Links */}
-        <div className="navbar-links">
+        <div className="navbar-links-glass">
           <button
-            className={`nav-link ${isActive("/") ? "active" : ""}`}
+            className={`nav-link-glass ${isActive("/") ? "active" : ""}`}
             onClick={() => navigate("/")}
           >
             Home
           </button>
 
           <button
-            className={`nav-link ${isActive("/properties") ? "active" : ""}`}
+            className={`nav-link-glass ${isActive("/properties") ? "active" : ""}`}
             onClick={() => navigate("/properties")}
           >
             Properties
           </button>
 
           <button
-            className={`nav-link ${isActive("/brokers") ? "active" : ""}`}
+            className={`nav-link-glass ${isActive("/explore") ? "active" : ""}`}
+            onClick={() => navigate("/explore")}
+          >
+            About
+          </button>
+
+          <button
+            className={`nav-link-glass ${isActive("/brokers") ? "active" : ""}`}
             onClick={() => navigate("/brokers")}
           >
-            Brokers
+            Blogs
           </button>
         </div>
 
         {/* User / Auth Section */}
-        <div className="navbar-user">
+        <div className="navbar-actions-glass">
           {!loading && !user ? (
-            <>
-              <button
-                className="nav-link login-btn"
-                onClick={() => navigate("/login")}
-              >
-                <FaSignInAlt /> Login
-              </button>
-
-              <button
-                className="nav-link register-btn"
-                onClick={() => navigate("/register")}
-              >
-                <FaUserPlus /> Register
-              </button>
-            </>
+            <button
+              className="cta-btn-glass"
+              onClick={() => navigate("/login")}
+            >
+              Let's Talk <FaArrowRight />
+            </button>
           ) : !loading && user ? (
             <>
               <button
-                className="nav-link user-profile"
+                className="user-profile-glass"
                 onClick={() => navigate("/profile")}
               >
                 <FaUser /> {user.name || "Profile"}
               </button>
-
-              <button className="btn-logout" onClick={handleLogout}>
+              <button className="logout-btn-glass" onClick={handleLogout}>
                 <FaSignOutAlt /> Logout
               </button>
             </>

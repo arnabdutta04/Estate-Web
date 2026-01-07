@@ -124,14 +124,6 @@ const handleExplorePageClick = () => {
               <h2>PROPIFY</h2>
             </div>
 
-            {/* Navigation Links */}
-            <div className="navbar-links-modern">
-              <Link to="/" className="nav-link-modern active">Home</Link>
-              <Link to="/properties" className="nav-link-modern">Properties</Link>
-              <Link to="/explore" className="nav-link-modern">About</Link>
-              <Link to="/contact" className="nav-link-modern">Blogs</Link>
-            </div>
-
             {/* CTA Button */}
             <button className="navbar-cta-btn-modern" onClick={() => navigate('/contact')}>
               Let's Talk <FaArrowRight />

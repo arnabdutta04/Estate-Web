@@ -1,333 +1,297 @@
-/* ================= FIXED NAVBAR - TRANSPARENT BY DEFAULT ================= */
-.navbar-fixed {
+/* ================= GLASSMORPHIC NAVBAR ================= */
+.navbar-glass-modern {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 70px;
-  background: transparent !important; /* Force transparent */
   z-index: 1000;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  border-bottom: 1px solid transparent;
-  box-shadow: none; /* No shadow by default */
+  padding: 2rem 3rem;
+  pointer-events: none; /* Allow clicks through transparent areas */
 }
 
-/* Navbar when scrolled - ADD THIS CLASS VIA JAVASCRIPT */
-.navbar-fixed.scrolled {
-  background: rgba(45, 82, 53, 0.95) !important;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  border-bottom: 1px solid transparent;
-}
-
-.navbar-container {
-  max-width: 100%;
+.navbar-glass-wrapper {
+  max-width: 1400px;
   margin: 0 auto;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 3rem;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 60px;
+  padding: 1rem 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  pointer-events: auto; /* Enable clicks on navbar */
 }
 
-/* ================= BRAND/LOGO ================= */
-.navbar-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+/* Logo Section */
+.navbar-logo-glass {
   cursor: pointer;
   transition: transform 0.3s ease;
 }
 
-.navbar-brand:hover {
+.navbar-logo-glass:hover {
   transform: scale(1.05);
 }
 
-.navbar-brand img {
-  width: 45px;
-  height: 45px;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+.logo-text-glass {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: 0.15em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
-.navbar-brand span {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #f4c430;
-  letter-spacing: 0.5px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-/* ================= NAVIGATION LINKS ================= */
-.navbar-links {
+/* Navigation Links */
+.navbar-links-glass {
   display: flex;
   gap: 2.5rem;
   align-items: center;
   flex: 1;
   justify-content: center;
-  margin-left: 4rem;
+  margin: 0 3rem;
 }
 
-.nav-link {
+.nav-link-glass {
   background: none;
   border: none;
-  color: #f4c430;
-  font-size: 1.125rem;
-  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  font-weight: 400;
   padding: 0.5rem 0;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.nav-link:hover {
-  color: #ffd700;
+.nav-link-glass:hover {
+  color: #fff;
   transform: translateY(-2px);
 }
 
-.nav-link.active {
-  color: #ffd700;
-  font-weight: 700;
+.nav-link-glass.active {
+  color: #fff;
+  font-weight: 600;
 }
 
-.nav-link.active::after {
+.nav-link-glass.active::after {
   content: "";
   position: absolute;
-  bottom: -5px;
+  bottom: -8px;
   left: 0;
   right: 0;
-  height: 3px;
-  background: #f4c430;
-  border-radius: 2px;
-  box-shadow: 0 2px 4px rgba(244, 196, 48, 0.4);
+  height: 2px;
+  background: #c4d600;
+  border-radius: 1px;
+  box-shadow: 0 0 10px rgba(196, 214, 0, 0.5);
 }
 
-/* ================= USER SECTION ================= */
-.navbar-user {
+/* Actions Section */
+.navbar-actions-glass {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
-.user-profile {
-  display: flex;
+/* CTA Button - Yellow Green */
+.cta-btn-glass {
+  background: #c4d600;
+  color: #000;
+  padding: 0.75rem 1.8rem;
+  border: none;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1.125rem;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
+  gap: 0.6rem;
   transition: all 0.3s ease;
-  color: #f4c430;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 15px rgba(196, 214, 0, 0.3);
 }
 
-.user-profile:hover {
-  background: rgba(244, 196, 48, 0.15);
+.cta-btn-glass:hover {
+  background: #d4e600;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(196, 214, 0, 0.5);
 }
 
-.user-profile svg {
-  font-size: 1.25rem;
+.cta-btn-glass svg {
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
 }
 
-/* ================= LOGIN & REGISTER BUTTONS ================= */
-.login-btn,
-.register-btn {
+.cta-btn-glass:hover svg {
+  transform: translateX(3px);
+}
+
+/* User Profile Button */
+.user-profile-glass {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   background: transparent;
-  border: 2px solid #f4c430;
-  color: #f4c430;
-  padding: 0.6rem 1.5rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.login-btn:hover,
-.register-btn:hover {
-  background: #f4c430;
-  color: #2d5235;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(244, 196, 48, 0.4);
-  text-shadow: none;
+.user-profile-glass:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
 }
 
-.register-btn {
-  background: #f4c430;
-  color: #2d5235;
-  text-shadow: none;
-}
-
-.register-btn:hover {
-  background: #ffd700;
-  border-color: #ffd700;
-}
-
-.login-btn svg,
-.register-btn svg {
-  font-size: 1.1rem;
-}
-
-/* ================= LOGOUT BUTTON ================= */
-.btn-logout {
+/* Logout Button */
+.logout-btn-glass {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   background: transparent;
-  border: 2px solid #f4c430;
-  color: #f4c430;
-  padding: 0.6rem 1.5rem;
-  border-radius: 8px;
-  font-size: 1rem;
+  border: 2px solid rgba(196, 214, 0, 0.5);
+  color: #c4d600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.btn-logout:hover {
-  background: #f4c430;
-  color: #2d5235;
+.logout-btn-glass:hover {
+  background: #c4d600;
+  border-color: #c4d600;
+  color: #000;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(244, 196, 48, 0.4);
-  text-shadow: none;
 }
 
-.btn-logout svg {
-  font-size: 1.1rem;
+/* Scrolled State */
+.navbar-glass-modern.scrolled .navbar-glass-wrapper {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
-/* ================= PAGE TRANSITIONS ================= */
-.page-transition {
-  padding-top: 70px;
-  min-height: 100vh;
-  animation: slideDown 0.5s ease-out;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.page-content {
-  animation: fadeIn 0.6s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* ================= RESPONSIVE ================= */
+/* Responsive Design */
 @media (max-width: 1200px) {
-  .navbar-links {
+  .navbar-glass-modern {
+    padding: 1.5rem 2rem;
+  }
+
+  .navbar-links-glass {
     gap: 1.5rem;
-    margin-left: 2rem;
+    margin: 0 2rem;
   }
 }
 
 @media (max-width: 968px) {
-  .navbar-container {
-    padding: 0 1.5rem;
+  .navbar-glass-modern {
+    padding: 1rem 1.5rem;
   }
 
-  .navbar-links {
+  .navbar-glass-wrapper {
+    flex-wrap: wrap;
     gap: 1rem;
-    margin-left: 1rem;
+    padding: 1.5rem;
+    border-radius: 30px;
   }
 
-  .nav-link {
-    font-size: 1rem;
+  .navbar-links-glass {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 0;
   }
 
-  .navbar-brand span {
-    font-size: 1.5rem;
+  .navbar-actions-glass {
+    margin-left: auto;
   }
 }
 
 @media (max-width: 768px) {
-  .navbar-container {
-    padding: 0 1rem;
+  .navbar-glass-modern {
+    padding: 1rem;
   }
 
-  .navbar-brand span {
-    font-size: 1.25rem;
+  .navbar-glass-wrapper {
+    padding: 1rem;
   }
 
-  .navbar-links {
+  .logo-text-glass {
+    font-size: 1.2rem;
+  }
+
+  .navbar-links-glass {
+    gap: 1rem;
+  }
+
+  .nav-link-glass {
+    font-size: 0.85rem;
+  }
+
+  .cta-btn-glass {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar-glass-wrapper {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .navbar-links-glass {
     gap: 0.75rem;
-    margin-left: 0.5rem;
   }
 
-  .nav-link {
-    font-size: 0.9rem;
-    padding: 0.4rem 0;
+  .nav-link-glass {
+    font-size: 0.8rem;
   }
 
-  .btn-logout,
-  .login-btn,
-  .register-btn {
+  .cta-btn-glass,
+  .user-profile-glass,
+  .logout-btn-glass {
     padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-  }
-
-  .user-profile {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
-  .navbar-brand span {
-    display: none;
+  .logo-text-glass {
+    font-size: 1rem;
   }
 
-  .navbar-links {
+  .navbar-links-glass {
+    flex-wrap: wrap;
     gap: 0.5rem;
   }
 
-  .nav-link {
-    font-size: 0.8rem;
-  }
-
-  .user-profile {
-    font-size: 0.8rem;
-    padding: 0.3rem 0.6rem;
-  }
-
-  .btn-logout,
-  .login-btn,
-  .register-btn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
+  .nav-link-glass {
+    font-size: 0.75rem;
+    padding: 0.3rem 0;
   }
 }
-/* ================= NAVBAR SAFE ZONE ================= */
+
+/* Prevent content from hiding under navbar */
 .navbar-spacer {
-  height: 70px;          /* SAME as navbar height */
+  height: 100px;
   width: 100%;
   pointer-events: none;
-  background: transparent;
 }
-.hero,
-.hero-section,
-.home-hero {
-  padding-top: 70px;     /* navbar height */
-  box-sizing: border-box;
+
+/* Hero sections should have no extra padding */
+.hero-modern-full,
+.nexium-hero,
+.modern-hero {
+  margin-top: 0;
+  padding-top: 0;
 }
