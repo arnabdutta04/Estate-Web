@@ -63,13 +63,6 @@ const Navbar = () => {
           </button>
 
           <button
-            className={`nav-link-glass ${isActive("/Broker") ? "active" : ""}`}
-            onClick={() => navigate("/Broker")}
-          >
-            Profile
-          </button>
-
-          <button
             className={`nav-link-glass ${isActive("/brokers") ? "active" : ""}`}
             onClick={() => navigate("/brokers")}
           >
