@@ -2631,113 +2631,254 @@ display: none;
 }
 
 /* Property Types Section */
-.property-types-section {
-  padding: 8rem 0;
-  background: var(--light-bg);
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 5rem;
-}
-
-.section-header h2 {
-  font-size: 3rem;
-  color: var(--dark-bg);
-  margin-bottom: 1rem;
-  font-family: 'Playfair Display', serif;
-}
-
-.section-header p {
-  font-size: 1.2rem;
-  color: var(--text-light);
-}
-
-.property-types-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2.5rem;
-}
-
-.property-type-card {
-  background: var(--white);
-  padding: 3rem 2rem;
-  border-radius: 20px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 2px solid transparent;
+/* ================= PROPERTY TYPES ELEGANT ================= */
+.property-types-elegant {
+  background: #3d4f3e;
+  padding: 6rem 2rem;
   position: relative;
-  overflow: hidden;
 }
 
-.property-type-card::before {
-  content: '';
+.elegant-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header Section */
+.elegant-header {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  margin-bottom: 3rem;
+  align-items: start;
+}
+
+.elegant-header-left {
+  position: relative;
+}
+
+.elegant-main-title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: #ffffff;
+  font-weight: 300;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.elegant-header-right {
+  padding-top: 1rem;
+}
+
+.elegant-subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* Decorative Divider */
+.elegant-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+  margin: 3rem 0 4rem;
+}
+
+/* Properties Grid */
+.elegant-properties-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+/* Property Card */
+.elegant-property-card {
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+  position: relative;
+}
+
+.elegant-property-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Property Image */
+.elegant-property-image {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.elegant-property-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.elegant-property-card:hover .elegant-property-image img {
+  transform: scale(1.08);
+}
+
+.elegant-image-overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--gold), var(--secondary-color));
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
+  bottom: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.4));
+  pointer-events: none;
 }
 
-.property-type-card:hover::before {
-  transform: scaleX(1);
-}
-
-.property-type-card:hover {
-  transform: translateY(-15px);
-  border-color: var(--gold);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-}
-
-.type-icon {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 1.5rem;
-  background: linear-gradient(135deg, var(--gold) 0%, var(--secondary-color) 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  color: var(--dark-bg);
-  transition: all 0.4s ease;
-  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
-}
-
-.property-type-card:hover .type-icon {
-  transform: scale(1.1) rotate(10deg);
-}
-
-.property-type-card h3 {
-  font-size: 1.6rem;
-  color: var(--dark-bg);
-  margin-bottom: 0.5rem;
-  font-family: 'Playfair Display', serif;
-}
-
-.property-type-card p {
-  color: var(--text-light);
-  font-size: 1rem;
-  margin-bottom: 1rem;
-}
-
-.card-arrow {
-  color: var(--gold);
-  font-size: 1.2rem;
-  opacity: 0;
-  transform: translateX(-10px);
+/* Category Badge */
+.elegant-category-badge {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: #2c2c2c;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.property-type-card:hover .card-arrow {
-  opacity: 1;
-  transform: translateX(0);
+.elegant-property-card:hover .elegant-category-badge {
+  background: #d4af37;
+  color: #fff;
 }
 
+/* Property Info */
+.elegant-property-info {
+  color: #fff;
+}
+
+.elegant-property-title {
+  font-size: 1.8rem;
+  font-weight: 300;
+  margin: 0 0 0.5rem 0;
+  color: #fff;
+}
+
+.elegant-property-subtitle {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 1.5rem 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.elegant-property-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.elegant-property-details {
+  flex: 1;
+}
+
+.elegant-description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 1rem 0;
+}
+
+.elegant-count {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Lock Badge */
+.elegant-lock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.5rem;
+  background: rgba(212, 175, 55, 0.15);
+  border: 2px solid #d4af37;
+  border-radius: 30px;
+  color: #d4af37;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.elegant-property-card:hover .elegant-lock-badge {
+  background: rgba(212, 175, 55, 0.25);
+  transform: scale(1.02);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .elegant-header {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .elegant-properties-grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .elegant-property-image {
+    height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .property-types-elegant {
+    padding: 4rem 1.5rem;
+  }
+
+  .elegant-main-title {
+    font-size: 2rem;
+  }
+
+  .elegant-property-image {
+    height: 300px;
+  }
+
+  .elegant-property-title {
+    font-size: 1.5rem;
+  }
+
+  .elegant-properties-grid {
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .property-types-elegant {
+    padding: 3rem 1rem;
+  }
+
+  .elegant-property-image {
+    height: 250px;
+  }
+
+  .elegant-category-badge {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.8rem;
+  }
+
+  .elegant-property-footer {
+    gap: 1rem;
+  }
+}
 /* Welcome Features Section */
 .welcome-features {
   padding: 8rem 0;

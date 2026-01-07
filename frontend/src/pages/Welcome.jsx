@@ -243,40 +243,158 @@ const handleExplorePageClick = () => {
 </section>
 
       {/* ================= PROPERTY TYPES ================= */}
-      <section className="property-types-section">
-        <div className="welcome-container">
-          <h2>Browse By Property Type</h2>
-          <div className="property-types-grid">
-            {propertyTypes.map((type, index) => (
-              <div
-                key={index}
-                className="property-type-card"
-                onClick={() => handlePropertyTypeClick(type.filter)}
-                style={{ cursor: 'pointer', position: 'relative' }}
-              >
-                <div className="type-icon">{type.icon}</div>
-                <h3>{type.name}</h3>
-                <p>{type.count} listings</p>
-                {!user && (
-                  <div style={{ 
-                    marginTop: '1rem',
-                    padding: '0.5rem 1rem',
-                    background: 'rgba(212, 175, 55, 0.1)',
-                    borderRadius: '20px',
-                    border: '2px solid #d4af37',
-                    fontSize: '0.85rem',
-                    color: '#d4af37',
-                    fontWeight: 700,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    justifyContent: 'center'
-                  }}>
-                    🔒 Login Required
-                  </div>
-                )}
+      {/* ================= PROPERTY TYPES ================= */}
+      <section className="property-types-elegant">
+        <div className="elegant-container">
+          {/* Header Section */}
+          <div className="elegant-header">
+            <div className="elegant-header-left">
+              <h2 className="elegant-main-title">Browse By Property Type</h2>
+            </div>
+            <div className="elegant-header-right">
+              <p className="elegant-subtitle">
+                Discover premium properties across residential, commercial, and luxury segments. 
+                Each listing is verified and curated for your investment needs.
+              </p>
+            </div>
+          </div>
+
+          {/* Decorative Line */}
+          <div className="elegant-divider"></div>
+
+          {/* Property Grid */}
+          <div className="elegant-properties-grid">
+            {/* Residential */}
+            <div 
+              className="elegant-property-card"
+              onClick={() => handlePropertyTypeClick('residential')}
+            >
+              <div className="elegant-property-image">
+                <img 
+                  src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800" 
+                  alt="Residential Property" 
+                />
+                <div className="elegant-image-overlay"></div>
+                <button className="elegant-category-badge">Residential</button>
               </div>
-            ))}
+              <div className="elegant-property-info">
+                <h3 className="elegant-property-title">Residential</h3>
+                <p className="elegant-property-subtitle">Modern Living</p>
+                <div className="elegant-property-footer">
+                  <div className="elegant-property-details">
+                    <p className="elegant-description">
+                      Premium residential properties with modern amenities. Perfect for families seeking 
+                      comfort and style in prime locations.
+                    </p>
+                    <p className="elegant-count">5,000+ listings</p>
+                  </div>
+                  {!user && (
+                    <div className="elegant-lock-badge">
+                      <FaKey /> Login Required
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Commercial */}
+            <div 
+              className="elegant-property-card"
+              onClick={() => handlePropertyTypeClick('commercial')}
+            >
+              <div className="elegant-property-image">
+                <img 
+                  src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800" 
+                  alt="Commercial Property" 
+                />
+                <div className="elegant-image-overlay"></div>
+                <button className="elegant-category-badge">Commercial</button>
+              </div>
+              <div className="elegant-property-info">
+                <h3 className="elegant-property-title">Commercial</h3>
+                <p className="elegant-property-subtitle">Business Spaces</p>
+                <div className="elegant-property-footer">
+                  <div className="elegant-property-details">
+                    <p className="elegant-description">
+                      Strategic commercial spaces in high-traffic areas. Ideal for businesses 
+                      looking to establish or expand their presence.
+                    </p>
+                    <p className="elegant-count">2,500+ listings</p>
+                  </div>
+                  {!user && (
+                    <div className="elegant-lock-badge">
+                      <FaKey /> Login Required
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Land & Plots */}
+            <div 
+              className="elegant-property-card"
+              onClick={() => handlePropertyTypeClick('land')}
+            >
+              <div className="elegant-property-image">
+                <img 
+                  src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800" 
+                  alt="Land Property" 
+                />
+                <div className="elegant-image-overlay"></div>
+                <button className="elegant-category-badge">Land & Plots</button>
+              </div>
+              <div className="elegant-property-info">
+                <h3 className="elegant-property-title">Land & Plots</h3>
+                <p className="elegant-property-subtitle">Investment Opportunities</p>
+                <div className="elegant-property-footer">
+                  <div className="elegant-property-details">
+                    <p className="elegant-description">
+                      Prime land parcels for development or investment. Verified titles with 
+                      clear documentation and growth potential.
+                    </p>
+                    <p className="elegant-count">1,500+ listings</p>
+                  </div>
+                  {!user && (
+                    <div className="elegant-lock-badge">
+                      <FaKey /> Login Required
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Luxury Villas */}
+            <div 
+              className="elegant-property-card"
+              onClick={() => handlePropertyTypeClick('luxury')}
+            >
+              <div className="elegant-property-image">
+                <img 
+                  src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800" 
+                  alt="Luxury Villa" 
+                />
+                <div className="elegant-image-overlay"></div>
+                <button className="elegant-category-badge">Luxury</button>
+              </div>
+              <div className="elegant-property-info">
+                <h3 className="elegant-property-title">Luxury Villas</h3>
+                <p className="elegant-property-subtitle">Exclusive Living</p>
+                <div className="elegant-property-footer">
+                  <div className="elegant-property-details">
+                    <p className="elegant-description">
+                      Ultra-premium villas with world-class amenities. Designed for those who 
+                      demand the finest in architecture and lifestyle.
+                    </p>
+                    <p className="elegant-count">1,000+ listings</p>
+                  </div>
+                  {!user && (
+                    <div className="elegant-lock-badge">
+                      <FaKey /> Login Required
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
