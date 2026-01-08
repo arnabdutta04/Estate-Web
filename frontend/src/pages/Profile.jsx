@@ -1,4 +1,4 @@
-// src/pages/Profile.jsx - E-Commerce Profile with Hero Banner
+// src/pages/Profile.jsx
 import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import api from '../utils/api';
@@ -7,63 +7,52 @@ import { useTheme } from '../context/ThemeContext';
 import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
 import { 
-  FaSearch,
-  FaCog,
-  FaShoppingBag,
-  FaHeart,
-  FaStar,
-  FaMapMarkerAlt,
-  FaBox,
-  FaClock,
-  FaTruck,
-  FaCheckCircle,
-  FaEdit
+  FaUser, 
+  FaCamera, 
+  FaLock, 
+  FaCog, 
+  FaSun, 
+  FaMoon, 
+  FaDesktop,
+  FaImage 
 } from 'react-icons/fa';
 
 const Profile = () => {
   const { user, login } = useContext(AuthContext);
+  const [activeTab, setActiveTab] = useState('personal');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
-  const { theme } = useTheme();
-  const [showFullBio, setShowFullBio] = useState(false);
+  const { theme, changeTheme } = useTheme();
   
   // Personal Info State
   const [personalInfo, setPersonalInfo] = useState({
-    username: user?.username || 'lucky.jesse',
+    name: user?.name || '',
     email: user?.email || '',
-    firstName: user?.firstName || user?.name?.split(' ')[0] || '',
-    lastName: user?.lastName || user?.name?.split(' ')[1] || '',
     phone: user?.phone || '',
-    address: user?.address || '',
-    city: user?.city || '',
-    country: user?.country || '',
-    postalCode: user?.postalCode || '',
-    bio: user?.bio || 'A beautiful Dashboard for E-commerce. Passionate online shopper and product enthusiast.'
+    address: user?.address || ''
   });
+
+  // Password Change State
+  const [passwordData, setPasswordData] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: '',
+    otp: ''
+  });
+  const [otpSent, setOtpSent] = useState(false);
 
   // Profile Picture State
   const [profilePicture, setProfilePicture] = useState(user?.profilePicture || null);
   const [previewUrl, setPreviewUrl] = useState(user?.profilePicture || null);
 
-  // E-commerce stats (mock data - replace with real API calls)
-  const [stats, setStats] = useState({
-    orders: 22,
-    wishlist: 10,
-    reviews: 89
-  });
-
-  const [recentOrders] = useState([
-    { id: 'ORD-001', name: 'Wireless Headphones', date: 'Jan 5, 2026', status: 'delivered' },
-    { id: 'ORD-002', name: 'Smart Watch', date: 'Jan 3, 2026', status: 'processing' },
-    { id: 'ORD-003', name: 'Running Shoes', date: 'Dec 28, 2025', status: 'delivered' }
-  ]);
-
   useEffect(() => {
+    // Apply theme
     if (theme === 'dark') {
       document.documentElement.classList.add('dark-mode');
     } else if (theme === 'light') {
       document.documentElement.classList.remove('dark-mode');
     } else {
+      // System preference
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       if (prefersDark) {
         document.documentElement.classList.add('dark-mode');
@@ -73,6 +62,7 @@ const Profile = () => {
     }
   }, [theme]);
 
+  // Handle Personal Info Update
   const handlePersonalInfoChange = (e) => {
     setPersonalInfo({ ...personalInfo, [e.target.name]: e.target.value });
   };
@@ -96,6 +86,7 @@ const Profile = () => {
     }
   };
 
+  // Handle Profile Picture Upload
   const handleProfilePictureChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -108,46 +99,104 @@ const Profile = () => {
     }
   };
 
-  const handleCancel = () => {
-    setPersonalInfo({
-      username: user?.username || '',
-      email: user?.email || '',
-      firstName: user?.firstName || '',
-      lastName: user?.lastName || '',
-      phone: user?.phone || '',
-      address: user?.address || '',
-      city: user?.city || '',
-      country: user?.country || '',
-      postalCode: user?.postalCode || '',
-      bio: user?.bio || ''
-    });
+  const handleProfilePictureSubmit = async (e) => {
+    e.preventDefault();
+    if (!profilePicture) return;
+
+    setLoading(true);
     setMessage({ type: '', text: '' });
-  };
 
-  const getStatusClass = (status) => {
-    switch (status) {
-      case 'delivered':
-        return 'status-delivered';
-      case 'processing':
-        return 'status-processing';
-      case 'pending':
-        return 'status-pending';
-      default:
-        return '';
+    try {
+      const formData = new FormData();
+      formData.append('profilePicture', profilePicture);
+
+      const { data } = await api.post('/auth/upload-profile-picture', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+
+      login(data.user);
+      setMessage({ type: 'success', text: 'Profile picture updated!' });
+    } catch (error) {
+      setMessage({ 
+        type: 'error', 
+        text: error.response?.data?.message || 'Failed to upload picture' 
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
-  const getStatusIcon = (status) => {
-    switch (status) {
-      case 'delivered':
-        return <FaCheckCircle />;
-      case 'processing':
-        return <FaClock />;
-      case 'pending':
-        return <FaTruck />;
-      default:
-        return <FaBox />;
+  // Handle Password Change
+  const handlePasswordChange = (e) => {
+    setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
+  };
+
+  const handleSendOTP = async () => {
+    if (!passwordData.currentPassword) {
+      setMessage({ type: 'error', text: 'Please enter current password' });
+      return;
     }
+
+    setLoading(true);
+    try {
+      await api.post('/auth/send-password-otp', {
+        currentPassword: passwordData.currentPassword
+      });
+      setOtpSent(true);
+      setMessage({ type: 'success', text: 'OTP sent to your email!' });
+    } catch (error) {
+      setMessage({ 
+        type: 'error', 
+        text: error.response?.data?.message || 'Failed to send OTP' 
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePasswordSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      setMessage({ type: 'error', text: 'Passwords do not match' });
+      return;
+    }
+
+    if (passwordData.newPassword.length < 6) {
+      setMessage({ type: 'error', text: 'Password must be at least 6 characters' });
+      return;
+    }
+
+    setLoading(true);
+    setMessage({ type: '', text: '' });
+
+    try {
+      await api.post('/auth/change-password', {
+        currentPassword: passwordData.currentPassword,
+        newPassword: passwordData.newPassword,
+        otp: passwordData.otp
+      });
+
+      setMessage({ type: 'success', text: 'Password changed successfully!' });
+      setPasswordData({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: '',
+        otp: ''
+      });
+      setOtpSent(false);
+    } catch (error) {
+      setMessage({ 
+        type: 'error', 
+        text: error.response?.data?.message || 'Failed to change password' 
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleThemeChange = (newTheme) => {
+    changeTheme(newTheme);
   };
 
   return (
@@ -155,328 +204,323 @@ const Profile = () => {
       <Navbar />
       <PageTransition>
         <div className="profile-page">
-          {/* Hero Section */}
-          <div className="profile-hero">
-            <div className="hero-content">
-              <div className="hero-top">
-                <h1 className="hero-title">User Profile</h1>
-                <div className="hero-user-info">
-                  <div className="hero-search">
-                    <FaSearch className="hero-search-icon" />
-                    <input type="text" placeholder="Search" />
-                  </div>
-                  <div className="hero-avatar">
+          <div className="container">
+            <div className="profile-header">
+              <h1>My Profile</h1>
+              <p>Manage your account settings and preferences</p>
+            </div>
+
+            <div className="profile-layout">
+              {/* Sidebar */}
+              <div className="profile-sidebar">
+                <div className="profile-avatar-section">
+                  <div className="profile-avatar">
                     {previewUrl ? (
                       <img src={previewUrl} alt="Profile" />
                     ) : (
-                      <div style={{
-                        width: '100%',
-                        height: '100%',
-                        background: 'linear-gradient(135deg, #036666, #c4d600)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '1.5rem',
-                        fontWeight: '700',
-                        color: 'white'
-                      }}>
+                      <div className="avatar-placeholder">
                         {user?.name?.charAt(0)?.toUpperCase() || 'U'}
                       </div>
                     )}
                   </div>
-                  <span className="hero-username">{user?.name || 'Jessica Jones'}</span>
+                  <h3>{user?.name || 'User'}</h3>
+                  <p>{user?.email}</p>
                 </div>
-              </div>
 
-              <div className="hero-main">
-                <h2 className="hero-greeting">Hello {user?.firstName || user?.name?.split(' ')[0] || 'Jesse'}</h2>
-                <p className="hero-description">
-                  This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks
-                </p>
-                <button className="btn-edit-profile">
-                  <FaEdit style={{ marginRight: '0.5rem' }} />
-                  Edit profile
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Main Content */}
-          <div className="profile-main-content">
-            <div className="profile-grid">
-              {/* Left Column - Account Information */}
-              <div className="profile-card">
-                <div className="profile-card-header">
-                  <h2 className="profile-card-title">My account</h2>
-                  <button className="btn-settings">
-                    <FaCog />
+                <nav className="profile-nav">
+                  <button
+                    className={`profile-nav-item ${activeTab === 'personal' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('personal')}
+                  >
+                    <FaUser className="nav-icon" />
+                    Personal Information
+                  </button>
+                  <button
+                    className={`profile-nav-item ${activeTab === 'picture' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('picture')}
+                  >
+                    <FaCamera className="nav-icon" />
+                    Profile Picture
+                  </button>
+                  <button
+                    className={`profile-nav-item ${activeTab === 'security' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('security')}
+                  >
+                    <FaLock className="nav-icon" />
+                    Security & Password
+                  </button>
+                  <button
+                    className={`profile-nav-item ${activeTab === 'settings' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('settings')}
+                  >
+                    <FaCog className="nav-icon" />
                     Settings
                   </button>
-                </div>
+                </nav>
+              </div>
 
+              {/* Main Content */}
+              <div className="profile-content">
                 {message.text && (
                   <div className={`profile-message ${message.type}`}>
                     {message.text}
                   </div>
                 )}
 
-                {/* E-Commerce Statistics */}
-                <div className="ecommerce-stats">
-                  <div className="stat-box">
-                    <div className="stat-box-icon">
-                      <FaShoppingBag />
-                    </div>
-                    <div className="stat-box-value">{stats.orders}</div>
-                    <div className="stat-box-label">Total Orders</div>
-                  </div>
-                  <div className="stat-box">
-                    <div className="stat-box-icon">
-                      <FaHeart />
-                    </div>
-                    <div className="stat-box-value">{stats.wishlist}</div>
-                    <div className="stat-box-label">Wishlist Items</div>
-                  </div>
-                  <div className="stat-box">
-                    <div className="stat-box-icon">
-                      <FaStar />
-                    </div>
-                    <div className="stat-box-value">{stats.reviews}</div>
-                    <div className="stat-box-label">Reviews Written</div>
-                  </div>
-                </div>
+                {/* Personal Information Tab */}
+                {activeTab === 'personal' && (
+                  <div className="profile-section">
+                    <h2>Personal Information</h2>
+                    <p className="section-description">
+                      Update your personal details and contact information
+                    </p>
 
-                <form onSubmit={handlePersonalInfoSubmit}>
-                  {/* User Information Section */}
-                  <div className="form-section">
-                    <div className="section-label">User Information</div>
-                    <div className="form-row">
+                    <form onSubmit={handlePersonalInfoSubmit} className="profile-form">
                       <div className="form-group">
-                        <label>Username</label>
+                        <label>Full Name</label>
                         <input
                           type="text"
-                          name="username"
-                          value={personalInfo.username}
+                          name="name"
+                          value={personalInfo.name}
                           onChange={handlePersonalInfoChange}
-                          placeholder="lucky.jesse"
+                          placeholder="Enter your full name"
+                          required
                         />
                       </div>
+
                       <div className="form-group">
-                        <label>Email address</label>
+                        <label>Email Address</label>
                         <input
                           type="email"
                           name="email"
                           value={personalInfo.email}
                           onChange={handlePersonalInfoChange}
-                          placeholder="jesse@example.com"
+                          placeholder="Enter your email"
                           required
                         />
                       </div>
-                    </div>
-                    <div className="form-row">
-                      <div className="form-group">
-                        <label>First name</label>
-                        <input
-                          type="text"
-                          name="firstName"
-                          value={personalInfo.firstName}
-                          onChange={handlePersonalInfoChange}
-                          placeholder="Lucky"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label>Last name</label>
-                        <input
-                          type="text"
-                          name="lastName"
-                          value={personalInfo.lastName}
-                          onChange={handlePersonalInfoChange}
-                          placeholder="Jesse"
-                        />
-                      </div>
-                    </div>
-                  </div>
 
-                  {/* Contact Information Section */}
-                  <div className="form-section">
-                    <div className="section-label">Contact Information</div>
-                    <div className="form-row full">
+                      <div className="form-group">
+                        <label>Phone Number</label>
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={personalInfo.phone}
+                          onChange={handlePersonalInfoChange}
+                          placeholder="Enter your phone number"
+                        />
+                      </div>
+
                       <div className="form-group">
                         <label>Address</label>
-                        <input
-                          type="text"
+                        <textarea
                           name="address"
                           value={personalInfo.address}
                           onChange={handlePersonalInfoChange}
-                          placeholder="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                          placeholder="Enter your address"
+                          rows="3"
                         />
                       </div>
-                    </div>
-                    <div className="form-row">
-                      <div className="form-group">
-                        <label>City</label>
-                        <input
-                          type="text"
-                          name="city"
-                          value={personalInfo.city}
-                          onChange={handlePersonalInfoChange}
-                          placeholder="New York"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label>Country</label>
-                        <input
-                          type="text"
-                          name="country"
-                          value={personalInfo.country}
-                          onChange={handlePersonalInfoChange}
-                          placeholder="United States"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label>Postal code</label>
-                        <input
-                          type="text"
-                          name="postalCode"
-                          value={personalInfo.postalCode}
-                          onChange={handlePersonalInfoChange}
-                          placeholder="Postal code"
-                        />
-                      </div>
-                    </div>
-                  </div>
 
-                  {/* About Me Section */}
-                  <div className="form-section">
-                    <div className="section-label">About Me</div>
-                    <div className="form-row full">
-                      <div className="form-group">
-                        <label>About Me</label>
-                        <textarea
-                          name="bio"
-                          value={personalInfo.bio}
-                          onChange={handlePersonalInfoChange}
-                          placeholder="Tell us about yourself..."
-                          rows="5"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Recent Orders Section */}
-                  <div className="orders-section">
-                    <div className="orders-header">
-                      <h3 className="orders-title">Recent Orders</h3>
-                      <button type="button" className="btn-view-all">
-                        View All
+                      <button 
+                        type="submit" 
+                        className="btn-save" 
+                        disabled={loading}
+                      >
+                        {loading ? 'Saving...' : 'Save Changes'}
                       </button>
-                    </div>
-                    <div className="recent-orders">
-                      {recentOrders.map((order) => (
-                        <div key={order.id} className="order-item">
-                          <div className="order-info">
-                            <div className="order-icon">
-                              {getStatusIcon(order.status)}
-                            </div>
-                            <div className="order-details">
-                              <h4>{order.name}</h4>
-                              <p>{order.id} • {order.date}</p>
-                            </div>
+                    </form>
+                  </div>
+                )}
+
+                {/* Profile Picture Tab */}
+                {activeTab === 'picture' && (
+                  <div className="profile-section">
+                    <h2>Profile Picture</h2>
+                    <p className="section-description">
+                      Upload a profile picture to personalize your account
+                    </p>
+
+                    <div className="picture-upload-section">
+                      <div className="picture-preview">
+                        {previewUrl ? (
+                          <img src={previewUrl} alt="Preview" />
+                        ) : (
+                          <div className="preview-placeholder">
+                            {user?.name?.charAt(0)?.toUpperCase() || 'U'}
                           </div>
-                          <span className={`order-status ${getStatusClass(order.status)}`}>
-                            {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
-                          </span>
+                        )}
+                      </div>
+
+                      <form onSubmit={handleProfilePictureSubmit} className="picture-form">
+                        <div className="file-input-wrapper">
+                          <input
+                            type="file"
+                            id="profilePicture"
+                            accept="image/*"
+                            onChange={handleProfilePictureChange}
+                          />
+                          <label htmlFor="profilePicture" className="file-input-label">
+                            <FaImage /> Choose Image
+                          </label>
                         </div>
-                      ))}
+
+                        <button 
+                          type="submit" 
+                          className="btn-save" 
+                          disabled={!profilePicture || loading}
+                        >
+                          {loading ? 'Uploading...' : 'Upload Picture'}
+                        </button>
+                      </form>
+
+                      <div className="picture-guidelines">
+                        <h4>Image Guidelines:</h4>
+                        <ul>
+                          <li>Recommended size: 400x400 pixels</li>
+                          <li>Maximum file size: 5MB</li>
+                          <li>Supported formats: JPG, PNG, GIF</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
+                )}
 
-                  {/* Form Actions */}
-                  <div className="form-actions">
-                    <button 
-                      type="button" 
-                      className="btn-cancel"
-                      onClick={handleCancel}
-                    >
-                      Cancel
-                    </button>
-                    <button 
-                      type="submit" 
-                      className="btn-save" 
-                      disabled={loading}
-                    >
-                      {loading ? 'Saving...' : 'Save Changes'}
-                    </button>
-                  </div>
-                </form>
-              </div>
+                {/* Security & Password Tab */}
+                {activeTab === 'security' && (
+                  <div className="profile-section">
+                    <h2>Security & Password</h2>
+                    <p className="section-description">
+                      Change your password using OTP verification
+                    </p>
 
-              {/* Right Column - User Profile Card */}
-              <div className="user-profile-card">
-                <div className="profile-image-section">
-                  <div className="profile-image-wrapper">
-                    {previewUrl ? (
-                      <img src={previewUrl} alt="Profile" className="profile-image" />
-                    ) : (
-                      <div className="profile-placeholder">
-                        {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+                    <form onSubmit={handlePasswordSubmit} className="profile-form">
+                      <div className="form-group">
+                        <label>Current Password</label>
+                        <input
+                          type="password"
+                          name="currentPassword"
+                          value={passwordData.currentPassword}
+                          onChange={handlePasswordChange}
+                          placeholder="Enter current password"
+                          required
+                        />
                       </div>
-                    )}
-                  </div>
-                  <input
-                    type="file"
-                    id="profilePictureInput"
-                    accept="image/*"
-                    onChange={handleProfilePictureChange}
-                    style={{ display: 'none' }}
-                  />
-                </div>
 
-                <div className="user-stats">
-                  <div className="stat-item">
-                    <span className="stat-number">{stats.orders}</span>
-                    <span className="stat-label">Orders</span>
-                  </div>
-                  <div className="stat-item">
-                    <span className="stat-number">{stats.wishlist}</span>
-                    <span className="stat-label">Wishlist</span>
-                  </div>
-                  <div className="stat-item">
-                    <span className="stat-number">{stats.reviews}</span>
-                    <span className="stat-label">Reviews</span>
-                  </div>
-                </div>
+                      {!otpSent && (
+                        <button 
+                          type="button" 
+                          className="btn-send-otp" 
+                          onClick={handleSendOTP}
+                          disabled={loading || !passwordData.currentPassword}
+                        >
+                          {loading ? 'Sending...' : 'Send OTP to Email'}
+                        </button>
+                      )}
 
-                <div className="user-details">
-                  <h3 className="user-name">
-                    {personalInfo.firstName} {personalInfo.lastName}, 27
-                  </h3>
-                  <div className="user-location">
-                    <FaMapMarkerAlt />
-                    {personalInfo.city || 'Bucharest'}, {personalInfo.country || 'Romania'}
-                  </div>
-                  <div className="user-role">Solution Manager - Creative Tim Officer</div>
-                  <div className="user-company">University of Computer Science</div>
-                  
-                  <p className="user-bio">
-                    {showFullBio 
-                      ? personalInfo.bio 
-                      : `${personalInfo.bio?.substring(0, 100)}${personalInfo.bio?.length > 100 ? '...' : ''}`
-                    }
-                  </p>
-                  {personalInfo.bio?.length > 100 && (
-                    <button 
-                      className="btn-show-more" 
-                      onClick={() => setShowFullBio(!showFullBio)}
-                    >
-                      {showFullBio ? 'Show less' : 'Show more'}
-                    </button>
-                  )}
-                </div>
+                      {otpSent && (
+                        <>
+                          <div className="form-group">
+                            <label>OTP Code</label>
+                            <input
+                              type="text"
+                              name="otp"
+                              value={passwordData.otp}
+                              onChange={handlePasswordChange}
+                              placeholder="Enter 6-digit OTP"
+                              maxLength="6"
+                              required
+                            />
+                          </div>
 
-                <div className="profile-actions">
-                  <button className="btn-connect">Connect</button>
-                  <button className="btn-message">Message</button>
-                </div>
+                          <div className="form-group">
+                            <label>New Password</label>
+                            <input
+                              type="password"
+                              name="newPassword"
+                              value={passwordData.newPassword}
+                              onChange={handlePasswordChange}
+                              placeholder="Enter new password"
+                              required
+                            />
+                          </div>
+
+                          <div className="form-group">
+                            <label>Confirm New Password</label>
+                            <input
+                              type="password"
+                              name="confirmPassword"
+                              value={passwordData.confirmPassword}
+                              onChange={handlePasswordChange}
+                              placeholder="Confirm new password"
+                              required
+                            />
+                          </div>
+
+                          <button 
+                            type="submit" 
+                            className="btn-save" 
+                            disabled={loading}
+                          >
+                            {loading ? 'Changing...' : 'Change Password'}
+                          </button>
+                        </>
+                      )}
+                    </form>
+                  </div>
+                )}
+
+                {/* Settings Tab */}
+                {activeTab === 'settings' && (
+                  <div className="profile-section">
+                    <h2>Appearance Settings</h2>
+                    <p className="section-description">
+                      Customize your viewing experience
+                    </p>
+
+                    <div className="theme-selector">
+                      <h3>Theme Preference</h3>
+                      
+                      <div className="theme-options">
+                        <div 
+                          className={`theme-option ${theme === 'light' ? 'active' : ''}`}
+                          onClick={() => handleThemeChange('light')}
+                        >
+                          <div className="theme-preview light-preview">
+                            <div className="preview-header"></div>
+                            <div className="preview-content"></div>
+                          </div>
+                          <FaSun className="theme-icon" />
+                          <span className="theme-label">Light</span>
+                        </div>
+
+                        <div 
+                          className={`theme-option ${theme === 'dark' ? 'active' : ''}`}
+                          onClick={() => handleThemeChange('dark')}
+                        >
+                          <div className="theme-preview dark-preview">
+                            <div className="preview-header"></div>
+                            <div className="preview-content"></div>
+                          </div>
+                          <FaMoon className="theme-icon" />
+                          <span className="theme-label">Dark</span>
+                        </div>
+
+                        <div 
+                          className={`theme-option ${theme === 'system' ? 'active' : ''}`}
+                          onClick={() => handleThemeChange('system')}
+                        >
+                          <div className="theme-preview system-preview">
+                            <div className="preview-header"></div>
+                            <div className="preview-content"></div>
+                          </div>
+                          <FaDesktop className="theme-icon" />
+                          <span className="theme-label">System</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

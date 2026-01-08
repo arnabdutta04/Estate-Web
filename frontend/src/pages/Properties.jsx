@@ -28,7 +28,7 @@ const Properties = () => {
 
   // Indian cities list
   const cities = [
-     'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Ahmedabad', 'Chennai', 
+    'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Ahmedabad', 'Chennai', 
     'Kolkata', 'Surat', 'Pune', 'Jaipur', 'Lucknow', 'Kanpur', 'Nagpur',
     'Indore', 'Thane', 'Bhopal', 'Visakhapatnam', 'Pimpri-Chinchwad', 
     'Patna', 'Vadodara', 'Ghaziabad', 'Ludhiana', 'Agra', 'Nashik',
@@ -138,8 +138,9 @@ const Properties = () => {
 
   const handlePageChange = (page) => {
     fetchProperties(filters, page);
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
   return (
     <>
       <Navbar />
@@ -148,10 +149,10 @@ const Properties = () => {
           {/* Hero Section */}
           <div className='properties-hero-dark'>
             <div className='hero-content-dark'>
-              <h1>Find Properties</h1>
+              <h1>Find Your Dream Property</h1>
               <p className='hero-subtitle-dark'>
-                Browse a variety of homes, apartments, and investments tailored to your needs—<br />
-                perfect spaces for living, working, or growing.
+                Discover exceptional homes, apartments, and investments tailored to your lifestyle—<br />
+                perfect spaces for living, working, or building your future.
               </p>
 
               {/* Search Filters */}
@@ -164,7 +165,7 @@ const Properties = () => {
                       value={cityInput}
                       onChange={handleCityInputChange}
                       onFocus={handleCityInputFocus}
-                      placeholder='Find Location'
+                      placeholder='Search city...'
                       className='filter-input-dark'
                     />
                     <FaChevronDown className='dropdown-icon' />
@@ -182,14 +183,14 @@ const Properties = () => {
                 </div>
 
                 <div className='filter-group-dark'>
-                  <label>Properties</label>
+                  <label>Category</label>
                   <select 
                     name='listingType'
                     value={filters.listingType}
                     onChange={handleFilterChange}
                     className='filter-select-dark'
                   >
-                    <option value=''>Category</option>
+                    <option value=''>All Properties</option>
                     <option value='sale'>For Sale</option>
                     <option value='rent'>For Rent</option>
                   </select>
@@ -203,7 +204,7 @@ const Properties = () => {
                     onChange={handleFilterChange}
                     className='filter-select-dark'
                   >
-                    <option value=''>Select Type</option>
+                    <option value=''>All Types</option>
                     <option value='apartment'>Apartment</option>
                     <option value='villa'>Villa</option>
                     <option value='house'>House</option>
@@ -217,16 +218,44 @@ const Properties = () => {
 
           {/* Properties Grid */}
           <div className='properties-container-dark'>
-            {properties.length === 0 ? (
+            {loading ? (
               <div className='no-results-dark'>
-                <h2>No properties found</h2>
-                <p>Try adjusting your filters to see more results</p>
+                <h2>Loading properties...</h2>
+                <p>Please wait while we fetch the best options for you</p>
+              </div>
+            ) : properties.length === 0 ? (
+              <div className='no-results-dark'>
+                <h2>No Properties Found</h2>
+                <p>Try adjusting your filters to discover more amazing properties</p>
+                <button 
+                  onClick={handleReset}
+                  style={{
+                    marginTop: '20px',
+                    padding: '12px 32px',
+                    background: '#c4d600',
+                    border: 'none',
+                    borderRadius: '8px',
+                    color: '#0a0a0a',
+                    fontSize: '16px',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+                  onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+                >
+                  Reset Filters
+                </button>
               </div>
             ) : (
               <>
                 <div className='properties-grid-dark'>
                   {properties.map((property, index) => (
-                    <PropertyCard key={property._id} property={property} index={index} />
+                    <PropertyCard 
+                      key={property._id} 
+                      property={property} 
+                      index={index} 
+                    />
                   ))}
                 </div>
 
