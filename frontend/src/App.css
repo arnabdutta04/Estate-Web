@@ -290,75 +290,48 @@ html {
   max-width: 650px;
 }
 
-/* Search Box */
-.hero-search-box-modern {
-  background: rgba(0, 0, 0, 0.4);
+/* Trust Badges Section */
+.hero-trust-badges {
+  background: linear-gradient(135deg, #1a4d2e 0%, #0d3320 100%);
   backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(196, 214, 0, 0.2);
   border-radius: 20px;
-  padding: 2rem;
+  padding: 2rem 3rem;
   display: flex;
-  gap: 1.5rem;
-  align-items: flex-end;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2rem;
   flex-wrap: wrap;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-.search-field-modern {
-  flex: 1;
-  min-width: 200px;
+.trust-badge-item {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.search-label-modern {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 500;
-}
-
-.search-select-modern {
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
-  font-size: 1.05rem;
-  font-weight: 600;
-  padding: 0.5rem 0;
-  cursor: pointer;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-.search-select-modern:focus {
-  border-bottom-color: #c4d600;
-}
-
-.search-select-modern option {
-  background: #1a1a1a;
-  color: #fff;
-}
-
-.search-btn-modern {
-  background: #c4d600;
-  color: #000;
-  padding: 1rem 2.5rem;
-  border: none;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  transition: all 0.3s ease;
-  white-space: nowrap;
+  color: #fff;
 }
 
-.search-btn-modern:hover {
-  background: #d4e600;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(196, 214, 0, 0.4);
+.trust-badge-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+}
+
+.trust-badge-icon circle {
+  fill: #c4d600;
+}
+
+.trust-badge-icon path {
+  stroke: #1a4d2e;
+  stroke-width: 2.5;
+}
+
+.trust-badge-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
 }
 
 /* Suggestions */
@@ -405,6 +378,10 @@ html {
   .hero-content-modern {
     padding: 3rem 2rem 5rem;
   }
+
+  .hero-trust-badges {
+    padding: 1.5rem 2rem;
+  }
 }
 
 @media (max-width: 968px) {
@@ -422,12 +399,13 @@ html {
     gap: 1.5rem;
   }
 
-  .hero-search-box-modern {
+  .hero-trust-badges {
     padding: 1.5rem;
+    gap: 1.5rem;
   }
 
-  .search-field-modern {
-    min-width: 150px;
+  .trust-badge-text {
+    font-size: 0.9rem;
   }
 }
 
@@ -457,16 +435,13 @@ html {
     font-size: 2.5rem;
   }
 
-  .hero-search-box-modern {
+  .hero-trust-badges {
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
+    padding: 1.5rem;
   }
 
-  .search-field-modern {
-    width: 100%;
-  }
-
-  .search-btn-modern {
+  .trust-badge-item {
     width: 100%;
     justify-content: center;
   }
@@ -496,6 +471,19 @@ html {
 
   .navbar-links-modern {
     flex-wrap: wrap;
+  }
+
+  .trust-badge-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .trust-badge-text {
+    font-size: 0.85rem;
+  }
+
+  .hero-trust-badges {
+    padding: 1.25rem;
   }
 }
 /* Advanced Search Bar */

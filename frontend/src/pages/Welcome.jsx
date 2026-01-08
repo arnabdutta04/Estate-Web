@@ -105,41 +105,85 @@ const handleExplorePageClick = () => {
     <div className="welcome-page">
       {/* NAVBAR - ALWAYS VISIBLE */}
       <Navbar />
-   {/* ================= MODERN HERO SECTION ================= */}
-      <section className="hero-modern-full">
-        {/* Background Image */}
-        <div className="hero-background-image">
-          <img 
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600" 
-            alt="Luxury Property Aerial View"
+{/* ================= MODERN HERO SECTION ================= */}
+<section className="hero-modern-full">
+  {/* Background Image */}
+  <div className="hero-background-image">
+    <img 
+      src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600" 
+      alt="Luxury Property Aerial View"
+    />
+    <div className="hero-overlay"></div>
+  </div>
+  
+  {/* Hero Content */}
+  <div className="hero-content-modern">
+    <div className="hero-text-wrapper-modern">
+      <h1 className="hero-title-modern">
+        Find your<br />
+        Dream Home <span className="highlight-yellow">Where Memories Begin</span>
+      </h1>
+      <p className="hero-description-modern">
+        Discover thousands of properties, connect with verified brokers, and make 
+        your real estate journey seamless and stress-free.
+      </p>
+    </div>
+    
+    {/* Trust Badges - Replaces Search Box */}
+    <div className="hero-trust-badges">
+      <div className="trust-badge-item">
+        <svg 
+          className="trust-badge-icon" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path 
+            d="M7 12l3 3 7-7" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
           />
-          <div className="hero-overlay"></div>
-        </div>
+        </svg>
+        <span className="trust-badge-text">100% Verified Listings</span>
+      </div>
 
-        {/* Hero Content */}
-        <div className="hero-content-modern">
-          <div className="hero-text-wrapper-modern">
-            <h1 className="hero-title-modern">
-              Let us find a place<br />
-              you can <span className="highlight-yellow">call home</span>
-            </h1>
-            <p className="hero-description-modern">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere rutrum 
-              dui eu malesuada. Cras id est rhoncus tortor bibendum commodo pretium ac mi. 
-              Donec vel fringilla augue, ac interdum enim.
-            </p>
-          </div>
-          {/* Suggestions */}
-          <div className="hero-suggestions-modern">
-            <span className="suggestion-label-modern">Let's see</span>
-            <button className="suggestion-tag-modern">Apartment</button>
-            <button className="suggestion-tag-modern">Duplexes</button>
-            <button className="suggestion-tag-modern">Mannor</button>
-            <button className="suggestion-tag-modern">Commercial</button>
-            <button className="suggestion-tag-modern">Swimming pool</button>
-          </div>
-        </div>
-      </section>
+      <div className="trust-badge-item">
+        <svg 
+          className="trust-badge-icon" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path 
+            d="M7 12l3 3 7-7" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          />
+        </svg>
+        <span className="trust-badge-text">Trusted by Smart Users</span>
+      </div>
+
+      <div className="trust-badge-item">
+        <svg 
+          className="trust-badge-icon" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path 
+            d="M7 12l3 3 7-7" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          />
+        </svg>
+        <span className="trust-badge-text">24/7 Customer Support</span>
+      </div>
+    </div>
+  </div>
+</section>
    {/* ================= HOW IT WORKS - NEXIUM STYLE ================= */}
       <section className="how-it-works-nexium">
         <div className="nexium-works-container">
@@ -152,7 +196,7 @@ const handleExplorePageClick = () => {
             </div>
             
             <div className="header-main-title">
-              <h2>How It Works</h2>
+              <h2>About Us</h2>
               <p className="subtitle-nexium">
                 The Journey of Finding Your Dream Property
               </p>
