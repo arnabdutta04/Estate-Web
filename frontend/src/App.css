@@ -232,28 +232,6 @@ html {
   background: #c4d600;
 }
 
-/* CTA Button */
-.navbar-cta-btn-modern {
-  background: #c4d600;
-  color: #000;
-  padding: 0.75rem 1.8rem;
-  border: none;
-  border-radius: 30px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  transition: all 0.3s ease;
-}
-
-.navbar-cta-btn-modern:hover {
-  background: #d4e600;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(196, 214, 0, 0.4);
-}
-
 /* Hero Content */
 .hero-content-modern {
   position: relative;
@@ -290,11 +268,12 @@ html {
   max-width: 650px;
 }
 
-/* Trust Badges Section */
+/* Trust Badges Section - Perfect Transparent Glassmorphism */
 .hero-trust-badges {
-  background: linear-gradient(135deg, #1a4d2e 0%, #0d3320 100%);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(196, 214, 0, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
   padding: 2rem 3rem;
   display: flex;
@@ -302,7 +281,7 @@ html {
   align-items: center;
   gap: 2rem;
   flex-wrap: wrap;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
 .trust-badge-item {
@@ -332,6 +311,7 @@ html {
   font-weight: 600;
   color: #fff;
   white-space: nowrap;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 /* Suggestions */
@@ -371,9 +351,6 @@ html {
     padding: 1.5rem 2rem;
   }
 
-  .navbar-links-modern {
-    gap: 1.5rem;
-  }
 
   .hero-content-modern {
     padding: 3rem 2rem 5rem;
@@ -385,20 +362,6 @@ html {
 }
 
 @media (max-width: 968px) {
-  .navbar-wrapper-modern {
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 1.5rem;
-    border-radius: 25px;
-  }
-
-  .navbar-links-modern {
-    order: 3;
-    width: 100%;
-    justify-content: center;
-    gap: 1.5rem;
-  }
-
   .hero-trust-badges {
     padding: 1.5rem;
     gap: 1.5rem;
@@ -412,18 +375,6 @@ html {
 @media (max-width: 768px) {
   .hero-navbar-modern {
     padding: 1rem;
-  }
-
-  .navbar-wrapper-modern {
-    background: rgba(0, 0, 0, 0.5);
-  }
-
-  .navbar-links-modern {
-    gap: 1rem;
-  }
-
-  .nav-link-modern {
-    font-size: 0.85rem;
   }
 
   .hero-content-modern {
@@ -452,25 +403,12 @@ html {
 }
 
 @media (max-width: 480px) {
-  .navbar-logo-modern h2 {
-    font-size: 1.2rem;
-  }
-
-  .navbar-cta-btn-modern {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.85rem;
-  }
-
   .hero-title-modern {
     font-size: 2rem;
   }
 
   .hero-description-modern {
     font-size: 0.9rem;
-  }
-
-  .navbar-links-modern {
-    flex-wrap: wrap;
   }
 
   .trust-badge-icon {
