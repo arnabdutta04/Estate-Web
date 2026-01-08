@@ -6040,7 +6040,6 @@ animation: dots 1.5s steps(3, end) infinite;
 
 /* ================= PAGE TRANSITIONS ================= */
 .page-transition {
-  padding-top: 70px;
   min-height: 100vh;
   animation: slideDown 0.5s ease-out;
 }
