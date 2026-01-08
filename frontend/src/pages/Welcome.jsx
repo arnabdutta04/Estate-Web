@@ -29,10 +29,12 @@ const Welcome = () => {
   // Updated: Allow all users to view properties (no auth check)
  // PROTECTED - Requires login
 const handleExploreClick = () => {
-  if (user) {
-    navigate("/properties");
+  const token = localStorage.getItem('authToken');
+  
+  if (token) {
+    navigate('/properties');
   } else {
-    navigate("/login");
+    navigate('/login', { state: { from: '/properties' } }); // Pass redirect info
   }
 };
 
@@ -49,57 +51,6 @@ const handlePropertyTypeClick = (propertyType) => {
 const handleExplorePageClick = () => {
   navigate("/explore");
 };
-
-  const features = [
-    {
-      icon: <FaHandshake />,
-      title: "Verified Brokers",
-      description:
-        "Connect with certified real estate professionals who understand your needs."
-    },
-    {
-      icon: <FaKey />,
-      title: "Easy Transactions",
-      description:
-        "Seamless buying, selling, and renting process with complete transparency."
-    },
-    {
-      icon: <FaChartLine />,
-      title: "Market Insights",
-      description:
-        "Access real-time market data and property valuations to make informed decisions."
-    }
-  ];
-
-  const propertyTypes = [
-    { icon: <FaHome />, name: "Residential", count: "5,000+", filter: "residential" },
-    { icon: <FaBuilding />, name: "Commercial", count: "2,500+", filter: "commercial" },
-    { icon: <FaMapMarkedAlt />, name: "Land & Plots", count: "1,500+", filter: "land" },
-    { icon: <FaStar />, name: "Luxury Villas", count: "1,000+", filter: "luxury" }
-  ];
-
-  const exploreFeatures = [
-    {
-      icon: <FaChartBar />,
-      title: "Market Analytics",
-      description: "5-year property appreciation trends across all major cities"
-    },
-    {
-      icon: <FaTrendingUp />,
-      title: "Growth Insights",
-      description: "City-wise YoY growth data with demand indicators"
-    },
-    {
-      icon: <FaPercentage />,
-      title: "Investment Guide",
-      description: "Best time to buy, rental yields, and price appreciation"
-    },
-    {
-      icon: <FaCalendarAlt />,
-      title: "Real-time Data",
-      description: "Live market updates and property valuation insights"
-    }
-  ];
 
   return (
     <div className="welcome-page">
@@ -204,9 +155,9 @@ const handleExplorePageClick = () => {
 
             <div className="header-right-text">
               <p className="description-text">
-                Egestas quisque viverra adipiscing at dictus dolor
-                vitae potenti quis. Praesent mi eu malesuada blis.
-                Consectetur ullamcorper in donec donec.
+                It’s not about the money, though that’s nice to have. At the end of the day, 
+                it’s really about matching the right buyer to the right seller.
+                We’re matchmakers—real estate matchmakers.
               </p>
             </div>
           </div>
@@ -217,7 +168,7 @@ const handleExplorePageClick = () => {
           {/* Main Content Area with Images */}
           <div className="nexium-works-content">
             <div className="content-left-title">
-              <h3>Simple, transparent,<br />and efficient</h3>
+              <h3>Clearly state your motivation.<br />and efficient</h3>
             </div>
 
             {/* Property Images */}
@@ -238,9 +189,8 @@ const handleExplorePageClick = () => {
 
             <div className="content-right-text">
               <p className="side-description">
-                Egestas quisque viverra adipiscing at dictus dolor
-                vitae potenti quis. Praesent mi eu malesuada blis.
-                Consectetur ullamcorper in donec donec.
+                Real Estate provides the highest returns, 
+                the greatest values, and the least risk.
               </p>
             </div>
           </div>
@@ -248,7 +198,7 @@ const handleExplorePageClick = () => {
           {/* Bottom CTA */}
           <div className="nexium-works-footer">
             <h3>Ready to start your property journey?</h3>
-            <button className="nexium-cta-btn">
+            <button className="nexium-cta-btn" onClick={handleExploreClick}>
               Explore Properties <span className="arrow-icon">→</span>
             </button>
           </div>
