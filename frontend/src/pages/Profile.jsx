@@ -1,4 +1,4 @@
-// src/pages/Profile.jsx
+// src/pages/Profile.jsx - Professional Dashboard Style
 import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import api from '../utils/api';
@@ -14,7 +14,11 @@ import {
   FaSun, 
   FaMoon, 
   FaDesktop,
-  FaImage 
+  FaImage,
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaBell
 } from 'react-icons/fa';
 
 const Profile = () => {
@@ -23,6 +27,7 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
   const { theme, changeTheme } = useTheme();
+  const [smsAlerts, setSmsAlerts] = useState(true);
   
   // Personal Info State
   const [personalInfo, setPersonalInfo] = useState({
@@ -46,13 +51,11 @@ const Profile = () => {
   const [previewUrl, setPreviewUrl] = useState(user?.profilePicture || null);
 
   useEffect(() => {
-    // Apply theme
     if (theme === 'dark') {
       document.documentElement.classList.add('dark-mode');
     } else if (theme === 'light') {
       document.documentElement.classList.remove('dark-mode');
     } else {
-      // System preference
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       if (prefersDark) {
         document.documentElement.classList.add('dark-mode');
@@ -62,7 +65,6 @@ const Profile = () => {
     }
   }, [theme]);
 
-  // Handle Personal Info Update
   const handlePersonalInfoChange = (e) => {
     setPersonalInfo({ ...personalInfo, [e.target.name]: e.target.value });
   };
@@ -86,7 +88,6 @@ const Profile = () => {
     }
   };
 
-  // Handle Profile Picture Upload
   const handleProfilePictureChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -126,7 +127,6 @@ const Profile = () => {
     }
   };
 
-  // Handle Password Change
   const handlePasswordChange = (e) => {
     setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
   };
@@ -199,6 +199,18 @@ const Profile = () => {
     changeTheme(newTheme);
   };
 
+  const formatLastLogin = () => {
+    const now = new Date();
+    return `Last login: ${now.toLocaleDateString('en-US', { 
+      month: 'long', 
+      day: 'numeric', 
+      year: 'numeric' 
+    })} ${now.toLocaleTimeString('en-US', { 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    })}`;
+  };
+
   return (
     <>
       <Navbar />
@@ -206,12 +218,12 @@ const Profile = () => {
         <div className="profile-page">
           <div className="container">
             <div className="profile-header">
-              <h1>My Profile</h1>
-              <p>Manage your account settings and preferences</p>
+              <h1>My finance dashboard</h1>
+              <p>Welcome to xPay payment portal</p>
             </div>
 
             <div className="profile-layout">
-              {/* Sidebar */}
+              {/* Enhanced Profile Card */}
               <div className="profile-sidebar">
                 <div className="profile-avatar-section">
                   <div className="profile-avatar">
@@ -223,10 +235,49 @@ const Profile = () => {
                       </div>
                     )}
                   </div>
-                  <h3>{user?.name || 'User'}</h3>
-                  <p>{user?.email}</p>
+                  <h3>My profile</h3>
+                  <p className="last-login">{formatLastLogin()}</p>
+                  <p className="location-info">
+                    <FaMapMarkerAlt style={{ marginRight: '0.5rem' }} />
+                    Window 86 bto New York USA
+                  </p>
                 </div>
 
+                {/* Profile Information List */}
+                <div className="profile-info-list">
+                  <div className="profile-info-item">
+                    <span className="profile-info-label">{user?.name || 'User Name'}</span>
+                  </div>
+                  <div className="profile-info-item">
+                    <span className="profile-info-label">
+                      <FaPhone style={{ marginRight: '0.5rem' }} />
+                      {user?.phone || '+1-626-589-5951-1326'}
+                    </span>
+                  </div>
+                  <div className="profile-info-item">
+                    <span className="profile-info-label">
+                      <FaEnvelope style={{ marginRight: '0.5rem' }} />
+                      {user?.email || 'user@email.com'}
+                    </span>
+                  </div>
+                  
+                  <div className="sms-alert-toggle">
+                    <span className="sms-alert-label">
+                      <FaBell style={{ marginRight: '0.5rem' }} />
+                      SMS alerts activation
+                    </span>
+                    <div 
+                      className={`toggle-switch ${smsAlerts ? 'active' : ''}`}
+                      onClick={() => setSmsAlerts(!smsAlerts)}
+                    />
+                  </div>
+                  
+                  <button className="btn-save" style={{ width: '100%', marginTop: '1rem' }}>
+                    Save
+                  </button>
+                </div>
+
+                {/* Navigation */}
                 <nav className="profile-nav">
                   <button
                     className={`profile-nav-item ${activeTab === 'personal' ? 'active' : ''}`}
