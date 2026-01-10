@@ -16,7 +16,7 @@
   align-items: flex-start;
   min-height: 650px;
   overflow: hidden;
-  background: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80') center right/cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&q=80') center/cover no-repeat;
 }
 
 .hero-overlay {
@@ -25,7 +25,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to right, rgba(10, 46, 31, 0.95) 0%, rgba(10, 46, 31, 0.85) 50%, rgba(10, 46, 31, 0.4) 100%);
+  background: linear-gradient(135deg, rgba(10, 46, 31, 0.92) 0%, rgba(15, 42, 29, 0.88) 50%, rgba(10, 46, 31, 0.90) 100%);
   z-index: 0;
 }
 
@@ -445,7 +445,7 @@
   }
   
   .hero-overlay {
-    background: linear-gradient(to bottom, rgba(10, 46, 31, 0.95) 0%, rgba(10, 46, 31, 0.85) 60%, rgba(10, 46, 31, 0.5) 100%);
+    background: linear-gradient(135deg, rgba(10, 46, 31, 0.92) 0%, rgba(15, 42, 29, 0.88) 50%, rgba(10, 46, 31, 0.90) 100%);
   }
   
   .hero-sidebar {
