@@ -19,13 +19,11 @@ const Properties = () => {
     bathrooms: ''
   });
 
-  // City autocomplete state
   const [cityInput, setCityInput] = useState('');
   const [showCitySuggestions, setShowCitySuggestions] = useState(false);
   const [citySuggestions, setCitySuggestions] = useState([]);
   const cityDropdownRef = useRef(null);
 
-  // Indian cities list
   const cities = [
     'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Ahmedabad', 'Chennai', 
     'Kolkata', 'Surat', 'Pune', 'Jaipur', 'Lucknow', 'Kanpur', 'Nagpur',
@@ -168,8 +166,18 @@ const Properties = () => {
                   <p>Transaction we have<br />completed so far</p>
                 </div>
               </div>
+            </div>
 
-              {/* Search Bar */}
+            <div className='hero-sidebar'>
+              <div className='ratings-card'>
+                <p>Ratings ★ <span className='stars'>5.0</span></p>
+                <p className='rating-count'>Trusted on over 100+ reviews</p>
+              </div>
+
+              <button className='watch-video-btn'>
+                <FaPlay /> Watch Video
+              </button>
+
               <div className='search-bar-modern'>
                 <div className='search-input-group' ref={cityDropdownRef}>
                   <input
@@ -177,7 +185,7 @@ const Properties = () => {
                     value={cityInput}
                     onChange={handleCityInputChange}
                     onFocus={handleCityInputFocus}
-                    placeholder='City (like Pune, College, Baner)'
+                    placeholder="Let's find Home, Cottage, Appart"
                     className='city-search-input'
                   />
                   {showCitySuggestions && citySuggestions.length > 0 && (
@@ -194,18 +202,238 @@ const Properties = () => {
                   Search
                 </button>
               </div>
+            </div>
+          </div>
 
-              <button className='watch-video-btn'>
-                <FaPlay /> Watch Video
-              </button>
+          {/* Popular Cities Section */}
+          <div className='popular-cities-section'>
+            <h2 className='popular-cities-title'>
+              Popular <span className='highlight-yellow'>Cities</span>
+            </h2>
+            
+            <div className='cities-grid'>
+              <div className='city-card'>
+                <img 
+                  src='https://images.unsplash.com/photo-1558098329-a38eedc74e37?w=800&q=80' 
+                  alt='Bruges' 
+                  className='city-card-image'
+                />
+                <div className='city-card-overlay'>
+                  <div className='city-info'>
+                    <h3>Bruges</h3>
+                    <p>28,759 Listing Available</p>
+                  </div>
+                  <button className='view-listing-btn'>View Listing</button>
+                </div>
+              </div>
+
+              <div className='city-card'>
+                <img 
+                  src='https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80' 
+                  alt='Rome' 
+                  className='city-card-image'
+                />
+                <div className='city-card-overlay'>
+                  <div className='city-info'>
+                    <h3>Rome</h3>
+                    <p>16,759 Listing Available</p>
+                  </div>
+                  <button className='view-listing-btn'>View Listing</button>
+                </div>
+              </div>
+
+              <div className='city-card'>
+                <img 
+                  src='https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80' 
+                  alt='Paris' 
+                  className='city-card-image'
+                />
+                <div className='city-card-overlay'>
+                  <div className='city-info'>
+                    <h3>Paris</h3>
+                    <p>25,759 Listing Available</p>
+                  </div>
+                  <button className='view-listing-btn'>View Listing</button>
+                </div>
+              </div>
             </div>
 
-            <div className='hero-sidebar'>
-              <div className='ratings-card'>
-                <p>Ratings</p>
-                <div className='stars'>★ 5.0</div>
-                <p className='rating-count'>Trusted on over 100+ reviews</p>
+            <div className='view-all-cities'>
+              <button className='view-all-btn'>
+                View All
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          {/* Featured Properties Section */}
+          <div className='featured-properties-section'>
+            <h2 className='featured-properties-title'>
+              <span className='highlight-yellow'>Featured</span>
+              <span className='white-text'>Properties</span>
+            </h2>
+            
+            <div className='featured-grid'>
+              <div className='featured-property-card'>
+                <img 
+                  src='https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&q=80' 
+                  alt='A-Frame House' 
+                  className='featured-property-image'
+                />
               </div>
+
+              <div className='featured-property-card'>
+                <img 
+                  src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80' 
+                  alt='Modern Villa' 
+                  className='featured-property-image'
+                />
+              </div>
+
+              <div className='featured-property-card'>
+                <img 
+                  src='https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80' 
+                  alt='Luxury Villa' 
+                  className='featured-property-image'
+                />
+              </div>
+
+              <div className='featured-property-card'>
+                <img 
+                  src='https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80' 
+                  alt='Contemporary House' 
+                  className='featured-property-image'
+                />
+                <div className='featured-property-overlay'>
+                  <div className='featured-property-label'>
+                    Luxury House
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className='view-all-featured'>
+              <button className='view-all-featured-btn'>
+                View All
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          {/* Honored Customers Section */}
+          <div className='honored-customers-section'>
+            <h2 className='honored-customers-title'>
+              <span className='white-text'>Our </span>
+              <span className='highlight-yellow'>Honored</span>
+              <span className='highlight-yellow'>Customers</span>
+            </h2>
+            
+            <div className='customers-year-section'>
+              <div className='year-header'>
+                <h3 className='year-title'>2022</h3>
+                <div className='year-count'>
+                  3/64
+                  <div className='year-count-arrow'>↗</div>
+                </div>
+              </div>
+              
+              <div className='customers-grid'>
+                <div className='customer-card'>
+                  <img 
+                    src='https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80' 
+                    alt='Villa with Pool' 
+                    className='customer-card-image'
+                  />
+                  <div className='customer-card-overlay'>
+                    <div className='customer-info'>
+                      <img 
+                        src='https://i.pravatar.cc/150?img=12' 
+                        alt='Christopher Thomas' 
+                        className='customer-avatar'
+                      />
+                      <div className='customer-details'>
+                        <h4>Christopher Thomas</h4>
+                        <p>CEO Family Planing</p>
+                      </div>
+                    </div>
+                    <div className='customer-price'>$168k</div>
+                  </div>
+                </div>
+
+                <div className='customer-card'>
+                  <img 
+                    src='https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=800&q=80' 
+                    alt='Classic Manor' 
+                    className='customer-card-image'
+                  />
+                  <div className='customer-card-overlay'>
+                    <div className='customer-info'>
+                      <img 
+                        src='https://i.pravatar.cc/150?img=33' 
+                        alt='James Bond' 
+                        className='customer-avatar'
+                      />
+                      <div className='customer-details'>
+                        <h4>James Bond</h4>
+                        <p>CEO Family Planing</p>
+                      </div>
+                    </div>
+                    <div className='customer-price'>$146k</div>
+                  </div>
+                </div>
+
+                <div className='customer-card'>
+                  <img 
+                    src='https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80' 
+                    alt='Modern Villa' 
+                    className='customer-card-image'
+                  />
+                  <div className='customer-card-overlay'>
+                    <div className='customer-info'>
+                      <img 
+                        src='https://i.pravatar.cc/150?img=15' 
+                        alt='David Jhon' 
+                        className='customer-avatar'
+                      />
+                      <div className='customer-details'>
+                        <h4>David Jhon</h4>
+                        <p>CEO Family Planing</p>
+                      </div>
+                    </div>
+                    <div className='customer-price'>$185k</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className='year-divider'>
+              <div className='year-divider-title'>
+                2023
+                <span className='year-divider-count'>38</span>
+              </div>
+            </div>
+
+            <div className='year-divider'>
+              <div className='year-divider-title'>
+                2024
+                <span className='year-divider-count'>42</span>
+              </div>
+            </div>
+
+            <div className='view-all-customers'>
+              <button className='view-all-customers-btn'>
+                View All
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
             </div>
           </div>
 
