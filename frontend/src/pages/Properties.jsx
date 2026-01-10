@@ -4,7 +4,7 @@ import PropertyCard from '../components/PropertyCard';
 import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
 import { FaChevronDown, FaPlay } from 'react-icons/fa';
-import '../App.css';
+import './Properties.css';
 
 const Properties = () => {
   const [properties, setProperties] = useState([]);
