@@ -47,12 +47,13 @@
 }
 
 .hero-title {
-  font-size: 90px;
+  font-size: 120px;
   font-weight: 800;
   line-height: 1.05;
   margin-bottom: 0;
   color: #ffffff;
   text-transform: uppercase;
+  letter-spacing: -2px;
 }
 
 .highlight-yellow {
@@ -74,7 +75,7 @@
 }
 
 .stat-item h3 {
-  font-size: 48px;
+  font-size: 56px;
   font-weight: 700;
   color: #ffffff;
   margin: 0;
@@ -82,10 +83,10 @@
 }
 
 .stat-item p {
-  font-size: 13px;
+  font-size: 14px;
   color: #b0b0b0;
   line-height: 1.5;
-  max-width: 140px;
+  max-width: 160px;
   margin: 0;
 }
 
@@ -962,7 +963,7 @@
 /* Large Tablets and Small Desktops */
 @media (max-width: 1200px) {
   .hero-title {
-    font-size: 75px;
+    font-size: 95px;
   }
   
   .hero-stats {
@@ -970,7 +971,7 @@
   }
   
   .stat-item h3 {
-    font-size: 42px;
+    font-size: 48px;
   }
 }
 
@@ -982,7 +983,7 @@
   }
   
   .hero-title {
-    font-size: 64px;
+    font-size: 80px;
   }
   
   .hero-stats {
@@ -1049,7 +1050,7 @@
   }
   
   .hero-title {
-    font-size: 52px;
+    font-size: 64px;
   }
   
   .stat-item {
@@ -1059,11 +1060,11 @@
   }
   
   .stat-item h3 {
-    font-size: 36px;
+    font-size: 42px;
   }
   
   .stat-item p {
-    font-size: 12px;
+    font-size: 13px;
   }
   
   .search-bar-modern {
