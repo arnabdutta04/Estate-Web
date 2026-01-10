@@ -3,7 +3,8 @@ import api from '../utils/api';
 import PropertyCard from '../components/PropertyCard';
 import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
-import { FaChevronDown } from 'react-icons/fa';
+import { FaChevronDown, FaPlay } from 'react-icons/fa';
+import './Properties.css';
 
 const Properties = () => {
   const [properties, setProperties] = useState([]);
@@ -11,13 +12,11 @@ const Properties = () => {
   const [pagination, setPagination] = useState({ currentPage: 1, totalPages: 1 });
   const [filters, setFilters] = useState({
     propertyType: '',
-    listingType: '',
     city: '',
     minPrice: '',
     maxPrice: '',
     bedrooms: '',
-    bathrooms: '',
-    condition: ''
+    bathrooms: ''
   });
 
   // City autocomplete state
@@ -115,7 +114,7 @@ const Properties = () => {
     setShowCitySuggestions(false);
   };
 
-  const handleFilter = (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
     fetchProperties(filters);
   };
@@ -123,13 +122,11 @@ const Properties = () => {
   const handleReset = () => {
     const resetFilters = {
       propertyType: '',
-      listingType: '',
       city: '',
       minPrice: '',
       maxPrice: '',
       bedrooms: '',
-      bathrooms: '',
-      condition: ''
+      bathrooms: ''
     };
     setFilters(resetFilters);
     setCityInput('');
@@ -145,111 +142,158 @@ const Properties = () => {
     <>
       <Navbar />
       <PageTransition>
-        <div className='properties-page-dark'>
+        <div className='properties-page-modern'>
           {/* Hero Section */}
-          <div className='properties-hero-dark'>
-            <div className='hero-content-dark'>
-              <h1>Find Your Dream Property</h1>
-              <p className='hero-subtitle-dark'>
-                Discover exceptional homes, apartments, and investments tailored to your lifestyle—<br />
-                perfect spaces for living, working, or building your future.
-              </p>
+          <div className='properties-hero-modern'>
+            <div className='hero-overlay'></div>
+            <div className='hero-content-modern'>
+              <p className='welcome-text'>welcome to our home</p>
+              <h1 className='hero-title'>
+                Find Your <br />
+                <span className='highlight-yellow'>Dream</span> <br />
+                House
+              </h1>
 
-              {/* Search Filters */}
-              <div className='search-filters-dark'>
-                <div className='filter-group-dark' ref={cityDropdownRef}>
-                  <label>Location</label>
-                  <div className='filter-input-wrapper'>
-                    <input
-                      type='text'
-                      value={cityInput}
-                      onChange={handleCityInputChange}
-                      onFocus={handleCityInputFocus}
-                      placeholder='Search city...'
-                      className='filter-input-dark'
-                    />
-                    <FaChevronDown className='dropdown-icon' />
-                    
-                    {showCitySuggestions && citySuggestions.length > 0 && (
-                      <ul className='city-dropdown-dark'>
-                        {citySuggestions.slice(0, 8).map((city, index) => (
-                          <li key={index} onClick={() => handleCitySelect(city)}>
-                            {city}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
+              <div className='hero-stats'>
+                <div className='stat-item'>
+                  <h3>140k</h3>
+                  <p>People trust left to<br />our service</p>
                 </div>
+                <div className='stat-item'>
+                  <h3>3400</h3>
+                  <p>Property out brand<br />listing in available</p>
+                </div>
+                <div className='stat-item'>
+                  <h3>140k</h3>
+                  <p>Transaction we have<br />completed so far</p>
+                </div>
+              </div>
 
-                <div className='filter-group-dark'>
-                  <label>Category</label>
-                  <select 
-                    name='listingType'
-                    value={filters.listingType}
-                    onChange={handleFilterChange}
-                    className='filter-select-dark'
-                  >
-                    <option value=''>All Properties</option>
-                    <option value='sale'>For Sale</option>
-                    <option value='rent'>For Rent</option>
-                  </select>
+              {/* Search Bar */}
+              <div className='search-bar-modern'>
+                <div className='search-input-group' ref={cityDropdownRef}>
+                  <input
+                    type='text'
+                    value={cityInput}
+                    onChange={handleCityInputChange}
+                    onFocus={handleCityInputFocus}
+                    placeholder='City (like Pune, College, Baner)'
+                    className='city-search-input'
+                  />
+                  {showCitySuggestions && citySuggestions.length > 0 && (
+                    <ul className='city-dropdown-modern'>
+                      {citySuggestions.slice(0, 8).map((city, index) => (
+                        <li key={index} onClick={() => handleCitySelect(city)}>
+                          {city}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
+                <button className='search-btn-modern' onClick={handleSearch}>
+                  Search
+                </button>
+              </div>
 
-                <div className='filter-group-dark'>
-                  <label>Property Type</label>
-                  <select 
-                    name='propertyType'
-                    value={filters.propertyType}
-                    onChange={handleFilterChange}
-                    className='filter-select-dark'
-                  >
-                    <option value=''>All Types</option>
-                    <option value='apartment'>Apartment</option>
-                    <option value='villa'>Villa</option>
-                    <option value='house'>House</option>
-                    <option value='flat'>Flat</option>
-                    <option value='commercial'>Commercial</option>
-                  </select>
-                </div>
+              <button className='watch-video-btn'>
+                <FaPlay /> Watch Video
+              </button>
+            </div>
+
+            <div className='hero-sidebar'>
+              <div className='ratings-card'>
+                <p>Ratings</p>
+                <div className='stars'>★ 5.0</div>
+                <p className='rating-count'>Trusted on over 100+ reviews</p>
               </div>
             </div>
           </div>
 
+          {/* Filter Section */}
+          <div className='filter-section-modern'>
+            <h2 className='filter-title'>Browse Properties</h2>
+            <div className='filters-grid'>
+              <div className='filter-item'>
+                <label>Property Type</label>
+                <select 
+                  name='propertyType'
+                  value={filters.propertyType}
+                  onChange={handleFilterChange}
+                >
+                  <option value=''>All Types</option>
+                  <option value='apartment'>Apartment</option>
+                  <option value='villa'>Villa</option>
+                  <option value='house'>House</option>
+                  <option value='flat'>Flat</option>
+                  <option value='commercial'>Commercial</option>
+                </select>
+              </div>
+
+              <div className='filter-item'>
+                <label>Bedrooms</label>
+                <select 
+                  name='bedrooms'
+                  value={filters.bedrooms}
+                  onChange={handleFilterChange}
+                >
+                  <option value=''>Any</option>
+                  <option value='1'>1 BHK</option>
+                  <option value='2'>2 BHK</option>
+                  <option value='3'>3 BHK</option>
+                  <option value='4'>4+ BHK</option>
+                </select>
+              </div>
+
+              <div className='filter-item'>
+                <label>Min Price</label>
+                <input
+                  type='number'
+                  name='minPrice'
+                  value={filters.minPrice}
+                  onChange={handleFilterChange}
+                  placeholder='Min'
+                />
+              </div>
+
+              <div className='filter-item'>
+                <label>Max Price</label>
+                <input
+                  type='number'
+                  name='maxPrice'
+                  value={filters.maxPrice}
+                  onChange={handleFilterChange}
+                  placeholder='Max'
+                />
+              </div>
+
+              <button className='apply-filter-btn' onClick={handleSearch}>
+                Apply Filters
+              </button>
+              <button className='reset-filter-btn' onClick={handleReset}>
+                Reset
+              </button>
+            </div>
+          </div>
+
           {/* Properties Grid */}
-          <div className='properties-container-dark'>
+          <div className='properties-container-modern'>
             {loading ? (
-              <div className='no-results-dark'>
+              <div className='loading-state'>
+                <div className='loader'></div>
                 <h2>Loading properties...</h2>
                 <p>Please wait while we fetch the best options for you</p>
               </div>
             ) : properties.length === 0 ? (
-              <div className='no-results-dark'>
+              <div className='no-results-modern'>
                 <h2>No Properties Found</h2>
                 <p>Try adjusting your filters to discover more amazing properties</p>
-                <button 
-                  onClick={handleReset}
-                  style={{
-                    marginTop: '20px',
-                    padding: '12px 32px',
-                    background: '#c4d600',
-                    border: 'none',
-                    borderRadius: '8px',
-                    color: '#0a0a0a',
-                    fontSize: '16px',
-                    fontWeight: '600',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
-                  onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
-                >
+                <button className='reset-btn-large' onClick={handleReset}>
                   Reset Filters
                 </button>
               </div>
             ) : (
               <>
-                <div className='properties-grid-dark'>
+                <div className='properties-grid-modern'>
                   {properties.map((property, index) => (
                     <PropertyCard 
                       key={property._id} 
@@ -260,7 +304,7 @@ const Properties = () => {
                 </div>
 
                 {pagination.totalPages > 1 && (
-                  <div className='pagination-dark'>
+                  <div className='pagination-modern'>
                     {Array.from({ length: pagination.totalPages }, (_, i) => (
                       <button
                         key={i + 1}
