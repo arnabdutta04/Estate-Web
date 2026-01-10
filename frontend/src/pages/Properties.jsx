@@ -204,7 +204,109 @@ const Properties = () => {
               </div>
             </div>
           </div>
+          {/* Filter Section */}
+          <div className='filter-section-modern'>
+            <h2 className='filter-title'>Browse Properties</h2>
+            <div className='filters-grid'>
+              <div className='filter-item'>
+                <label>Property Type</label>
+                <select 
+                  name='propertyType'
+                  value={filters.propertyType}
+                  onChange={handleFilterChange}
+                >
+                  <option value=''>All Types</option>
+                  <option value='apartment'>Apartment</option>
+                  <option value='villa'>Villa</option>
+                  <option value='house'>House</option>
+                  <option value='flat'>Flat</option>
+                  <option value='commercial'>Commercial</option>
+                </select>
+              </div>
 
+              <div className='filter-item'>
+                <label>Bedrooms</label>
+                <select 
+                  name='bedrooms'
+                  value={filters.bedrooms}
+                  onChange={handleFilterChange}
+                >
+                  <option value=''>Any</option>
+                  <option value='1'>1 BHK</option>
+                  <option value='2'>2 BHK</option>
+                  <option value='3'>3 BHK</option>
+                  <option value='4'>4+ BHK</option>
+                </select>
+              </div>
+
+              <div className='filter-item'>
+                <label>Min Price</label>
+                <input
+                  type='number'
+                  name='minPrice'
+                  value={filters.minPrice}
+                  onChange={handleFilterChange}
+                  placeholder='Min'
+                />
+              </div>
+
+              <div className='filter-item'>
+                <label>Max Price</label>
+                <input
+                  type='number'
+                  name='maxPrice'
+                  value={filters.maxPrice}
+                  onChange={handleFilterChange}
+                  placeholder='Max'
+                />
+              </div>
+
+              <button className='apply-filter-btn' onClick={handleSearch}>
+                Apply Filters
+              </button>
+              <button className='reset-filter-btn' onClick={handleReset}>
+                Reset
+              </button>
+            </div>
+          </div>
+          {/* Properties Grid */}
+          <div className='properties-container-modern'>
+            {loading ? (
+              <div className='loading-state'>
+                <div className='loader'></div>
+                <h2>Loading properties...</h2>
+                <p>Please wait while we fetch the best options for you</p>
+              </div>
+            ) : properties.length === 0 ? (
+              <div className='no-results-modern'>
+                <h2>No Properties Found</h2>
+                <p>Try adjusting your filters to discover more amazing properties</p>
+                <button className='reset-btn-large' onClick={handleReset}>
+                  Reset Filters
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className='properties-grid-modern'>
+                  {properties.map((property, index) => (
+                    <PropertyCard 
+                      key={property._id} 
+                      property={property} 
+                      index={index} 
+                    />
+                  ))}
+                </div>
+                 {pagination.totalPages > 1 && (
+                  <div className='pagination-modern'>
+                    {Array.from({ length: pagination.totalPages }, (_, i) => (
+                      <button
+                        key={i + 1}
+                        onClick={() => handlePageChange(i + 1)}
+                        className={pagination.currentPage === i + 1 ? 'active' : ''}
+                      >
+                        {i + 1}
+                      </button>
+                    ))}
           {/* Popular Cities Section */}
           <div className='popular-cities-section'>
             <h2 className='popular-cities-title'>
@@ -436,113 +538,7 @@ const Properties = () => {
               </button>
             </div>
           </div>
-
-          {/* Filter Section */}
-          <div className='filter-section-modern'>
-            <h2 className='filter-title'>Browse Properties</h2>
-            <div className='filters-grid'>
-              <div className='filter-item'>
-                <label>Property Type</label>
-                <select 
-                  name='propertyType'
-                  value={filters.propertyType}
-                  onChange={handleFilterChange}
-                >
-                  <option value=''>All Types</option>
-                  <option value='apartment'>Apartment</option>
-                  <option value='villa'>Villa</option>
-                  <option value='house'>House</option>
-                  <option value='flat'>Flat</option>
-                  <option value='commercial'>Commercial</option>
-                </select>
-              </div>
-
-              <div className='filter-item'>
-                <label>Bedrooms</label>
-                <select 
-                  name='bedrooms'
-                  value={filters.bedrooms}
-                  onChange={handleFilterChange}
-                >
-                  <option value=''>Any</option>
-                  <option value='1'>1 BHK</option>
-                  <option value='2'>2 BHK</option>
-                  <option value='3'>3 BHK</option>
-                  <option value='4'>4+ BHK</option>
-                </select>
-              </div>
-
-              <div className='filter-item'>
-                <label>Min Price</label>
-                <input
-                  type='number'
-                  name='minPrice'
-                  value={filters.minPrice}
-                  onChange={handleFilterChange}
-                  placeholder='Min'
-                />
-              </div>
-
-              <div className='filter-item'>
-                <label>Max Price</label>
-                <input
-                  type='number'
-                  name='maxPrice'
-                  value={filters.maxPrice}
-                  onChange={handleFilterChange}
-                  placeholder='Max'
-                />
-              </div>
-
-              <button className='apply-filter-btn' onClick={handleSearch}>
-                Apply Filters
-              </button>
-              <button className='reset-filter-btn' onClick={handleReset}>
-                Reset
-              </button>
-            </div>
-          </div>
-
-          {/* Properties Grid */}
-          <div className='properties-container-modern'>
-            {loading ? (
-              <div className='loading-state'>
-                <div className='loader'></div>
-                <h2>Loading properties...</h2>
-                <p>Please wait while we fetch the best options for you</p>
-              </div>
-            ) : properties.length === 0 ? (
-              <div className='no-results-modern'>
-                <h2>No Properties Found</h2>
-                <p>Try adjusting your filters to discover more amazing properties</p>
-                <button className='reset-btn-large' onClick={handleReset}>
-                  Reset Filters
-                </button>
-              </div>
-            ) : (
-              <>
-                <div className='properties-grid-modern'>
-                  {properties.map((property, index) => (
-                    <PropertyCard 
-                      key={property._id} 
-                      property={property} 
-                      index={index} 
-                    />
-                  ))}
-                </div>
-
-                {pagination.totalPages > 1 && (
-                  <div className='pagination-modern'>
-                    {Array.from({ length: pagination.totalPages }, (_, i) => (
-                      <button
-                        key={i + 1}
-                        onClick={() => handlePageChange(i + 1)}
-                        className={pagination.currentPage === i + 1 ? 'active' : ''}
-                      >
-                        {i + 1}
-                      </button>
-                    ))}
-                  </div>
+           </div>
                 )}
               </>
             )}
