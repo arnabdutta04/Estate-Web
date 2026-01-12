@@ -94,18 +94,7 @@
   align-items: center;
   gap: 1rem;
 }
-/* Register Button Variant - Optional styling */
-.register-btn-glass {
-  background: transparent;
-  border: 2px solid #c4d600;
-  color: #c4d600;
-}
 
-.register-btn-glass:hover {
-  background: #c4d600;
-  color: #000;
-  border-color: #c4d600;
-}
 /* CTA Button - Yellow Green */
 .cta-btn-glass {
   background: #c4d600;
@@ -135,6 +124,30 @@
 }
 
 .cta-btn-glass:hover svg {
+  transform: translateX(3px);
+}
+
+/* Register Button - Outlined Style */
+.register-btn-glass {
+  background: transparent !important;
+  border: 2px solid #c4d600 !important;
+  color: #c4d600 !important;
+  box-shadow: 0 4px 15px rgba(196, 214, 0, 0.2) !important;
+}
+
+.register-btn-glass:hover {
+  background: #c4d600 !important;
+  color: #000 !important;
+  border-color: #c4d600 !important;
+  box-shadow: 0 6px 25px rgba(196, 214, 0, 0.5) !important;
+  transform: translateY(-2px) !important;
+}
+
+.register-btn-glass svg {
+  transition: transform 0.3s ease;
+}
+
+.register-btn-glass:hover svg {
   transform: translateX(3px);
 }
 
@@ -181,6 +194,26 @@
   border-color: #c4d600;
   color: #000;
   transform: translateY(-2px);
+}
+
+/* ================= ENSURE ALL BUTTONS ARE CLICKABLE ================= */
+.nav-link-glass,
+.cta-btn-glass,
+.register-btn-glass,
+.user-profile-glass,
+.logout-btn-glass,
+.navbar-logo-glass {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+.navbar-glass-wrapper > * {
+  pointer-events: auto;
+}
+
+.navbar-links-glass > *,
+.navbar-actions-glass > * {
+  pointer-events: auto !important;
 }
 
 /* Scrolled State */
@@ -249,7 +282,8 @@
     font-size: 0.85rem;
   }
 
-  .cta-btn-glass {
+  .cta-btn-glass,
+  .register-btn-glass {
     padding: 0.6rem 1.4rem;
     font-size: 0.85rem;
   }
@@ -269,6 +303,7 @@
   }
 
   .cta-btn-glass,
+  .register-btn-glass,
   .user-profile-glass,
   .logout-btn-glass {
     padding: 0.5rem 1rem;
@@ -289,6 +324,21 @@
   .nav-link-glass {
     font-size: 0.75rem;
     padding: 0.3rem 0;
+  }
+
+  .navbar-actions-glass {
+    gap: 0.5rem;
+  }
+  
+  .cta-btn-glass,
+  .register-btn-glass {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+  }
+  
+  .cta-btn-glass svg,
+  .register-btn-glass svg {
+    font-size: 0.7rem;
   }
 }
 
