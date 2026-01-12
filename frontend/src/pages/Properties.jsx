@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import PropertyCard from '../components/PropertyCard';
 import Navbar from "../components/Navbar";
@@ -7,6 +8,7 @@ import { FaChevronDown, FaPlay } from 'react-icons/fa';
 import './Properties.css';
 
 const Properties = () => {
+  const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState({ currentPage: 1, totalPages: 1 });
@@ -23,6 +25,7 @@ const Properties = () => {
   const [showCitySuggestions, setShowCitySuggestions] = useState(false);
   const [citySuggestions, setCitySuggestions] = useState([]);
   const cityDropdownRef = useRef(null);
+  const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
 
   const cities = [
     'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Ahmedabad', 'Chennai', 
@@ -135,139 +138,261 @@ const Properties = () => {
     fetchProperties(filters, page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
+  
   return (
     <>
       <Navbar />
       <PageTransition>
         <div className='properties-page-modern'>
-          {/* Hero Section */}
-            <div className='properties-hero-modern'>
-            <div className='hero-overlay'></div>
-                  <div className='hero-content-modern'>
-                 <p className='welcome-text'>Home / Properties</p>
-                  <h1 className='hero-title'>
-                    Find your perfect<br />
-                    investment properties
-                    </h1>
-                  <p className='hero-description'>
-                   Explore a selection of high-value real estate opportunities designed for financial growth and stability
-                 </p>
+         {/* Hero Section */}
+<div className='properties-hero-modern'>
+  <div className='hero-overlay'></div>
+  <div className='hero-content-modern'>
+    <p className='welcome-text'>Home / Properties</p>
+    <h1 className='hero-title'>
+      Find your perfect<br />
+      investment properties
+    </h1>
+    <p className='hero-description'>
+      Explore a selection of high-value real estate opportunities designed for financial growth and stability
+    </p>
   </div>
 
-  <div className='search-bar-modern'>
-    <div className='search-input-group' ref={cityDropdownRef}>
-      <input
-        type='text'
-        value={cityInput}
-        onChange={handleCityInputChange}
-        onFocus={handleCityInputFocus}
-        placeholder="Enter address"
-        className='city-search-input'
-      />
-      {showCitySuggestions && citySuggestions.length > 0 && (
-        <ul className='city-dropdown-modern'>
-          {citySuggestions.slice(0, 8).map((city, index) => (
-            <li key={index} onClick={() => handleCitySelect(city)}>
-              {city}
-            </li>
-          ))}
-        </ul>
-      )}
+  <div className='search-bar-wrapper'>
+    <div className='search-bar-modern'>
+      <div className='search-input-group' ref={cityDropdownRef}>
+        <FaHome className='home-icon' />
+        <input
+          type='text'
+          value={cityInput}
+          onChange={handleCityInputChange}
+          onFocus={handleCityInputFocus}
+          placeholder="Enter city"
+          className='city-search-input'
+        />
+        {showCitySuggestions && citySuggestions.length > 0 && (
+          <ul className='city-dropdown-modern'>
+            {citySuggestions.slice(0, 8).map((city, index) => (
+              <li key={index} onClick={() => handleCitySelect(city)}>
+                {city}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      
+      <select 
+        name='propertyType'
+        value={filters.propertyType}
+        onChange={handleFilterChange}
+        className='search-property-select'
+      >
+        <option value=''>Property type</option>
+        <option value='apartment'>Apartment</option>
+        <option value='villa'>Villa</option>
+        <option value='house'>House</option>
+        <option value='flat'>Flat</option>
+        <option value='commercial'>Commercial</option>
+      </select>
+
+      <select 
+        name='bedrooms'
+        value={filters.bedrooms}
+        onChange={handleFilterChange}
+        className='search-property-select'
+      >
+        <option value=''>Bedrooms</option>
+        <option value='1'>1 BHK</option>
+        <option value='2'>2 BHK</option>
+        <option value='3'>3 BHK</option>
+        <option value='4'>4+ BHK</option>
+      </select>
+      
+      <button className='search-btn-modern' onClick={handleSearch}>
+        Search Property
+      </button>
     </div>
-    
-    <input
-      type='text'
-      placeholder='Location'
-      className='search-location-input'
-    />
-    
-    <select className='search-property-select'>
-      <option>Property type</option>
-      <option>Apartment</option>
-      <option>Villa</option>
-      <option>House</option>
-      <option>Commercial</option>
-    </select>
-    
-    <button className='search-btn-modern' onClick={handleSearch}>
-      Search Property
+
+    <button 
+      className='advanced-search-link'
+      onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
+    >
+      <FaChevronDown className={`advanced-search-icon ${showAdvancedFilters ? 'rotate' : ''}`} />
+      {showAdvancedFilters ? 'Hide Filters' : 'Advanced Search'}
     </button>
 
-    <a href='#' className='advanced-search-link'>
-      <svg className='advanced-search-icon' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-      Advanced Search
-    </a>
-  </div>
-</div>
+    {/* Advanced Filters Dropdown */}
+    {showAdvancedFilters && (
+      <div className='advanced-filters-dropdown'>
+        <div className='advanced-filters-grid'>
+          {/* Property For */}
+          <div className='filter-item'>
+            <label>Property For</label>
+            <select 
+              name='propertyFor'
+              value={filters.propertyFor}
+              onChange={handleFilterChange}
+            >
+              <option value=''>Buy or Rent</option>
+              <option value='buy'>Buy</option>
+              <option value='rent'>Rent</option>
+            </select>
+          </div>
 
-          {/* Filter Section */}
-          <div className='filter-section-modern'>
-            <h2 className='filter-title'>Browse Properties</h2>
-            <div className='filters-grid'>
-              <div className='filter-item'>
-                <label>Property Type</label>
-                <select 
-                  name='propertyType'
-                  value={filters.propertyType}
-                  onChange={handleFilterChange}
-                >
-                  <option value=''>All Types</option>
-                  <option value='apartment'>Apartment</option>
-                  <option value='villa'>Villa</option>
-                  <option value='house'>House</option>
-                  <option value='flat'>Flat</option>
-                  <option value='commercial'>Commercial</option>
-                </select>
+          {/* Bathrooms */}
+          <div className='filter-item'>
+            <label>Bathrooms</label>
+            <select 
+              name='bathrooms'
+              value={filters.bathrooms}
+              onChange={handleFilterChange}
+            >
+              <option value=''>Any</option>
+              <option value='1'>1</option>
+              <option value='2'>2</option>
+              <option value='3'>3</option>
+              <option value='4'>4+</option>
+            </select>
+          </div>
+
+          {/* Price Range Slider */}
+          <div className='filter-item filter-item-full'>
+            <label>
+              Price Range {filters.propertyFor === 'rent' ? '(₹/month)' : '(₹)'}
+            </label>
+            <div className='price-range-display'>
+              <span className='price-value'>
+                {filters.propertyFor === 'rent' 
+                  ? `₹${filters.minPrice ? (filters.minPrice / 1000).toFixed(0) : '0'}K`
+                  : `₹${filters.minPrice ? (filters.minPrice / 100000).toFixed(0) : '0'}L`
+                }
+              </span>
+              <span className='price-separator'>-</span>
+              <span className='price-value'>
+                {filters.propertyFor === 'rent'
+                  ? `₹${filters.maxPrice ? (filters.maxPrice / 1000).toFixed(0) : '100'}K`
+                  : filters.maxPrice >= 10000000
+                    ? `₹${(filters.maxPrice / 10000000).toFixed(1)}Cr`
+                    : `₹${filters.maxPrice ? (filters.maxPrice / 100000).toFixed(0) : '500'}L`
+                }
+              </span>
+            </div>
+            
+            {/* Dual Range Slider */}
+            <div className='range-slider-container'>
+              <input
+                type='range'
+                className='range-slider range-slider-min'
+                min={filters.propertyFor === 'rent' ? '5000' : '500000'}
+                max={filters.propertyFor === 'rent' ? '100000' : '50000000'}
+                step={filters.propertyFor === 'rent' ? '1000' : '100000'}
+                value={filters.minPrice || (filters.propertyFor === 'rent' ? '5000' : '500000')}
+                onChange={(e) => {
+                  const value = parseInt(e.target.value);
+                  if (value < (filters.maxPrice || (filters.propertyFor === 'rent' ? 100000 : 50000000))) {
+                    setFilters({ ...filters, minPrice: value });
+                  }
+                }}
+              />
+              <input
+                type='range'
+                className='range-slider range-slider-max'
+                min={filters.propertyFor === 'rent' ? '5000' : '500000'}
+                max={filters.propertyFor === 'rent' ? '100000' : '50000000'}
+                step={filters.propertyFor === 'rent' ? '1000' : '100000'}
+                value={filters.maxPrice || (filters.propertyFor === 'rent' ? '100000' : '50000000')}
+                onChange={(e) => {
+                  const value = parseInt(e.target.value);
+                  if (value > (filters.minPrice || (filters.propertyFor === 'rent' ? 5000 : 500000))) {
+                    setFilters({ ...filters, maxPrice: value });
+                  }
+                }}
+              />
+              <div className='range-slider-track'>
+                <div 
+                  className='range-slider-progress'
+                  style={{
+                    left: `${((filters.minPrice || (filters.propertyFor === 'rent' ? 5000 : 500000)) - (filters.propertyFor === 'rent' ? 5000 : 500000)) / ((filters.propertyFor === 'rent' ? 100000 : 50000000) - (filters.propertyFor === 'rent' ? 5000 : 500000)) * 100}%`,
+                    right: `${100 - ((filters.maxPrice || (filters.propertyFor === 'rent' ? 100000 : 50000000)) - (filters.propertyFor === 'rent' ? 5000 : 500000)) / ((filters.propertyFor === 'rent' ? 100000 : 50000000) - (filters.propertyFor === 'rent' ? 5000 : 500000)) * 100}%`
+                  }}
+                ></div>
               </div>
+            </div>
 
-              <div className='filter-item'>
-                <label>Bedrooms</label>
-                <select 
-                  name='bedrooms'
-                  value={filters.bedrooms}
-                  onChange={handleFilterChange}
-                >
-                  <option value=''>Any</option>
-                  <option value='1'>1 BHK</option>
-                  <option value='2'>2 BHK</option>
-                  <option value='3'>3 BHK</option>
-                  <option value='4'>4+ BHK</option>
-                </select>
-              </div>
-
-              <div className='filter-item'>
-                <label>Min Price</label>
-                <input
-                  type='number'
-                  name='minPrice'
-                  value={filters.minPrice}
-                  onChange={handleFilterChange}
-                  placeholder='Min'
-                />
-              </div>
-
-              <div className='filter-item'>
-                <label>Max Price</label>
-                <input
-                  type='number'
-                  name='maxPrice'
-                  value={filters.maxPrice}
-                  onChange={handleFilterChange}
-                  placeholder='Max'
-                />
-              </div>
-
-              <button className='apply-filter-btn' onClick={handleSearch}>
-                Apply Filters
-              </button>
-              <button className='reset-filter-btn' onClick={handleReset}>
-                Reset
-              </button>
+            {/* Quick Price Options */}
+            <div className='quick-price-options'>
+              {filters.propertyFor === 'rent' ? (
+                <>
+                  <button 
+                    className={`price-option ${filters.minPrice === 5000 && filters.maxPrice === 15000 ? 'active' : ''}`}
+                    onClick={() => setFilters({ ...filters, minPrice: 5000, maxPrice: 15000 })}
+                  >
+                    ₹5K - ₹15K
+                  </button>
+                  <button 
+                    className={`price-option ${filters.minPrice === 15000 && filters.maxPrice === 30000 ? 'active' : ''}`}
+                    onClick={() => setFilters({ ...filters, minPrice: 15000, maxPrice: 30000 })}
+                  >
+                    ₹15K - ₹30K
+                  </button>
+                  <button 
+                    className={`price-option ${filters.minPrice === 30000 && filters.maxPrice === 50000 ? 'active' : ''}`}
+                    onClick={() => setFilters({ ...filters, minPrice: 30000, maxPrice: 50000 })}
+                  >
+                    ₹30K - ₹50K
+                  </button>
+                  <button 
+                    className={`price-option ${filters.minPrice === 50000 && filters.maxPrice === 100000 ? 'active' : ''}`}
+                    onClick={() => setFilters({ ...filters, minPrice: 50000, maxPrice: 100000 })}
+                  >
+                    ₹50K+
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button 
+                    className={`price-option ${filters.minPrice === 2500000 && filters.maxPrice === 5000000 ? 'active' : ''}`}
+                    onClick={() => setFilters({ ...filters, minPrice: 2500000, maxPrice: 5000000 })}
+                  >
+                    ₹25L - ₹50L
+                  </button>
+                  <button 
+                    className={`price-option ${filters.minPrice === 5000000 && filters.maxPrice === 10000000 ? 'active' : ''}`}
+                    onClick={() => setFilters({ ...filters, minPrice: 5000000, maxPrice: 10000000 })}
+                  >
+                    ₹50L - ₹1Cr
+                  </button>
+                  <button 
+                    className={`price-option ${filters.minPrice === 10000000 && filters.maxPrice === 25000000 ? 'active' : ''}`}
+                    onClick={() => setFilters({ ...filters, minPrice: 10000000, maxPrice: 25000000 })}
+                  >
+                    ₹1Cr - ₹2.5Cr
+                  </button>
+                  <button 
+                    className={`price-option ${filters.minPrice === 25000000 && filters.maxPrice === 50000000 ? 'active' : ''}`}
+                    onClick={() => setFilters({ ...filters, minPrice: 25000000, maxPrice: 50000000 })}
+                  >
+                    ₹2.5Cr+
+                  </button>
+                </>
+              )}
             </div>
           </div>
+
+          {/* Action Buttons */}
+          <div className='filter-actions'>
+            <button className='reset-filter-btn-hero' onClick={handleReset}>
+              Reset All
+            </button>
+            <button className='apply-filter-btn-hero' onClick={handleSearch}>
+              Apply Filters
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+</div>
 
           {/* Properties Grid */}
           <div className='properties-container-modern'>
@@ -378,11 +503,11 @@ const Properties = () => {
                 <div className='footer-column'>
                   <h3>Navigation</h3>
                   <ul className='footer-links'>
-                    <li>Home</li>
-                    <li>About Us</li>
+                    <li onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>Home</li>
+                    <li onClick={() => navigate('/about')} style={{ cursor: 'pointer' }}>About Us</li>
                     <li>Property</li>
                     <li>Event</li>
-                    <li>Contact Us</li>
+                    <li onClick={() => navigate('/contact')} style={{ cursor: 'pointer' }}>Contact Us</li>
                   </ul>
                 </div>
 
@@ -398,13 +523,12 @@ const Properties = () => {
                 </div>
 
                 <div className='footer-column'>
-                  <h3>Subscribe Our Newsletter</h3>
                   <div className='footer-newsletter'>
                     <p>Enter your email</p>
                     <input 
                       type='email' 
                       className='newsletter-input' 
-                      placeholder='example123@gmail.com'
+                      placeholder='Enter the email'
                     />
                     <button className='newsletter-button'>Subscribe</button>
                   </div>
@@ -420,8 +544,6 @@ const Properties = () => {
                   <span className='footer-social-icon'>f</span>
                   <span className='footer-social-icon'>𝕏</span>
                   <span className='footer-social-icon'>in</span>
-                  <span className='footer-social-icon'>📷</span>
-                  <span className='footer-social-icon'>▶</span>
                 </div>
               </div>
 
