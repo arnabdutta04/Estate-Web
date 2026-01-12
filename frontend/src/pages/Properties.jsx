@@ -148,7 +148,6 @@ const Properties = () => {
 <div className='properties-hero-modern'>
   <div className='hero-overlay'></div>
   <div className='hero-content-modern'>
-    <p className='welcome-text'>Home / Properties</p>
     <h1 className='hero-title'>
       Find your perfect<br />
       investment properties
