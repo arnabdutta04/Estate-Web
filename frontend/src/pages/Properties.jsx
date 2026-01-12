@@ -142,56 +142,66 @@ const Properties = () => {
       <PageTransition>
         <div className='properties-page-modern'>
           {/* Hero Section */}
-          <div className='properties-hero-modern'>
+            <div className='properties-hero-modern'>
             <div className='hero-overlay'></div>
-            <div className='hero-content-modern'>
-              <p className='welcome-text'>Home / Properties</p>
-              <h1 className='hero-title'>
-                Find your perfect<br />
-                investment properties
-              </h1>
-              <p style={{ fontSize: '16px', color: '#666', marginTop: '15px', maxWidth: '700px', margin: '15px auto 0' }}>
-                Explore a selection of high-value real estate opportunities designed for financial growth and stability
-              </p>
-            </div>
+                  <div className='hero-content-modern'>
+                 <p className='welcome-text'>Home / Properties</p>
+                  <h1 className='hero-title'>
+                    Find your perfect<br />
+                    investment properties
+                    </h1>
+                  <p className='hero-description'>
+                   Explore a selection of high-value real estate opportunities designed for financial growth and stability
+                 </p>
+  </div>
 
-            <div className='search-bar-modern'>
-              <div className='search-input-group' ref={cityDropdownRef}>
-                <input
-                  type='text'
-                  value={cityInput}
-                  onChange={handleCityInputChange}
-                  onFocus={handleCityInputFocus}
-                  placeholder="Enter address"
-                  className='city-search-input'
-                />
-                {showCitySuggestions && citySuggestions.length > 0 && (
-                  <ul className='city-dropdown-modern'>
-                    {citySuggestions.slice(0, 8).map((city, index) => (
-                      <li key={index} onClick={() => handleCitySelect(city)}>
-                        {city}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-              <input
-                type='text'
-                placeholder='Location'
-                className='city-search-input'
-                style={{ borderLeft: '1px solid #e0e0e0', borderRight: '1px solid #e0e0e0' }}
-              />
-              <select className='city-search-input' style={{ border: 'none' }}>
-                <option>Property type</option>
-                <option>Apartment</option>
-                <option>Villa</option>
-                <option>House</option>
-              </select>
-              <button className='search-btn-modern' onClick={handleSearch}>
-                Search Property
-              </button>
-            </div>
-          </div>
+  <div className='search-bar-modern'>
+    <div className='search-input-group' ref={cityDropdownRef}>
+      <input
+        type='text'
+        value={cityInput}
+        onChange={handleCityInputChange}
+        onFocus={handleCityInputFocus}
+        placeholder="Enter address"
+        className='city-search-input'
+      />
+      {showCitySuggestions && citySuggestions.length > 0 && (
+        <ul className='city-dropdown-modern'>
+          {citySuggestions.slice(0, 8).map((city, index) => (
+            <li key={index} onClick={() => handleCitySelect(city)}>
+              {city}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+    
+    <input
+      type='text'
+      placeholder='Location'
+      className='search-location-input'
+    />
+    
+    <select className='search-property-select'>
+      <option>Property type</option>
+      <option>Apartment</option>
+      <option>Villa</option>
+      <option>House</option>
+      <option>Commercial</option>
+    </select>
+    
+    <button className='search-btn-modern' onClick={handleSearch}>
+      Search Property
+    </button>
+
+    <a href='#' className='advanced-search-link'>
+      <svg className='advanced-search-icon' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+      Advanced Search
+    </a>
+  </div>
+</div>
 
           {/* Filter Section */}
           <div className='filter-section-modern'>

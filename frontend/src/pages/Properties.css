@@ -8,22 +8,28 @@
 }
 
 /* ============================================
-   HERO SECTION - IMAGE 1 STYLE
+   HERO SECTION - EXACT MATCH
    ============================================ */
 .properties-hero-modern {
   position: relative;
-  padding: 80px 5% 120px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 65vh;
+  min-height: 70vh;
   overflow: visible;
-  background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 50%, #e0f2f1 100%);
+  background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80') center/cover no-repeat;
 }
 
 .hero-overlay {
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(240, 240, 235, 0.85) 0%, rgba(240, 240, 235, 0.9) 100%);
+  z-index: 0;
 }
 
 .hero-content-modern {
@@ -31,35 +37,48 @@
   z-index: 1;
   max-width: 900px;
   text-align: center;
-  margin-bottom: 40px;
+  padding: 80px 5% 180px;
 }
 
 .welcome-text {
-  font-size: 13px;
+  font-size: 14px;
   text-transform: capitalize;
-  letter-spacing: 1px;
-  margin-bottom: 15px;
+  letter-spacing: 0.5px;
+  margin-bottom: 25px;
   color: #6b9c6f;
   font-weight: 500;
   display: inline-block;
   background: white;
-  padding: 8px 20px;
+  padding: 8px 18px;
   border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .hero-title {
-  font-size: 52px;
+  font-size: 56px;
   font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 20px;
+  line-height: 1.15;
+  margin-bottom: 25px;
   color: #1a1a1a;
   text-transform: none;
-  letter-spacing: -1px;
+  letter-spacing: -1.5px;
+}
+
+.hero-title br {
+  display: block;
 }
 
 .highlight-yellow {
   color: #1a1a1a;
   display: inline;
+}
+
+.hero-description {
+  font-size: 17px;
+  color: #666;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .hero-stats {
@@ -70,21 +89,22 @@
   display: none;
 }
 
-/* Search Bar - Centered Below Title */
+/* Search Bar - Floating Card Style */
 .search-bar-modern {
-  display: flex;
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr auto;
   gap: 0;
-  position: relative;
   max-width: 900px;
-  width: 100%;
+  width: 90%;
   background: white;
   border-radius: 16px;
-  overflow: visible;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-  padding: 12px;
-  margin: 0 auto;
-  margin-top: -60px;
-  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  padding: 0;
   z-index: 10;
 }
 
@@ -93,21 +113,23 @@
   flex: 1;
   display: flex;
   align-items: center;
-  gap: 12px;
+  border-right: 1px solid #e8e8e8;
 }
 
 .search-input-group::before {
   content: '🏠';
   font-size: 20px;
-  margin-left: 15px;
+  margin-left: 20px;
+  position: absolute;
+  left: 0;
+  color: #999;
 }
 
 .city-search-input {
   width: 100%;
-  padding: 16px 20px;
+  padding: 22px 20px 22px 55px;
   background: transparent;
   border: none;
-  border-right: 1px solid #e0e0e0;
   color: #333;
   font-size: 15px;
   transition: all 0.3s ease;
@@ -115,10 +137,45 @@
 
 .city-search-input::placeholder {
   color: #999;
+  font-weight: 400;
 }
 
 .city-search-input:focus {
   outline: none;
+  background: #fafafa;
+}
+
+/* Additional Input Fields */
+.search-location-input,
+.search-property-select {
+  padding: 22px 20px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid #e8e8e8;
+  color: #333;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none;
+  position: relative;
+}
+
+.search-location-input::placeholder,
+.search-property-select {
+  color: #999;
+}
+
+.search-location-input:focus,
+.search-property-select:focus {
+  outline: none;
+  background: #fafafa;
+}
+
+.search-property-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  padding-right: 45px;
 }
 
 /* City Dropdown */
@@ -133,7 +190,7 @@
   max-height: 300px;
   overflow-y: auto;
   z-index: 100;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
   list-style: none;
   padding: 8px;
 }
@@ -144,6 +201,7 @@
   border-radius: 8px;
   transition: all 0.2s ease;
   color: #333;
+  font-size: 14px;
 }
 
 .city-dropdown-modern li:hover {
@@ -152,11 +210,11 @@
 }
 
 .search-btn-modern {
-  padding: 16px 45px;
+  padding: 22px 45px;
   background: #6b9c6f;
   color: white;
   border: none;
-  border-radius: 12px;
+  border-radius: 0;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
@@ -166,8 +224,30 @@
 
 .search-btn-modern:hover {
   background: #5a8a5e;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(107, 156, 111, 0.3);
+}
+
+/* Advanced Search Link */
+.advanced-search-link {
+  position: absolute;
+  bottom: -35px;
+  right: 0;
+  font-size: 14px;
+  color: #666;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.advanced-search-link:hover {
+  color: #6b9c6f;
+}
+
+.advanced-search-icon {
+  width: 16px;
+  height: 16px;
 }
 
 .properties-hero-modern::before,
@@ -179,7 +259,7 @@
    FILTER SECTION - TOP
    ============================================ */
 .filter-section-modern {
-  padding: 60px 5% 40px;
+  padding: 100px 5% 40px;
   background: white;
   border-bottom: 1px solid #f0f0f0;
 }
