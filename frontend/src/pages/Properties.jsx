@@ -493,7 +493,7 @@ const Properties = () => {
                     <svg className='footer-logo-icon' viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                       <path d="M32 8L8 24v24h16V32h16v16h16V24L32 8z" fill="currentColor"/>
                     </svg>
-                    <span className='footer-logo-text'>Keyly</span>
+                    <span className='footer-logo-text'>PROPIFY</span>
                   </div>
                   <p className='footer-description'>
                     Helping you discover and secure your dream property with ease, expertise, and unmatched service in Dubai.
@@ -548,7 +548,7 @@ const Properties = () => {
               </div>
 
               <div className='footer-copyright'>
-                ©2025 Keyly, Designed by Ogndoo
+                ©2026 PROPIFY, Designed by Arnab
               </div>
             </div>
           </div>
