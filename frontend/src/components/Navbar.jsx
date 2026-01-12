@@ -37,16 +37,6 @@ const Navbar = () => {
     navigate("/");
   };
 
-  // Handle navigation to protected routes
-  const handleBrokerClick = () => {
-    if (!user) {
-      // Redirect to login if not authenticated
-      navigate("/login");
-    } else {
-      navigate("/brokers");
-    }
-  };
-
   const isActive = (path) => location.pathname === path;
 
   return (
@@ -74,8 +64,8 @@ const Navbar = () => {
           </button>
 
           <button
-            className={`nav-link-glass ${isActive("/Brokers") ? "active" : ""}`}
-            onClick={handleBrokerClick}
+            className={`nav-link-glass ${isActive("/brokers") ? "active" : ""}`}
+            onClick={() => navigate("/brokers")}
           >
             Broker
           </button>
