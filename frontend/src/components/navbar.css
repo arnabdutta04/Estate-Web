@@ -94,7 +94,18 @@
   align-items: center;
   gap: 1rem;
 }
+/* Register Button Variant - Optional styling */
+.register-btn-glass {
+  background: transparent;
+  border: 2px solid #c4d600;
+  color: #c4d600;
+}
 
+.register-btn-glass:hover {
+  background: #c4d600;
+  color: #000;
+  border-color: #c4d600;
+}
 /* CTA Button - Yellow Green */
 .cta-btn-glass {
   background: #c4d600;

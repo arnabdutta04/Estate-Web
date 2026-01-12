@@ -5,7 +5,8 @@ import "./navbar.css";
 import {
   FaUser,
   FaSignOutAlt,
-  FaArrowRight
+  FaArrowRight,
+  FaUserPlus
 } from "react-icons/fa";
 
 const Navbar = () => {
@@ -36,10 +37,20 @@ const Navbar = () => {
     navigate("/");
   };
 
+  // Handle navigation to protected routes
+  const handleBrokerClick = () => {
+    if (!user) {
+      // Redirect to login if not authenticated
+      navigate("/login");
+    } else {
+      navigate("/brokers");
+    }
+  };
+
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="navbar-glass-modern">
+    <nav className={`navbar-glass-modern ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-glass-wrapper">
         {/* Logo Section */}
         <div className="navbar-logo-glass" onClick={() => navigate("/")}>
@@ -64,7 +75,7 @@ const Navbar = () => {
 
           <button
             className={`nav-link-glass ${isActive("/brokers") ? "active" : ""}`}
-            onClick={() => navigate("/brokers")}
+            onClick={handleBrokerClick}
           >
             Broker
           </button>
@@ -73,12 +84,20 @@ const Navbar = () => {
         {/* User / Auth Section */}
         <div className="navbar-actions-glass">
           {!loading && !user ? (
-            <button
-              className="cta-btn-glass"
-              onClick={() => navigate("/login")}
-            >
-              Login <FaArrowRight />
-            </button>
+            <>
+              <button
+                className="cta-btn-glass"
+                onClick={() => navigate("/login")}
+              >
+                Login <FaArrowRight />
+              </button>
+              <button
+                className="cta-btn-glass register-btn-glass"
+                onClick={() => navigate("/register")}
+              >
+                Register <FaUserPlus />
+              </button>
+            </>
           ) : !loading && user ? (
             <>
               <button
