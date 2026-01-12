@@ -4,7 +4,6 @@
   background: #ffffff;
   min-height: 100vh;
   color: #1a1a1a;
-  padding-top: 80px;
 }
 
 /* ============================================
@@ -773,10 +772,6 @@
 
 /* Mobile */
 @media (max-width: 768px) {
-  .properties-page-modern {
-    padding-top: 60px;
-  }
-
   .properties-hero-modern {
     padding: 60px 5% 100px;
     min-height: 50vh;
