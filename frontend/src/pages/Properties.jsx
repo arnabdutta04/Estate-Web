@@ -468,8 +468,24 @@ const Properties = () => {
               </>
             )}
           </div>
-          <section className="honored-customers-section">
-  <div className="honored-customers-container">
+         
+
+          {/* CTA Section - Orange */}
+          <div className='cta-section-orange'>
+            <div className='cta-content-wrapper'>
+              <svg className='cta-icon' viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <path d="M32 8L8 24v24h16V32h16v16h16V24L32 8z" fill="currentColor"/>
+              </svg>
+              <div className='cta-text'>
+                Find Your Home 
+                <span className='cta-arrow'>→</span>
+                <span className='cta-button-text'>Get Started</span>
+              </div>
+            </div>
+          </div>
+          {/* Honored Customers */}
+           <section className="honored-customers-section">
+              <div className="honored-customers-container">
     <h1 className="honored-customers-title">
       Our <span className="highlight">Honored Customers</span>
     </h1>
@@ -538,20 +554,6 @@ const Properties = () => {
     </button>
   </div>
 </section>
-          {/* CTA Section - Orange */}
-          <div className='cta-section-orange'>
-            <div className='cta-content-wrapper'>
-              <svg className='cta-icon' viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <path d="M32 8L8 24v24h16V32h16v16h16V24L32 8z" fill="currentColor"/>
-              </svg>
-              <div className='cta-text'>
-                Find Your Home 
-                <span className='cta-arrow'>→</span>
-                <span className='cta-button-text'>Get Started</span>
-              </div>
-            </div>
-          </div>
-
           {/* Footer Section - Dark */}
           <div className='footer-section-dark'>
             <div className='footer-container'>
