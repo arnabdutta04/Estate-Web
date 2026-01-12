@@ -4,7 +4,7 @@ import api from '../utils/api';
 import PropertyCard from '../components/PropertyCard';
 import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
-import { FaChevronDown, FaPlay } from 'react-icons/fa';
+import { FaChevronDown, FaHome } from 'react-icons/fa';
 import './Properties.css';
 
 const Properties = () => {
@@ -127,7 +127,8 @@ const Properties = () => {
       minPrice: '',
       maxPrice: '',
       bedrooms: '',
-      bathrooms: ''
+      bathrooms: '',
+      propertyFor: ''
     };
     setFilters(resetFilters);
     setCityInput('');
@@ -136,7 +137,6 @@ const Properties = () => {
 
   const handlePageChange = (page) => {
     fetchProperties(filters, page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   
   return (
