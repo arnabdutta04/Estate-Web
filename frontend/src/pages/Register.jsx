@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaUser, FaEnvelope, FaPhone, FaLock, FaUserTag } from "react-icons/fa";
 import "./Auth.css";
 
 const Register = () => {
@@ -52,37 +52,44 @@ const Register = () => {
         </button>
 
         <div className="auth-modal-card">
-          <h1 className="auth-modal-title">Create Your Account</h1>
+          <h1 className="auth-modal-title">USER REGISTRATION</h1>
 
           {error && <div className="auth-modal-error">{error}</div>}
 
           <form onSubmit={handleSubmit} className="auth-modal-form">
             <div className="auth-form-group">
-              <label>Full Name</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Enter your full name"
-                required
-              />
+              <div className="auth-input-container">
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Full Name"
+                  required
+                />
+                <div className="auth-input-icon">
+                  <FaUser />
+                </div>
+              </div>
             </div>
 
             <div className="auth-form-group">
-              <label>Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Enter your email"
-                required
-              />
+              <div className="auth-input-container">
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Email Address"
+                  required
+                />
+                <div className="auth-input-icon">
+                  <FaEnvelope />
+                </div>
+              </div>
             </div>
 
             <div className="auth-form-group">
-              <label>Phone Number</label>
               <div className="phone-input-wrapper">
                 <select 
                   className="country-select"
@@ -96,48 +103,61 @@ const Register = () => {
                   <option value="+86">CN +86</option>
                   <option value="+81">JP +81</option>
                 </select>
-                <input
-                  type="tel"
-                  name="phone"
-                  className="phone-number-input"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="Enter your phone number"
-                  pattern="[0-9]{10}"
-                  maxLength="10"
-                  required
-                />
+                <div className="auth-input-container" style={{ flex: 1 }}>
+                  <input
+                    type="tel"
+                    name="phone"
+                    className="phone-number-input"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="Phone Number"
+                    pattern="[0-9]{10}"
+                    maxLength="10"
+                    required
+                  />
+                  <div className="auth-input-icon">
+                    <FaPhone />
+                  </div>
+                </div>
               </div>
             </div>
 
             <div className="auth-form-group">
-              <label>Password</label>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Create a strong password"
-                minLength="6"
-                required
-              />
+              <div className="auth-input-container">
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="Password (min 6 characters)"
+                  minLength="6"
+                  required
+                />
+                <div className="auth-input-icon">
+                  <FaLock />
+                </div>
+              </div>
             </div>
 
             <div className="auth-form-group">
-              <label>Register as</label>
-              <select
-                name="role"
-                value={formData.role}
-                onChange={handleChange}
-                required
-              >
-                <option value="customer">Customer</option>
-                <option value="broker">Broker</option>
-              </select>
+              <div className="auth-input-container">
+                <select
+                  name="role"
+                  value={formData.role}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="customer">Register as Customer</option>
+                  <option value="broker">Register as Broker</option>
+                </select>
+                <div className="auth-input-icon">
+                  <FaUserTag />
+                </div>
+              </div>
             </div>
 
             <button type="submit" className="auth-modal-submit" disabled={loading}>
-              {loading ? "Creating Account..." : "Register"}
+              {loading ? "CREATING ACCOUNT..." : "REGISTER"}
             </button>
           </form>
 

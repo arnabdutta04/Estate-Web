@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaUser, FaLock } from "react-icons/fa";
 import "./Auth.css";
 
 const Login = () => {
@@ -46,37 +46,45 @@ const Login = () => {
         </button>
 
         <div className="auth-modal-card">
-          <h1 className="auth-modal-title">Login to Your Account</h1>
+          <h1 className="auth-modal-title">USER LOGIN</h1>
 
           {error && <div className="auth-modal-error">{error}</div>}
 
           <form onSubmit={handleSubmit} className="auth-modal-form">
             <div className="auth-form-group">
-              <label>Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Enter your email"
-                required
-              />
+              <div className="auth-input-container">
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Email"
+                  required
+                />
+                <div className="auth-input-icon">
+                  <FaUser />
+                </div>
+              </div>
             </div>
 
             <div className="auth-form-group">
-              <label>Password</label>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Enter your password"
-                required
-              />
+              <div className="auth-input-container">
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="Password"
+                  required
+                />
+                <div className="auth-input-icon">
+                  <FaLock />
+                </div>
+              </div>
             </div>
 
             <button type="submit" className="auth-modal-submit" disabled={loading}>
-              {loading ? "Logging in..." : "Login"}
+              {loading ? "LOGGING IN..." : "LOGIN"}
             </button>
           </form>
 

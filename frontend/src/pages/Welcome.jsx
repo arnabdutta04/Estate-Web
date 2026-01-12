@@ -494,6 +494,83 @@ const handleExplorePageClick = () => {
           </div>
         </div>
       </section>
+      {/* ================= TESTIMONIALS SECTION ================= */}
+<section className="testimonials-section">
+  <div className="testimonials-container">
+    {/* Header */}
+    <div className="testimonials-header">
+      <h2 className="testimonials-title">
+        What our clients say about us
+      </h2>
+      <div className="testimonials-stats">
+        <div className="client-avatars">
+          <img 
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" 
+            alt="Client" 
+            className="client-avatar"
+          />
+          <img 
+            src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100" 
+            alt="Client" 
+            className="client-avatar"
+          />
+          <img 
+            src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100" 
+            alt="Client" 
+            className="client-avatar"
+          />
+          <img 
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" 
+            alt="Client" 
+            className="client-avatar"
+          />
+        </div>
+        <p className="testimonials-count">
+          More than <strong>500+</strong><br />Client Reviews
+        </p>
+      </div>
+    </div>
+
+    {/* Slider */}
+    <div className="testimonials-slider">
+      <button className="testimonial-nav prev">
+        <FaArrowRight style={{ transform: 'rotate(180deg)' }} />
+      </button>
+
+      <div className="testimonial-image">
+        <img 
+          src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400" 
+          alt="Sajibur Rahman" 
+        />
+      </div>
+
+      <div className="testimonial-content">
+        <div className="quote-icon">"</div>
+        <p className="testimonial-text">
+          Working with this team was a pleasure. They understood our vision and helped 
+          us find a property that exceeded our expectations. We couldn't have done it 
+          without them!
+        </p>
+        <div className="testimonial-author">
+          <div className="author-name">Sajibur Rahman</div>
+          <div className="author-role">UI UX Designer</div>
+        </div>
+
+        {/* Dots */}
+        <div className="testimonials-dots">
+          <span className="dot active"></span>
+          <span className="dot"></span>
+          <span className="dot"></span>
+          <span className="dot"></span>
+        </div>
+      </div>
+
+      <button className="testimonial-nav next">
+        <FaArrowRight />
+      </button>
+    </div>
+  </div>
+</section>
       <ContactSection />
     </div>
   );

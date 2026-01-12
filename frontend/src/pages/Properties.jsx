@@ -269,44 +269,8 @@ const Properties = () => {
               </button>
             </div>
           </div>
-          {/* Properties Grid */}
-          <div className='properties-container-modern'>
-            {loading ? (
-              <div className='loading-state'>
-                <div className='loader'></div>
-                <h2>Loading properties...</h2>
-                <p>Please wait while we fetch the best options for you</p>
-              </div>
-            ) : properties.length === 0 ? (
-              <div className='no-results-modern'>
-                <h2>No Properties Found</h2>
-                <p>Try adjusting your filters to discover more amazing properties</p>
-                <button className='reset-btn-large' onClick={handleReset}>
-                  Reset Filters
-                </button>
-              </div>
-            ) : (
-              <>
-                <div className='properties-grid-modern'>
-                  {properties.map((property, index) => (
-                    <PropertyCard 
-                      key={property._id} 
-                      property={property} 
-                      index={index} 
-                    />
-                  ))}
-                </div>
-                 {pagination.totalPages > 1 && (
-                  <div className='pagination-modern'>
-                    {Array.from({ length: pagination.totalPages }, (_, i) => (
-                      <button
-                        key={i + 1}
-                        onClick={() => handlePageChange(i + 1)}
-                        className={pagination.currentPage === i + 1 ? 'active' : ''}
-                      >
-                        {i + 1}
-                      </button>
-                    ))}
+
+
           {/* Popular Cities Section */}
           <div className='popular-cities-section'>
             <h2 className='popular-cities-title'>
@@ -538,12 +502,203 @@ const Properties = () => {
               </button>
             </div>
           </div>
-           </div>
+
+          {/* Filter Section */}
+          <div className='filter-section-modern'>
+            <h2 className='filter-title'>Browse Properties</h2>
+            <div className='filters-grid'>
+              <div className='filter-item'>
+                <label>Property Type</label>
+                <select 
+                  name='propertyType'
+                  value={filters.propertyType}
+                  onChange={handleFilterChange}
+                >
+                  <option value=''>All Types</option>
+                  <option value='apartment'>Apartment</option>
+                  <option value='villa'>Villa</option>
+                  <option value='house'>House</option>
+                  <option value='flat'>Flat</option>
+                  <option value='commercial'>Commercial</option>
+                </select>
+              </div>
+
+              <div className='filter-item'>
+                <label>Bedrooms</label>
+                <select 
+                  name='bedrooms'
+                  value={filters.bedrooms}
+                  onChange={handleFilterChange}
+                >
+                  <option value=''>Any</option>
+                  <option value='1'>1 BHK</option>
+                  <option value='2'>2 BHK</option>
+                  <option value='3'>3 BHK</option>
+                  <option value='4'>4+ BHK</option>
+                </select>
+              </div>
+
+              <div className='filter-item'>
+                <label>Min Price</label>
+                <input
+                  type='number'
+                  name='minPrice'
+                  value={filters.minPrice}
+                  onChange={handleFilterChange}
+                  placeholder='Min'
+                />
+              </div>
+
+              <div className='filter-item'>
+                <label>Max Price</label>
+                <input
+                  type='number'
+                  name='maxPrice'
+                  value={filters.maxPrice}
+                  onChange={handleFilterChange}
+                  placeholder='Max'
+                />
+              </div>
+
+              <button className='apply-filter-btn' onClick={handleSearch}>
+                Apply Filters
+              </button>
+              <button className='reset-filter-btn' onClick={handleReset}>
+                Reset
+              </button>
+            </div>
+          </div>
+
+          {/* Properties Grid */}
+          <div className='properties-container-modern'>
+            {loading ? (
+              <div className='loading-state'>
+                <div className='loader'></div>
+                <h2>Loading properties...</h2>
+                <p>Please wait while we fetch the best options for you</p>
+              </div>
+            ) : properties.length === 0 ? (
+              <div className='no-results-modern'>
+                <h2>No Properties Found</h2>
+                <p>Try adjusting your filters to discover more amazing properties</p>
+                <button className='reset-btn-large' onClick={handleReset}>
+                  Reset Filters
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className='properties-grid-modern'>
+                  {properties.map((property, index) => (
+                    <PropertyCard 
+                      key={property._id} 
+                      property={property} 
+                      index={index} 
+                    />
+                  ))}
+                </div>
+
+                {pagination.totalPages > 1 && (
+                  <div className='pagination-modern'>
+                    {Array.from({ length: pagination.totalPages }, (_, i) => (
+                      <button
+                        key={i + 1}
+                        onClick={() => handlePageChange(i + 1)}
+                        className={pagination.currentPage === i + 1 ? 'active' : ''}
+                      >
+                        {i + 1}
+                      </button>
+                    ))}
+                  </div>
                 )}
               </>
             )}
           </div>
         </div>
+        {/* CTA Section - Orange */}
+<div className='cta-section-orange'>
+  <div className='cta-content-wrapper'>
+    <svg className='cta-icon' viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <path d="M32 8L8 24v24h16V32h16v16h16V24L32 8z" fill="currentColor"/>
+    </svg>
+    <div className='cta-text'>
+      Find Your Home 
+      <span className='cta-arrow'>→</span>
+      <span className='cta-button-text'>Get Started</span>
+    </div>
+  </div>
+</div>
+
+{/* Footer Section - Dark */}
+<div className='footer-section-dark'>
+  <div className='footer-container'>
+    <div className='footer-top'>
+      <div className='footer-brand'>
+        <div className='footer-logo'>
+          <svg className='footer-logo-icon' viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 8L8 24v24h16V32h16v16h16V24L32 8z" fill="currentColor"/>
+          </svg>
+          <span className='footer-logo-text'>Keyly</span>
+        </div>
+        <p className='footer-description'>
+          Helping you discover and secure your dream property with ease, expertise, and unmatched service in Dubai.
+        </p>
+      </div>
+
+      <div className='footer-column'>
+        <h3>Navigation</h3>
+        <ul className='footer-links'>
+          <li onClick={() => navigate('/')}>Home</li>
+          <li>About Us</li>
+          <li>Property</li>
+          <li>Event</li>
+          <li>Contact Us</li>
+        </ul>
+      </div>
+
+      <div className='footer-column'>
+        <h3>Resource</h3>
+        <ul className='footer-links'>
+          <li>Blog</li>
+          <li>Blog Details</li>
+          <li>Property Details</li>
+          <li>FAQs</li>
+          <li>Reviews</li>
+        </ul>
+      </div>
+
+      <div className='footer-column'>
+        <h3>Subscribe Our Newsletter</h3>
+        <div className='footer-newsletter'>
+          <p>Enter your email</p>
+          <input 
+            type='email' 
+            className='newsletter-input' 
+            placeholder='example123@gmail.com'
+          />
+          <button className='newsletter-button'>Subscribe</button>
+        </div>
+      </div>
+    </div>
+
+    <div className='footer-bottom'>
+      <ul className='footer-links-bottom'>
+        <li>Privacy Policy</li>
+        <li>Help Center</li>
+      </ul>
+      <div className='footer-social'>
+        <span className='footer-social-icon'>f</span>
+        <span className='footer-social-icon'>𝕏</span>
+        <span className='footer-social-icon'>in</span>
+        <span className='footer-social-icon'>📷</span>
+        <span className='footer-social-icon'>▶</span>
+      </div>
+    </div>
+
+    <div className='footer-copyright'>
+      ©2025 Keyly, Designed by <a href='#'>Ogndoo</a>
+    </div>
+  </div>
+</div>
       </PageTransition>
     </>
   );
