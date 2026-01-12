@@ -616,7 +616,172 @@
 .honored-customers-section {
   display: none;
 }
+.honored-customers-section {
+  background-color: #0a2f2f;
+  padding: 80px 20px;
+  color: white;
+}
 
+.honored-customers-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.honored-customers-title {
+  font-size: 72px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 60px;
+  color: white;
+}
+
+.honored-customers-title .highlight {
+  color: #f4d03f;
+}
+
+.year-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 40px 0;
+}
+
+.year-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.year {
+  font-size: 32px;
+  font-weight: 600;
+  color: white;
+}
+
+.count {
+  font-size: 24px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.count-only {
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 2px solid white;
+  border-radius: 50%;
+  font-size: 18px;
+}
+
+.customers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.customer-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.customer-card:hover {
+  transform: translateY(-5px);
+}
+
+.property-image {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+.customer-info {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  gap: 15px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.customer-details {
+  flex: 1;
+}
+
+.customer-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: white;
+}
+
+.customer-role {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.amount {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+}
+
+.view-all-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 60px auto 0;
+  padding: 15px 40px;
+  background-color: transparent;
+  color: #f4d03f;
+  border: 2px solid #f4d03f;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-all-btn:hover {
+  background-color: #f4d03f;
+  color: #0a2f2f;
+}
+
+.view-all-btn .arrow {
+  border-color: currentColor;
+}
+
+@media (max-width: 768px) {
+  .honored-customers-title {
+    font-size: 48px;
+  }
+
+  .customers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .year-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+}
 /* ============================================
    CTA SECTION - ORANGE GRADIENT (IMAGE 4)
    ============================================ */

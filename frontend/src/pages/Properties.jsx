@@ -469,7 +469,76 @@ const Properties = () => {
               </>
             )}
           </div>
+          <section className="honored-customers-section">
+  <div className="honored-customers-container">
+    <h1 className="honored-customers-title">
+      Our <span className="highlight">Honored Customers</span>
+    </h1>
 
+    <div className="year-section">
+      <div className="year-header">
+        <h2 className="year">2022</h2>
+        <span className="count">3/64 <span className="arrow">↗</span></span>
+      </div>
+      
+      <div className="customers-grid">
+        <div className="customer-card">
+          <img src="/path-to-villa-image.jpg" alt="Villa" className="property-image" />
+          <div className="customer-info">
+            <img src="/path-to-avatar.jpg" alt="Christopher Thomas" className="avatar" />
+            <div className="customer-details">
+              <h3 className="customer-name">Christopher Thomas</h3>
+              <p className="customer-role">CEO Family Planing</p>
+            </div>
+            <span className="amount">$168k</span>
+          </div>
+        </div>
+
+        <div className="customer-card">
+          <img src="/path-to-mansion-image.jpg" alt="Mansion" className="property-image" />
+          <div className="customer-info">
+            <img src="/path-to-avatar2.jpg" alt="James Bond" className="avatar" />
+            <div className="customer-details">
+              <h3 className="customer-name">James Bond</h3>
+              <p className="customer-role">CEO Family Planing</p>
+            </div>
+            <span className="amount">$146k</span>
+          </div>
+        </div>
+
+        <div className="customer-card">
+          <img src="/path-to-modern-house-image.jpg" alt="Modern House" className="property-image" />
+          <div className="customer-info">
+            <img src="/path-to-avatar3.jpg" alt="David Jhon" className="avatar" />
+            <div className="customer-details">
+              <h3 className="customer-name">David Jhon</h3>
+              <p className="customer-role">CEO Family Planing</p>
+            </div>
+            <span className="amount">$185k</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div className="year-section">
+      <div className="year-header">
+        <h2 className="year">2023</h2>
+        <span className="count-only">38</span>
+      </div>
+    </div>
+
+    <div className="year-section">
+      <div className="year-header">
+        <h2 className="year">2024</h2>
+        <span className="count-only">42</span>
+      </div>
+    </div>
+
+    <button className="view-all-btn">
+      View All <span className="arrow">↗</span>
+    </button>
+  </div>
+</section>
           {/* CTA Section - Orange */}
           <div className='cta-section-orange'>
             <div className='cta-content-wrapper'>
