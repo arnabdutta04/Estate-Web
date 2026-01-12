@@ -26,15 +26,12 @@ const Welcome = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
-  // Updated: Allow all users to view properties (no auth check)
- // PROTECTED - Requires login
+// PROTECTED - Requires login
 const handleExploreClick = () => {
-  const token = localStorage.getItem('authToken');
-  
-  if (token) {
+  if (user) {
     navigate('/properties');
   } else {
-    navigate('/login', { state: { from: '/properties' } }); // Pass redirect info
+    navigate('/login', { state: { from: '/properties' } });
   }
 };
 
@@ -43,7 +40,7 @@ const handlePropertyTypeClick = (propertyType) => {
   if (user) {
     navigate("/properties", { state: { filter: propertyType } });
   } else {
-    navigate("/login");
+    navigate("/login", { state: { from: '/properties' } });
   }
 };
 
