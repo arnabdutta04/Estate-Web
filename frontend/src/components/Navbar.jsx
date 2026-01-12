@@ -87,13 +87,13 @@ const Navbar = () => {
             <>
               <button
                 className="cta-btn-glass"
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/Login")}
               >
                 Login <FaArrowRight />
               </button>
               <button
                 className="cta-btn-glass register-btn-glass"
-                onClick={() => navigate("/register")}
+                onClick={() => navigate("/Register")}
               >
                 Register <FaUserPlus />
               </button>
