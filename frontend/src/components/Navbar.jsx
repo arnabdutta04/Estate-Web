@@ -74,7 +74,7 @@ const Navbar = () => {
           </button>
 
           <button
-            className={`nav-link-glass ${isActive("/brokers") ? "active" : ""}`}
+            className={`nav-link-glass ${isActive("/Brokers") ? "active" : ""}`}
             onClick={handleBrokerClick}
           >
             Broker
