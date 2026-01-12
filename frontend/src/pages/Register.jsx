@@ -115,9 +115,6 @@ const Register = () => {
                     maxLength="10"
                     required
                   />
-                  <div className="auth-input-icon">
-                    <FaPhone />
-                  </div>
                 </div>
               </div>
             </div>
