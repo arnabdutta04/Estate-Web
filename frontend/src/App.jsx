@@ -59,8 +59,19 @@ function AppContent() {
         />
 
         {/* AUTH - Render as modals over Welcome page */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Welcome />} />
+  <Route path="/login" element={
+    <>
+      <Welcome />
+      <Login />
+    </>
+  } />
+        <Route path="/register" element={
+    <>
+      <Welcome />
+      <Register />
+    </>
+  } />
       </Routes>
     </>
   );
