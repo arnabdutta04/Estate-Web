@@ -533,14 +533,10 @@ const handleExplorePageClick = () => {
 
     {/* Slider */}
     <div className="testimonials-slider">
-      <button className="testimonial-nav prev">
-        <FaArrowRight style={{ transform: 'rotate(180deg)' }} />
-      </button>
-
       <div className="testimonial-image">
         <img 
           src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400" 
-          alt="Sajibur Rahman" 
+          alt="Arnab Dutta" 
         />
       </div>
 
@@ -552,7 +548,7 @@ const handleExplorePageClick = () => {
           without them!
         </p>
         <div className="testimonial-author">
-          <div className="author-name">Sajibur Rahman</div>
+          <div className="author-name">Arnab Dutta</div>
           <div className="author-role">UI UX Designer</div>
         </div>
 
@@ -564,10 +560,6 @@ const handleExplorePageClick = () => {
           <span className="dot"></span>
         </div>
       </div>
-
-      <button className="testimonial-nav next">
-        <FaArrowRight />
-      </button>
     </div>
   </div>
 </section>
