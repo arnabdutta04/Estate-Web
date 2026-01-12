@@ -145,360 +145,50 @@ const Properties = () => {
           <div className='properties-hero-modern'>
             <div className='hero-overlay'></div>
             <div className='hero-content-modern'>
-              <p className='welcome-text'>welcome to our home</p>
+              <p className='welcome-text'>Home / Properties</p>
               <h1 className='hero-title'>
-                Find Your <br />
-                <span className='highlight-yellow'>Dream</span> <br />
-                House
+                Find your perfect<br />
+                investment properties
               </h1>
-
-              <div className='hero-stats'>
-                <div className='stat-item'>
-                  <h3>140k</h3>
-                  <p>People trust left to<br />our service</p>
-                </div>
-                <div className='stat-item'>
-                  <h3>3400</h3>
-                  <p>Property out brand<br />listing in available</p>
-                </div>
-                <div className='stat-item'>
-                  <h3>140k</h3>
-                  <p>Transaction we have<br />completed so far</p>
-                </div>
-              </div>
+              <p style={{ fontSize: '16px', color: '#666', marginTop: '15px', maxWidth: '700px', margin: '15px auto 0' }}>
+                Explore a selection of high-value real estate opportunities designed for financial growth and stability
+              </p>
             </div>
 
-            <div className='hero-sidebar'>
-              <div className='ratings-card'>
-                <p>Ratings ★ <span className='stars'>5.0</span></p>
-                <p className='rating-count'>Trusted on over 100+ reviews</p>
-              </div>
-
-              <button className='watch-video-btn'>
-                <FaPlay /> Watch Video
-              </button>
-
-              <div className='search-bar-modern'>
-                <div className='search-input-group' ref={cityDropdownRef}>
-                  <input
-                    type='text'
-                    value={cityInput}
-                    onChange={handleCityInputChange}
-                    onFocus={handleCityInputFocus}
-                    placeholder="Let's find Home, Cottage, Appart"
-                    className='city-search-input'
-                  />
-                  {showCitySuggestions && citySuggestions.length > 0 && (
-                    <ul className='city-dropdown-modern'>
-                      {citySuggestions.slice(0, 8).map((city, index) => (
-                        <li key={index} onClick={() => handleCitySelect(city)}>
-                          {city}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-                <button className='search-btn-modern' onClick={handleSearch}>
-                  Search
-                </button>
-              </div>
-            </div>
-          </div>
-          {/* Filter Section */}
-          <div className='filter-section-modern'>
-            <h2 className='filter-title'>Browse Properties</h2>
-            <div className='filters-grid'>
-              <div className='filter-item'>
-                <label>Property Type</label>
-                <select 
-                  name='propertyType'
-                  value={filters.propertyType}
-                  onChange={handleFilterChange}
-                >
-                  <option value=''>All Types</option>
-                  <option value='apartment'>Apartment</option>
-                  <option value='villa'>Villa</option>
-                  <option value='house'>House</option>
-                  <option value='flat'>Flat</option>
-                  <option value='commercial'>Commercial</option>
-                </select>
-              </div>
-
-              <div className='filter-item'>
-                <label>Bedrooms</label>
-                <select 
-                  name='bedrooms'
-                  value={filters.bedrooms}
-                  onChange={handleFilterChange}
-                >
-                  <option value=''>Any</option>
-                  <option value='1'>1 BHK</option>
-                  <option value='2'>2 BHK</option>
-                  <option value='3'>3 BHK</option>
-                  <option value='4'>4+ BHK</option>
-                </select>
-              </div>
-
-              <div className='filter-item'>
-                <label>Min Price</label>
+            <div className='search-bar-modern'>
+              <div className='search-input-group' ref={cityDropdownRef}>
                 <input
-                  type='number'
-                  name='minPrice'
-                  value={filters.minPrice}
-                  onChange={handleFilterChange}
-                  placeholder='Min'
+                  type='text'
+                  value={cityInput}
+                  onChange={handleCityInputChange}
+                  onFocus={handleCityInputFocus}
+                  placeholder="Enter address"
+                  className='city-search-input'
                 />
+                {showCitySuggestions && citySuggestions.length > 0 && (
+                  <ul className='city-dropdown-modern'>
+                    {citySuggestions.slice(0, 8).map((city, index) => (
+                      <li key={index} onClick={() => handleCitySelect(city)}>
+                        {city}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
-
-              <div className='filter-item'>
-                <label>Max Price</label>
-                <input
-                  type='number'
-                  name='maxPrice'
-                  value={filters.maxPrice}
-                  onChange={handleFilterChange}
-                  placeholder='Max'
-                />
-              </div>
-
-              <button className='apply-filter-btn' onClick={handleSearch}>
-                Apply Filters
-              </button>
-              <button className='reset-filter-btn' onClick={handleReset}>
-                Reset
-              </button>
-            </div>
-          </div>
-
-
-          {/* Popular Cities Section */}
-          <div className='popular-cities-section'>
-            <h2 className='popular-cities-title'>
-              Popular <span className='highlight-yellow'>Cities</span>
-            </h2>
-            
-            <div className='cities-grid'>
-              <div className='city-card'>
-                <img 
-                  src='https://images.unsplash.com/photo-1558098329-a38eedc74e37?w=800&q=80' 
-                  alt='Bruges' 
-                  className='city-card-image'
-                />
-                <div className='city-card-overlay'>
-                  <div className='city-info'>
-                    <h3>Bruges</h3>
-                    <p>28,759 Listing Available</p>
-                  </div>
-                  <button className='view-listing-btn'>View Listing</button>
-                </div>
-              </div>
-
-              <div className='city-card'>
-                <img 
-                  src='https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80' 
-                  alt='Rome' 
-                  className='city-card-image'
-                />
-                <div className='city-card-overlay'>
-                  <div className='city-info'>
-                    <h3>Rome</h3>
-                    <p>16,759 Listing Available</p>
-                  </div>
-                  <button className='view-listing-btn'>View Listing</button>
-                </div>
-              </div>
-
-              <div className='city-card'>
-                <img 
-                  src='https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80' 
-                  alt='Paris' 
-                  className='city-card-image'
-                />
-                <div className='city-card-overlay'>
-                  <div className='city-info'>
-                    <h3>Paris</h3>
-                    <p>25,759 Listing Available</p>
-                  </div>
-                  <button className='view-listing-btn'>View Listing</button>
-                </div>
-              </div>
-            </div>
-
-            <div className='view-all-cities'>
-              <button className='view-all-btn'>
-                View All
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          {/* Featured Properties Section */}
-          <div className='featured-properties-section'>
-            <h2 className='featured-properties-title'>
-              <span className='highlight-yellow'>Featured</span>
-              <span className='white-text'>Properties</span>
-            </h2>
-            
-            <div className='featured-grid'>
-              <div className='featured-property-card'>
-                <img 
-                  src='https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&q=80' 
-                  alt='A-Frame House' 
-                  className='featured-property-image'
-                />
-              </div>
-
-              <div className='featured-property-card'>
-                <img 
-                  src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80' 
-                  alt='Modern Villa' 
-                  className='featured-property-image'
-                />
-              </div>
-
-              <div className='featured-property-card'>
-                <img 
-                  src='https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80' 
-                  alt='Luxury Villa' 
-                  className='featured-property-image'
-                />
-              </div>
-
-              <div className='featured-property-card'>
-                <img 
-                  src='https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80' 
-                  alt='Contemporary House' 
-                  className='featured-property-image'
-                />
-                <div className='featured-property-overlay'>
-                  <div className='featured-property-label'>
-                    Luxury House
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className='view-all-featured'>
-              <button className='view-all-featured-btn'>
-                View All
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          {/* Honored Customers Section */}
-          <div className='honored-customers-section'>
-            <h2 className='honored-customers-title'>
-              <span className='white-text'>Our </span>
-              <span className='highlight-yellow'>Honored</span>
-              <span className='highlight-yellow'>Customers</span>
-            </h2>
-            
-            <div className='customers-year-section'>
-              <div className='year-header'>
-                <h3 className='year-title'>2022</h3>
-                <div className='year-count'>
-                  3/64
-                  <div className='year-count-arrow'>↗</div>
-                </div>
-              </div>
-              
-              <div className='customers-grid'>
-                <div className='customer-card'>
-                  <img 
-                    src='https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80' 
-                    alt='Villa with Pool' 
-                    className='customer-card-image'
-                  />
-                  <div className='customer-card-overlay'>
-                    <div className='customer-info'>
-                      <img 
-                        src='https://i.pravatar.cc/150?img=12' 
-                        alt='Christopher Thomas' 
-                        className='customer-avatar'
-                      />
-                      <div className='customer-details'>
-                        <h4>Christopher Thomas</h4>
-                        <p>CEO Family Planing</p>
-                      </div>
-                    </div>
-                    <div className='customer-price'>$168k</div>
-                  </div>
-                </div>
-
-                <div className='customer-card'>
-                  <img 
-                    src='https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=800&q=80' 
-                    alt='Classic Manor' 
-                    className='customer-card-image'
-                  />
-                  <div className='customer-card-overlay'>
-                    <div className='customer-info'>
-                      <img 
-                        src='https://i.pravatar.cc/150?img=33' 
-                        alt='James Bond' 
-                        className='customer-avatar'
-                      />
-                      <div className='customer-details'>
-                        <h4>James Bond</h4>
-                        <p>CEO Family Planing</p>
-                      </div>
-                    </div>
-                    <div className='customer-price'>$146k</div>
-                  </div>
-                </div>
-
-                <div className='customer-card'>
-                  <img 
-                    src='https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80' 
-                    alt='Modern Villa' 
-                    className='customer-card-image'
-                  />
-                  <div className='customer-card-overlay'>
-                    <div className='customer-info'>
-                      <img 
-                        src='https://i.pravatar.cc/150?img=15' 
-                        alt='David Jhon' 
-                        className='customer-avatar'
-                      />
-                      <div className='customer-details'>
-                        <h4>David Jhon</h4>
-                        <p>CEO Family Planing</p>
-                      </div>
-                    </div>
-                    <div className='customer-price'>$185k</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className='year-divider'>
-              <div className='year-divider-title'>
-                2023
-                <span className='year-divider-count'>38</span>
-              </div>
-            </div>
-
-            <div className='year-divider'>
-              <div className='year-divider-title'>
-                2024
-                <span className='year-divider-count'>42</span>
-              </div>
-            </div>
-
-            <div className='view-all-customers'>
-              <button className='view-all-customers-btn'>
-                View All
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+              <input
+                type='text'
+                placeholder='Location'
+                className='city-search-input'
+                style={{ borderLeft: '1px solid #e0e0e0', borderRight: '1px solid #e0e0e0' }}
+              />
+              <select className='city-search-input' style={{ border: 'none' }}>
+                <option>Property type</option>
+                <option>Apartment</option>
+                <option>Villa</option>
+                <option>House</option>
+              </select>
+              <button className='search-btn-modern' onClick={handleSearch}>
+                Search Property
               </button>
             </div>
           </div>
@@ -599,106 +289,138 @@ const Properties = () => {
 
                 {pagination.totalPages > 1 && (
                   <div className='pagination-modern'>
-                    {Array.from({ length: pagination.totalPages }, (_, i) => (
+                    <button
+                      onClick={() => handlePageChange(pagination.currentPage - 1)}
+                      disabled={pagination.currentPage === 1}
+                      style={{ opacity: pagination.currentPage === 1 ? 0.5 : 1 }}
+                    >
+                      ←
+                    </button>
+                    {Array.from({ length: Math.min(pagination.totalPages, 8) }, (_, i) => {
+                      const pageNum = i + 1;
+                      if (pageNum === 4 && pagination.totalPages > 8) {
+                        return <span key="ellipsis">...</span>;
+                      }
+                      if (pageNum > 3 && pageNum < pagination.totalPages - 2 && pagination.totalPages > 8) {
+                        return null;
+                      }
+                      return (
+                        <button
+                          key={pageNum}
+                          onClick={() => handlePageChange(pageNum)}
+                          className={pagination.currentPage === pageNum ? 'active' : ''}
+                        >
+                          {pageNum}
+                        </button>
+                      );
+                    })}
+                    {pagination.totalPages > 8 && (
                       <button
-                        key={i + 1}
-                        onClick={() => handlePageChange(i + 1)}
-                        className={pagination.currentPage === i + 1 ? 'active' : ''}
+                        onClick={() => handlePageChange(pagination.totalPages)}
+                        className={pagination.currentPage === pagination.totalPages ? 'active' : ''}
                       >
-                        {i + 1}
+                        {pagination.totalPages}
                       </button>
-                    ))}
+                    )}
+                    <button
+                      onClick={() => handlePageChange(pagination.currentPage + 1)}
+                      disabled={pagination.currentPage === pagination.totalPages}
+                      style={{ opacity: pagination.currentPage === pagination.totalPages ? 0.5 : 1 }}
+                    >
+                      →
+                    </button>
                   </div>
                 )}
               </>
             )}
           </div>
+
+          {/* CTA Section - Orange */}
+          <div className='cta-section-orange'>
+            <div className='cta-content-wrapper'>
+              <svg className='cta-icon' viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <path d="M32 8L8 24v24h16V32h16v16h16V24L32 8z" fill="currentColor"/>
+              </svg>
+              <div className='cta-text'>
+                Find Your Home 
+                <span className='cta-arrow'>→</span>
+                <span className='cta-button-text'>Get Started</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer Section - Dark */}
+          <div className='footer-section-dark'>
+            <div className='footer-container'>
+              <div className='footer-top'>
+                <div className='footer-brand'>
+                  <div className='footer-logo'>
+                    <svg className='footer-logo-icon' viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M32 8L8 24v24h16V32h16v16h16V24L32 8z" fill="currentColor"/>
+                    </svg>
+                    <span className='footer-logo-text'>Keyly</span>
+                  </div>
+                  <p className='footer-description'>
+                    Helping you discover and secure your dream property with ease, expertise, and unmatched service in Dubai.
+                  </p>
+                </div>
+
+                <div className='footer-column'>
+                  <h3>Navigation</h3>
+                  <ul className='footer-links'>
+                    <li>Home</li>
+                    <li>About Us</li>
+                    <li>Property</li>
+                    <li>Event</li>
+                    <li>Contact Us</li>
+                  </ul>
+                </div>
+
+                <div className='footer-column'>
+                  <h3>Resource</h3>
+                  <ul className='footer-links'>
+                    <li>Blog</li>
+                    <li>Blog Details</li>
+                    <li>Property Details</li>
+                    <li>FAQs</li>
+                    <li>Reviews</li>
+                  </ul>
+                </div>
+
+                <div className='footer-column'>
+                  <h3>Subscribe Our Newsletter</h3>
+                  <div className='footer-newsletter'>
+                    <p>Enter your email</p>
+                    <input 
+                      type='email' 
+                      className='newsletter-input' 
+                      placeholder='example123@gmail.com'
+                    />
+                    <button className='newsletter-button'>Subscribe</button>
+                  </div>
+                </div>
+              </div>
+
+              <div className='footer-bottom'>
+                <ul className='footer-links-bottom'>
+                  <li>Privacy Policy</li>
+                  <li>Help Center</li>
+                </ul>
+                <div className='footer-social'>
+                  <span className='footer-social-icon'>f</span>
+                  <span className='footer-social-icon'>𝕏</span>
+                  <span className='footer-social-icon'>in</span>
+                  <span className='footer-social-icon'>📷</span>
+                  <span className='footer-social-icon'>▶</span>
+                </div>
+              </div>
+
+              <div className='footer-copyright'>
+                ©2025 Keyly, Designed by Ogndoo
+              </div>
+            </div>
+          </div>
         </div>
-        {/* CTA Section - Orange */}
-<div className='cta-section-orange'>
-  <div className='cta-content-wrapper'>
-    <svg className='cta-icon' viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-      <path d="M32 8L8 24v24h16V32h16v16h16V24L32 8z" fill="currentColor"/>
-    </svg>
-    <div className='cta-text'>
-      Find Your Home 
-      <span className='cta-arrow'>→</span>
-      <span className='cta-button-text'>Get Started</span>
-    </div>
-  </div>
-</div>
-
-{/* Footer Section - Dark */}
-<div className='footer-section-dark'>
-  <div className='footer-container'>
-    <div className='footer-top'>
-      <div className='footer-brand'>
-        <div className='footer-logo'>
-          <svg className='footer-logo-icon' viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <path d="M32 8L8 24v24h16V32h16v16h16V24L32 8z" fill="currentColor"/>
-          </svg>
-          <span className='footer-logo-text'>Keyly</span>
-        </div>
-        <p className='footer-description'>
-          Helping you discover and secure your dream property with ease, expertise, and unmatched service in Dubai.
-        </p>
-      </div>
-
-      <div className='footer-column'>
-        <h3>Navigation</h3>
-        <ul className='footer-links'>
-          <li onClick={() => navigate('/')}>Home</li>
-          <li>About Us</li>
-          <li>Property</li>
-          <li>Event</li>
-          <li>Contact Us</li>
-        </ul>
-      </div>
-
-      <div className='footer-column'>
-        <h3>Resource</h3>
-        <ul className='footer-links'>
-          <li>Blog</li>
-          <li>Blog Details</li>
-          <li>Property Details</li>
-          <li>FAQs</li>
-          <li>Reviews</li>
-        </ul>
-      </div>
-
-      <div className='footer-column'>
-        <h3>Subscribe Our Newsletter</h3>
-        <div className='footer-newsletter'>
-          <p>Enter your email</p>
-          <input 
-            type='email' 
-            className='newsletter-input' 
-            placeholder='example123@gmail.com'
-          />
-          <button className='newsletter-button'>Subscribe</button>
-        </div>
-      </div>
-    </div>
-
-    <div className='footer-bottom'>
-      <ul className='footer-links-bottom'>
-        <li>Privacy Policy</li>
-        <li>Help Center</li>
-      </ul>
-      <div className='footer-social'>
-        <span className='footer-social-icon'>f</span>
-        <span className='footer-social-icon'>𝕏</span>
-        <span className='footer-social-icon'>in</span>
-        <span className='footer-social-icon'>📷</span>
-        <span className='footer-social-icon'>▶</span>
-      </div>
-    </div>
-
-    <div className='footer-copyright'>
-      ©2025 Keyly, Designed by <a href='#'>Ogndoo</a>
-    </div>
-  </div>
-</div>
       </PageTransition>
     </>
   );
