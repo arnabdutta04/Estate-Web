@@ -230,6 +230,47 @@ const Brokers = () => {
               </div>
             )}
           </div>
+          {/* Search Section */}
+          <div className="brokers-search-section">
+            <div className="search-container-brokers">
+              <div className="search-input-wrapper-brokers">
+                <FaSearch className="search-icon-brokers" />
+                <input
+                  type="text"
+                  placeholder="Search by name, company, or location..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="search-input-brokers"
+                />
+              </div>
+
+              <select 
+                value={selectedCity} 
+                onChange={(e) => setSelectedCity(e.target.value)}
+                className="filter-select-brokers"
+              >
+                <option value="">All Cities</option>
+                {cities.map((city, index) => (
+                  <option key={index} value={city}>{city}</option>
+                ))}
+              </select>
+
+              <select 
+                value={selectedSpecialization} 
+                onChange={(e) => setSelectedSpecialization(e.target.value)}
+                className="filter-select-brokers"
+              >
+                <option value="">All Specializations</option>
+                {specializations.map((spec, index) => (
+                  <option key={index} value={spec}>{spec}</option>
+                ))}
+              </select>
+
+              <button className="btn-reset-brokers" onClick={resetFilters}>
+                Reset Filters
+              </button>
+            </div>
+          </div>
           {/* Featured Brokers Sliding Section */}
           {featuredBrokers.length > 0 && (
             <div className="featured-brokers-section">
@@ -397,48 +438,6 @@ const Brokers = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* Search Section */}
-          <div className="brokers-search-section">
-            <div className="search-container-brokers">
-              <div className="search-input-wrapper-brokers">
-                <FaSearch className="search-icon-brokers" />
-                <input
-                  type="text"
-                  placeholder="Search by name, company, or location..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="search-input-brokers"
-                />
-              </div>
-
-              <select 
-                value={selectedCity} 
-                onChange={(e) => setSelectedCity(e.target.value)}
-                className="filter-select-brokers"
-              >
-                <option value="">All Cities</option>
-                {cities.map((city, index) => (
-                  <option key={index} value={city}>{city}</option>
-                ))}
-              </select>
-
-              <select 
-                value={selectedSpecialization} 
-                onChange={(e) => setSelectedSpecialization(e.target.value)}
-                className="filter-select-brokers"
-              >
-                <option value="">All Specializations</option>
-                {specializations.map((spec, index) => (
-                  <option key={index} value={spec}>{spec}</option>
-                ))}
-              </select>
-
-              <button className="btn-reset-brokers" onClick={resetFilters}>
-                Reset Filters
-              </button>
             </div>
           </div>
 
