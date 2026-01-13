@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaArrowLeft, FaArrowRight, FaCheckCircle, FaUserTie, FaAward, FaChartLine } from 'react-icons/fa';
 import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
 import './Brokers.css';
@@ -13,11 +13,20 @@ const Brokers = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedSpecialization, setSelectedSpecialization] = useState('');
-  const [email, setEmail] = useState('');
   const navigate = useNavigate();
+  const sliderRef = useRef(null);
 
   const cities = [...new Set(brokers.map(b => b.servingCities).filter(Boolean))];
   const specializations = [...new Set(brokers.flatMap(b => b.specialization || []))];
+
+  // Get featured brokers
+  const featuredBrokers = brokers.filter(broker => broker.isFeatured);
+  
+  // Get best agent
+  const bestAgent = brokers.find(broker => broker.isBestAgent);
+
+  // Get hero agents (first 3 verified brokers)
+  const heroAgents = brokers.slice(0, 3);
 
   useEffect(() => {
     filterBrokers();
@@ -70,12 +79,19 @@ const Brokers = () => {
     setSelectedSpecialization('');
   };
 
-  const handleGetStarted = (e) => {
+  const handleHeroSearch = (e) => {
     e.preventDefault();
-    if (email) {
-      console.log('Email submitted:', email);
-      alert('Thank you! We will contact you soon.');
-      setEmail('');
+    // Scroll to brokers grid section
+    document.querySelector('.brokers-search-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollSlider = (direction) => {
+    if (sliderRef.current) {
+      const scrollAmount = 370; // card width + gap
+      sliderRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -86,27 +102,269 @@ const Brokers = () => {
         <div className="brokers-page-dark">
           {/* Hero Section */}
           <div className="brokers-hero-dark">
-            <div className="hero-overlay-brokers"></div>
             <div className="hero-content-brokers">
-              <h1>Want To Get The Most Return From Your Property?</h1>
-              <div className="hero-subtitle-bar">
-                <span>ROI Consultation, Design + Marketing Services</span>
+              <div className="hero-label">
+                <span className="hero-label-icon"></span>
+                <span>VERIFIED PROFESSIONALS</span>
               </div>
               
-              {/* Liquid Glass Email Bar */}
-              <form onSubmit={handleGetStarted} className="hero-email-bar">
-                <input
-                  type="email"
-                  placeholder="Enter Your Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="hero-email-input"
-                  required
-                />
-                <button type="submit" className="hero-email-btn">
-                  Get Started
+              <h1>
+                Find Your Perfect
+                <span className="hero-emoji">🏠</span>
+                Real Estate Agent
+              </h1>
+              
+              <p className="hero-description">
+                Connect with top-rated, verified real estate professionals in your area. 
+                Whether buying, selling, or investing, find the expert guidance you need.
+              </p>
+
+              <form onSubmit={handleHeroSearch} className="hero-search-form">
+                <div className="hero-select-wrapper">
+                  <label className="hero-select-label">Location</label>
+                  <select 
+                    className="hero-select"
+                    value={selectedCity}
+                    onChange={(e) => setSelectedCity(e.target.value)}
+                  >
+                    <option value="">Select City</option>
+                    {cities.map((city, index) => (
+                      <option key={index} value={city}>{city}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="hero-select-wrapper">
+                  <label className="hero-select-label">Specialization</label>
+                  <select 
+                    className="hero-select"
+                    value={selectedSpecialization}
+                    onChange={(e) => setSelectedSpecialization(e.target.value)}
+                  >
+                    <option value="">Select Type</option>
+                    {specializations.map((spec, index) => (
+                      <option key={index} value={spec}>{spec}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="hero-select-wrapper">
+                  <label className="hero-select-label">Price Range</label>
+                  <select className="hero-select">
+                    <option value="">Any Price</option>
+                    <option value="0-500k">$0 - $500K</option>
+                    <option value="500k-1m">$500K - $1M</option>
+                    <option value="1m+">$1M+</option>
+                  </select>
+                </div>
+
+                <button type="submit" className="hero-search-btn">
+                  <FaSearch />
                 </button>
               </form>
+
+              <div className="hero-verified-section">
+                <h3 className="hero-verified-title">
+                  <FaCheckCircle style={{ color: '#a3e635', marginRight: '0.5rem' }} />
+                  All Agents Verified
+                </h3>
+                <p className="hero-verified-description">
+                  Every agent on our platform is thoroughly vetted and verified for your peace of mind.
+                </p>
+              </div>
+            </div>
+
+            <div className="hero-agents-grid">
+              {heroAgents.map((agent, index) => (
+                <div key={agent._id} className="hero-agent-card">
+                  {agent.photo ? (
+                    <img src={agent.photo} alt={agent.userId?.name} className="hero-agent-image" />
+                  ) : (
+                    <div className="hero-agent-image" style={{ 
+                      background: 'linear-gradient(135deg, #a3e635 0%, #84cc16 100%)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '4rem',
+                      fontWeight: '700',
+                      color: '#fff'
+                    }}>
+                      {agent.userId?.name?.charAt(0)}
+                    </div>
+                  )}
+                  <div className="hero-agent-badge">VERIFIED</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Featured Brokers Sliding Section */}
+          {featuredBrokers.length > 0 && (
+            <div className="featured-brokers-section">
+              <div className="featured-section-header">
+                <h2>Featured Agents</h2>
+                <p>Hand-picked professionals with proven track records</p>
+              </div>
+
+              <div className="featured-brokers-slider">
+                <div className="slider-track" ref={sliderRef}>
+                  {featuredBrokers.map((broker) => (
+                    <div key={broker._id} className="featured-broker-card">
+                      <div className="featured-broker-image">
+                        {broker.photo ? (
+                          <img src={broker.photo} alt={broker.userId?.name} className="featured-broker-photo" />
+                        ) : (
+                          <div className="featured-broker-placeholder">
+                            {broker.userId?.name?.charAt(0)}
+                          </div>
+                        )}
+                        <div className="featured-broker-badge">FEATURED</div>
+                        <div className="featured-broker-info">
+                          <h3 className="featured-broker-name">{broker.userId?.name}</h3>
+                          <p className="featured-broker-role">{broker.specialization?.[0] || 'Real Estate Agent'}</p>
+                          <div className="featured-broker-company">
+                            <div className="featured-broker-company-logo">
+                              {broker.company?.charAt(0) || 'R'}
+                            </div>
+                            <span className="featured-broker-company-name">{broker.company || 'Real Estate Co.'}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="slider-controls">
+                  <button className="slider-btn" onClick={() => scrollSlider('left')}>
+                    <FaArrowLeft />
+                  </button>
+                  <button className="slider-btn" onClick={() => scrollSlider('right')}>
+                    <FaArrowRight />
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Best Agent Section */}
+          {bestAgent && (
+            <div className="best-agent-section">
+              <div className="best-agent-container">
+                <div className="best-agent-content">
+                  <h2 className="best-agent-title">Agent of the Month</h2>
+                  <p className="best-agent-description">
+                    Meet our top-performing agent who has consistently delivered exceptional 
+                    results and outstanding service to clients. Recognized for excellence in 
+                    real estate transactions and customer satisfaction.
+                  </p>
+                </div>
+
+                <div className="best-agent-visual">
+                  <div className="best-agent-card">
+                    <div className="best-agent-image">
+                      {bestAgent.photo ? (
+                        <img src={bestAgent.photo} alt={bestAgent.userId?.name} className="best-agent-photo" />
+                      ) : (
+                        <div style={{
+                          width: '100%',
+                          height: '100%',
+                          background: 'linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '8rem',
+                          fontWeight: '700',
+                          color: '#fff'
+                        }}>
+                          {bestAgent.userId?.name?.charAt(0)}
+                        </div>
+                      )}
+                      <div className="best-agent-badge">BEST AGENT</div>
+                    </div>
+                    <div className="best-agent-info">
+                      <h3 className="best-agent-name">{bestAgent.userId?.name}</h3>
+                      <p className="best-agent-role">{bestAgent.specialization?.[0] || 'Real Estate Expert'}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Why Use Our Agents Section */}
+          <div className="why-use-agents-section">
+            <div className="why-use-container">
+              <div className="why-use-image-side">
+                <p className="why-use-section-label">WHY CHOOSE US</p>
+                <div className="why-use-image-wrapper">
+                  {brokers[0]?.photo ? (
+                    <img src={brokers[0].photo} alt="Agent" className="why-use-agent-photo" />
+                  ) : (
+                    <div style={{
+                      width: '100%',
+                      height: '500px',
+                      background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '8rem',
+                      fontWeight: '700',
+                      color: '#fff'
+                    }}>
+                      {brokers[0]?.userId?.name?.charAt(0) || 'A'}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="why-use-content-side">
+                <h2 className="why-use-main-title">Why Work With Our Verified Agents?</h2>
+                <p className="why-use-description">
+                  Our platform connects you with the best real estate professionals who are 
+                  committed to helping you achieve your property goals.
+                </p>
+
+                <div className="why-use-features-list">
+                  <div className="why-use-feature-item">
+                    <div className="feature-icon-wrapper">
+                      <FaCheckCircle />
+                    </div>
+                    <div className="feature-content">
+                      <h3 className="feature-title">Verified Professionals</h3>
+                      <p className="feature-description">
+                        All agents undergo rigorous verification to ensure they meet our high 
+                        standards of professionalism and expertise.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="why-use-feature-item">
+                    <div className="feature-icon-wrapper">
+                      <FaUserTie />
+                    </div>
+                    <div className="feature-content">
+                      <h3 className="feature-title">Local Market Experts</h3>
+                      <p className="feature-description">
+                        Our agents have deep knowledge of local markets and can provide 
+                        invaluable insights for your real estate decisions.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="why-use-feature-item">
+                    <div className="feature-icon-wrapper">
+                      <FaChartLine />
+                    </div>
+                    <div className="feature-content">
+                      <h3 className="feature-title">Proven Track Record</h3>
+                      <p className="feature-description">
+                        Work with agents who have demonstrated success in helping clients 
+                        buy, sell, and invest in properties.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
