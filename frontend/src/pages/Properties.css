@@ -5,7 +5,7 @@
 }
 
 /* ============================================
-   HERO SECTION - DRAMATIC STYLE
+   HERO SECTION - CLEAN MODERN STYLE
    ============================================ */
 .properties-hero-modern {
   position: relative;
@@ -14,9 +14,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 75vh;
+  min-height: 65vh;
   overflow: visible;
-  background: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80') center/cover no-repeat;
+  background: url('/property.jpg') center/cover no-repeat;
 }
 
 .hero-overlay {
@@ -25,58 +25,55 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.6) 100%);
   z-index: 0;
 }
 
 .hero-content-modern {
   position: relative;
   z-index: 1;
-  max-width: 1100px;
+  max-width: 900px;
   text-align: center;
-  padding: 100px 5% 200px;
+  padding: 120px 5% 200px;
 }
 
 .welcome-text {
-  font-size: 13px;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 3px;
-  margin-bottom: 30px;
-  color: rgba(255, 255, 255, 0.85);
-  font-weight: 500;
-  display: inline-block;
-  padding: 0;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-}
-
-.hero-title {
-  font-size: clamp(4.5rem, 9vw, 9rem); 
-  font-weight: 900;
-  line-height: 1.1;
-  margin-bottom: 30px;
-  color: #ffffff;
-  letter-spacing: -3px;
-  text-transform: uppercase;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-}
-
-.hero-title br {
+  letter-spacing: 4px;
+  margin-bottom: 25px;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 400;
   display: block;
 }
 
-.hero-description {
-  font-size: 18px;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.7;
-  max-width: 750px;
-  margin: 0 auto;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+.hero-title {
+  font-size: clamp(3.5rem, 7vw, 6.5rem); 
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 35px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+  word-spacing: 0.3em;
 }
 
-/* Search Bar Wrapper */
-.search-bar-wrapper {
+.hero-title br {
+  display: none;
+}
+
+.hero-description {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  display: none;
+}
+
+/* Search Bar Container - Fixed to not be absolute */
+.search-bar-container {
   position: absolute;
   bottom: -50px;
   left: 50%;
@@ -256,27 +253,35 @@
   transform: rotate(180deg);
 }
 
+/* Advanced Filters Section - Outside Hero, Relative Positioning */
+.advanced-filters-section {
+  position: relative;
+  width: 100%;
+  background: #f9f9f9;
+  padding: 80px 5% 40px;
+  margin-top: 0;
+  z-index: 5;
+}
+
 /* Advanced Filters Dropdown */
 .advanced-filters-dropdown {
-  margin-top: 15px;
+  max-width: 900px;
+  margin: 0 auto;
   background: white;
   border-radius: 16px;
   padding: 35px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
   animation: slideDown 0.4s ease;
-  order: 3;
 }
 
 @keyframes slideDown {
   from {
     opacity: 0;
     transform: translateY(-20px);
-    max-height: 0;
   }
   to {
     opacity: 1;
     transform: translateY(0);
-    max-height: 1000px;
   }
 }
 
@@ -528,8 +533,6 @@
     font-size: clamp(3rem, 8vw, 4.5rem);
   }
 }
-
-
 /* ============================================
    PROPERTIES GRID SECTION - WHITE BACKGROUND
    ============================================ */

@@ -145,83 +145,87 @@ const Properties = () => {
       <PageTransition>
         <div className='properties-page-modern'>
          {/* Hero Section */}
-<div className='properties-hero-modern'>
-  <div className='hero-overlay'></div>
-  <div className='hero-content-modern'>
-    <h1 className='hero-title'>
-      Find your perfect<br />
-      investment properties
-    </h1>
-    <p className='hero-description'>
-      Explore a selection of high-value real estate opportunities designed for financial growth and stability
-    </p>
-  </div>
-
-  <div className='search-bar-wrapper'>
-    <div className='search-bar-modern'>
-      <div className='search-input-group' ref={cityDropdownRef}>
-        <FaHome className='home-icon' />
-        <input
-          type='text'
-          value={cityInput}
-          onChange={handleCityInputChange}
-          onFocus={handleCityInputFocus}
-          placeholder="Enter city"
-          className='city-search-input'
-        />
-        {showCitySuggestions && citySuggestions.length > 0 && (
-          <ul className='city-dropdown-modern'>
-            {citySuggestions.slice(0, 8).map((city, index) => (
-              <li key={index} onClick={() => handleCitySelect(city)}>
-                {city}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-      
-      <select 
-        name='propertyType'
-        value={filters.propertyType}
-        onChange={handleFilterChange}
-        className='search-property-select'
-      >
-        <option value=''>Property type</option>
-        <option value='apartment'>Apartment</option>
-        <option value='villa'>Villa</option>
-        <option value='house'>House</option>
-        <option value='flat'>Flat</option>
-        <option value='commercial'>Commercial</option>
-      </select>
-
-      <select 
-        name='bedrooms'
-        value={filters.bedrooms}
-        onChange={handleFilterChange}
-        className='search-property-select'
-      >
-        <option value=''>Bedrooms</option>
-        <option value='1'>1 BHK</option>
-        <option value='2'>2 BHK</option>
-        <option value='3'>3 BHK</option>
-        <option value='4'>4+ BHK</option>
-      </select>
-      
-      <button className='search-btn-modern' onClick={handleSearch}>
-        Search Property
-      </button>
+<>
+  <div className='properties-hero-modern'>
+    <div className='hero-overlay'></div>
+    <div className='hero-content-modern'>
+      <span className='welcome-text'>Choice Around The World</span>
+      <h1 className='hero-title'>
+        APARTMENTS AND HOUSES
+      </h1>
+      <p className='hero-description'>
+        Explore a selection of high-value real estate opportunities designed for financial growth and stability
+      </p>
     </div>
 
-    <button 
-      className='advanced-search-link'
-      onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-    >
-      <FaChevronDown className={`advanced-search-icon ${showAdvancedFilters ? 'rotate' : ''}`} />
-      {showAdvancedFilters ? 'Hide Filters' : 'Advanced Search'}
-    </button>
+    <div className='search-bar-container'>
+      <div className='search-bar-modern'>
+        <div className='search-input-group' ref={cityDropdownRef}>
+          <FaHome className='home-icon' />
+          <input
+            type='text'
+            value={cityInput}
+            onChange={handleCityInputChange}
+            onFocus={handleCityInputFocus}
+            placeholder="Enter city"
+            className='city-search-input'
+          />
+          {showCitySuggestions && citySuggestions.length > 0 && (
+            <ul className='city-dropdown-modern'>
+              {citySuggestions.slice(0, 8).map((city, index) => (
+                <li key={index} onClick={() => handleCitySelect(city)}>
+                  {city}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        
+        <select 
+          name='propertyType'
+          value={filters.propertyType}
+          onChange={handleFilterChange}
+          className='search-property-select'
+        >
+          <option value=''>Property type</option>
+          <option value='apartment'>Apartment</option>
+          <option value='villa'>Villa</option>
+          <option value='house'>House</option>
+          <option value='flat'>Flat</option>
+          <option value='commercial'>Commercial</option>
+        </select>
 
-    {/* Advanced Filters Dropdown */}
-    {showAdvancedFilters && (
+        <select 
+          name='bedrooms'
+          value={filters.bedrooms}
+          onChange={handleFilterChange}
+          className='search-property-select'
+        >
+          <option value=''>Bedrooms</option>
+          <option value='1'>1 BHK</option>
+          <option value='2'>2 BHK</option>
+          <option value='3'>3 BHK</option>
+          <option value='4'>4+ BHK</option>
+        </select>
+        
+        <button className='search-btn-modern' onClick={handleSearch}>
+          Search Property
+        </button>
+      </div>
+
+      <button 
+        className='advanced-search-link'
+        onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
+      >
+        <FaChevronDown className={`advanced-search-icon ${showAdvancedFilters ? 'rotate' : ''}`} />
+        {showAdvancedFilters ? 'Hide Filters' : 'Advanced Search'}
+      </button>
+    </div>
+  </div>
+
+  {/* Advanced Filters - Now Outside Hero Section */}
+  {showAdvancedFilters && (
+    <div className='advanced-filters-section'>
       <div className='advanced-filters-dropdown'>
         <div className='advanced-filters-grid'>
           {/* Property For */}
@@ -389,10 +393,9 @@ const Properties = () => {
           </div>
         </div>
       </div>
-    )}
-  </div>
-</div>
-
+    </div>
+  )}
+</>
           {/* Properties Grid */}
           <div className='properties-container-modern'>
             {loading ? (
