@@ -110,7 +110,6 @@ const Brokers = () => {
               
               <h1>
                 Find Your Perfect
-                <span className="hero-emoji">🏠</span>
                 Real Estate Agent
               </h1>
               
