@@ -1178,3 +1178,168 @@
     padding: 3rem 1rem;
   }
 }
+/* ================= HOW IT WORKS SECTION ================= */
+.how-it-works-section {
+  background: #fafafa;
+  padding: 6rem 2rem;
+  position: relative;
+}
+
+.how-it-works-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.how-it-works-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+}
+
+.how-it-works-label {
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.how-it-works-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+.highlight-text {
+  color: #a3e635;
+}
+
+.how-it-works-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.how-it-works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin-top: 4rem;
+}
+
+.how-it-works-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.how-it-works-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.how-it-works-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 2rem;
+  background: linear-gradient(135deg, #a3e635 0%, #84cc16 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(163, 230, 53, 0.3);
+}
+
+.how-it-works-icon svg {
+  font-size: 2rem;
+  color: #fff;
+}
+
+.how-it-works-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.3px;
+}
+
+.how-it-works-card-description {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Responsive Design for How It Works */
+@media (max-width: 1024px) {
+  .how-it-works-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .how-it-works-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .how-it-works-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .how-it-works-title {
+    font-size: 2rem;
+  }
+
+  .how-it-works-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .how-it-works-icon {
+    width: 70px;
+    height: 70px;
+  }
+
+  .how-it-works-icon svg {
+    font-size: 1.75rem;
+  }
+
+  .how-it-works-card-title {
+    font-size: 1.3rem;
+  }
+
+  .how-it-works-card-description {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .how-it-works-section {
+    padding: 3rem 1rem;
+  }
+
+  .how-it-works-title {
+    font-size: 1.8rem;
+  }
+
+  .how-it-works-card {
+    padding: 2rem 1rem;
+  }
+
+  .how-it-works-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .how-it-works-icon svg {
+    font-size: 1.5rem;
+  }
+}

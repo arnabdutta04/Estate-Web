@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
-import { FaSearch, FaArrowLeft, FaArrowRight, FaCheckCircle, FaUserTie, FaAward, FaChartLine } from 'react-icons/fa';
+import { FaSearch, FaArrowLeft, FaArrowRight, FaCheckCircle, FaUserTie, FaAward, FaChartLine, FaClipboardList, FaUsers, FaComments } from 'react-icons/fa';
 import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
 import './Brokers.css';
@@ -443,6 +443,53 @@ const Brokers = () => {
                 ))}
               </div>
             )}
+          </div>
+
+          {/* How It Works Section - Always appears at the end */}
+          <div className="how-it-works-section">
+            <div className="how-it-works-container">
+              <div className="how-it-works-header">
+                <h3 className="how-it-works-label">How It Works</h3>
+                <h2 className="how-it-works-title">
+                  Fast, simple, and <span className="highlight-text">tailored to you</span>
+                </h2>
+                <p className="how-it-works-subtitle">
+                  We've made finding the right real estate agent effortless. Here's how it works
+                </p>
+              </div>
+
+              <div className="how-it-works-grid">
+                <div className="how-it-works-card">
+                  <div className="how-it-works-icon">
+                    <FaClipboardList />
+                  </div>
+                  <h3 className="how-it-works-card-title">Tell Us What You Need</h3>
+                  <p className="how-it-works-card-description">
+                    Fill out a short form with your location, budget, and the type of property you're interested in. The more we know, the better we can match.
+                  </p>
+                </div>
+
+                <div className="how-it-works-card">
+                  <div className="how-it-works-icon">
+                    <FaUsers />
+                  </div>
+                  <h3 className="how-it-works-card-title">Get Matched with Top Agents</h3>
+                  <p className="how-it-works-card-description">
+                    Our smart matching system connects you with 1-3 trusted, local agents based on your needs. All agents are verified, rated, and experienced.
+                  </p>
+                </div>
+
+                <div className="how-it-works-card">
+                  <div className="how-it-works-icon">
+                    <FaComments />
+                  </div>
+                  <h3 className="how-it-works-card-title">Chat or Schedule a Call</h3>
+                  <p className="how-it-works-card-description">
+                    Review agent profiles, read reviews, and start a conversation—your way. You can message directly, schedule a call, or book a tour instantly.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </PageTransition>
