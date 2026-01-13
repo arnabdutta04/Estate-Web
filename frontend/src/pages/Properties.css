@@ -16,7 +16,10 @@
   justify-content: center;
   min-height: 65vh;
   overflow: visible;
-  background: url('/hero-bg.jpg') center/cover no-repeat;
+  background-image: url("/hero-bg.jpg");
+  background-size: cover;               
+  background-position: center;           
+  background-repeat: no-repeat;          
 }
 
 .hero-overlay {
