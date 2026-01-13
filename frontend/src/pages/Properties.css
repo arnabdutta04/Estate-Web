@@ -125,7 +125,7 @@
   padding: 22px 20px 22px 55px;
   background: #000000;
   border: none;
-  color: #333;
+  color: #ffffff;
   font-size: 15px;
   transition: all 0.3s ease;
 }
@@ -145,8 +145,8 @@
   padding: 22px 20px;
   background: transparent;
   border: none;
-  border-right: 1px solid #e8e8e8;
-  color: #333;
+  border-right: 1px solid #000000;
+  color: #000000;
   font-size: 15px;
   cursor: pointer;
   transition: all 0.3s ease;
