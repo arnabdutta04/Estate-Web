@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
-import { FaStar, FaMapMarkerAlt, FaPhone, FaEnvelope, FaBuilding, FaBriefcase, FaCheckCircle, FaSearch } from 'react-icons/fa';
+import { FaSearch } from 'react-icons/fa';
 import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
+import './Brokers.css';
 
 const Brokers = () => {
   const [brokers, setBrokers] = useState([]);
