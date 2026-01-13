@@ -12,6 +12,7 @@ const Brokers = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedSpecialization, setSelectedSpecialization] = useState('');
+  const [email, setEmail] = useState('');
   const navigate = useNavigate();
 
   const cities = [...new Set(brokers.map(b => b.servingCities).filter(Boolean))];
@@ -68,6 +69,15 @@ const Brokers = () => {
     setSelectedSpecialization('');
   };
 
+  const handleGetStarted = (e) => {
+    e.preventDefault();
+    if (email) {
+      console.log('Email submitted:', email);
+      alert('Thank you! We will contact you soon.');
+      setEmail('');
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -77,10 +87,25 @@ const Brokers = () => {
           <div className="brokers-hero-dark">
             <div className="hero-overlay-brokers"></div>
             <div className="hero-content-brokers">
-              <h1>MEET OUR AGENTS</h1>
+              <h1>Want To Get The Most Return From Your Property?</h1>
               <div className="hero-subtitle-bar">
-                <span>Residential and commercial properties</span>
+                <span>ROI Consultation, Design + Marketing Services</span>
               </div>
+              
+              {/* Liquid Glass Email Bar */}
+              <form onSubmit={handleGetStarted} className="hero-email-bar">
+                <input
+                  type="email"
+                  placeholder="Enter Your Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="hero-email-input"
+                  required
+                />
+                <button type="submit" className="hero-email-btn">
+                  Get Started
+                </button>
+              </form>
             </div>
           </div>
 
