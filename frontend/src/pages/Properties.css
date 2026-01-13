@@ -37,26 +37,25 @@
   text-align: center;
   padding: 120px 5% 200px;
 }
-
 .welcome-text {
-  font-size: 11px;
+  font-size: 13px; /* Increased from 11px */
   text-transform: uppercase;
-  letter-spacing: 4px;
-  margin-bottom: 25px;
-  color: rgba(255, 255, 255, 0.75);
-  font-weight: 400;
+  letter-spacing: 5px; /* Increased from 4px */
+  margin-bottom: 30px; /* Increased from 25px */
+  color: rgba(255, 255, 255, 0.85); /* Slightly more visible */
+  font-weight: 500; /* Increased from 400 */
   display: block;
 }
 
 .hero-title {
-  font-size: clamp(3.5rem, 7vw, 6.5rem); 
+  font-size: clamp(4.5rem, 9vw, 8rem); /* Increased from clamp(3.5rem, 7vw, 6.5rem) */
   font-weight: 900;
-  line-height: 1.15;
-  margin-bottom: 35px;
+  line-height: 1.1; /* Tighter line height for bigger text */
+  margin-bottom: 40px; /* Increased from 35px */
   color: #ffffff;
-  letter-spacing: 2px;
+  letter-spacing: 3px; /* Increased from 2px */
   text-transform: uppercase;
-  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.6); /* Stronger shadow for bigger text */
   word-spacing: 0.3em;
 }
 
@@ -65,14 +64,35 @@
 }
 
 .hero-description {
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.85);
-  line-height: 1.6;
-  max-width: 600px;
-  margin: 0 auto 40px;
+  font-size: 18px; /* Increased from 16px */
+  color: rgba(255, 255, 255, 0.9); /* More visible */
+  line-height: 1.7; /* Increased from 1.6 */
+  max-width: 700px; /* Increased from 600px */
+  margin: 0 auto 50px; /* Increased bottom margin from 40px */
   display: none;
 }
 
+/* Responsive Design Updates */
+@media (max-width: 768px) {
+  .welcome-text {
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+  }
+  
+  .hero-description {
+    font-size: 16px;
+    max-width: 90%;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 480px) {  
+  .hero-description {
+    font-size: 14px;
+    margin-bottom: 35px;
+  }
+}
 /* Search Bar Container - Fixed to not be absolute */
 .search-bar-container {
   position: absolute;
@@ -1098,10 +1118,6 @@
 
 /* Tablets */
 @media (max-width: 1024px) {
-  .hero-title {
-    font-size: 42px;
-  }
-
   .search-bar-modern {
     max-width: 100%;
     margin-top: -40px;
@@ -1131,11 +1147,6 @@
     padding: 60px 5% 100px;
     min-height: 50vh;
   }
-
-  .hero-title {
-    font-size: 36px;
-  }
-
   .search-bar-modern {
     flex-direction: column;
     padding: 15px;
@@ -1226,15 +1237,6 @@
 
 /* Small Mobile */
 @media (max-width: 480px) {
-  .hero-title {
-    font-size: 28px;
-  }
-
-  .welcome-text {
-    font-size: 11px;
-    padding: 6px 16px;
-  }
-
   .search-input-group::before {
     font-size: 16px;
     margin-left: 10px;
