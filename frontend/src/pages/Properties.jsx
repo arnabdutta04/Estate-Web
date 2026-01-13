@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
 import { FaChevronDown, FaHome } from 'react-icons/fa';
 import './Properties.css';
+import img from "/property.jpg";
 
 const Properties = () => {
   const navigate = useNavigate();
