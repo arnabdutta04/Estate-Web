@@ -48,7 +48,7 @@
 }
 
 .hero-title {
-  font-size: clamp(3.5rem, 7vw, 6.5rem); 
+  font-size:8rem; 
   font-weight: 900;
   line-height: 1.15;
   margin-bottom: 35px;
@@ -222,7 +222,7 @@
 .advanced-search-link {
   margin-top: 15px;
   font-size: 14px;
-  color: #000000;
+  color: #333;
   text-decoration: none;
   display: flex;
   align-items: center;
