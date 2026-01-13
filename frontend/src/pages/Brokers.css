@@ -13,7 +13,7 @@
   align-items: center;
   gap: 4rem;
   padding: 6rem 4rem;
-  background: #fafafa;
+  background: url('https://img.freepik.com/free-photo/people-hangout-together-coffee-shop_53876-31517.jpg?semt=ais_hybrid&w=740&q=80') center/cover no-repeat;
   overflow: hidden;
 }
 
