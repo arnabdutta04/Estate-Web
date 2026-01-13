@@ -271,6 +271,7 @@ const Brokers = () => {
               </button>
             </div>
           </div>
+          
           {/* Featured Brokers Sliding Section */}
           {featuredBrokers.length > 0 && (
             <div className="featured-brokers-section">
@@ -279,45 +280,7 @@ const Brokers = () => {
                 <p>Hand-picked professionals with proven track records</p>
               </div>
 
-              <div className="featured-brokers-slider">
-                <div className="slider-track" ref={sliderRef}>
-                  {featuredBrokers.map((broker) => (
-                    <div key={broker._id} className="featured-broker-card">
-                      <div className="featured-broker-image">
-                        {broker.photo ? (
-                          <img src={broker.photo} alt={broker.userId?.name} className="featured-broker-photo" />
-                        ) : (
-                          <div className="featured-broker-placeholder">
-                            {broker.userId?.name?.charAt(0)}
-                          </div>
-                        )}
-                        <div className="featured-broker-badge">FEATURED</div>
-                        <div className="featured-broker-info">
-                          <h3 className="featured-broker-name">{broker.userId?.name}</h3>
-                          <p className="featured-broker-role">{broker.specialization?.[0] || 'Real Estate Agent'}</p>
-                          <div className="featured-broker-company">
-                            <div className="featured-broker-company-logo">
-                              {broker.company?.charAt(0) || 'R'}
-                            </div>
-                            <span className="featured-broker-company-name">{broker.company || 'Real Estate Co.'}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
 
-                <div className="slider-controls">
-                  <button className="slider-btn" onClick={() => scrollSlider('left')}>
-                    <FaArrowLeft />
-                  </button>
-                  <button className="slider-btn" onClick={() => scrollSlider('right')}>
-                    <FaArrowRight />
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
 
           {/* Best Agent Section */}
           {bestAgent && (
@@ -440,7 +403,45 @@ const Brokers = () => {
               </div>
             </div>
           </div>
+                         <div className="featured-brokers-slider">
+                <div className="slider-track" ref={sliderRef}>
+                  {featuredBrokers.map((broker) => (
+                    <div key={broker._id} className="featured-broker-card">
+                      <div className="featured-broker-image">
+                        {broker.photo ? (
+                          <img src={broker.photo} alt={broker.userId?.name} className="featured-broker-photo" />
+                        ) : (
+                          <div className="featured-broker-placeholder">
+                            {broker.userId?.name?.charAt(0)}
+                          </div>
+                        )}
+                        <div className="featured-broker-badge">FEATURED</div>
+                        <div className="featured-broker-info">
+                          <h3 className="featured-broker-name">{broker.userId?.name}</h3>
+                          <p className="featured-broker-role">{broker.specialization?.[0] || 'Real Estate Agent'}</p>
+                          <div className="featured-broker-company">
+                            <div className="featured-broker-company-logo">
+                              {broker.company?.charAt(0) || 'R'}
+                            </div>
+                            <span className="featured-broker-company-name">{broker.company || 'Real Estate Co.'}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
 
+                <div className="slider-controls">
+                  <button className="slider-btn" onClick={() => scrollSlider('left')}>
+                    <FaArrowLeft />
+                  </button>
+                  <button className="slider-btn" onClick={() => scrollSlider('right')}>
+                    <FaArrowRight />
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
           {/* How It Works Section - Always appears at the end */}
           <div className="how-it-works-section">
             <div className="how-it-works-container">
