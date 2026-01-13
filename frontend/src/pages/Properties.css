@@ -123,7 +123,7 @@
 .city-search-input {
   width: 100%;
   padding: 22px 20px 22px 55px;
-  background: transparent;
+  background: #000000;
   border: none;
   color: #333;
   font-size: 15px;
