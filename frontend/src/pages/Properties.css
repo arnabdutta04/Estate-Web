@@ -48,17 +48,13 @@
 }
 
 .hero-title {
-  font-size:8rem; 
-  font-weight: 900;
-  line-height: 1.15;
-  margin-bottom: 35px;
-  color: #ffffff;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
-  word-spacing: 0.3em;
+    color: #fff;
+    color: var(--card-white);
+    font-size: 7rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
-
 .hero-title br {
   display: none;
 }
