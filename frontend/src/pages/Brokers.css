@@ -913,7 +913,7 @@
 @media (max-width: 1024px) {
   .brokers-hero-dark {
     grid-template-columns: 1fr;
-    padding: 4rem 2rem;
+    padding: 7rem 2rem;
     min-height: auto;
   }
 
@@ -987,10 +987,6 @@
 }
 
 @media (max-width: 768px) {
-  .brokers-hero-dark {
-    padding: 3rem 1.5rem;
-  }
-
   .hero-content-brokers h1 {
     font-size: 2.5rem;
   }
@@ -1094,11 +1090,7 @@
 }
 
 @media (max-width: 480px) {
-  .brokers-hero-dark {
-    padding: 2rem 1rem;
-  }
-
-  .hero-content-brokers h1 {
+ .hero-content-brokers h1 {
     font-size: 2rem;
   }
 
