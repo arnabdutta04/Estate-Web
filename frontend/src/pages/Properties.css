@@ -31,14 +31,11 @@
 }
 
 .hero-content-modern {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin: 0 auto;
-    max-width: 1400px;
-    padding: 12rem 3rem 6rem;
-    position: relative;
-    z-index: 10;
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  text-align: center;
+  padding: 120px 5% 200px;
 }
 
 .welcome-text {
@@ -52,12 +49,15 @@
 }
 
 .hero-title {
-    color: #fff;
-    color: var(--card-white);
-    font-size: 4.5rem;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+  font-size: clamp(3.5rem, 7vw, 6.5rem); 
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 35px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+  word-spacing: 0.3em;
 }
 
 .hero-title br {
@@ -223,7 +223,7 @@
 .advanced-search-link {
   margin-top: 15px;
   font-size: 14px;
-  color: #333;
+  color: #000000;
   text-decoration: none;
   display: flex;
   align-items: center;
