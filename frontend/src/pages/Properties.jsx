@@ -151,7 +151,7 @@ const Properties = () => {
     <div className='hero-content-modern'>
       <span className='welcome-text'>Choice Around The World</span>
       <h1 className='hero-title'>
-        APARTMENTS AND HOUSES
+        Find Your Best Investment
       </h1>
       <p className='hero-description'>
         Explore a selection of high-value real estate opportunities designed for financial growth and stability
