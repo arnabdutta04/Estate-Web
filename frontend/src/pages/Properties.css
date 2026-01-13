@@ -17,11 +17,7 @@
   min-height: 65vh;
   overflow: visible;
   /* Very dark modern luxury house at night with pool - dramatic lighting */
-  background: url('https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=1920&q=80') center/cover no-repeat;
-  /* Alternative dark options:
-  background: url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&q=80') center/cover no-repeat;
-  background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80') center/cover no-repeat;
-  */
+  background: url('https://media.istockphoto.com/id/1516938158/photo/3d-render-of-forest-house-with-large-windows-at-night.jpg?s=612x612&w=0&k=20&c=C-peb5w4MRU4rcl0M45-zX6NMUXPwtmIDPWRbuJ4Quw=') center/cover no-repeat;
 }
 
 .hero-overlay {
