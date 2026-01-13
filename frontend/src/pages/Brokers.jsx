@@ -196,7 +196,40 @@ const Brokers = () => {
               ))}
             </div>
           </div>
-
+           {/* Brokers Grid */}
+          <div className="brokers-container-dark">
+            {filteredBrokers.length === 0 ? (
+              <div className="no-results-brokers">
+                <h2>No Brokers Found</h2>
+                <p>Try adjusting your filters or search terms</p>
+                <button className="btn-clear-filters" onClick={resetFilters}>
+                  Clear Filters
+                </button>
+              </div>
+            ) : (
+              <div className="brokers-grid-dark">
+                {filteredBrokers.map((broker) => (
+                  <div key={broker._id} className="broker-card-dark">
+                    <div className="broker-image-container">
+                      {broker.photo ? (
+                        <img src={broker.photo} alt={broker.userId?.name} className="broker-photo-dark" />
+                      ) : (
+                        <div className="broker-photo-placeholder-dark">
+                          {broker.userId?.name?.charAt(0)}
+                        </div>
+                      )}
+                      <div className="broker-overlay-dark">
+                        <div className="broker-name-overlay">
+                          <h3>{broker.userId?.name}</h3>
+                          <p>{broker.specialization?.[0] || 'Real Estate Agent'}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
           {/* Featured Brokers Sliding Section */}
           {featuredBrokers.length > 0 && (
             <div className="featured-brokers-section">
@@ -407,41 +440,6 @@ const Brokers = () => {
                 Reset Filters
               </button>
             </div>
-          </div>
-
-          {/* Brokers Grid */}
-          <div className="brokers-container-dark">
-            {filteredBrokers.length === 0 ? (
-              <div className="no-results-brokers">
-                <h2>No Brokers Found</h2>
-                <p>Try adjusting your filters or search terms</p>
-                <button className="btn-clear-filters" onClick={resetFilters}>
-                  Clear Filters
-                </button>
-              </div>
-            ) : (
-              <div className="brokers-grid-dark">
-                {filteredBrokers.map((broker) => (
-                  <div key={broker._id} className="broker-card-dark">
-                    <div className="broker-image-container">
-                      {broker.photo ? (
-                        <img src={broker.photo} alt={broker.userId?.name} className="broker-photo-dark" />
-                      ) : (
-                        <div className="broker-photo-placeholder-dark">
-                          {broker.userId?.name?.charAt(0)}
-                        </div>
-                      )}
-                      <div className="broker-overlay-dark">
-                        <div className="broker-name-overlay">
-                          <h3>{broker.userId?.name}</h3>
-                          <p>{broker.specialization?.[0] || 'Real Estate Agent'}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
 
           {/* How It Works Section - Always appears at the end */}
