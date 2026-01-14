@@ -350,6 +350,33 @@ const Properties = () => {
             </div>
           </section>
 
+          {/* Ready to Find Section */}
+          <section className="ready-to-find-section">
+            <div className="ready-to-find-container">
+              <div className="ready-to-find-content">
+                <div className="ready-left">
+                  <p className="ready-subtitle">(06) Ready to Find Your Next Home?</p>
+                  <div className="ready-image-wrapper">
+                    <img 
+                      src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80" 
+                      alt="Modern luxury home" 
+                      className="ready-house-image" 
+                    />
+                  </div>
+                </div>
+                <div className="ready-right">
+                  <h2 className="ready-title">
+                    Whether you're buying, browsing, or just getting started — Propify makes it easy to take the next step with confidence.
+                  </h2>
+                  <button className="book-tour-btn">
+                    <span className="arrow-circle">→</span>
+                    Book A Tour
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* CTA Section - Orange */}
           <div className='cta-section-orange'>
             <div className='cta-content-wrapper'>
