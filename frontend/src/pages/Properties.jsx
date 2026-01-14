@@ -144,258 +144,257 @@ const Properties = () => {
       <Navbar />
       <PageTransition>
         <div className='properties-page-modern'>
-         {/* Hero Section */}
-<>
-  <div className='properties-hero-modern'>
-    <div className='hero-overlay'></div>
-    <div className='hero-content-modern'>
-      <span className='welcome-text'>Choice Around The World</span>
-      <h1 className='hero-title'>
-        Find Your Best Investment
-      </h1>
-      <p className='hero-description'>
-        Explore a selection of high-value real estate opportunities designed for financial growth and stability
-      </p>
-    </div>
-
-    <div className='search-bar-container'>
-      <div className='search-bar-modern'>
-        <div className='search-input-group' ref={cityDropdownRef}>
-          <FaHome className='home-icon' />
-          <input
-            type='text'
-            value={cityInput}
-            onChange={handleCityInputChange}
-            onFocus={handleCityInputFocus}
-            placeholder="Enter city"
-            className='city-search-input'
-          />
-          {showCitySuggestions && citySuggestions.length > 0 && (
-            <ul className='city-dropdown-modern'>
-              {citySuggestions.slice(0, 8).map((city, index) => (
-                <li key={index} onClick={() => handleCitySelect(city)}>
-                  {city}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-        
-        <select 
-          name='propertyType'
-          value={filters.propertyType}
-          onChange={handleFilterChange}
-          className='search-property-select'
-        >
-          <option value=''>Property type</option>
-          <option value='apartment'>Apartment</option>
-          <option value='villa'>Villa</option>
-          <option value='house'>House</option>
-          <option value='flat'>Flat</option>
-          <option value='commercial'>Commercial</option>
-        </select>
-
-        <select 
-          name='bedrooms'
-          value={filters.bedrooms}
-          onChange={handleFilterChange}
-          className='search-property-select'
-        >
-          <option value=''>Bedrooms</option>
-          <option value='1'>1 BHK</option>
-          <option value='2'>2 BHK</option>
-          <option value='3'>3 BHK</option>
-          <option value='4'>4+ BHK</option>
-        </select>
-        
-        <button className='search-btn-modern' onClick={handleSearch}>
-          Search Property
-        </button>
-      </div>
-
-      <button 
-        className='advanced-search-link'
-        onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-      >
-        <FaChevronDown className={`advanced-search-icon ${showAdvancedFilters ? 'rotate' : ''}`} />
-        {showAdvancedFilters ? 'Hide Filters' : 'Advanced Search'}
-      </button>
-    </div>
-  </div>
-
-  {/* Advanced Filters - Now Outside Hero Section */}
-  {showAdvancedFilters && (
-    <div className='advanced-filters-section'>
-      <div className='advanced-filters-dropdown'>
-        <div className='advanced-filters-grid'>
-          {/* Property For */}
-          <div className='filter-item'>
-            <label>Property For</label>
-            <select 
-              name='propertyFor'
-              value={filters.propertyFor}
-              onChange={handleFilterChange}
-            >
-              <option value=''>Buy or Rent</option>
-              <option value='buy'>Buy</option>
-              <option value='rent'>Rent</option>
-            </select>
-          </div>
-
-          {/* Bathrooms */}
-          <div className='filter-item'>
-            <label>Bathrooms</label>
-            <select 
-              name='bathrooms'
-              value={filters.bathrooms}
-              onChange={handleFilterChange}
-            >
-              <option value=''>Any</option>
-              <option value='1'>1</option>
-              <option value='2'>2</option>
-              <option value='3'>3</option>
-              <option value='4'>4+</option>
-            </select>
-          </div>
-
-          {/* Price Range Slider */}
-          <div className='filter-item filter-item-full'>
-            <label>
-              Price Range {filters.propertyFor === 'rent' ? '(₹/month)' : '(₹)'}
-            </label>
-            <div className='price-range-display'>
-              <span className='price-value'>
-                {filters.propertyFor === 'rent' 
-                  ? `₹${filters.minPrice ? (filters.minPrice / 1000).toFixed(0) : '0'}K`
-                  : `₹${filters.minPrice ? (filters.minPrice / 100000).toFixed(0) : '0'}L`
-                }
-              </span>
-              <span className='price-separator'>-</span>
-              <span className='price-value'>
-                {filters.propertyFor === 'rent'
-                  ? `₹${filters.maxPrice ? (filters.maxPrice / 1000).toFixed(0) : '100'}K`
-                  : filters.maxPrice >= 10000000
-                    ? `₹${(filters.maxPrice / 10000000).toFixed(1)}Cr`
-                    : `₹${filters.maxPrice ? (filters.maxPrice / 100000).toFixed(0) : '500'}L`
-                }
-              </span>
+          {/* Hero Section */}
+          <div className='properties-hero-modern'>
+            <div className='hero-overlay'></div>
+            <div className='hero-content-modern'>
+              <span className='welcome-text'>Choice Around The World</span>
+              <h1 className='hero-title'>
+                Find Your Best Investment
+              </h1>
+              <p className='hero-description'>
+                Explore a selection of high-value real estate opportunities designed for financial growth and stability
+              </p>
             </div>
-            
-            {/* Dual Range Slider */}
-            <div className='range-slider-container'>
-              <input
-                type='range'
-                className='range-slider range-slider-min'
-                min={filters.propertyFor === 'rent' ? '5000' : '500000'}
-                max={filters.propertyFor === 'rent' ? '100000' : '50000000'}
-                step={filters.propertyFor === 'rent' ? '1000' : '100000'}
-                value={filters.minPrice || (filters.propertyFor === 'rent' ? '5000' : '500000')}
-                onChange={(e) => {
-                  const value = parseInt(e.target.value);
-                  if (value < (filters.maxPrice || (filters.propertyFor === 'rent' ? 100000 : 50000000))) {
-                    setFilters({ ...filters, minPrice: value });
-                  }
-                }}
-              />
-              <input
-                type='range'
-                className='range-slider range-slider-max'
-                min={filters.propertyFor === 'rent' ? '5000' : '500000'}
-                max={filters.propertyFor === 'rent' ? '100000' : '50000000'}
-                step={filters.propertyFor === 'rent' ? '1000' : '100000'}
-                value={filters.maxPrice || (filters.propertyFor === 'rent' ? '100000' : '50000000')}
-                onChange={(e) => {
-                  const value = parseInt(e.target.value);
-                  if (value > (filters.minPrice || (filters.propertyFor === 'rent' ? 5000 : 500000))) {
-                    setFilters({ ...filters, maxPrice: value });
-                  }
-                }}
-              />
-              <div className='range-slider-track'>
-                <div 
-                  className='range-slider-progress'
-                  style={{
-                    left: `${((filters.minPrice || (filters.propertyFor === 'rent' ? 5000 : 500000)) - (filters.propertyFor === 'rent' ? 5000 : 500000)) / ((filters.propertyFor === 'rent' ? 100000 : 50000000) - (filters.propertyFor === 'rent' ? 5000 : 500000)) * 100}%`,
-                    right: `${100 - ((filters.maxPrice || (filters.propertyFor === 'rent' ? 100000 : 50000000)) - (filters.propertyFor === 'rent' ? 5000 : 500000)) / ((filters.propertyFor === 'rent' ? 100000 : 50000000) - (filters.propertyFor === 'rent' ? 5000 : 500000)) * 100}%`
-                  }}
-                ></div>
+
+            <div className='search-bar-container'>
+              <div className='search-bar-modern'>
+                <div className='search-input-group' ref={cityDropdownRef}>
+                  <FaHome className='home-icon' />
+                  <input
+                    type='text'
+                    value={cityInput}
+                    onChange={handleCityInputChange}
+                    onFocus={handleCityInputFocus}
+                    placeholder="Enter city"
+                    className='city-search-input'
+                  />
+                  {showCitySuggestions && citySuggestions.length > 0 && (
+                    <ul className='city-dropdown-modern'>
+                      {citySuggestions.slice(0, 8).map((city, index) => (
+                        <li key={index} onClick={() => handleCitySelect(city)}>
+                          {city}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+                
+                <select 
+                  name='propertyType'
+                  value={filters.propertyType}
+                  onChange={handleFilterChange}
+                  className='search-property-select'
+                >
+                  <option value=''>Property type</option>
+                  <option value='apartment'>Apartment</option>
+                  <option value='villa'>Villa</option>
+                  <option value='house'>House</option>
+                  <option value='flat'>Flat</option>
+                  <option value='commercial'>Commercial</option>
+                </select>
+
+                <select 
+                  name='bedrooms'
+                  value={filters.bedrooms}
+                  onChange={handleFilterChange}
+                  className='search-property-select'
+                >
+                  <option value=''>Bedrooms</option>
+                  <option value='1'>1 BHK</option>
+                  <option value='2'>2 BHK</option>
+                  <option value='3'>3 BHK</option>
+                  <option value='4'>4+ BHK</option>
+                </select>
+                
+                <button className='search-btn-modern' onClick={handleSearch}>
+                  Search Property
+                </button>
+              </div>
+
+              <button 
+                className='advanced-search-link'
+                onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
+              >
+                <FaChevronDown className={`advanced-search-icon ${showAdvancedFilters ? 'rotate' : ''}`} />
+                {showAdvancedFilters ? 'Hide Filters' : 'Advanced Search'}
+              </button>
+            </div>
+          </div>
+
+          {/* Advanced Filters - Now Outside Hero Section */}
+          {showAdvancedFilters && (
+            <div className='advanced-filters-section'>
+              <div className='advanced-filters-dropdown'>
+                <div className='advanced-filters-grid'>
+                  {/* Property For */}
+                  <div className='filter-item'>
+                    <label>Property For</label>
+                    <select 
+                      name='propertyFor'
+                      value={filters.propertyFor}
+                      onChange={handleFilterChange}
+                    >
+                      <option value=''>Buy or Rent</option>
+                      <option value='buy'>Buy</option>
+                      <option value='rent'>Rent</option>
+                    </select>
+                  </div>
+
+                  {/* Bathrooms */}
+                  <div className='filter-item'>
+                    <label>Bathrooms</label>
+                    <select 
+                      name='bathrooms'
+                      value={filters.bathrooms}
+                      onChange={handleFilterChange}
+                    >
+                      <option value=''>Any</option>
+                      <option value='1'>1</option>
+                      <option value='2'>2</option>
+                      <option value='3'>3</option>
+                      <option value='4'>4+</option>
+                    </select>
+                  </div>
+
+                  {/* Price Range Slider */}
+                  <div className='filter-item filter-item-full'>
+                    <label>
+                      Price Range {filters.propertyFor === 'rent' ? '(₹/month)' : '(₹)'}
+                    </label>
+                    <div className='price-range-display'>
+                      <span className='price-value'>
+                        {filters.propertyFor === 'rent' 
+                          ? `₹${filters.minPrice ? (filters.minPrice / 1000).toFixed(0) : '0'}K`
+                          : `₹${filters.minPrice ? (filters.minPrice / 100000).toFixed(0) : '0'}L`
+                        }
+                      </span>
+                      <span className='price-separator'>-</span>
+                      <span className='price-value'>
+                        {filters.propertyFor === 'rent'
+                          ? `₹${filters.maxPrice ? (filters.maxPrice / 1000).toFixed(0) : '100'}K`
+                          : filters.maxPrice >= 10000000
+                            ? `₹${(filters.maxPrice / 10000000).toFixed(1)}Cr`
+                            : `₹${filters.maxPrice ? (filters.maxPrice / 100000).toFixed(0) : '500'}L`
+                        }
+                      </span>
+                    </div>
+                    
+                    {/* Dual Range Slider */}
+                    <div className='range-slider-container'>
+                      <input
+                        type='range'
+                        className='range-slider range-slider-min'
+                        min={filters.propertyFor === 'rent' ? '5000' : '500000'}
+                        max={filters.propertyFor === 'rent' ? '100000' : '50000000'}
+                        step={filters.propertyFor === 'rent' ? '1000' : '100000'}
+                        value={filters.minPrice || (filters.propertyFor === 'rent' ? '5000' : '500000')}
+                        onChange={(e) => {
+                          const value = parseInt(e.target.value);
+                          if (value < (filters.maxPrice || (filters.propertyFor === 'rent' ? 100000 : 50000000))) {
+                            setFilters({ ...filters, minPrice: value });
+                          }
+                        }}
+                      />
+                      <input
+                        type='range'
+                        className='range-slider range-slider-max'
+                        min={filters.propertyFor === 'rent' ? '5000' : '500000'}
+                        max={filters.propertyFor === 'rent' ? '100000' : '50000000'}
+                        step={filters.propertyFor === 'rent' ? '1000' : '100000'}
+                        value={filters.maxPrice || (filters.propertyFor === 'rent' ? '100000' : '50000000')}
+                        onChange={(e) => {
+                          const value = parseInt(e.target.value);
+                          if (value > (filters.minPrice || (filters.propertyFor === 'rent' ? 5000 : 500000))) {
+                            setFilters({ ...filters, maxPrice: value });
+                          }
+                        }}
+                      />
+                      <div className='range-slider-track'>
+                        <div 
+                          className='range-slider-progress'
+                          style={{
+                            left: `${((filters.minPrice || (filters.propertyFor === 'rent' ? 5000 : 500000)) - (filters.propertyFor === 'rent' ? 5000 : 500000)) / ((filters.propertyFor === 'rent' ? 100000 : 50000000) - (filters.propertyFor === 'rent' ? 5000 : 500000)) * 100}%`,
+                            right: `${100 - ((filters.maxPrice || (filters.propertyFor === 'rent' ? 100000 : 50000000)) - (filters.propertyFor === 'rent' ? 5000 : 500000)) / ((filters.propertyFor === 'rent' ? 100000 : 50000000) - (filters.propertyFor === 'rent' ? 5000 : 500000)) * 100}%`
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+
+                    {/* Quick Price Options */}
+                    <div className='quick-price-options'>
+                      {filters.propertyFor === 'rent' ? (
+                        <>
+                          <button 
+                            className={`price-option ${filters.minPrice === 5000 && filters.maxPrice === 15000 ? 'active' : ''}`}
+                            onClick={() => setFilters({ ...filters, minPrice: 5000, maxPrice: 15000 })}
+                          >
+                            ₹5K - ₹15K
+                          </button>
+                          <button 
+                            className={`price-option ${filters.minPrice === 15000 && filters.maxPrice === 30000 ? 'active' : ''}`}
+                            onClick={() => setFilters({ ...filters, minPrice: 15000, maxPrice: 30000 })}
+                          >
+                            ₹15K - ₹30K
+                          </button>
+                          <button 
+                            className={`price-option ${filters.minPrice === 30000 && filters.maxPrice === 50000 ? 'active' : ''}`}
+                            onClick={() => setFilters({ ...filters, minPrice: 30000, maxPrice: 50000 })}
+                          >
+                            ₹30K - ₹50K
+                          </button>
+                          <button 
+                            className={`price-option ${filters.minPrice === 50000 && filters.maxPrice === 100000 ? 'active' : ''}`}
+                            onClick={() => setFilters({ ...filters, minPrice: 50000, maxPrice: 100000 })}
+                          >
+                            ₹50K+
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button 
+                            className={`price-option ${filters.minPrice === 2500000 && filters.maxPrice === 5000000 ? 'active' : ''}`}
+                            onClick={() => setFilters({ ...filters, minPrice: 2500000, maxPrice: 5000000 })}
+                          >
+                            ₹25L - ₹50L
+                          </button>
+                          <button 
+                            className={`price-option ${filters.minPrice === 5000000 && filters.maxPrice === 10000000 ? 'active' : ''}`}
+                            onClick={() => setFilters({ ...filters, minPrice: 5000000, maxPrice: 10000000 })}
+                          >
+                            ₹50L - ₹1Cr
+                          </button>
+                          <button 
+                            className={`price-option ${filters.minPrice === 10000000 && filters.maxPrice === 25000000 ? 'active' : ''}`}
+                            onClick={() => setFilters({ ...filters, minPrice: 10000000, maxPrice: 25000000 })}
+                          >
+                            ₹1Cr - ₹2.5Cr
+                          </button>
+                          <button 
+                            className={`price-option ${filters.minPrice === 25000000 && filters.maxPrice === 50000000 ? 'active' : ''}`}
+                            onClick={() => setFilters({ ...filters, minPrice: 25000000, maxPrice: 50000000 })}
+                          >
+                            ₹2.5Cr+
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className='filter-actions'>
+                    <button className='reset-filter-btn-hero' onClick={handleReset}>
+                      Reset All
+                    </button>
+                    <button className='apply-filter-btn-hero' onClick={handleSearch}>
+                      Apply Filters
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
+          )}
 
-            {/* Quick Price Options */}
-            <div className='quick-price-options'>
-              {filters.propertyFor === 'rent' ? (
-                <>
-                  <button 
-                    className={`price-option ${filters.minPrice === 5000 && filters.maxPrice === 15000 ? 'active' : ''}`}
-                    onClick={() => setFilters({ ...filters, minPrice: 5000, maxPrice: 15000 })}
-                  >
-                    ₹5K - ₹15K
-                  </button>
-                  <button 
-                    className={`price-option ${filters.minPrice === 15000 && filters.maxPrice === 30000 ? 'active' : ''}`}
-                    onClick={() => setFilters({ ...filters, minPrice: 15000, maxPrice: 30000 })}
-                  >
-                    ₹15K - ₹30K
-                  </button>
-                  <button 
-                    className={`price-option ${filters.minPrice === 30000 && filters.maxPrice === 50000 ? 'active' : ''}`}
-                    onClick={() => setFilters({ ...filters, minPrice: 30000, maxPrice: 50000 })}
-                  >
-                    ₹30K - ₹50K
-                  </button>
-                  <button 
-                    className={`price-option ${filters.minPrice === 50000 && filters.maxPrice === 100000 ? 'active' : ''}`}
-                    onClick={() => setFilters({ ...filters, minPrice: 50000, maxPrice: 100000 })}
-                  >
-                    ₹50K+
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button 
-                    className={`price-option ${filters.minPrice === 2500000 && filters.maxPrice === 5000000 ? 'active' : ''}`}
-                    onClick={() => setFilters({ ...filters, minPrice: 2500000, maxPrice: 5000000 })}
-                  >
-                    ₹25L - ₹50L
-                  </button>
-                  <button 
-                    className={`price-option ${filters.minPrice === 5000000 && filters.maxPrice === 10000000 ? 'active' : ''}`}
-                    onClick={() => setFilters({ ...filters, minPrice: 5000000, maxPrice: 10000000 })}
-                  >
-                    ₹50L - ₹1Cr
-                  </button>
-                  <button 
-                    className={`price-option ${filters.minPrice === 10000000 && filters.maxPrice === 25000000 ? 'active' : ''}`}
-                    onClick={() => setFilters({ ...filters, minPrice: 10000000, maxPrice: 25000000 })}
-                  >
-                    ₹1Cr - ₹2.5Cr
-                  </button>
-                  <button 
-                    className={`price-option ${filters.minPrice === 25000000 && filters.maxPrice === 50000000 ? 'active' : ''}`}
-                    onClick={() => setFilters({ ...filters, minPrice: 25000000, maxPrice: 50000000 })}
-                  >
-                    ₹2.5Cr+
-                  </button>
-                </>
-              )}
-            </div>
-          </div>
-
-          {/* Action Buttons */}
-          <div className='filter-actions'>
-            <button className='reset-filter-btn-hero' onClick={handleReset}>
-              Reset All
-            </button>
-            <button className='apply-filter-btn-hero' onClick={handleSearch}>
-              Apply Filters
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  )}
-</>
           {/* Properties Grid */}
           <div className='properties-container-modern'>
             {loading ? (
@@ -471,7 +470,78 @@ const Properties = () => {
               </>
             )}
           </div>
-         
+
+          {/* Honored Customers - NOW ALWAYS VISIBLE AT FIXED POSITION */}
+          <section className="honored-customers-section">
+            <div className="honored-customers-container">
+              <h1 className="honored-customers-title">
+                Our <span className="highlight">Honored Customers</span>
+              </h1>
+
+              <div className="year-section">
+                <div className="year-header">
+                  <h2 className="year">2022</h2>
+                  <span className="count">3/64 <span className="arrow">↗</span></span>
+                </div>
+                
+                <div className="customers-grid">
+                  <div className="customer-card">
+                    <img src="/path-to-villa-image.jpg" alt="Villa" className="property-image" />
+                    <div className="customer-info">
+                      <img src="/path-to-avatar.jpg" alt="Christopher Thomas" className="avatar" />
+                      <div className="customer-details">
+                        <h3 className="customer-name">Christopher Thomas</h3>
+                        <p className="customer-role">CEO Family Planing</p>
+                      </div>
+                      <span className="amount">$168k</span>
+                    </div>
+                  </div>
+
+                  <div className="customer-card">
+                    <img src="/path-to-mansion-image.jpg" alt="Mansion" className="property-image" />
+                    <div className="customer-info">
+                      <img src="/path-to-avatar2.jpg" alt="James Bond" className="avatar" />
+                      <div className="customer-details">
+                        <h3 className="customer-name">James Bond</h3>
+                        <p className="customer-role">CEO Family Planing</p>
+                      </div>
+                      <span className="amount">$146k</span>
+                    </div>
+                  </div>
+
+                  <div className="customer-card">
+                    <img src="/path-to-modern-house-image.jpg" alt="Modern House" className="property-image" />
+                    <div className="customer-info">
+                      <img src="/path-to-avatar3.jpg" alt="David Jhon" className="avatar" />
+                      <div className="customer-details">
+                        <h3 className="customer-name">David Jhon</h3>
+                        <p className="customer-role">CEO Family Planing</p>
+                      </div>
+                      <span className="amount">$185k</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="year-section">
+                <div className="year-header">
+                  <h2 className="year">2023</h2>
+                  <span className="count-only">38</span>
+                </div>
+              </div>
+
+              <div className="year-section">
+                <div className="year-header">
+                  <h2 className="year">2024</h2>
+                  <span className="count-only">42</span>
+                </div>
+              </div>
+
+              <button className="view-all-btn">
+                View All <span className="arrow">↗</span>
+              </button>
+            </div>
+          </section>
 
           {/* CTA Section - Orange */}
           <div className='cta-section-orange'>
@@ -486,77 +556,7 @@ const Properties = () => {
               </div>
             </div>
           </div>
-          {/* Honored Customers */}
-           <section className="honored-customers-section">
-              <div className="honored-customers-container">
-    <h1 className="honored-customers-title">
-      Our <span className="highlight">Honored Customers</span>
-    </h1>
 
-    <div className="year-section">
-      <div className="year-header">
-        <h2 className="year">2022</h2>
-        <span className="count">3/64 <span className="arrow">↗</span></span>
-      </div>
-      
-      <div className="customers-grid">
-        <div className="customer-card">
-          <img src="/path-to-villa-image.jpg" alt="Villa" className="property-image" />
-          <div className="customer-info">
-            <img src="/path-to-avatar.jpg" alt="Christopher Thomas" className="avatar" />
-            <div className="customer-details">
-              <h3 className="customer-name">Christopher Thomas</h3>
-              <p className="customer-role">CEO Family Planing</p>
-            </div>
-            <span className="amount">$168k</span>
-          </div>
-        </div>
-
-        <div className="customer-card">
-          <img src="/path-to-mansion-image.jpg" alt="Mansion" className="property-image" />
-          <div className="customer-info">
-            <img src="/path-to-avatar2.jpg" alt="James Bond" className="avatar" />
-            <div className="customer-details">
-              <h3 className="customer-name">James Bond</h3>
-              <p className="customer-role">CEO Family Planing</p>
-            </div>
-            <span className="amount">$146k</span>
-          </div>
-        </div>
-
-        <div className="customer-card">
-          <img src="/path-to-modern-house-image.jpg" alt="Modern House" className="property-image" />
-          <div className="customer-info">
-            <img src="/path-to-avatar3.jpg" alt="David Jhon" className="avatar" />
-            <div className="customer-details">
-              <h3 className="customer-name">David Jhon</h3>
-              <p className="customer-role">CEO Family Planing</p>
-            </div>
-            <span className="amount">$185k</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div className="year-section">
-      <div className="year-header">
-        <h2 className="year">2023</h2>
-        <span className="count-only">38</span>
-      </div>
-    </div>
-
-    <div className="year-section">
-      <div className="year-header">
-        <h2 className="year">2024</h2>
-        <span className="count-only">42</span>
-      </div>
-    </div>
-
-    <button className="view-all-btn">
-      View All <span className="arrow">↗</span>
-    </button>
-  </div>
-</section>
           {/* Footer Section - Dark */}
           <div className='footer-section-dark'>
             <div className='footer-container'>
