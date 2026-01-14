@@ -48,15 +48,12 @@
 }
 
 .hero-title {
-  font-size: clamp(4.5rem, 9vw, 8rem); /* Increased from clamp(3.5rem, 7vw, 6.5rem) */
-  font-weight: 900;
-  line-height: 1.1; /* Tighter line height for bigger text */
-  margin-bottom: 40px; /* Increased from 35px */
-  color: #ffffff;
-  letter-spacing: 3px; /* Increased from 2px */
-  text-transform: uppercase;
-  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.6); /* Stronger shadow for bigger text */
-  word-spacing: 0.3em;
+    color: #fff;
+    color: var(--card-white);
+    font-size: 8.5rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;; /* Increased from clamp(3.5rem, 7vw, 6.5rem) */
 }
 
 .hero-title br {
@@ -562,10 +559,6 @@
   
   .quick-price-options {
     grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .hero-title {
-    font-size: clamp(3rem, 8vw, 4.5rem);
   }
 }
 /* ============================================
