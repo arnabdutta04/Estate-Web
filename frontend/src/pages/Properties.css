@@ -68,59 +68,41 @@
 }
 
 /* ============================================
-   LIQUID GLASS SEARCH SECTION - ALL FILTERS
+   LIQUID GLASS SEARCH SECTION - SINGLE ROW
    ============================================ */
 .search-bar-container {
   position: absolute;
-  bottom: -120px;
+  bottom: -50px;
   left: 50%;
   transform: translateX(-50%);
-  max-width: 1200px;
+  max-width: 1300px;
   width: 90%;
   z-index: 10;
   display: flex;
   flex-direction: column;
 }
 
-/* Liquid Glass Search Bar - Expanded */
+/* Liquid Glass Search Bar - Single Row Design */
 .search-bar-modern {
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
   border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 30px;
+  border-radius: 80px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
               0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* First Row - Main Search */
-.search-row-main {
+  padding: 8px;
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr auto;
-  gap: 12px;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 8px;
   align-items: center;
 }
 
-/* Second Row - Additional Filters */
-.search-row-filters {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-/* Third Row - Price Range */
+/* Remove the row classes */
+.search-row-main,
+.search-row-filters,
 .search-row-price {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  display: contents;
 }
 
 .search-input-group {
@@ -132,7 +114,7 @@
 
 .home-icon {
   position: absolute;
-  left: 20px;
+  left: 25px;
   font-size: 20px;
   color: rgba(255, 255, 255, 0.7);
   pointer-events: none;
@@ -143,23 +125,21 @@
 .search-property-select,
 .search-filter-select {
   width: 100%;
-  padding: 16px 20px;
-  background: rgba(255, 255, 255, 0.12);
+  padding: 18px 25px;
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 60px;
   color: #fff;
   font-size: 15px;
   transition: all 0.3s ease;
 }
 
 .city-search-input {
-  padding-left: 55px;
+  padding-left: 60px;
 }
 
-.city-search-input::placeholder,
-.search-property-select option:first-child,
-.search-filter-select option:first-child {
+.city-search-input::placeholder {
   color: rgba(255, 255, 255, 0.6);
   font-weight: 400;
 }
@@ -168,8 +148,8 @@
 .search-property-select:focus,
 .search-filter-select:focus {
   outline: none;
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* Dropdown Select Styling */
@@ -179,8 +159,8 @@
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 20px center;
-  padding-right: 45px;
+  background-position: right 25px center;
+  padding-right: 50px;
 }
 
 .search-property-select option,
@@ -224,11 +204,11 @@
 
 /* Search Button - Black Pill */
 .search-btn-modern {
-  padding: 16px 45px;
+  padding: 18px 50px;
   background: #000;
   color: white;
   border: none;
-  border-radius: 15px;
+  border-radius: 60px;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
@@ -238,18 +218,17 @@
 
 .search-btn-modern:hover {
   background: #1a1a1a;
-  transform: translateY(-2px);
+  transform: scale(1.02);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* Price Range Label */
-.price-range-label {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 5px;
+/* Hide all advanced filter elements */
+.price-range-label,
+.price-range-display,
+.range-slider-container,
+.quick-price-options,
+.reset-btn-search {
+  display: none;
 }
 
 /* Price Range Display */
@@ -407,7 +386,7 @@
    PROPERTIES CONTAINER - ADJUSTED SPACING
    ============================================ */
 .properties-container-modern {
-  padding: 180px 5% 100px;
+  padding: 120px 5% 100px;
   background: #f5f5f0;
 }
 
