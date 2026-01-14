@@ -5,7 +5,7 @@
 }
 
 /* ============================================
-   HERO SECTION - LUXURY DARK HOUSE STYLE
+   HERO SECTION - LUXURY STYLE
    ============================================ */
 .properties-hero-modern {
   position: relative;
@@ -35,74 +35,51 @@
   max-width: 1400px;
   width: 100%;
   text-align: center;
-  padding: 150px 5% 280px;
+  padding: 180px 5% 80px;
 }
 
 .welcome-text {
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  margin-bottom: 30px;
-  color: rgba(255, 255, 255, 0.85);
-  font-weight: 500;
-  display: block;
+  display: none;
 }
 
-.hero-title {
+.hero-title-large {
   color: #fff;
-  font-size: clamp(3rem, 8vw, 7rem);
+  font-size: clamp(3.5rem, 10vw, 8rem);
   font-weight: 600;
-  letter-spacing: -2px;
+  letter-spacing: -3px;
   line-height: 1.1;
-  margin-bottom: 30px;
+  margin-bottom: 0;
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .hero-description {
-  font-size: 18px;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.7;
-  max-width: 700px;
-  margin: 0 auto 50px;
   display: none;
 }
 
 /* ============================================
-   LIQUID GLASS SEARCH SECTION - SINGLE ROW
+   SEARCH BAR - BELOW HERO STYLE
    ============================================ */
-.search-bar-container {
-  position: absolute;
-  bottom: -50px;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 1300px;
-  width: 90%;
+.search-bar-container-below {
+  position: relative;
   z-index: 10;
-  display: flex;
-  flex-direction: column;
+  max-width: 1100px;
+  width: 85%;
+  margin: 50px auto 0;
 }
 
-/* Liquid Glass Search Bar - Single Row Design */
+/* Dark Horizontal Search Bar */
 .search-bar-modern {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 80px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
-              0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-  padding: 8px;
+  background: rgba(30, 40, 55, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 100px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  padding: 10px 12px;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr auto;
-  gap: 8px;
+  grid-template-columns: 180px 180px 180px 1fr auto;
+  gap: 12px;
   align-items: center;
-}
-
-/* Remove the row classes */
-.search-row-main,
-.search-row-filters,
-.search-row-price {
-  display: contents;
 }
 
 .search-input-group {
@@ -113,60 +90,52 @@
 }
 
 .home-icon {
-  position: absolute;
-  left: 25px;
-  font-size: 20px;
-  color: rgba(255, 255, 255, 0.7);
-  pointer-events: none;
-  z-index: 1;
+  display: none;
 }
 
 .city-search-input,
 .search-property-select,
-.search-filter-select {
+.search-text-input {
   width: 100%;
-  padding: 18px 25px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 60px;
-  color: #fff;
+  padding: 16px 22px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.9);
   font-size: 15px;
   transition: all 0.3s ease;
+  outline: none;
 }
 
-.city-search-input {
-  padding-left: 60px;
-}
-
-.city-search-input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+.city-search-input::placeholder,
+.search-text-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
   font-weight: 400;
 }
 
 .city-search-input:focus,
 .search-property-select:focus,
-.search-filter-select:focus {
-  outline: none;
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
+.search-text-input:focus {
+  color: #fff;
 }
 
 /* Dropdown Select Styling */
-.search-property-select,
-.search-filter-select {
+.search-property-select {
   cursor: pointer;
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 25px center;
-  padding-right: 50px;
+  background-position: right 22px center;
+  padding-right: 45px;
 }
 
-.search-property-select option,
-.search-filter-select option {
-  background: #1a2332;
+.search-property-select option {
+  background: #1e2837;
   color: #fff;
+}
+
+/* Search Text Input */
+.search-text-input {
+  padding-left: 22px;
 }
 
 /* City Dropdown */
@@ -175,7 +144,7 @@
   top: calc(100% + 15px);
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 20px;
@@ -204,11 +173,11 @@
 
 /* Search Button - Black Pill */
 .search-btn-modern {
-  padding: 18px 50px;
+  padding: 16px 45px;
   background: #000;
   color: white;
   border: none;
-  border-radius: 60px;
+  border-radius: 100px;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
@@ -219,171 +188,11 @@
 .search-btn-modern:hover {
   background: #1a1a1a;
   transform: scale(1.02);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
-
-/* Hide all advanced filter elements */
-.price-range-label,
-.price-range-display,
-.range-slider-container,
-.quick-price-options,
-.reset-btn-search {
-  display: none;
-}
-
-/* Price Range Display */
-.price-range-display {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 14px 20px;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  margin-bottom: 15px;
-}
-
-.price-value {
-  font-size: 18px;
-  font-weight: 700;
-  color: #fff;
-}
-
-.price-separator {
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-/* Range Slider Container */
-.range-slider-container {
-  position: relative;
-  height: 35px;
-  margin-bottom: 15px;
-}
-
-.range-slider {
-  position: absolute;
-  width: 100%;
-  height: 5px;
-  background: transparent;
-  pointer-events: none;
-  -webkit-appearance: none;
-  appearance: none;
-  outline: none;
-}
-
-.range-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  background: #fff;
-  cursor: pointer;
-  border-radius: 50%;
-  pointer-events: all;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-  border: none;
-  transition: all 0.2s ease;
-}
-
-.range-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-}
-
-.range-slider::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  background: #fff;
-  cursor: pointer;
-  border-radius: 50%;
-  pointer-events: all;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-  border: none;
-  transition: all 0.2s ease;
-}
-
-.range-slider::-moz-range-thumb:hover {
-  transform: scale(1.15);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-}
-
-.range-slider-track {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 3px;
-}
-
-.range-slider-progress {
-  position: absolute;
-  height: 100%;
-  background: linear-gradient(90deg, #fff, #fff);
-  border-radius: 3px;
-  transition: all 0.2s ease;
-}
-
-/* Quick Price Options */
-.quick-price-options {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
-
-.price-option {
-  padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: center;
-}
-
-.price-option:hover {
-  border-color: rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-}
-
-.price-option.active {
-  background: rgba(255, 255, 255, 0.95);
-  color: #000;
-  border-color: rgba(255, 255, 255, 0.95);
-}
-
-/* Reset Button in Search Bar */
-.reset-btn-search {
-  padding: 16px 30px;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(10px);
-  color: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 15px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.reset-btn-search:hover {
-  border-color: rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.25);
-  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 /* ============================================
-   PROPERTIES CONTAINER - ADJUSTED SPACING
+   PROPERTIES CONTAINER
    ============================================ */
 .properties-container-modern {
   padding: 120px 5% 100px;
@@ -766,44 +575,6 @@
   letter-spacing: 0px;
 }
 
-/* Responsive Design for Tailored Solutions */
-@media (max-width: 1024px) {
-  .solutions-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .solution-card:last-child {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (max-width: 768px) {
-  .tailored-solutions-section {
-    padding: 60px 5%;
-  }
-
-  .tailored-solutions-title {
-    margin-bottom: 50px;
-  }
-
-  .solutions-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .solution-card:last-child {
-    grid-column: auto;
-  }
-
-  .solution-title {
-    bottom: 30px;
-    left: 30px;
-  }
-
-  .solution-card:hover .solution-title {
-    bottom: 35px;
-  }
-}
-
 /* ============================================
    CTA SECTION
    ============================================ */
@@ -1062,11 +833,17 @@
 /* Tablets */
 @media (max-width: 1024px) {
   .search-bar-modern {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 10px;
+    padding: 12px;
   }
 
   .search-input-group {
     grid-column: 1 / -1;
+  }
+
+  .search-text-input {
+    display: none;
   }
 
   .properties-grid-modern {
@@ -1077,45 +854,61 @@
     grid-template-columns: 1fr 1fr;
     gap: 40px;
   }
+
+  .solutions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .solution-card:last-child {
+    grid-column: 1 / -1;
+  }
 }
 
 /* Mobile */
 @media (max-width: 768px) {
   .properties-hero-modern {
-    min-height: 80vh;
+    min-height: 85vh;
   }
 
   .hero-content-modern {
-    padding: 100px 5% 250px;
+    padding: 140px 5% 60px;
   }
 
-  .hero-title {
-    font-size: clamp(2.5rem, 10vw, 4rem);
+  .hero-title-large {
+    font-size: clamp(2.8rem, 12vw, 4.5rem);
+    letter-spacing: -2px;
   }
 
-  .search-bar-container {
-    bottom: -180px;
+  .search-bar-container-below {
+    width: 90%;
+    margin: 40px auto 0;
   }
 
   .search-bar-modern {
-    padding: 20px;
-  }
-
-  .search-row-main {
     grid-template-columns: 1fr;
     gap: 12px;
+    padding: 18px;
+    border-radius: 24px;
   }
 
-  .search-row-filters {
-    grid-template-columns: 1fr;
+  .search-input-group {
+    grid-column: auto;
   }
 
-  .quick-price-options {
-    grid-template-columns: repeat(2, 1fr);
+  .city-search-input,
+  .search-property-select {
+    padding: 18px 22px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .search-btn-modern {
+    width: 100%;
+    padding: 18px 35px;
   }
 
   .properties-container-modern {
-    padding: 220px 5% 60px;
+    padding: 80px 5% 60px;
   }
 
   .properties-header {
@@ -1130,12 +923,29 @@
     gap: 25px;
   }
 
-  .honored-customers-title {
-    font-size: 48px;
+  .tailored-solutions-section {
+    padding: 60px 5%;
   }
 
-  .customers-grid {
+  .tailored-solutions-title {
+    margin-bottom: 50px;
+  }
+
+  .solutions-grid {
     grid-template-columns: 1fr;
+  }
+
+  .solution-card:last-child {
+    grid-column: auto;
+  }
+
+  .solution-title {
+    bottom: 30px;
+    left: 30px;
+  }
+
+  .solution-card:hover .solution-title {
+    bottom: 35px;
   }
 
   .cta-content-wrapper {
@@ -1169,11 +979,15 @@
 /* Small Mobile */
 @media (max-width: 480px) {
   .hero-content-modern {
-    padding: 80px 5% 280px;
+    padding: 120px 5% 50px;
   }
 
-  .search-bar-container {
-    bottom: -220px;
+  .hero-title-large {
+    font-size: clamp(2.2rem, 12vw, 3.5rem);
+  }
+
+  .search-bar-container-below {
+    width: 92%;
   }
 
   .search-bar-modern {
@@ -1181,27 +995,18 @@
   }
 
   .city-search-input,
-  .search-property-select,
-  .search-filter-select {
-    padding: 14px 18px;
+  .search-property-select {
+    padding: 16px 20px;
+    font-size: 14px;
   }
 
-  .city-search-input {
-    padding-left: 50px;
-  }
-
-  .home-icon {
-    left: 18px;
-    font-size: 18px;
-  }
-
-  .search-btn-modern,
-  .reset-btn-search {
-    padding: 14px 25px;
+  .search-btn-modern {
+    padding: 16px 30px;
+    font-size: 14px;
   }
 
   .properties-container-modern {
-    padding: 260px 5% 50px;
+    padding: 70px 5% 50px;
   }
 
   .cta-text {

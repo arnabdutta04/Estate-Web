@@ -148,26 +148,21 @@ const Properties = () => {
           <div className='properties-hero-modern'>
             <div className='hero-overlay'></div>
             <div className='hero-content-modern'>
-              <span className='welcome-text'>Choice Around The World</span>
-              <h1 className='hero-title'>
-                Find Your Best Investment
+              <h1 className='hero-title-large'>
+                Experience Living<br />Beyond Luxury
               </h1>
-              <p className='hero-description'>
-                Explore a selection of high-value real estate opportunities designed for financial growth and stability
-              </p>
             </div>
 
-            {/* Simple Search Bar - Single Row */}
-            <div className='search-bar-container'>
+            {/* Search Bar - Below Hero Title */}
+            <div className='search-bar-container-below'>
               <div className='search-bar-modern'>
                 <div className='search-input-group' ref={cityDropdownRef}>
-                  <FaHome className='home-icon' />
                   <input
                     type='text'
                     value={cityInput}
                     onChange={handleCityInputChange}
                     onFocus={handleCityInputFocus}
-                    placeholder="Enter city"
+                    placeholder="Location"
                     className='city-search-input'
                   />
                   {showCitySuggestions && citySuggestions.length > 0 && (
@@ -187,7 +182,7 @@ const Properties = () => {
                   onChange={handleFilterChange}
                   className='search-property-select'
                 >
-                  <option value=''>Property type</option>
+                  <option value=''>Category</option>
                   <option value='apartment'>Apartment</option>
                   <option value='villa'>Villa</option>
                   <option value='house'>House</option>
@@ -201,12 +196,18 @@ const Properties = () => {
                   onChange={handleFilterChange}
                   className='search-property-select'
                 >
-                  <option value=''>Bedrooms</option>
+                  <option value=''>Type</option>
                   <option value='1'>1 BHK</option>
                   <option value='2'>2 BHK</option>
                   <option value='3'>3 BHK</option>
                   <option value='4'>4+ BHK</option>
                 </select>
+
+                <input
+                  type='text'
+                  placeholder='Search...'
+                  className='search-text-input'
+                />
                 
                 <button className='search-btn-modern' onClick={handleSearch}>
                   Search
