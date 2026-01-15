@@ -2,43 +2,15 @@
   background: #ffffff;
   min-height: 100vh;
   color: #1a1a1a;
-}
-/* ============================================
-   REMOVE TOP PROGRESS BAR/LINE
-   ============================================ */
-* {
-  border-top: none !important;
-}
-
-body,
-html,
-#root,
-.properties-page-modern,
-.brokers-page-nestico {
-  border-top: none !important;
-  margin-top: 0 !important;
+  position: relative;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
-/* Remove any progress bar libraries */
-#nprogress,
-#nprogress .bar,
-#nprogress .peg,
-.nprogress-custom-parent,
-.pace,
-.pace-progress,
-[id*="top-loading-bar"],
-[class*="TopLoadingBar"],
-[class*="progress-bar"],
-[class*="loading-bar"] {
-  display: none !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-  height: 0 !important;
-}
-
-body::before,
-html::before,
-#root::before {
+.properties-page-modern::before,
+.properties-page-modern::after {
   display: none !important;
 }
 
@@ -56,6 +28,12 @@ html::before,
   background: url('https://i.pinimg.com/1200x/73/75/41/737541c14598e35a5f37a337a6dc211a.jpg') center/cover no-repeat;
   padding: 120px 5% 60px 5%;
   gap: 40px;
+  margin-top: 0 !important;
+  border-top: none !important;
+}
+
+.properties-hero-modern::before {
+  content: none !important;
 }
 
 .hero-overlay {
