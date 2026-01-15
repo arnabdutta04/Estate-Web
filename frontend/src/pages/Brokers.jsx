@@ -103,7 +103,9 @@ const Brokers = () => {
       <PageTransition>
         <div className="brokers-page-nestico">
           {/* Nestico Style Hero Section */}
-          <div className="brokers-hero-nestico">
+          <div className="brokers-hero-nestico" style={{
+             backgroundImage: `url(${process.env.PUBLIC_URL}/Broker.jpg)`
+             }}>
             <div className="hero-left-content-nestico">
               <div className="hero-label-nestico">
                 <span className="hero-label-square-nestico"></span>
