@@ -1181,7 +1181,7 @@
 
 /* ================= HOW IT WORKS SECTION ================= */
 .how-it-works-section {
-  background: #fafafa;
+  background: #27ae60;
   padding: 6rem 2rem;
 }
 
@@ -1198,7 +1198,7 @@
 
 .how-it-works-label {
   font-size: 0.95rem;
-  color: #666;
+  color: #ffffff;
   font-weight: 600;
   margin: 0 0 1rem 0;
   text-transform: uppercase;
