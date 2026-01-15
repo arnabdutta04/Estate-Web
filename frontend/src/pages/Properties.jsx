@@ -445,19 +445,6 @@ const toggleAmenity = (amenity) => {
 
       {/* Filters Sidebar */}
       <div className='filters-sidebar'>
-        {/* Create Alert Box */}
-        <div className='create-alert-box'>
-          <h3 className='alert-title'>Create Real Estate Alert</h3>
-          <p className='alert-description'>
-            Create a landing page alert and never miss an opportunity to live in your dream "home"
-          </p>
-          <input 
-            type='text' 
-            placeholder='Enter Keyword' 
-            className='alert-input'
-          />
-          <button className='create-btn'>Create</button>
-        </div>
 
         {/* Price Filter */}
 <div className='filter-section'>
