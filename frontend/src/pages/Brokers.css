@@ -4,9 +4,9 @@
   background: #ffffff;
 }
 
-/* ================= NESTICO HERO SECTION ================= */
+/* ================= NESTICO HERO SECTION - FIXED ================= */
 .brokers-hero-nestico {
-  padding-top: 90px;
+  padding-top: 0;
   position: relative;
   width: 100%;
   min-height: 100vh;       
@@ -20,8 +20,9 @@
 .hero-left-content-nestico {
   width: 50%;
   min-height: 100vh;
-
-  padding: 110px 80px 80px 100px; /* TOP RIGHT BOTTOM LEFT */
+  
+  /* UPDATED PADDING - More space from top for navbar, better left alignment */
+  padding: 180px 60px 80px 120px; /* TOP RIGHT BOTTOM LEFT */
 
   display: flex;
   flex-direction: column;
@@ -34,7 +35,6 @@
     rgba(0, 0, 0, 0) 100%
   );
 }
-
 
 .hero-label-nestico {
   display: inline-flex;
@@ -63,6 +63,7 @@
   line-height: 1.2;
   color: #ffffff;
   letter-spacing: -1px;
+  max-width: 650px; /* Prevent text from going too wide */
 }
 
 .hero-subtitle-nestico {
@@ -70,6 +71,7 @@
   color: #ffffff;
   line-height: 1.7;
   margin: 0 0 3rem 0;
+  max-width: 580px; /* Keep subtitle contained */
 }
 
 .hero-search-form-nestico {
@@ -77,6 +79,7 @@
   grid-template-columns: repeat(3, 1fr) auto;
   gap: 1rem;
   margin-bottom: 2.5rem;
+  max-width: 850px; /* Prevent form from stretching too wide */
 }
 
 .hero-input-group-nestico {
@@ -138,13 +141,15 @@
 
 .hero-divider-nestico {
   width: 100%;
+  max-width: 850px;
   height: 1px;
-  background: #e5e5e5;
+  background: rgba(255, 255, 255, 0.2);
   margin: 2.5rem 0;
 }
 
 .hero-verified-section-nestico {
   margin-top: 2rem;
+  max-width: 580px;
 }
 
 .verified-title-nestico {
@@ -160,88 +165,58 @@
   color: #ffffff;
   line-height: 1.7;
   margin: 0;
-  max-width: 480px;
 }
 
-/* Hero Agents Grid - 5 Images Layout */
-.hero-right-agents-nestico {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* ================= RESPONSIVE ADJUSTMENTS ================= */
+@media (max-width: 1200px) {
+  .hero-left-content-nestico {
+    padding: 160px 50px 80px 100px;
+  }
 }
 
+@media (max-width: 1024px) {
+  .hero-left-content-nestico {
+    width: 100%;
+    padding: 140px 60px 80px 60px;
+  }
 
-.agents-grid-nestico {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, 200px);
-  gap: 1.5rem;
-  width: 100%;
-  max-width: 600px;
+  .hero-search-form-nestico {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-search-btn-nestico {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
 }
 
-.agent-card-nestico {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  background: #e5e5e5;
+@media (max-width: 768px) {
+  .hero-left-content-nestico {
+    padding: 120px 40px 60px 40px;
+  }
+
+  .hero-title-nestico {
+    font-size: 2.5rem;
+  }
+
+  .hero-search-form-nestico {
+    grid-template-columns: 1fr;
+  }
 }
 
-.agent-card-nestico:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-}
+@media (max-width: 480px) {
+  .hero-left-content-nestico {
+    padding: 100px 20px 40px 20px;
+  }
 
-/* Custom grid positioning */
-.agent-card-1 {
-  grid-column: 1;
-  grid-row: 1;
-}
+  .hero-title-nestico {
+    font-size: 2rem;
+  }
 
-.agent-card-2 {
-  grid-column: 2;
-  grid-row: 1 / 3;
-  height: 100%;
+  .hero-subtitle-nestico {
+    font-size: 0.95rem;
+  }
 }
-
-.agent-card-3 {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.agent-card-4 {
-  grid-column: 1;
-  grid-row: 3;
-}
-
-.agent-card-5 {
-  grid-column: 2;
-  grid-row: 3;
-}
-
-.agent-photo-nestico {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.agent-photo-placeholder-nestico {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3.5rem;
-  font-weight: 700;
-  color: #fff;
-  text-transform: uppercase;
-}
-
 /* ================= GRNATA STYLE BROKERS LIST SECTION ================= */
 .brokers-list-section-grnata {
   background: #ffffff;
