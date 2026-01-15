@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import { FaSearch, FaArrowLeft, FaArrowRight, FaCheckCircle, FaUserTie, FaAward, FaChartLine, FaClipboardList, FaUsers, FaComments } from 'react-icons/fa';
+import { FaSearch, FaArrowLeft, FaArrowRight, FaCheckCircle, FaUserTie, FaAward, FaChartLine, FaClipboardList, FaUsers, FaComments, FaHome, FaBuilding, FaUserFriends } from 'react-icons/fa';
 import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
 import './Brokers.css';
@@ -110,9 +111,14 @@ const Brokers = () => {
                 <span>FIND YOUR TRUSTED LOCAL AGENT</span>
               </div>
               
-              <h1 className="hero-title-nestico">
-                Your perfect 🏡 home starts with the right 👥 agent
-              </h1>
+              // Alternative with building icon
+<h1 className="hero-title-nestico">
+  Your perfect <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+    <FaBuilding style={{ color: '#a3e635', fontSize: '0.9em' }} />
+  </span> home starts with the right <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+    <FaUserFriends style={{ color: '#6366f1', fontSize: '0.9em' }} />
+  </span> agent
+</h1>
               
               <p className="hero-subtitle-nestico">
                 Need expert help to choose the right property?<br />
