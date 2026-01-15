@@ -441,11 +441,6 @@ const toggleAmenity = (amenity) => {
             Search
           </button>
         </div>
-      </div>
-
-      {/* Filters Sidebar */}
-      <div className='filters-sidebar'>
-
         {/* Price Filter */}
 <div className='filter-section'>
   <div className='filter-header'>
