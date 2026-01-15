@@ -14,13 +14,7 @@ const Properties = () => {
   const [pagination, setPagination] = useState({ currentPage: 1, totalPages: 1 });
   const [activeTab, setActiveTab] = useState('rent');
   const [priceRange, setPriceRange] = useState([1000, 5000]);
-  const [selectedBedrooms, setSelectedBedrooms] = useState('1');
-  const [ setSelectedAmenities] = useState({
-    furnished: true,
-    petAllowed: true,
-    parkingSlot: false,
-    kitchen: false
-  });
+  const [selectedBedrooms, setSelectedBedrooms] = useState('1');;
  const [selectedBathrooms, setSelectedBathrooms] = useState('');
 const [searchKeyword, setSearchKeyword] = useState('');
 const [selectedLocation, setSelectedLocation] = useState('');
@@ -47,10 +41,7 @@ const [selectedFacilities, setSelectedFacilities] = useState({
     bathrooms: '',
     propertyFor: 'rent'
   });
-
-  const [cityInput, setCityInput] = useState('');
   const [ setShowCitySuggestions] = useState(false);
-  const [setCitySuggestions] = useState([]);
   const cityDropdownRef = useRef(null);
 
   const cities = [
