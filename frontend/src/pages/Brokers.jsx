@@ -111,8 +111,6 @@ const Brokers = () => {
                 <span className="hero-label-square-nestico"></span>
                 <span>FIND YOUR TRUSTED LOCAL AGENT</span>
               </div>
-              
-              // Alternative with building icon
 <h1 className="hero-title-nestico">
   Your perfect <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
     <FaBuilding style={{ color: '#a3e635', fontSize: '0.9em' }} />
