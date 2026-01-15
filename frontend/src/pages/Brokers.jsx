@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
-import { FaSearch, FaArrowLeft, FaArrowRight, FaCheckCircle, FaUserTie, FaAward, FaChartLine, FaClipboardList, FaUsers, FaComments } from 'react-icons/fa';
 import { FaSearch, FaArrowLeft, FaArrowRight, FaCheckCircle, FaUserTie, FaAward, FaChartLine, FaClipboardList, FaUsers, FaComments, FaHome, FaBuilding, FaUserFriends } from 'react-icons/fa';
 import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
