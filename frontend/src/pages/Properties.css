@@ -101,6 +101,78 @@
   margin-bottom: 30px;
 }
 
+/* Balance Display */
+.balance-display {
+  background: linear-gradient(135deg, #FF6B35 0%, #ff8c61 100%);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.balance-display .search-label {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 12px;
+}
+
+.balance-amount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.balance-icon {
+  color: white;
+  font-size: 28px;
+}
+
+.amount-text {
+  color: white;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.balance-subtitle {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  margin: 0;
+}
+
+/* Quick Amounts Grid */
+.quick-amounts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.quick-amount-btn {
+  background: #f8f8f8;
+  border: 2px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 16px 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quick-amount-btn:hover {
+  background: #fff;
+  border-color: #FF6B35;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.15);
+}
+
+.quick-amount-btn .amount {
+  color: #1a1a1a;
+  font-size: 16px;
+  font-weight: 600;
+}
+
 /* Form Groups */
 .search-form-group {
   margin-bottom: 20px;
@@ -153,99 +225,7 @@
   color: #aaa;
 }
 
-.dropdown-arrow {
-  position: absolute;
-  right: 16px;
-  color: #666;
-  pointer-events: none;
-  width: 12px;
-  height: 12px;
-}
-
-/* City Dropdown */
-.city-dropdown-white {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  right: 0;
-  background: white;
-  border: 1px solid #e5e5e5;
-  border-radius: 12px;
-  max-height: 280px;
-  overflow-y: auto;
-  z-index: 100;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-  list-style: none;
-  padding: 8px;
-}
-
-.city-dropdown-white li {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  color: #1a1a1a;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.city-dropdown-white li:hover {
-  background: #f8f8f8;
-}
-
-.dropdown-icon {
-  font-size: 14px;
-  color: #666;
-}
-
-/* Property Details Inline */
-.property-details-inline {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.detail-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 12px;
-  background: #f8f8f8;
-  border: 1px solid #e5e5e5;
-  border-radius: 10px;
-  font-size: 14px;
-  color: #1a1a1a;
-}
-
-.detail-icon {
-  font-size: 16px;
-  color: #666;
-  flex-shrink: 0;
-}
-
-.detail-select {
-  border: none;
-  background: transparent;
-  color: #1a1a1a;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  outline: none;
-  appearance: none;
-  width: 100%;
-}
-
-.detail-text {
-  font-size: 13px;
-  font-weight: 500;
-  color: #1a1a1a;
-}
-
-/* Search Button */
+/* Top-up Button */
 .search-btn-orange {
   width: 100%;
   padding: 18px;
@@ -264,6 +244,52 @@
   background: #ff5722;
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+}
+
+/* Wallet Stats */
+.wallet-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat-icon-wrapper {
+  width: 36px;
+  height: 36px;
+  background: #f8f8f8;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FF6B35;
+  flex-shrink: 0;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-label {
+  color: #999;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.stat-value {
+  color: #1a1a1a;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 /* ============================================
@@ -438,16 +464,18 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Filter Sections */
+/* ============================================
+   PROFESSIONAL PRICE RANGE SLIDER
+   ============================================ */
 .filter-section {
-  padding: 20px 0;
+  padding: 24px 0;
   border-bottom: 1px solid #e5e5e5;
 }
 
 .filter-section h4 {
   font-size: 16px;
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   color: #1a1a1a;
 }
 
@@ -455,83 +483,281 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+}
+
+.filter-header h4 {
+  margin: 0;
 }
 
 .monthly-toggle {
   font-size: 12px;
-  color: #666;
-  background: #f8f8f8;
-  padding: 4px 12px;
-  border-radius: 6px;
+  color: #5B7FFF;
+  background: rgba(91, 127, 255, 0.1);
+  padding: 6px 14px;
+  border-radius: 20px;
   cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
 }
 
-/* Price Range Slider */
+.monthly-toggle:hover {
+  background: rgba(91, 127, 255, 0.15);
+  border-color: rgba(91, 127, 255, 0.3);
+}
+
+/* Price Range Slider Container */
 .price-range-slider {
   position: relative;
-  height: 40px;
-  margin-bottom: 16px;
+  height: 50px;
+  margin-bottom: 30px;
+  padding: 0 4px;
 }
 
+/* Base Track */
+.range-track {
+  position: absolute;
+  top: 23px;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(to right, #e8ecf4 0%, #e8ecf4 100%);
+  border-radius: 10px;
+  z-index: 0;
+}
+
+/* Active Track (between thumbs) - Add this dynamically with JS or use pseudo-element */
+.range-track::before {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, #5B7FFF 0%, #7B93FF 100%);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+/* Range Input Base */
 .range-input {
   position: absolute;
   width: 100%;
-  height: 4px;
+  height: 6px;
+  top: 23px;
   background: transparent;
   pointer-events: none;
   appearance: none;
   -webkit-appearance: none;
+  z-index: 2;
 }
 
+.range-input:focus {
+  outline: none;
+}
+
+/* Chrome, Safari, Edge - Thumb */
 .range-input::-webkit-slider-thumb {
   appearance: none;
   -webkit-appearance: none;
-  width: 16px;
-  height: 16px;
-  background: #5B7FFF;
+  width: 22px;
+  height: 22px;
+  background: #ffffff;
+  border: 3px solid #5B7FFF;
   border-radius: 50%;
   cursor: pointer;
   pointer-events: all;
-  border: 3px solid white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 12px rgba(91, 127, 255, 0.3), 
+              0 0 0 0 rgba(91, 127, 255, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
 
+.range-input::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 16px rgba(91, 127, 255, 0.4), 
+              0 0 0 8px rgba(91, 127, 255, 0.1);
+  border-width: 4px;
+}
+
+.range-input::-webkit-slider-thumb:active {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(91, 127, 255, 0.5), 
+              0 0 0 12px rgba(91, 127, 255, 0.15);
+}
+
+/* Firefox - Thumb */
 .range-input::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  background: #5B7FFF;
+  width: 22px;
+  height: 22px;
+  background: #ffffff;
+  border: 3px solid #5B7FFF;
   border-radius: 50%;
   cursor: pointer;
   pointer-events: all;
-  border: 3px solid white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 12px rgba(91, 127, 255, 0.3), 
+              0 0 0 0 rgba(91, 127, 255, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.range-track {
-  position: absolute;
-  top: 18px;
-  width: 100%;
-  height: 4px;
-  background: #e5e5e5;
-  border-radius: 2px;
+.range-input::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 16px rgba(91, 127, 255, 0.4), 
+              0 0 0 8px rgba(91, 127, 255, 0.1);
+  border-width: 4px;
 }
 
+.range-input::-moz-range-thumb:active {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(91, 127, 255, 0.5), 
+              0 0 0 12px rgba(91, 127, 255, 0.15);
+}
+
+/* Firefox - Track */
+.range-input::-moz-range-track {
+  background: transparent;
+  border: none;
+}
+
+/* Chrome - Track */
+.range-input::-webkit-slider-runnable-track {
+  background: transparent;
+  border: none;
+}
+
+/* Price Input Fields */
 .price-inputs {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 14px;
+  margin-top: 10px;
 }
 
 .price-input {
-  padding: 10px;
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
-  font-size: 14px;
+  padding: 14px 16px;
+  border: 2px solid #e8ecf4;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
   text-align: center;
-  background: #f8f8f8;
+  background: #f8f9fc;
+  color: #1a1a1a;
+  transition: all 0.3s ease;
+  cursor: default;
+  letter-spacing: 0.3px;
 }
 
+.price-input:hover {
+  border-color: #d0d7e6;
+  background: #ffffff;
+}
+
+.price-input:focus {
+  outline: none;
+  border-color: #5B7FFF;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(91, 127, 255, 0.1);
+}
+
+/* Price Labels (Optional - Add above inputs) */
+.price-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 0 4px;
+}
+
+.price-label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Animated Range Fill (Add this for better visual) */
+@keyframes fillAnimation {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+.range-input:active ~ .range-track::before {
+  animation: fillAnimation 0.6s ease-in-out;
+}
+
+/* Value Tooltip (Optional Enhancement) */
+.price-tooltip {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  background: #1a1a1a;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  z-index: 10;
+}
+
+.price-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: #1a1a1a;
+}
+
+.range-input:active ~ .price-tooltip {
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .price-range-slider {
+    height: 55px;
+    margin-bottom: 25px;
+  }
+
+  .range-input::-webkit-slider-thumb {
+    width: 26px;
+    height: 26px;
+  }
+
+  .range-input::-moz-range-thumb {
+    width: 26px;
+    height: 26px;
+  }
+
+  .price-input {
+    padding: 16px 14px;
+    font-size: 16px;
+  }
+}
+
+/* Enhanced hover effect for entire price section */
+.filter-section:hover .range-track {
+  background: linear-gradient(to right, #e0e5f0 0%, #e0e5f0 100%);
+}
+
+.filter-section:hover .monthly-toggle {
+  transform: scale(1.02);
+}
 /* Bedroom Buttons */
 .bedroom-buttons {
   display: grid;
@@ -576,8 +802,28 @@
   font-size: 14px;
   color: #1a1a1a;
   position: relative;
+  padding: 8px 0;
+  transition: all 0.2s ease;
+}
+.facility-icon {
+  width: 16px;
+  height: 16px;
+  color: #666;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+.amenity-checkbox:hover .facility-icon {
+  color: #5B7FFF;
 }
 
+.amenity-checkbox input:checked ~ .facility-icon {
+  color: #5B7FFF;
+}
+
+/* Bathroom buttons - same styling as bedroom buttons */
+.filter-section:has(.bedroom-buttons) {
+  padding: 20px 0;
+}
 .amenity-checkbox input[type="checkbox"] {
   position: absolute;
   opacity: 0;
