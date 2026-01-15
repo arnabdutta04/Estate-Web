@@ -26,8 +26,8 @@ const Brokers = () => {
   // Get best agent
   const bestAgent = brokers.find(broker => broker.isBestAgent);
 
-  // Get hero agents (first 6 verified brokers for grid)
-  const heroAgents = brokers.slice(0, 6);
+  // Get hero agents (first 5 verified brokers for grid)
+  const heroAgents = brokers.slice(0, 5);
 
   useEffect(() => {
     filterBrokers();
@@ -101,79 +101,102 @@ const Brokers = () => {
     <>
       <Navbar />
       <PageTransition>
-        <div className="brokers-page-new">
-          {/* New Hero Section */}
-          <div className="brokers-hero-new">
-            <div className="hero-left-content">
-              <div className="hero-label-new">
-                <span className="hero-label-icon-new"></span>
+        <div className="brokers-page-nestico">
+          {/* Nestico Style Hero Section */}
+          <div className="brokers-hero-nestico">
+            <div className="hero-left-content-nestico">
+              <div className="hero-label-nestico">
+                <span className="hero-label-square-nestico"></span>
                 <span>FIND YOUR TRUSTED LOCAL AGENT</span>
               </div>
               
-              <h1 className="hero-title-new">
+              <h1 className="hero-title-nestico">
                 Your perfect 🏡 home starts with the right 👥 agent
               </h1>
               
-              <p className="hero-subtitle-new">
-                Need expert help to choose the right property? We've got you covered.
+              <p className="hero-subtitle-nestico">
+                Need expert help to choose the right property?<br />
+                We've got you covered.
               </p>
 
-              <form onSubmit={handleHeroSearch} className="hero-search-new">
-                <select 
-                  className="hero-select-new"
-                  value={selectedCity}
-                  onChange={(e) => setSelectedCity(e.target.value)}
-                >
-                  <option value="">Agent Area</option>
-                  {cities.map((city, index) => (
-                    <option key={index} value={city}>{city}</option>
-                  ))}
-                </select>
+              <form onSubmit={handleHeroSearch} className="hero-search-form-nestico">
+                <div className="hero-input-group-nestico">
+                  <label className="hero-input-label-nestico">Agent Area</label>
+                  <select 
+                    className="hero-select-nestico"
+                    value={selectedCity}
+                    onChange={(e) => setSelectedCity(e.target.value)}
+                  >
+                    <option value="">Select Area</option>
+                    {cities.map((city, index) => (
+                      <option key={index} value={city}>{city}</option>
+                    ))}
+                  </select>
+                </div>
 
-                <select 
-                  className="hero-select-new"
-                  value={selectedSpecialization}
-                  onChange={(e) => setSelectedSpecialization(e.target.value)}
-                >
-                  <option value="">Specialties</option>
-                  {specializations.map((spec, index) => (
-                    <option key={index} value={spec}>{spec}</option>
-                  ))}
-                </select>
+                <div className="hero-input-group-nestico">
+                  <label className="hero-input-label-nestico">Specialties</label>
+                  <select 
+                    className="hero-select-nestico"
+                    value={selectedSpecialization}
+                    onChange={(e) => setSelectedSpecialization(e.target.value)}
+                  >
+                    <option value="">Select Specialties</option>
+                    {specializations.map((spec, index) => (
+                      <option key={index} value={spec}>{spec}</option>
+                    ))}
+                  </select>
+                </div>
 
-                <select 
-                  className="hero-select-new"
-                  value={selectedLanguage}
-                  onChange={(e) => setSelectedLanguage(e.target.value)}
-                >
-                  <option value="">Language</option>
-                  <option value="english">English</option>
-                  <option value="spanish">Spanish</option>
-                  <option value="french">French</option>
-                  <option value="hindi">Hindi</option>
-                </select>
+                <div className="hero-input-group-nestico">
+                  <label className="hero-input-label-nestico">Language</label>
+                  <select 
+                    className="hero-select-nestico"
+                    value={selectedLanguage}
+                    onChange={(e) => setSelectedLanguage(e.target.value)}
+                  >
+                    <option value="">Select Language</option>
+                    <option value="english">English</option>
+                    <option value="spanish">Spanish</option>
+                    <option value="french">French</option>
+                    <option value="hindi">Hindi</option>
+                    <option value="arabic">Arabic</option>
+                  </select>
+                </div>
 
-                <button type="submit" className="hero-search-btn-new">
+                <button type="submit" className="hero-search-btn-nestico">
                   <FaSearch />
                 </button>
               </form>
 
-              <div className="hero-verified-new">
-                <h3>Work With<br />Verified Experts</h3>
-                <p>
-                  At Propify, we connect you with experienced, trusted real estate agents who know your neighborhood inside and out. Whether you're buying, selling, or just exploring, our agents offer personalized guidance every step of the way.
+              <div className="hero-divider-nestico"></div>
+
+              <div className="hero-verified-section-nestico">
+                <h3 className="verified-title-nestico">
+                  Work With<br />Verified Experts
+                </h3>
+                <p className="verified-description-nestico">
+                  At Propify, we connect you with experienced, trusted real estate agents 
+                  who know your neighborhood inside and out. Whether you're buying, selling, 
+                  or just exploring, our agents offer personalized guidance every step of the way.
                 </p>
               </div>
             </div>
 
-            <div className="hero-right-agents">
-              <div className="agents-grid-new">
+            <div className="hero-right-agents-nestico">
+              <div className="agents-grid-nestico">
                 {heroAgents.map((agent, index) => (
-                  <div key={agent._id} className="agent-card-new">
+                  <div key={agent._id} className={`agent-card-nestico agent-card-${index + 1}`}>
                     {agent.photo ? (
-                      <img src={agent.photo} alt={agent.userId?.name} className="agent-photo-new" />
+                      <img src={agent.photo} alt={agent.userId?.name} className="agent-photo-nestico" />
                     ) : (
-                      <div className="agent-photo-placeholder-new">
+                      <div className="agent-photo-placeholder-nestico" style={{
+                        background: index === 0 ? 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%)' :
+                                    index === 1 ? 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)' :
+                                    index === 2 ? 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)' :
+                                    index === 3 ? 'linear-gradient(135deg, #334155 0%, #1e293b 100%)' :
+                                    'linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%)'
+                      }}>
                         {agent.userId?.name?.charAt(0)}
                       </div>
                     )}
@@ -183,81 +206,129 @@ const Brokers = () => {
             </div>
           </div>
 
-          {/* Search Section */}
-          <div className="brokers-search-section">
-            <div className="search-container-brokers">
-              <div className="search-input-wrapper-brokers">
-                <FaSearch className="search-icon-brokers" />
-                <input
-                  type="text"
-                  placeholder="Search by name, company, or location..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="search-input-brokers"
-                />
+          {/* Grnata Style Search & Brokers Section */}
+          <div className="brokers-list-section-grnata">
+            <div className="brokers-list-container-grnata">
+              <div className="brokers-list-header-grnata">
+                <div>
+                  <h2 className="brokers-list-title-grnata">Find an Agent</h2>
+                  <p className="brokers-list-subtitle-grnata">
+                    Let Propify finder find you a local real estate agent, and chat instantly.
+                  </p>
+                </div>
               </div>
 
-              <select 
-                value={selectedCity} 
-                onChange={(e) => setSelectedCity(e.target.value)}
-                className="filter-select-brokers"
-              >
-                <option value="">All Cities</option>
-                {cities.map((city, index) => (
-                  <option key={index} value={city}>{city}</option>
-                ))}
-              </select>
+              <div className="brokers-search-bar-grnata">
+                <select 
+                  value={selectedCity} 
+                  onChange={(e) => setSelectedCity(e.target.value)}
+                  className="filter-select-grnata"
+                >
+                  <option value="">Agent Area</option>
+                  {cities.map((city, index) => (
+                    <option key={index} value={city}>{city}</option>
+                  ))}
+                </select>
 
-              <select 
-                value={selectedSpecialization} 
-                onChange={(e) => setSelectedSpecialization(e.target.value)}
-                className="filter-select-brokers"
-              >
-                <option value="">All Specializations</option>
-                {specializations.map((spec, index) => (
-                  <option key={index} value={spec}>{spec}</option>
-                ))}
-              </select>
+                <select 
+                  value={selectedSpecialization} 
+                  onChange={(e) => setSelectedSpecialization(e.target.value)}
+                  className="filter-select-grnata"
+                >
+                  <option value="">Specialties</option>
+                  {specializations.map((spec, index) => (
+                    <option key={index} value={spec}>{spec}</option>
+                  ))}
+                </select>
 
-              <button className="btn-reset-brokers" onClick={resetFilters}>
-                Reset Filters
-              </button>
-            </div>
-          </div>
+                <select 
+                  value={selectedLanguage} 
+                  onChange={(e) => setSelectedLanguage(e.target.value)}
+                  className="filter-select-grnata"
+                >
+                  <option value="">Language</option>
+                  <option value="english">English</option>
+                  <option value="spanish">Spanish</option>
+                  <option value="french">French</option>
+                  <option value="hindi">Hindi</option>
+                  <option value="arabic">Arabic</option>
+                </select>
 
-          {/* Brokers Grid */}
-          <div className="brokers-container-dark">
-            {filteredBrokers.length === 0 ? (
-              <div className="no-results-brokers">
-                <h2>No Brokers Found</h2>
-                <p>Try adjusting your filters or search terms</p>
-                <button className="btn-clear-filters" onClick={resetFilters}>
+                <div className="search-input-wrapper-grnata">
+                  <FaSearch className="search-icon-grnata" />
+                  <input
+                    type="text"
+                    placeholder="Agent name"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="search-input-grnata"
+                  />
+                </div>
+
+                <button className="btn-search-grnata" onClick={() => filterBrokers()}>
+                  Search
+                </button>
+              </div>
+
+              <div className="brokers-info-bar-grnata">
+                <span className="brokers-count-grnata">{filteredBrokers.length} agents available</span>
+                <button className="btn-clear-filters-grnata" onClick={resetFilters}>
                   Clear Filters
                 </button>
               </div>
-            ) : (
-              <div className="brokers-grid-dark">
-                {filteredBrokers.map((broker) => (
-                  <div key={broker._id} className="broker-card-dark">
-                    <div className="broker-image-container">
-                      {broker.photo ? (
-                        <img src={broker.photo} alt={broker.userId?.name} className="broker-photo-dark" />
-                      ) : (
-                        <div className="broker-photo-placeholder-dark">
-                          {broker.userId?.name?.charAt(0)}
-                        </div>
-                      )}
-                      <div className="broker-overlay-dark">
-                        <div className="broker-name-overlay">
-                          <h3>{broker.userId?.name}</h3>
-                          <p>{broker.specialization?.[0] || 'Real Estate Agent'}</p>
-                        </div>
+
+              {/* Brokers Grid */}
+              {filteredBrokers.length === 0 ? (
+                <div className="no-results-grnata">
+                  <h3>No Agents Found</h3>
+                  <p>Try adjusting your filters or search terms</p>
+                </div>
+              ) : (
+                <div className="brokers-grid-grnata">
+                  {filteredBrokers.map((broker) => (
+                    <div key={broker._id} className="broker-card-grnata">
+                      <div className="broker-image-grnata">
+                        {broker.photo ? (
+                          <img src={broker.photo} alt={broker.userId?.name} className="broker-photo-grnata" />
+                        ) : (
+                          <div className="broker-photo-placeholder-grnata">
+                            {broker.userId?.name?.charAt(0)}
+                          </div>
+                        )}
+                      </div>
+                      
+                      <div className="broker-info-grnata">
+                        <h3 className="broker-name-grnata">{broker.userId?.name}</h3>
+                        <p className="broker-title-grnata">
+                          {broker.specialization?.[0] || 'Senior Agent'} | {broker.servingCities || 'Miami, FL'}
+                        </p>
+                        <p className="broker-experience-grnata">10+ years in residential sales</p>
+                        <p className="broker-rating-grnata">4.9/5 rating from 320 clients</p>
+                      </div>
+
+                      <div className="broker-actions-grnata">
+                        <button className="btn-view-profile-grnata">View Profile</button>
+                        <button className="btn-message-grnata">Message Emily</button>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            )}
+                  ))}
+                </div>
+              )}
+
+              {/* Pagination */}
+              {filteredBrokers.length > 0 && (
+                <div className="pagination-grnata">
+                  <button className="pagination-arrow-grnata">←</button>
+                  <button className="pagination-number-grnata active">01</button>
+                  <button className="pagination-number-grnata">02</button>
+                  <button className="pagination-number-grnata">03</button>
+                  <button className="pagination-number-grnata">04</button>
+                  <button className="pagination-number-grnata">05</button>
+                  <button className="pagination-number-grnata">06</button>
+                  <button className="pagination-arrow-grnata">→</button>
+                </div>
+              )}
+            </div>
           </div>
           
           {/* Featured Brokers Sliding Section */}
@@ -371,7 +442,8 @@ const Brokers = () => {
                       justifyContent: 'center',
                       fontSize: '8rem',
                       fontWeight: '700',
-                      color: '#fff'
+                      color: '#fff',
+                      borderRadius: '20px'
                     }}>
                       {brokers[0]?.userId?.name?.charAt(0) || 'A'}
                     </div>
