@@ -274,7 +274,7 @@ const toggleAmenity = (amenity) => {
             {/* Left Side - Hero Content */}
             <div className='hero-left-content'>
               <h1 className='hero-title-serif'>
-                Buy, Rent, & Sell<br />Property
+                Buy & Rent<br />Property
               </h1>
               <button className='explore-btn' onClick={() => navigate('/properties')}>
                 Explore All Property 
