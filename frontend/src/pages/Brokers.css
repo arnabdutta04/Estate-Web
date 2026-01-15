@@ -3,18 +3,20 @@
   min-height: 100vh;
   background: #ffffff;
 }
-/* ================= NESTICO HERO SECTION - FIXED ================= */
+/* ================= BROKERS HERO – PROPERTY STYLE ================= */
 .brokers-hero-nestico {
-  padding-top: 0;
   position: relative;
   width: 100%;
-  min-height: 100vh;       
-  background-size: cover;  
-  background-position: center center;
-  background-repeat: no-repeat; 
+  min-height: 100vh;
+  background: url('https://i.pinimg.com/1200x/73/75/41/737541c14598e35a5f37a337a6dc211a.jpg')center / cover no-repeat;
   display: flex;
-  overflow: hidden;          
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  padding: 0 5%;
+  overflow: hidden;
 }
+
 
 .hero-left-content-nestico {
   width: 50%;
@@ -167,6 +169,14 @@
 }
 
 /* ================= RESPONSIVE ADJUSTMENTS ================= */
+@media (max-width: 1024px) {
+  .brokers-hero-nestico {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 40px;
+  }
+}
 @media (max-width: 1200px) {
   .hero-left-content-nestico {
     padding: 160px 50px 80px 100px;

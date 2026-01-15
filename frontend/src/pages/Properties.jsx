@@ -4,7 +4,7 @@ import api from '../utils/api';
 import PropertyCard from '../components/PropertyCard';
 import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
-import { FaMapMarkerAlt, FaHome, FaBed, FaBath, FaRulerCombined, FaDollarSign, FaPlus, FaMinus, FaExpand, FaParking, FaCheck } from 'react-icons/fa';
+import {  FaHome, FaBed, FaBath, FaRulerCombined, FaDollarSign, FaPlus, FaMinus,  FaParking,  } from 'react-icons/fa';
 import './Properties.css';
 
 const Properties = () => {
@@ -15,7 +15,7 @@ const Properties = () => {
   const [activeTab, setActiveTab] = useState('rent');
   const [priceRange, setPriceRange] = useState([1000, 5000]);
   const [selectedBedrooms, setSelectedBedrooms] = useState('1');
-  const [selectedAmenities, setSelectedAmenities] = useState({
+  const [ setSelectedAmenities] = useState({
     furnished: true,
     petAllowed: true,
     parkingSlot: false,
@@ -49,8 +49,8 @@ const [selectedFacilities, setSelectedFacilities] = useState({
   });
 
   const [cityInput, setCityInput] = useState('');
-  const [showCitySuggestions, setShowCitySuggestions] = useState(false);
-  const [citySuggestions, setCitySuggestions] = useState([]);
+  const [ setShowCitySuggestions] = useState(false);
+  const [setCitySuggestions] = useState([]);
   const cityDropdownRef = useRef(null);
 
   const cities = [
@@ -136,26 +136,6 @@ const [selectedFacilities, setSelectedFacilities] = useState({
     }
     setLoading(false);
   };
-
-  const handleFilterChange = (e) => {
-    setFilters({ ...filters, [e.target.name]: e.target.value });
-  };
-
-  const handleCityInputChange = (e) => {
-    const value = e.target.value;
-    setCityInput(value);
-
-    if (value.length > 0) {
-      const filtered = cities.filter(city =>
-        city.toLowerCase().includes(value.toLowerCase())
-      );
-      setCitySuggestions(filtered);
-      setShowCitySuggestions(true);
-    } else {
-      setCitySuggestions([]);
-      setShowCitySuggestions(false);
-    }
-  };
    
   const handleFilterSearch = () => {
   const filterParams = {
@@ -169,51 +149,6 @@ const [selectedFacilities, setSelectedFacilities] = useState({
     bedrooms: selectedBedrooms,
     bathrooms: selectedBathrooms,
     facilities: Object.keys(selectedFacilities).filter(key => selectedFacilities[key])
-  };
-  const handleCityInputFocus = () => {
-    if (cityInput.length === 0) {
-      setCitySuggestions(cities);
-      setShowCitySuggestions(true);
-    }
-  };
-
-  const handleCitySelect = (city) => {
-    setCityInput(city);
-    setFilters({ ...filters, city });
-    setShowCitySuggestions(false);
-  };
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    fetchProperties(filters);
-  };
-
-  const handleReset = () => {
-    const resetFilters = {
-      propertyType: '',
-      city: '',
-      minPrice: '',
-      maxPrice: '',
-      bedrooms: '',
-      bathrooms: '',
-      propertyFor: 'rent'
-    };
-    setFilters(resetFilters);
-    setCityInput('');
-    setPriceRange([1000, 5000]);
-    setSelectedBedrooms('1');
-    fetchProperties({});
-  };
-
-  const handlePageChange = (page) => {
-    fetchProperties(filters, page);
-  };
-
-  const toggleAmenity = (amenity) => {
-    setSelectedAmenities(prev => ({
-      ...prev,
-      [amenity]: !prev[amenity]
-    }));
   };
   const filtered = mockProperties.filter(property => {
     let matches = true;
