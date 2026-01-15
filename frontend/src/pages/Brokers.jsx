@@ -81,12 +81,6 @@ const Brokers = () => {
     setSelectedLanguage('');
   };
 
-  const handleHeroSearch = (e) => {
-    e.preventDefault();
-    // Scroll to brokers grid section
-    document.querySelector('.brokers-search-section')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   const scrollSlider = (direction) => {
     if (sliderRef.current) {
       const scrollAmount = 370;
@@ -102,7 +96,7 @@ const Brokers = () => {
       <Navbar />
       <PageTransition>
         <div className="brokers-page-nestico">
-          {/* Nestico Style Hero Section */}
+          {/* Nestico Style Hero Section - NO SEARCH FORM */}
           <div className="brokers-hero-nestico" style={{
              backgroundImage: `url(${process.env.PUBLIC_URL}/Broker.jpg)`
              }}>
@@ -111,68 +105,19 @@ const Brokers = () => {
                 <span className="hero-label-square-nestico"></span>
                 <span>FIND YOUR TRUSTED LOCAL AGENT</span>
               </div>
-<h1 className="hero-title-nestico">
-  Your perfect <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-    <FaBuilding style={{ color: '#a3e635', fontSize: '0.9em' }} />
-  </span> home starts with the right <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-    <FaUserFriends style={{ color: '#6366f1', fontSize: '0.9em' }} />
-  </span> agent
-</h1>
+              
+              <h1 className="hero-title-nestico">
+                Your perfect <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <FaBuilding style={{ color: '#a3e635', fontSize: '0.9em' }} />
+                </span> home starts with the right <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <FaUserFriends style={{ color: '#6366f1', fontSize: '0.9em' }} />
+                </span> agent
+              </h1>
               
               <p className="hero-subtitle-nestico">
                 Need expert help to choose the right property?<br />
                 We've got you covered.
               </p>
-
-              <form onSubmit={handleHeroSearch} className="hero-search-form-nestico">
-                <div className="hero-input-group-nestico">
-                  <label className="hero-input-label-nestico">Agent Area</label>
-                  <select 
-                    className="hero-select-nestico"
-                    value={selectedCity}
-                    onChange={(e) => setSelectedCity(e.target.value)}
-                  >
-                    <option value="">Select Area</option>
-                    {cities.map((city, index) => (
-                      <option key={index} value={city}>{city}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="hero-input-group-nestico">
-                  <label className="hero-input-label-nestico">Specialties</label>
-                  <select 
-                    className="hero-select-nestico"
-                    value={selectedSpecialization}
-                    onChange={(e) => setSelectedSpecialization(e.target.value)}
-                  >
-                    <option value="">Select Specialties</option>
-                    {specializations.map((spec, index) => (
-                      <option key={index} value={spec}>{spec}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="hero-input-group-nestico">
-                  <label className="hero-input-label-nestico">Language</label>
-                  <select 
-                    className="hero-select-nestico"
-                    value={selectedLanguage}
-                    onChange={(e) => setSelectedLanguage(e.target.value)}
-                  >
-                    <option value="">Select Language</option>
-                    <option value="english">English</option>
-                    <option value="spanish">Spanish</option>
-                    <option value="french">French</option>
-                    <option value="hindi">Hindi</option>
-                    <option value="arabic">Arabic</option>
-                  </select>
-                </div>
-
-                <button type="submit" className="hero-search-btn-nestico">
-                  <FaSearch />
-                </button>
-              </form>
 
               <div className="hero-divider-nestico"></div>
 
@@ -211,7 +156,7 @@ const Brokers = () => {
             </div>
           </div>
 
-          {/* Grnata Style Search & Brokers Section */}
+          {/* MAIN SEARCH SECTION - Grnata Style */}
           <div className="brokers-list-section-grnata">
             <div className="brokers-list-container-grnata">
               <div className="brokers-list-header-grnata">
@@ -223,6 +168,7 @@ const Brokers = () => {
                 </div>
               </div>
 
+              {/* MAIN SEARCH BAR - This is now the primary search feature */}
               <div className="brokers-search-bar-grnata">
                 <select 
                   value={selectedCity} 
@@ -553,6 +499,7 @@ const Brokers = () => {
               </div>
             </div>
           </div>
+
           {/* Testimonials Section */}
           <div className="testimonials-section">
             <div className="testimonials-container">

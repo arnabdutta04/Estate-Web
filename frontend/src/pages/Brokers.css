@@ -3,7 +3,6 @@
   min-height: 100vh;
   background: #ffffff;
 }
-
 /* ================= NESTICO HERO SECTION - FIXED ================= */
 .brokers-hero-nestico {
   padding-top: 0;
@@ -26,7 +25,7 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center; /* Changed from flex-start to center for better vertical alignment */
 
   background: linear-gradient(
     90deg,
