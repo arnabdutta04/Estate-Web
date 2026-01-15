@@ -4,7 +4,7 @@ import api from '../utils/api';
 import PropertyCard from '../components/PropertyCard';
 import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
-import {  FaHome, FaBed, FaBath, FaRulerCombined, FaDollarSign, FaPlus, FaMinus,  FaParking,  } from 'react-icons/fa';
+import {  FaHome, FaBed, FaBath, FaRulerCombined, FaDollarSign, FaPlus, FaMinus,  FaParking, FaCheck } from 'react-icons/fa';
 import './Properties.css';
 
 const Properties = () => {
@@ -14,7 +14,13 @@ const Properties = () => {
   const [pagination, setPagination] = useState({ currentPage: 1, totalPages: 1 });
   const [activeTab, setActiveTab] = useState('rent');
   const [priceRange, setPriceRange] = useState([1000, 5000]);
-  const [selectedBedrooms, setSelectedBedrooms] = useState('1');;
+  const [selectedBedrooms, setSelectedBedrooms] = useState('1');
+  const [selectedAmenities, setSelectedAmenities] = useState({
+    furnished: true,
+    petAllowed: true,
+    parkingSlot: false,
+    kitchen: false
+  });
  const [selectedBathrooms, setSelectedBathrooms] = useState('');
 const [searchKeyword, setSearchKeyword] = useState('');
 const [selectedLocation, setSelectedLocation] = useState('');
@@ -41,7 +47,10 @@ const [selectedFacilities, setSelectedFacilities] = useState({
     bathrooms: '',
     propertyFor: 'rent'
   });
-  const [ setShowCitySuggestions] = useState(false);
+
+  const [cityInput, setCityInput] = useState('');
+  const [showCitySuggestions, setShowCitySuggestions] = useState(false);
+  const [citySuggestions, setCitySuggestions] = useState([]);
   const cityDropdownRef = useRef(null);
 
   const cities = [
@@ -127,6 +136,26 @@ const [selectedFacilities, setSelectedFacilities] = useState({
     }
     setLoading(false);
   };
+
+  const handleFilterChange = (e) => {
+    setFilters({ ...filters, [e.target.name]: e.target.value });
+  };
+
+  const handleCityInputChange = (e) => {
+    const value = e.target.value;
+    setCityInput(value);
+
+    if (value.length > 0) {
+      const filtered = cities.filter(city =>
+        city.toLowerCase().includes(value.toLowerCase())
+      );
+      setCitySuggestions(filtered);
+      setShowCitySuggestions(true);
+    } else {
+      setCitySuggestions([]);
+      setShowCitySuggestions(false);
+    }
+  };
    
   const handleFilterSearch = () => {
   const filterParams = {
@@ -141,6 +170,7 @@ const [selectedFacilities, setSelectedFacilities] = useState({
     bathrooms: selectedBathrooms,
     facilities: Object.keys(selectedFacilities).filter(key => selectedFacilities[key])
   };
+
   const filtered = mockProperties.filter(property => {
     let matches = true;
     
@@ -156,10 +186,10 @@ const [selectedFacilities, setSelectedFacilities] = useState({
     if (property.price < filterParams.minPrice || property.price > filterParams.maxPrice) {
       matches = false;
     }
-    if (filterParams.bedrooms && property.bedrooms.toString() !== filterParams.bedrooms) {
+    if (filterParams.bedrooms && property.bedrooms && property.bedrooms.toString() !== filterParams.bedrooms) {
       matches = false;
     }
-    if (filterParams.bathrooms && property.bathrooms.toString() !== filterParams.bathrooms) {
+    if (filterParams.bathrooms && property.bathrooms && property.bathrooms.toString() !== filterParams.bathrooms) {
       matches = false;
     }
     
@@ -168,6 +198,69 @@ const [selectedFacilities, setSelectedFacilities] = useState({
   
   setProperties(filtered);
   console.log('Applied Filters:', filterParams);
+};
+
+const handleCityInputFocus = () => {
+  if (cityInput.length === 0) {
+    setCitySuggestions(cities);
+    setShowCitySuggestions(true);
+  }
+};
+
+const handleCitySelect = (city) => {
+  setCityInput(city);
+  setFilters({ ...filters, city });
+  setShowCitySuggestions(false);
+};
+
+const handleSearch = (e) => {
+  e.preventDefault();
+  fetchProperties(filters);
+};
+
+const handleReset = () => {
+  const resetFilters = {
+    propertyType: '',
+    city: '',
+    minPrice: '',
+    maxPrice: '',
+    bedrooms: '',
+    bathrooms: '',
+    propertyFor: 'rent'
+  };
+  setFilters(resetFilters);
+  setCityInput('');
+  setPriceRange([1000, 5000]);
+  setSelectedBedrooms('1');
+  setSelectedBathrooms('');
+  setSearchKeyword('');
+  setSelectedLocation('');
+  setSelectedPropertyType('');
+  setSelectedStyle('');
+  setSelectedFacilities({
+    furnished: false,
+    petAllowed: false,
+    parkingSlot: false,
+    kitchen: false,
+    wifi: false,
+    ac: false,
+    swimmingPool: false,
+    gym: false,
+    security: false
+  });
+  fetchProperties({});
+};
+
+const handlePageChange = (page) => {
+  fetchProperties(filters, page);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+const toggleAmenity = (amenity) => {
+  setSelectedAmenities(prev => ({
+    ...prev,
+    [amenity]: !prev[amenity]
+  }));
 };
   return (
     <>
