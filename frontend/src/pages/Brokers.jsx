@@ -553,6 +553,67 @@ const Brokers = () => {
               </div>
             </div>
           </div>
+          {/* Testimonials Section */}
+          <div className="testimonials-section">
+            <div className="testimonials-container">
+              <div className="testimonials-header">
+                <p className="testimonials-label">Testimonials</p>
+                <h2 className="testimonials-title">Our Client Says</h2>
+              </div>
+
+              <div className="testimonials-slider">
+                <button className="testimonial-nav-btn">
+                  <FaArrowLeft />
+                </button>
+
+                <div className="testimonial-card">
+                  <div className="testimonial-avatar">
+                    <div className="testimonial-avatar-placeholder">L</div>
+                  </div>
+                  <p className="testimonial-quote">
+                    "Good Time is very good in what they're doing and more than happy to challenge and push you to think about your decisions both from usability and design standpoints."
+                  </p>
+                  <div className="testimonial-author">
+                    <h4 className="testimonial-author-name">Leslie Alexander</h4>
+                    <p className="testimonial-author-title">Ceo at Boston</p>
+                  </div>
+                </div>
+
+                <button className="testimonial-nav-btn">
+                  <FaArrowRight />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Newsletter Section */}
+          <div className="newsletter-section">
+            <div className="newsletter-container">
+              <h2 className="newsletter-title">
+                <span className="newsletter-title-highlight">Our</span> Newsletter
+              </h2>
+              <p className="newsletter-description">
+                Work smarter with this time management and not hard,<br />
+                join our newsletter for a better experience
+              </p>
+
+              <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
+                <input
+                  type="email"
+                  placeholder="Enter your email address"
+                  className="newsletter-input"
+                  required
+                />
+                <button type="submit" className="newsletter-submit-btn">
+                  Subscribe
+                </button>
+              </form>
+
+              <p className="newsletter-disclaimer">
+                No ads. No trails. No commitments
+              </p>
+            </div>
+          </div>
         </div>
       </PageTransition>
     </>
