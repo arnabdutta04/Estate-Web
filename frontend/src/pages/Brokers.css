@@ -7,15 +7,15 @@
 /* ================= NESTICO HERO SECTION ================= */
 .brokers-hero-nestico {
   position: relative;
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 5rem;
-  padding: 6rem 4rem;
-  background: #f8f8f8;
-  overflow: hidden;
+  width: 100%;
+  min-height: 100vh;       
+  background-size: cover;  
+  background-position: center center;
+  background-repeat: no-repeat; 
+  display: flex;
+  overflow: hidden;          
 }
+
 
 .hero-left-content-nestico {
   position: relative;
