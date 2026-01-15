@@ -1585,13 +1585,13 @@
 .newsletter-section::before {
   content: '';
   position: absolute;
-  top: 0;
+  top: -1px;
   left: 0;
   right: 0;
-  height: 200px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath fill='%23ffffff' d='M0,0 Q300,60 600,30 T1200,0 L1200,120 L0,120 Z'/%3E%3C/svg%3E") no-repeat;
-  background-size: cover;
-  background-position: top;
+  height: 150px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23ffffff' d='M0,0 C240,80 480,80 720,40 C960,0 1200,0 1440,40 L1440,0 L0,0 Z'/%3E%3C/svg%3E") no-repeat;
+  background-size: 100% 100%;
+  background-position: top center;
 }
 
 .newsletter-container {
@@ -1673,24 +1673,8 @@
 
 /* ================= RESPONSIVE DESIGN FOR NEW SECTIONS ================= */
 @media (max-width: 768px) {
-  .testimonials-section {
-    padding: 4rem 1.5rem;
-  }
-
-  .testimonials-title {
-    font-size: 2rem;
-  }
-
-  .testimonials-slider {
-    flex-direction: column;
-  }
-
-  .testimonial-nav-btn {
-    display: none;
-  }
-
-  .testimonial-card {
-    padding: 2rem;
+  .newsletter-section::before {
+    height: 100px;
   }
 
   .newsletter-section {
@@ -1714,21 +1698,8 @@
 }
 
 @media (max-width: 480px) {
-  .testimonials-title {
-    font-size: 1.6rem;
-  }
-
-  .testimonial-card {
-    padding: 1.5rem;
-  }
-
-  .testimonial-avatar {
-    width: 80px;
+  .newsletter-section::before {
     height: 80px;
-  }
-
-  .testimonial-quote {
-    font-size: 1rem;
   }
 
   .newsletter-title {
