@@ -846,7 +846,7 @@
 
 /* ================= WHY USE OUR AGENTS SECTION ================= */
 .why-use-agents-section {
-  background: #fafafa;
+  background: #b5b5b5;
   padding: 6rem 2rem;
   position: relative;
 }
@@ -866,7 +866,7 @@
 
 .why-use-section-label {
   font-size: 0.95rem;
-  color: #666;
+  color: #000000;
   font-weight: 600;
   margin: 0 0 1.5rem 0;
   text-transform: uppercase;
