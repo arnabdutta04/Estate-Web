@@ -3,36 +3,32 @@
   min-height: 100vh;
   background: #ffffff;
 }
+
 /* ================= BROKERS HERO – PROPERTY STYLE ================= */
 .brokers-hero-nestico {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: url('https://i.pinimg.com/1200x/73/75/41/737541c14598e35a5f37a337a6dc211a.jpg')center / cover no-repeat;
+  background: url('https://i.pinimg.com/736x/fd/83/40/fd8340d37ac36dbae806df82f0b9edc7.jpg') center / cover no-repeat;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 60px;
-  padding: 0 5%;
+  justify-content: flex-start;
+  padding: 0;
   overflow: hidden;
 }
 
-
 .hero-left-content-nestico {
-  width: 50%;
+  width: 55%;
   min-height: 100vh;
-  
-  /* UPDATED PADDING - More space from top for navbar, better left alignment */
-  padding: 180px 60px 80px 120px; /* TOP RIGHT BOTTOM LEFT */
-
+  padding: 140px 80px 80px 8%; /* Better left alignment */
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Changed from flex-start to center for better vertical alignment */
-
+  justify-content: center;
   background: linear-gradient(
     90deg,
-    rgba(0, 0, 0, 0.88) 0%,
-    rgba(0, 0, 0, 0.65) 65%,
+    rgba(0, 0, 0, 0.92) 0%,
+    rgba(0, 0, 0, 0.85) 50%,
+    rgba(0, 0, 0, 0.4) 85%,
     rgba(0, 0, 0, 0) 100%
   );
 }
@@ -46,7 +42,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1.2px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .hero-label-square-nestico {
@@ -58,21 +54,21 @@
 }
 
 .hero-title-nestico {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
   font-weight: 700;
   margin: 0 0 1.5rem 0;
-  line-height: 1.2;
+  line-height: 1.15;
   color: #ffffff;
   letter-spacing: -1px;
-  max-width: 650px; /* Prevent text from going too wide */
+  max-width: 700px;
 }
 
 .hero-subtitle-nestico {
-  font-size: 1rem;
-  color: #ffffff;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.95);
   line-height: 1.7;
   margin: 0 0 3rem 0;
-  max-width: 580px; /* Keep subtitle contained */
+  max-width: 600px;
 }
 
 .hero-search-form-nestico {
@@ -80,7 +76,7 @@
   grid-template-columns: repeat(3, 1fr) auto;
   gap: 1rem;
   margin-bottom: 2.5rem;
-  max-width: 850px; /* Prevent form from stretching too wide */
+  max-width: 900px;
 }
 
 .hero-input-group-nestico {
@@ -142,7 +138,7 @@
 
 .hero-divider-nestico {
   width: 100%;
-  max-width: 850px;
+  max-width: 900px;
   height: 1px;
   background: rgba(255, 255, 255, 0.2);
   margin: 2.5rem 0;
@@ -150,11 +146,11 @@
 
 .hero-verified-section-nestico {
   margin-top: 2rem;
-  max-width: 580px;
+  max-width: 600px;
 }
 
 .verified-title-nestico {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #ffffff;
   margin: 0 0 1rem 0;
@@ -162,31 +158,40 @@
 }
 
 .verified-description-nestico {
-  font-size: 0.95rem;
-  color: #ffffff;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.95);
   line-height: 1.7;
   margin: 0;
 }
 
 /* ================= RESPONSIVE ADJUSTMENTS ================= */
-@media (max-width: 1024px) {
-  .brokers-hero-nestico {
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    gap: 40px;
+@media (max-width: 1400px) {
+  .hero-left-content-nestico {
+    width: 60%;
+    padding: 140px 60px 80px 6%;
   }
 }
+
 @media (max-width: 1200px) {
   .hero-left-content-nestico {
-    padding: 160px 50px 80px 100px;
+    width: 65%;
+    padding: 140px 50px 80px 5%;
   }
 }
 
 @media (max-width: 1024px) {
+  .brokers-hero-nestico {
+    justify-content: center;
+  }
+
   .hero-left-content-nestico {
     width: 100%;
     padding: 140px 60px 80px 60px;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.88) 0%,
+      rgba(0, 0, 0, 0.75) 100%
+    );
   }
 
   .hero-search-form-nestico {
@@ -215,7 +220,7 @@
 
 @media (max-width: 480px) {
   .hero-left-content-nestico {
-    padding: 100px 20px 40px 20px;
+    padding: 100px 30px 50px 30px;
   }
 
   .hero-title-nestico {
