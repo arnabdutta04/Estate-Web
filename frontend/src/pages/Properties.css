@@ -4,6 +4,27 @@
   color: #1a1a1a;
 }
 /* ============================================
+   REMOVE TOP PROGRESS BAR/LINE
+   ============================================ */
+#nprogress,
+#nprogress .bar,
+.nprogress-custom-parent,
+[id*="top-loading-bar"],
+[class*="TopLoadingBar"],
+body::before,
+html::before {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+body,
+html,
+#root {
+  border-top: none !important;
+}
+
+/* ============================================
    HERO SECTION - SPLIT LAYOUT WITH CARD
    ============================================ */
 .properties-hero-modern {
@@ -15,7 +36,7 @@
   min-height: 100vh;
   overflow: hidden;
   background: url('https://i.pinimg.com/1200x/73/75/41/737541c14598e35a5f37a337a6dc211a.jpg') center/cover no-repeat;
-  padding: 120px 5% 60px 5%; /* Top padding for navbar clearance */
+  padding: 120px 5% 60px 5%;
   gap: 40px;
 }
 
