@@ -13,6 +13,7 @@ const Brokers = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedSpecialization, setSelectedSpecialization] = useState('');
+  const [selectedLanguage, setSelectedLanguage] = useState('');
   const navigate = useNavigate();
   const sliderRef = useRef(null);
 
@@ -25,8 +26,8 @@ const Brokers = () => {
   // Get best agent
   const bestAgent = brokers.find(broker => broker.isBestAgent);
 
-  // Get hero agents (first 3 verified brokers)
-  const heroAgents = brokers.slice(0, 3);
+  // Get hero agents (first 6 verified brokers for grid)
+  const heroAgents = brokers.slice(0, 6);
 
   useEffect(() => {
     filterBrokers();
@@ -77,6 +78,7 @@ const Brokers = () => {
     setSearchTerm('');
     setSelectedCity('');
     setSelectedSpecialization('');
+    setSelectedLanguage('');
   };
 
   const handleHeroSearch = (e) => {
@@ -87,7 +89,7 @@ const Brokers = () => {
 
   const scrollSlider = (direction) => {
     if (sliderRef.current) {
-      const scrollAmount = 370; // card width + gap
+      const scrollAmount = 370;
       sliderRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
@@ -99,137 +101,88 @@ const Brokers = () => {
     <>
       <Navbar />
       <PageTransition>
-        <div className="brokers-page-dark">
-          {/* Hero Section */}
-          <div className="brokers-hero-dark">
-            <div className="hero-content-brokers">
-              <div className="hero-label">
-                <span className="hero-label-icon"></span>
-                <span>VERIFIED PROFESSIONALS</span>
+        <div className="brokers-page-new">
+          {/* New Hero Section */}
+          <div className="brokers-hero-new">
+            <div className="hero-left-content">
+              <div className="hero-label-new">
+                <span className="hero-label-icon-new"></span>
+                <span>FIND YOUR TRUSTED LOCAL AGENT</span>
               </div>
               
-              <h1>
-                Find Your Perfect
-                Real Estate Agent
+              <h1 className="hero-title-new">
+                Your perfect 🏡 home starts with the right 👥 agent
               </h1>
               
-              <p className="hero-description">
-                Connect with top-rated, verified real estate professionals in your area. 
-                Whether buying, selling, or investing, find the expert guidance you need.
+              <p className="hero-subtitle-new">
+                Need expert help to choose the right property? We've got you covered.
               </p>
 
-              <form onSubmit={handleHeroSearch} className="hero-search-form">
-                <div className="hero-select-wrapper">
-                  <label className="hero-select-label">Location</label>
-                  <select 
-                    className="hero-select"
-                    value={selectedCity}
-                    onChange={(e) => setSelectedCity(e.target.value)}
-                  >
-                    <option value="">Select City</option>
-                    {cities.map((city, index) => (
-                      <option key={index} value={city}>{city}</option>
-                    ))}
-                  </select>
-                </div>
+              <form onSubmit={handleHeroSearch} className="hero-search-new">
+                <select 
+                  className="hero-select-new"
+                  value={selectedCity}
+                  onChange={(e) => setSelectedCity(e.target.value)}
+                >
+                  <option value="">Agent Area</option>
+                  {cities.map((city, index) => (
+                    <option key={index} value={city}>{city}</option>
+                  ))}
+                </select>
 
-                <div className="hero-select-wrapper">
-                  <label className="hero-select-label">Specialization</label>
-                  <select 
-                    className="hero-select"
-                    value={selectedSpecialization}
-                    onChange={(e) => setSelectedSpecialization(e.target.value)}
-                  >
-                    <option value="">Select Type</option>
-                    {specializations.map((spec, index) => (
-                      <option key={index} value={spec}>{spec}</option>
-                    ))}
-                  </select>
-                </div>
+                <select 
+                  className="hero-select-new"
+                  value={selectedSpecialization}
+                  onChange={(e) => setSelectedSpecialization(e.target.value)}
+                >
+                  <option value="">Specialties</option>
+                  {specializations.map((spec, index) => (
+                    <option key={index} value={spec}>{spec}</option>
+                  ))}
+                </select>
 
-                <div className="hero-select-wrapper">
-                  <label className="hero-select-label">Price Range</label>
-                  <select className="hero-select">
-                    <option value="">Any Price</option>
-                    <option value="0-500k">$0 - $500K</option>
-                    <option value="500k-1m">$500K - $1M</option>
-                    <option value="1m+">$1M+</option>
-                  </select>
-                </div>
+                <select 
+                  className="hero-select-new"
+                  value={selectedLanguage}
+                  onChange={(e) => setSelectedLanguage(e.target.value)}
+                >
+                  <option value="">Language</option>
+                  <option value="english">English</option>
+                  <option value="spanish">Spanish</option>
+                  <option value="french">French</option>
+                  <option value="hindi">Hindi</option>
+                </select>
 
-                <button type="submit" className="hero-search-btn">
+                <button type="submit" className="hero-search-btn-new">
                   <FaSearch />
                 </button>
               </form>
 
-              <div className="hero-verified-section">
-                <h3 className="hero-verified-title">
-                  <FaCheckCircle style={{ color: '#a3e635', marginRight: '0.5rem' }} />
-                  All Agents Verified
-                </h3>
-                <p className="hero-verified-description">
-                  Every agent on our platform is thoroughly vetted and verified for your peace of mind.
+              <div className="hero-verified-new">
+                <h3>Work With<br />Verified Experts</h3>
+                <p>
+                  At Propify, we connect you with experienced, trusted real estate agents who know your neighborhood inside and out. Whether you're buying, selling, or just exploring, our agents offer personalized guidance every step of the way.
                 </p>
               </div>
             </div>
 
-            <div className="hero-agents-grid">
-              {heroAgents.map((agent, index) => (
-                <div key={agent._id} className="hero-agent-card">
-                  {agent.photo ? (
-                    <img src={agent.photo} alt={agent.userId?.name} className="hero-agent-image" />
-                  ) : (
-                    <div className="hero-agent-image" style={{ 
-                      background: 'linear-gradient(135deg, #a3e635 0%, #84cc16 100%)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '4rem',
-                      fontWeight: '700',
-                      color: '#fff'
-                    }}>
-                      {agent.userId?.name?.charAt(0)}
-                    </div>
-                  )}
-                  <div className="hero-agent-badge">VERIFIED</div>
-                </div>
-              ))}
-            </div>
-          </div>
-           {/* Brokers Grid */}
-          <div className="brokers-container-dark">
-            {filteredBrokers.length === 0 ? (
-              <div className="no-results-brokers">
-                <h2>No Brokers Found</h2>
-                <p>Try adjusting your filters or search terms</p>
-                <button className="btn-clear-filters" onClick={resetFilters}>
-                  Clear Filters
-                </button>
-              </div>
-            ) : (
-              <div className="brokers-grid-dark">
-                {filteredBrokers.map((broker) => (
-                  <div key={broker._id} className="broker-card-dark">
-                    <div className="broker-image-container">
-                      {broker.photo ? (
-                        <img src={broker.photo} alt={broker.userId?.name} className="broker-photo-dark" />
-                      ) : (
-                        <div className="broker-photo-placeholder-dark">
-                          {broker.userId?.name?.charAt(0)}
-                        </div>
-                      )}
-                      <div className="broker-overlay-dark">
-                        <div className="broker-name-overlay">
-                          <h3>{broker.userId?.name}</h3>
-                          <p>{broker.specialization?.[0] || 'Real Estate Agent'}</p>
-                        </div>
+            <div className="hero-right-agents">
+              <div className="agents-grid-new">
+                {heroAgents.map((agent, index) => (
+                  <div key={agent._id} className="agent-card-new">
+                    {agent.photo ? (
+                      <img src={agent.photo} alt={agent.userId?.name} className="agent-photo-new" />
+                    ) : (
+                      <div className="agent-photo-placeholder-new">
+                        {agent.userId?.name?.charAt(0)}
                       </div>
-                    </div>
+                    )}
                   </div>
                 ))}
               </div>
-            )}
+            </div>
           </div>
+
           {/* Search Section */}
           <div className="brokers-search-section">
             <div className="search-container-brokers">
@@ -271,6 +224,41 @@ const Brokers = () => {
               </button>
             </div>
           </div>
+
+          {/* Brokers Grid */}
+          <div className="brokers-container-dark">
+            {filteredBrokers.length === 0 ? (
+              <div className="no-results-brokers">
+                <h2>No Brokers Found</h2>
+                <p>Try adjusting your filters or search terms</p>
+                <button className="btn-clear-filters" onClick={resetFilters}>
+                  Clear Filters
+                </button>
+              </div>
+            ) : (
+              <div className="brokers-grid-dark">
+                {filteredBrokers.map((broker) => (
+                  <div key={broker._id} className="broker-card-dark">
+                    <div className="broker-image-container">
+                      {broker.photo ? (
+                        <img src={broker.photo} alt={broker.userId?.name} className="broker-photo-dark" />
+                      ) : (
+                        <div className="broker-photo-placeholder-dark">
+                          {broker.userId?.name?.charAt(0)}
+                        </div>
+                      )}
+                      <div className="broker-overlay-dark">
+                        <div className="broker-name-overlay">
+                          <h3>{broker.userId?.name}</h3>
+                          <p>{broker.specialization?.[0] || 'Real Estate Agent'}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
           
           {/* Featured Brokers Sliding Section */}
           {featuredBrokers.length > 0 && (
@@ -280,7 +268,45 @@ const Brokers = () => {
                 <p>Hand-picked professionals with proven track records</p>
               </div>
 
+              <div className="featured-brokers-slider">
+                <div className="slider-track" ref={sliderRef}>
+                  {featuredBrokers.map((broker) => (
+                    <div key={broker._id} className="featured-broker-card">
+                      <div className="featured-broker-image">
+                        {broker.photo ? (
+                          <img src={broker.photo} alt={broker.userId?.name} className="featured-broker-photo" />
+                        ) : (
+                          <div className="featured-broker-placeholder">
+                            {broker.userId?.name?.charAt(0)}
+                          </div>
+                        )}
+                        <div className="featured-broker-badge">FEATURED</div>
+                        <div className="featured-broker-info">
+                          <h3 className="featured-broker-name">{broker.userId?.name}</h3>
+                          <p className="featured-broker-role">{broker.specialization?.[0] || 'Real Estate Agent'}</p>
+                          <div className="featured-broker-company">
+                            <div className="featured-broker-company-logo">
+                              {broker.company?.charAt(0) || 'R'}
+                            </div>
+                            <span className="featured-broker-company-name">{broker.company || 'Real Estate Co.'}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
 
+                <div className="slider-controls">
+                  <button className="slider-btn" onClick={() => scrollSlider('left')}>
+                    <FaArrowLeft />
+                  </button>
+                  <button className="slider-btn" onClick={() => scrollSlider('right')}>
+                    <FaArrowRight />
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Best Agent Section */}
           {bestAgent && (
@@ -403,46 +429,8 @@ const Brokers = () => {
               </div>
             </div>
           </div>
-                         <div className="featured-brokers-slider">
-                <div className="slider-track" ref={sliderRef}>
-                  {featuredBrokers.map((broker) => (
-                    <div key={broker._id} className="featured-broker-card">
-                      <div className="featured-broker-image">
-                        {broker.photo ? (
-                          <img src={broker.photo} alt={broker.userId?.name} className="featured-broker-photo" />
-                        ) : (
-                          <div className="featured-broker-placeholder">
-                            {broker.userId?.name?.charAt(0)}
-                          </div>
-                        )}
-                        <div className="featured-broker-badge">FEATURED</div>
-                        <div className="featured-broker-info">
-                          <h3 className="featured-broker-name">{broker.userId?.name}</h3>
-                          <p className="featured-broker-role">{broker.specialization?.[0] || 'Real Estate Agent'}</p>
-                          <div className="featured-broker-company">
-                            <div className="featured-broker-company-logo">
-                              {broker.company?.charAt(0) || 'R'}
-                            </div>
-                            <span className="featured-broker-company-name">{broker.company || 'Real Estate Co.'}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
 
-                <div className="slider-controls">
-                  <button className="slider-btn" onClick={() => scrollSlider('left')}>
-                    <FaArrowLeft />
-                  </button>
-                  <button className="slider-btn" onClick={() => scrollSlider('right')}>
-                    <FaArrowRight />
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-          {/* How It Works Section - Always appears at the end */}
+          {/* How It Works Section */}
           <div className="how-it-works-section">
             <div className="how-it-works-container">
               <div className="how-it-works-header">
