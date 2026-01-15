@@ -4125,7 +4125,9 @@ animation: dots 1.5s steps(3, end) infinite;
 .page-transition {
   min-height: 100vh;
   animation: slideDown 0.5s ease-out;
+  overflow: hidden;
 }
+
 
 @keyframes slideDown {
   from {
