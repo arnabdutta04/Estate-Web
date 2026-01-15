@@ -3,7 +3,6 @@
   min-height: 100vh;
   color: #1a1a1a;
 }
-
 /* ============================================
    HERO SECTION - SPLIT LAYOUT WITH CARD
    ============================================ */
@@ -17,6 +16,7 @@
   overflow: hidden;
   background: url('https://i.pinimg.com/1200x/73/75/41/737541c14598e35a5f37a337a6dc211a.jpg') center/cover no-repeat;
   padding: 0 5%;
+  padding-top: 100px; /* Add space for navbar */
   gap: 60px;
 }
 
@@ -85,7 +85,10 @@
 }
 
 .search-card-white {
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 24px;
   padding: 40px 35px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
@@ -149,8 +152,9 @@
 }
 
 .quick-amount-btn {
-  background: #f8f8f8;
-  border: 2px solid #e5e5e5;
+  background: rgba(248, 248, 248, 0.8);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(229, 229, 229, 0.5);
   border-radius: 12px;
   padding: 16px 12px;
   cursor: pointer;
@@ -161,7 +165,7 @@
 }
 
 .quick-amount-btn:hover {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.95);
   border-color: #FF6B35;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(255, 107, 53, 0.15);
@@ -205,8 +209,9 @@
 .search-white-input {
   width: 100%;
   padding: 16px 16px 16px 45px;
-  background: #f8f8f8;
-  border: 1px solid #e5e5e5;
+  background: rgba(248, 248, 248, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(229, 229, 229, 0.5);
   border-radius: 12px;
   color: #1a1a1a;
   font-size: 15px;
@@ -216,7 +221,7 @@
 }
 
 .search-white-input:focus {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.95);
   border-color: #FF6B35;
   box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
 }
@@ -253,7 +258,7 @@
   gap: 12px;
   margin-top: 20px;
   padding-top: 20px;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid rgba(229, 229, 229, 0.5);
 }
 
 .stat-item {
@@ -265,7 +270,8 @@
 .stat-icon-wrapper {
   width: 36px;
   height: 36px;
-  background: #f8f8f8;
+  background: rgba(248, 248, 248, 0.8);
+  backdrop-filter: blur(10px);
   border-radius: 8px;
   display: flex;
   align-items: center;
