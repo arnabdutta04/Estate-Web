@@ -6,22 +6,40 @@
 /* ============================================
    REMOVE TOP PROGRESS BAR/LINE
    ============================================ */
-#nprogress,
-#nprogress .bar,
-.nprogress-custom-parent,
-[id*="top-loading-bar"],
-[class*="TopLoadingBar"],
-body::before,
-html::before {
-  display: none !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
+* {
+  border-top: none !important;
 }
 
 body,
 html,
-#root {
+#root,
+.properties-page-modern,
+.brokers-page-nestico {
   border-top: none !important;
+  margin-top: 0 !important;
+}
+
+/* Remove any progress bar libraries */
+#nprogress,
+#nprogress .bar,
+#nprogress .peg,
+.nprogress-custom-parent,
+.pace,
+.pace-progress,
+[id*="top-loading-bar"],
+[class*="TopLoadingBar"],
+[class*="progress-bar"],
+[class*="loading-bar"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  height: 0 !important;
+}
+
+body::before,
+html::before,
+#root::before {
+  display: none !important;
 }
 
 /* ============================================
