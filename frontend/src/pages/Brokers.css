@@ -1,11 +1,4 @@
-/* ================= BROKERS PAGE NESTICO STYLE ================= */
-.brokers-page-nestico {
-  min-height: 100vh;
-  background: #ffffff;
-}
-
 /* ================= BROKERS HERO – PROPERTY STYLE ================= */
-/* Individual Broker Hero Section */
 .individual-broker-hero {
   padding: 100px 20px 80px;
   background: #fff;
@@ -826,7 +819,7 @@
 
 /* ================= WHY USE OUR AGENTS SECTION ================= */
 .why-use-agents-section {
-  background: #000000;
+  background: #ffffff;
   padding: 6rem 2rem;
   position: relative;
 }
