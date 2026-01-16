@@ -268,145 +268,305 @@ const Explore = () => {
     <div className="explore-page">
       <Navbar />
 
-      {/* Hero Search Section */}
-      <section className="explore-hero">
-        <div className="explore-hero-content">
-          <h1>Discover Your Perfect Property</h1>
-          <p>Explore thousands of verified listings with real-time market insights</p>
-
-          <div className="explore-search-bar">
-            <div className="search-input-wrapper">
-              <FaSearch className="search-icon" />
-              <input
-                type="text"
-                placeholder="Search by location, property name..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-
-            <button
-              className="filter-toggle-btn"
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              <FaFilter /> Filters
+      {/* Metro Living Hero Section */}
+      <div className="hero-container">
+        <div className="hero-content">
+          <div className="hero-left">
+            <h1 className="hero-title">
+              METRO<br />LIVING
+            </h1>
+            <button className="cta-button">
+              Get In Touch
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M4 16L16 4M16 4H7M16 4V13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </button>
+            <p className="hero-description">
+              Our properties are designed for those who appreciate the vibrancy of metropolitan living
+            </p>
+            <div className="property-icons">
+              <div className="icon-item"></div>
+              <div className="icon-item"></div>
+              <div className="icon-item"></div>
+              <div className="icon-item"></div>
+            </div>
           </div>
 
-          {showFilters && (
-            <div className="advanced-filters">
-              <div className="filter-group">
-                <label>Location</label>
-                <select
-                  value={selectedLocation}
-                  onChange={(e) => setSelectedLocation(e.target.value)}
-                >
-                  <option value="all">All Locations</option>
-                  {locations.map((loc) => (
-                    <option key={loc} value={loc}>
-                      {loc}
-                    </option>
-                  ))}
-                </select>
+          <div className="hero-center">
+            <div className="building-frame">
+              <img 
+                src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800" 
+                alt="Modern Building" 
+                className="building-image"
+              />
+              <div className="arrow-circle">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <path d="M8 24L24 8M24 8H12M24 8V20" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </div>
+            </div>
+          </div>
 
-              <div className="filter-group">
-                <label>Property Type</label>
-                <select
-                  value={selectedType}
-                  onChange={(e) => setSelectedType(e.target.value)}
-                >
-                  <option value="all">All Types</option>
-                  <option value="Residential">Residential</option>
-                  <option value="Commercial">Commercial</option>
-                  <option value="Land">Land & Plots</option>
-                  <option value="Luxury">Luxury Villas</option>
-                </select>
+          <div className="hero-right">
+            <div className="testimonial">
+              <div className="stars">★★★★★</div>
+              <div className="reviewer">
+                <img src="https://i.pravatar.cc/150?img=12" alt="Andrew Carlos" className="avatar" />
+                <span className="reviewer-name">Andrew Carlos</span>
               </div>
+              <p className="review-text">
+                "The tranquility and natural elements integrated into their properties align perfectly with my values"
+              </p>
+            </div>
 
-              <div className="filter-group">
-                <label>Price Range</label>
-                <select
-                  value={priceRange}
-                  onChange={(e) => setPriceRange(e.target.value)}
-                >
-                  <option value="all">All Prices</option>
-                  <option value="0-50">Under ₹50L</option>
-                  <option value="50-100">₹50L - ₹1Cr</option>
-                  <option value="100-200">₹1Cr - ₹2Cr</option>
-                  <option value="200+">Above ₹2Cr</option>
-                </select>
+            <div className="stats">
+              <div className="stat-item">
+                <h3 className="stat-number"><sup>+</sup>500k</h3>
+                <p className="stat-label">Happy user</p>
+              </div>
+              <div className="stat-item">
+                <h3 className="stat-number"><sup>+</sup>100k</h3>
+                <p className="stat-label">Our partner</p>
+              </div>
+            </div>
+
+            <div className="scroll-indicator">↓</div>
+            
+            <div className="qr-code">
+              <div className="qr-placeholder"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Modern Search Hero Section */}
+      <section className="modern-search-hero">
+        <div className="modern-hero-container">
+          {/* Left Side - Search Content */}
+          <div className="hero-search-content">
+            {/* Category Pills */}
+            <div className="category-pills">
+              <button className="pill-btn active">House</button>
+              <button className="pill-btn">Appartement</button>
+              <button className="pill-btn">Residential</button>
+              <button className="pill-btn arrow-btn">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+            </div>
+
+            {/* Main Heading */}
+            <h1 className="hero-main-heading">
+              Are you<br />
+              looking<br />
+              for<span className="heading-accent">–</span>
+            </h1>
+
+            {/* Search Bar */}
+            <div className="hero-search-wrapper">
+              <input 
+                type="text" 
+                placeholder="Search Location"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="hero-search-input"
+              />
+              <button className="hero-search-btn">
+                <FaSearch />
+              </button>
+            </div>
+
+            {/* Description */}
+            <p className="hero-description-text">
+              With its square floor plan, cubist shape and impressive 216 m² of living space, Heid not only offers amazing views over the Rhine, but also an exceptionally harmonious room layout.
+            </p>
+
+            {/* Agent Link */}
+            <div className="hero-agent-link">
+              <span className="agent-bullet">●</span>
+              <span className="agent-text">AGENTS</span>
+            </div>
+          </div>
+
+          {/* Right Side - Property Card & Text */}
+          <div className="hero-right-content">
+            {/* Featured Property Card */}
+            <div className="featured-property-card">
+              <div className="property-card-image">
+                <img 
+                  src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600" 
+                  alt="Property"
+                />
+              </div>
+              <div className="property-card-info">
+                <h3>1802 (From 1082 to 1899 Odd) Forest City RD, Forest City TWP, ME</h3>
+                <p className="property-card-time">Today, 9 hours ago</p>
+              </div>
+              <button className="property-card-add">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M10 5V15M5 10H15" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </button>
+            </div>
+
+            {/* Large Aesthetic Text */}
+            <div className="hero-aesthetic-text">
+              <span className="aesthetic-word">a</span>
+              <span className="aesthetic-word">aesthetic</span>
+              <span className="aesthetic-word">
+                <span className="aesthetic-accent">–</span>home?
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Description Section */}
+        <div className="hero-bottom-section">
+          <p className="bottom-description">
+            Embedded in the natural hillside location, carefully designed recesses in the building create marvellous outdoor areas that seamlessly connect the interior with the surrounding landscape.
+          </p>
+        </div>
+
+        {/* Property Cards Grid */}
+        <div className="property-cards-grid">
+          <div className="property-location-card dark-card">
+            <div className="card-location">
+              <p className="location-name">Königswinter,</p>
+              <p className="location-country">Germany</p>
+            </div>
+            <div className="card-size">664 m²</div>
+            <div className="card-footer">
+              <span className="card-code">AG24K</span>
+              <span className="card-floors">3 floor</span>
+            </div>
+          </div>
+
+          <div className="property-location-card dark-card">
+            <div className="card-location">
+              <p className="location-name">Moscow,</p>
+              <p className="location-country">Russia</p>
+            </div>
+            <div className="card-size highlight">216 m²</div>
+            <div className="card-footer">
+              <span className="card-code">MC20K</span>
+              <span className="card-floors">5 floor</span>
+            </div>
+          </div>
+
+          <div className="property-location-card dark-card">
+            <div className="card-location">
+              <p className="location-name">Jakarta,</p>
+              <p className="location-country">Indonesia</p>
+            </div>
+            <div className="card-size">928 m²</div>
+            <div className="card-footer">
+              <span className="card-code">JK12K</span>
+              <span className="card-floors">4 floor</span>
+            </div>
+          </div>
+
+          <div className="property-location-card image-card">
+            <img 
+              src="https://images.unsplash.com/photo-1504615755583-2916b52192a3?w=400" 
+              alt="Construction"
+            />
+          </div>
+
+          <div className="property-location-card dark-card">
+            <div className="card-location">
+              <p className="location-name">Yogyakarta,</p>
+              <p className="location-country">Indonesia</p>
+            </div>
+            <div className="card-size">420 m²</div>
+            <div className="card-footer">
+              <span className="card-code">Y2KC</span>
+              <span className="card-floors">2 floor</span>
+            </div>
+          </div>
+
+          <div className="property-location-card dark-card">
+            <div className="card-location">
+              <p className="location-name">Tokyo,</p>
+              <p className="location-country">Japan</p>
+            </div>
+            <div className="card-size">548 m²</div>
+            <div className="card-footer">
+              <span className="card-code">TK23K</span>
+              <span className="card-floors">8 floor</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Filter Section - Only show when toggled */}
+        {showFilters && (
+          <div className="modern-filters-overlay">
+            <div className="modern-filters-container">
+              <div className="filters-header">
+                <h3>Filter Properties</h3>
+                <button onClick={() => setShowFilters(false)} className="close-filters">
+                  <FaTimes />
+                </button>
+              </div>
+              
+              <div className="filters-grid">
+                <div className="filter-group">
+                  <label>Location</label>
+                  <select
+                    value={selectedLocation}
+                    onChange={(e) => setSelectedLocation(e.target.value)}
+                  >
+                    <option value="all">All Locations</option>
+                    {locations.map((loc) => (
+                      <option key={loc} value={loc}>{loc}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="filter-group">
+                  <label>Property Type</label>
+                  <select
+                    value={selectedType}
+                    onChange={(e) => setSelectedType(e.target.value)}
+                  >
+                    <option value="all">All Types</option>
+                    <option value="Residential">Residential</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="Land">Land & Plots</option>
+                    <option value="Luxury">Luxury Villas</option>
+                  </select>
+                </div>
+
+                <div className="filter-group">
+                  <label>Price Range</label>
+                  <select
+                    value={priceRange}
+                    onChange={(e) => setPriceRange(e.target.value)}
+                  >
+                    <option value="all">All Prices</option>
+                    <option value="0-50">Under ₹50L</option>
+                    <option value="50-100">₹50L - ₹1Cr</option>
+                    <option value="100-200">₹1Cr - ₹2Cr</option>
+                    <option value="200+">Above ₹2Cr</option>
+                  </select>
+                </div>
               </div>
 
               <button
-                className="clear-filters-btn"
-                onClick={() => {
-                  setSelectedLocation("all");
-                  setSelectedType("all");
-                  setPriceRange("all");
-                  setSearchQuery("");
-                }}
+                className="apply-filters-btn"
+                onClick={() => setShowFilters(false)}
               >
-                <FaTimes /> Clear All
+                Apply Filters
               </button>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </section>
 
       {/* Market Insights Section */}
       <section className="market-insights-section">
         <div className="explore-container">
-          <div className="section-header">
-            <h2>Market Insights & Analytics</h2>
-            <p>Make informed decisions with real-time market data and trends</p>
-          </div>
-
-          {/* Investment Insights Cards */}
-          <div className="investment-insights-grid">
-            {investmentInsights.map((insight, index) => (
-              <div key={index} className="insight-card">
-                <div className="insight-icon">{insight.icon}</div>
-                <h3>{insight.title}</h3>
-                <div className="insight-value">{insight.value}</div>
-                <p>{insight.description}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* City-wise Growth Table */}
-          <div className="city-growth-section">
-            <h3>City-wise Property Growth (2024)</h3>
-            <div className="city-growth-grid">
-              {cityGrowth.map((city, index) => (
-                <div key={index} className="city-growth-card">
-                  <div className="city-header">
-                    <h4>{city.city}</h4>
-                    <span className={`demand-badge ${city.demand.toLowerCase().replace(' ', '-')}`}>
-                      {city.demand} Demand
-                    </span>
-                  </div>
-                  <div className="growth-stats">
-                    <div className="stat">
-                      <span className="stat-label">YoY Growth</span>
-                      <span className="stat-value growth-positive">
-                        <FaTrendingUp /> +{city.growth}%
-                      </span>
-                    </div>
-                    <div className="stat">
-                      <span className="stat-label">Avg. Price</span>
-                      <span className="stat-value">{city.avgPrice}</span>
-                    </div>
-                  </div>
-                  <button className="btn-view-city" onClick={() => setSelectedLocation(city.city)}>
-                    View Properties <FaArrowRight />
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Market Trend Chart Placeholder */}
+          {/* Market Trend Chart */}
           <div className="market-trend-chart">
             <h3>5-Year Property Value Appreciation Trend</h3>
             <div className="chart-container">
@@ -446,7 +606,7 @@ const Explore = () => {
       </section>
 
       {/* Broker Benefits Section */}
-      <section className="broker-benefits-section">
+      <section className="broker-benefits-section dark-theme">
         <div className="explore-container">
           <div className="section-header">
             <h2>Why Brokers Choose Propify</h2>
@@ -587,9 +747,9 @@ const Explore = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="explore-cta">
+      <section className="explore-cta contact-style">
         <div className="explore-container">
-          <h2>Ready to Find Your Dream Property?</h2>
+          <h2>Ready to Find Your Dream Property</h2>
           <p>Sign up to get personalized recommendations and save your favorites</p>
           <button className="btn-primary" onClick={() => navigate("/register")}>
             Create Free Account
