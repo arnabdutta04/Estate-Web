@@ -9,7 +9,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: url('https://i.pinimg.com/736x/fd/83/40/fd8340d37ac36dbae806df82f0b9edc7.jpg') center / cover no-repeat;
+  background: url('https://pngtree.com/freebackground/solar-panels-installed-atop-modern-house-with-warm-interior-lighting-at-dusk-showcasing-sustainable-energy-and-contemporary-architecture-scene_19738311.html') center / cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -189,8 +189,8 @@
     padding: 140px 60px 80px 60px;
     background: linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.88) 0%,
-      rgba(0, 0, 0, 0.75) 100%
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) 100%
     );
   }
 
@@ -325,7 +325,7 @@
 
 .btn-search-grnata {
   padding: 0.875rem 2.5rem;
-  background: #3b82f6;
+  background: #000000;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -358,7 +358,7 @@
 
 .btn-clear-filters-grnata {
   background: transparent;
-  color: #3b82f6;
+  color: #000000;
   border: none;
   font-size: 0.95rem;
   font-weight: 500;
