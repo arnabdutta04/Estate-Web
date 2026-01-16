@@ -71,7 +71,7 @@
 
 /* ================= MODAL CARD BACKGROUND ================= */
 .auth-modal-card {
-  background: linear-gradient(135deg, #1a3a2e 0%, #2d5235 100%);
+  background: linear-gradient(135deg, #c4d60000, #646966a3);
   border-radius: 20px;
   padding: 2.5rem;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
