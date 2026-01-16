@@ -387,456 +387,427 @@ const Properties = () => {
               </div>
             </div>
           </div>
+{/* Filter Overlay */}
+{showFilter && (
+  <div className="filter-overlay">
+    <div className="filter-container">
+      {/* Header */}
+      <div className="filter-header">
+        <h2>Filter</h2>
+        <button className="close-btn" onClick={closeFilter}>×</button>
+      </div>
 
-          {/* Filter Overlay */}
-          {showFilter && (
-            <div className="filter-overlay">
-              <div className="filter-container">
-                {/* Header */}
-                <div className="filter-header">
-                  <h2>Filter</h2>
-                  <button className="close-btn" onClick={closeFilter}>×</button>
-                </div>
-
-                <div className="filter-content">
-                  {/* Type of Place */}
-                  <section className="filter-section">
-                    <h3>Type of Place</h3>
-                    <p className="section-subtitle">Search rooms, entire homes, or any type of place.</p>
-                    <div className="place-types">
-                      <div className="place-card">
-                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&q=80" alt="Type Of Place" />
-                        <div className="place-info">
-                          <h4>Type Of Place</h4>
-                          <p>A place all to yourself</p>
-                        </div>
-                      </div>
-                      <div className="place-card">
-                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=80" alt="Room" />
-                        <div className="place-info">
-                          <h4>Room</h4>
-                          <p>Your own room, plus access to shared spaces</p>
-                        </div>
-                      </div>
-                      <div className="place-card">
-                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&q=80" alt="Shared Room" />
-                        <div className="place-info">
-                          <h4>Shared Room</h4>
-                          <p>Your own room, plus access to shared spaces</p>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-
-                  <div className="filter-row">
-                    {/* Rooms And Beds */}
-                    <section className="filter-section half-width">
-                      <h3>Rooms And Beds</h3>
-
-                      <div className="counter-group">
-                        <div className="counter-item">
-                          <div className="counter-label">
-                            <Sofa className="facility-icon" size={24} />
-                            <div>
-                              <h4>Bedrooms</h4>
-                              <p>Select your room for your family</p>
-                            </div>
-                          </div>
-                          <div className="counter-controls">
-                            <button onClick={() => decrement('bedrooms')}>−</button>
-                            <span>{counters.bedrooms}</span>
-                            <button onClick={() => increment('bedrooms')}>+</button>
-                          </div>
-                        </div>
-
-                        <div className="counter-item">
-                          <div className="counter-label">
-                            <UtensilsCrossed className="icon" size={24} />
-                            <div>
-                              <h4>Dining</h4>
-                              <p>Select your room for your family</p>
-                            </div>
-                          </div>
-                          <div className="counter-controls">
-                            <button onClick={() => decrement('dining')}>−</button>
-                            <span>{counters.dining}</span>
-                            <button onClick={() => increment('dining')}>+</button>
-                          </div>
-                        </div>
-
-                        <div className="counter-item">
-                          <div className="counter-label">
-                            <ShowerHead className="icon" size={24} />
-                            <div>
-                              <h4>Bathrooms</h4>
-                              <p>Select your room for your family</p>
-                            </div>
-                          </div>
-                          <div className="counter-controls">
-                            <button onClick={() => decrement('bathrooms')}>−</button>
-                            <span>{counters.bathrooms}</span>
-                            <button onClick={() => increment('bathrooms')}>+</button>
-                          </div>
-                        </div>
-                      </div>
-                    </section>
-
-                    {/* Price Range */}
-                    <section className="filter-section half-width">
-                      <h3>Price Range</h3>
-                      <p className="section-subtitle">The average nightly price is ₹200000</p>
-
-                      <div className="price-slider">
-                        <input
-                          type="range"
-                          min="300000"
-                          max="67000000"
-                          value={priceRange[1]}
-                          onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                          className="slider"
-                        />
-                        <div className="price-values">
-                          <div>
-                            <label>Minimum</label>
-                            <p className="price">₹{priceRange[0]}</p>
-                          </div>
-                          <div>
-                            <label>Maximum</label>
-                            <p className="price">₹{priceRange[1]}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-
-                  {/* Amenities */}
-                  <section className="filter-section">
-                    <h3>Amenities</h3>
-
-                    <div className="amenities-grid">
-                      <div className="amenity-item">
-                        <Smartphone className="amenity-icon" size={24} />
-                        <div>
-                          <h4>Instant Book</h4>
-                          <p>Listings you can book without waiting for Host approval</p>
-                        </div>
-                        <label className="toggle">
-                          <input type="checkbox" />
-                          <span className="toggle-slider"></span>
-                        </label>
-                      </div>
-
-                      <div className="amenity-item">
-                        <Key className="amenity-icon" size={24} />
-                        <div>
-                          <h4>Self Check-In</h4>
-                          <p>Easy access to the property once you arrive</p>
-                        </div>
-                        <label className="toggle">
-                          <input type="checkbox" />
-                          <span className="toggle-slider"></span>
-                        </label>
-                      </div>
-
-                      <div className="amenity-item">
-                        <FaPaw className="amenity-icon" size={24} />
-                        <div>
-                          <h4>Allows Pets</h4>
-                          <p>Will Bringing a service animal?</p>
-                        </div>
-                        <label className="toggle">
-                          <input type="checkbox" />
-                          <span className="toggle-slider"></span>
-                        </label>
-                      </div>
-                    </div>
-                  </section>
-
-                  {/* Facilities */}
-                  <section className="filter-section">
-                    <h3>Facilities</h3>
-
-                    <div className="facilities-grid">
-                      <label className="facility-checkbox">
-                        <input
-                          type="checkbox"
-                          checked={selectedFacilities.furnished}
-                          onChange={() => toggleFacility('furnished')}
-                        />
-                        <span className="checkmark">✓</span>
-                        <Sofa className="facility-icon" size={24} />
-                        <span>Furnished</span>
-                      </label>
-
-                      <label className="facility-checkbox">
-                        <input
-                          type="checkbox"
-                          checked={selectedFacilities.petAllowed}
-                          onChange={() => toggleFacility('petAllowed')}
-                        />
-                        <span className="checkmark">✓</span>
-                         <Dog className="facility-icon" size={24} />
-                        <span>Pet Allowed</span>
-                      </label>
-
-                      <label className="facility-checkbox">
-                        <input
-                          type="checkbox"
-                          checked={selectedFacilities.parkingSlot}
-                          onChange={() => toggleFacility('parkingSlot')}
-                        />
-                        <span className="checkmark">✓</span>
-                       <Car className="facility-icon" size={24} />
-                        <span>Parking Slot</span>
-                      </label>
-
-                      <label className="facility-checkbox">
-                        <input
-                          type="checkbox"
-                          checked={selectedFacilities.kitchen}
-                          onChange={() => toggleFacility('kitchen')}
-                        />
-                        <span className="checkmark">✓</span>
-                        <UtensilsCrossed className="facility-icon" size={24} />
-                        <span>Kitchen</span>
-                      </label>
-
-                      <label className="facility-checkbox">
-                        <input
-                          type="checkbox"
-                          checked={selectedFacilities.wifi}
-                          onChange={() => toggleFacility('wifi')}
-                        />
-                        <span className="checkmark">✓</span>
-                        <Wifi className="facility-icon" size={24} />
-                        <span>WiFi</span>
-                      </label>
-
-                      <label className="facility-checkbox">
-                        <input
-                          type="checkbox"
-                          checked={selectedFacilities.ac}
-                          onChange={() => toggleFacility('ac')}
-                        />
-                        <span className="checkmark">✓</span>
-                        <Snowflake className="facility-icon" size={24} />
-                        <span>Air Conditioning</span>
-                      </label>
-
-                      <label className="facility-checkbox">
-                        <input
-                          type="checkbox"
-                          checked={selectedFacilities.swimmingPool}
-                          onChange={() => toggleFacility('swimmingPool')}
-                        />
-                        <span className="checkmark">✓</span>
-                        <Waves className="facility-icon" size={24} />
-                        <span>Swimming Pool</span>
-                      </label>
-
-                      <label className="facility-checkbox">
-                        <input
-                          type="checkbox"
-                          checked={selectedFacilities.gym}
-                          onChange={() => toggleFacility('gym')}
-                        />
-                        <span className="checkmark">✓</span>
-                        <Dumbbell className="facility-icon" size={24} />
-                        <span>Gym</span>
-                      </label>
-
-                      <label className="facility-checkbox">
-                        <input
-                          type="checkbox"
-                          checked={selectedFacilities.security}
-                          onChange={() => toggleFacility('security')}
-                        />
-                        <span className="checkmark">✓</span>
-                        <Lock className="facility-icon" size={24} />
-                        <span>24/7 Security</span>
-                      </label>
-                    </div>
-                  </section>
-
-                  {/* Property Type Tags */}
-                  <section className="filter-section">
-                    <h3>Property Type</h3>
-                    <div className="tag-group">
-                      <span className="tag active">City <button>×</button></span>
-                      <span className="tag">House <button>×</button></span>
-                      <span className="tag">Residential <button>×</button></span>
-                      <span className="tag">Apartment</span>
-                    </div>
-                  </section>
-
-                  {/* Action Buttons */}
-                  <div className="filter-actions">
-                    <button className="btn-clear" onClick={handleReset}>Clear All</button>
-                    <button className="btn-apply" onClick={handleFilterSearch}>Apply Filters</button>
-                  </div>
-                </div>
+      <div className="filter-content">
+        {/* Type of Place */}
+        <section className="filter-section">
+          <h3>Type of Place</h3>
+          <p className="section-subtitle">Search rooms, entire homes, or any type of place.</p>
+          <div className="place-types">
+            <div className="place-card">
+              <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&q=80" alt="Type Of Place" />
+              <div className="place-info">
+                <h4>Type Of Place</h4>
+                <p>A place all to yourself</p>
               </div>
             </div>
-          )}
-
-          {/* Property Listings Section with Map */}
-          <div className='property-listings-with-map'>
-            {/* Left Side - Property Listings */}
-            <div className='property-listings'>
-              {/* Filter Button */}
-              <button className='open-filter-btn' onClick={openFilter}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-                Open Filters
-              </button>
-
-              {(properties.length > 0 ? properties : mockProperties).map((property) => (
-                <div key={property._id} className='property-list-card'>
-                  <img src={property.image} alt={property.title} className='property-list-image' />
-                  <div className='property-list-content'>
-                    <h3 className='property-list-title'>{property.title}</h3>
-                    <p className='property-list-price'>${property.price}<span>/month</span></p>
-                    <div className='property-list-details'>
-                      <span><FaBed /> {property.bedrooms} Bed</span>
-                      <span><FaBath /> {property.bathrooms} Bath</span>
-                      <span><FaRulerCombined /> {property.area}m²</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Right Side - Map */}
-            <div className='map-panel'>
-              <div className='map-controls'>
-                <button className='map-control-btn'>
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <circle cx="10" cy="10" r="3" fill="white" />
-                    <circle cx="10" cy="10" r="7" stroke="white" strokeWidth="2" />
-                  </svg>
-                </button>
-                <button className='map-control-btn'><FaMinus /></button>
-                <button className='map-control-btn'><FaPlus /></button>
+            <div className="place-card">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=80" alt="Room" />
+              <div className="place-info">
+                <h4>Room</h4>
+                <p>Your own room, plus access to shared spaces</p>
               </div>
-
-              <div className='map-container'>
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.30596073366!2d-74.25986548248684!3d40.69714941932609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1234567890"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  title="Property Map"
-                ></iframe>
-
-                {mockProperties.map((property, idx) => (
-                  <div
-                    key={property._id}
-                    className='map-property-marker'
-                    style={{
-                      top: `${30 + idx * 20}%`,
-                      left: `${40 + idx * 15}%`
-                    }}
-                  >
-                    <div className='map-property-card'>
-                      <img src={property.image} alt={property.title} />
-                      <div className='map-card-content'>
-                        <h4>{property.title}</h4>
-                        <p>${property.price}/month</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+            </div>
+            <div className="place-card">
+              <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&q=80" alt="Shared Room" />
+              <div className="place-info">
+                <h4>Shared Room</h4>
+                <p>Your own room, plus access to shared spaces</p>
               </div>
             </div>
           </div>
+        </section>
 
-          {/* Properties Container */}
-          <div className='properties-container-modern'>
-            {loading ? (
-              <div className='loading-state'>
-                <div className='loader'></div>
-                <h2>Loading properties...</h2>
-                <p>Please wait while we fetch the best options for you</p>
+        <div className="filter-row">
+          {/* Rooms And Beds */}
+          <section className="filter-section half-width">
+            <h3>Rooms And Beds</h3>
+
+            <div className="counter-group">
+              <div className="counter-item">
+                <div className="counter-label">
+                  <Sofa className="facility-icon" size={24} />
+                  <div>
+                    <h4>Bedrooms</h4>
+                    <p>Select your room for your family</p>
+                  </div>
+                </div>
+                <div className="counter-controls">
+                  <button onClick={() => decrement('bedrooms')}>−</button>
+                  <span>{counters.bedrooms}</span>
+                  <button onClick={() => increment('bedrooms')}>+</button>
+                </div>
               </div>
-            ) : properties.length === 0 ? (
-              <div className='no-results-modern'>
-                <h2>No Properties Found</h2>
-                <p>Try adjusting your filters to discover more amazing properties</p>
-                <button className='reset-btn-large' onClick={handleReset}>
-                  Reset Filters
-                </button>
+
+              <div className="counter-item">
+                <div className="counter-label">
+                  <UtensilsCrossed className="icon" size={24} />
+                  <div>
+                    <h4>Dining</h4>
+                    <p>Select your room for your family</p>
+                  </div>
+                </div>
+                <div className="counter-controls">
+                  <button onClick={() => decrement('dining')}>−</button>
+                  <span>{counters.dining}</span>
+                  <button onClick={() => increment('dining')}>+</button>
+                </div>
               </div>
-            ) : (
-              <>
-                {/* Properties Header */}
-                <div className='properties-header'>
-                  <h2 className='properties-header-title'>
-                    More Than Properties<br />We Deliver Prestige
-                  </h2>
-                  <button className='view-all-properties-btn' onClick={() => navigate('/properties')}>
-                    View all Property
-                    <span className='arrow-icon'>→</span>
-                  </button></div>
-            <div className='properties-grid-modern'>
-              {properties.map((property, index) => (
-                <PropertyCard
-                  key={property._id}
-                  property={property}
-                  index={index}
-                />
-              ))}
+
+              <div className="counter-item">
+                <div className="counter-label">
+                  <ShowerHead className="icon" size={24} />
+                  <div>
+                    <h4>Bathrooms</h4>
+                    <p>Select your room for your family</p>
+                  </div>
+                </div>
+                <div className="counter-controls">
+                  <button onClick={() => decrement('bathrooms')}>−</button>
+                  <span>{counters.bathrooms}</span>
+                  <button onClick={() => increment('bathrooms')}>+</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Price Range */}
+          <section className="filter-section half-width">
+            <h3>Price Range</h3>
+            <p className="section-subtitle">The average nightly price is ₹200000</p>
+
+            <div className="price-slider">
+              <input
+                type="range"
+                min="300000"
+                max="67000000"
+                value={priceRange[1]}
+                onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
+                className="slider"
+              />
+              <div className="price-values">
+                <div>
+                  <label>Minimum</label>
+                  <p className="price">₹{priceRange[0]}</p>
+                </div>
+                <div>
+                  <label>Maximum</label>
+                  <p className="price">₹{priceRange[1]}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        {/* Amenities */}
+        <section className="filter-section">
+          <h3>Amenities</h3>
+
+          <div className="amenities-grid">
+            <div className="amenity-item">
+              <Smartphone className="amenity-icon" size={24} />
+              <div>
+                <h4>Instant Book</h4>
+                <p>Listings you can book without waiting for Host approval</p>
+              </div>
+              <label className="toggle">
+                <input type="checkbox" />
+                <span className="toggle-slider"></span>
+              </label>
             </div>
 
-            {pagination.totalPages > 1 && (
-              <div className='pagination-modern'>
-                <button
-                  onClick={() => handlePageChange(pagination.currentPage - 1)}
-                  disabled={pagination.currentPage === 1}
-                  style={{ opacity: pagination.currentPage === 1 ? 0.5 : 1 }}
-                >
-                  ←
-                </button>
-                {Array.from({ length: Math.min(pagination.totalPages, 8) }, (_, i) => {
-                  const pageNum = i + 1;
-                  if (pageNum === 4 && pagination.totalPages > 8) {
-                    return <span key="ellipsis">...</span>;
-                  }
-                  if (pageNum > 3 && pageNum < pagination.totalPages - 2 && pagination.totalPages > 8) {
-                    return null;
-                  }
-                  return (
-                    <button
-                      key={pageNum}
-                      onClick={() => handlePageChange(pageNum)}
-                      className={pagination.currentPage === pageNum ? 'active' : ''}
-                    >
-                      {pageNum}
-                    </button>
-                  );
-                })}
-                {pagination.totalPages > 8 && (
-                  <button
-                    onClick={() => handlePageChange(pagination.totalPages)}
-                    className={pagination.currentPage === pagination.totalPages ? 'active' : ''}
-                  >
-                    {pagination.totalPages}
-                  </button>
-                )}
-                <button
-                  onClick={() => handlePageChange(pagination.currentPage + 1)}
-                  disabled={pagination.currentPage === pagination.totalPages}
-                  style={{ opacity: pagination.currentPage === pagination.totalPages ? 0.5 : 1 }}
-                >
-                  →
-                </button>
+            <div className="amenity-item">
+              <Key className="amenity-icon" size={24} />
+              <div>
+                <h4>Self Check-In</h4>
+                <p>Easy access to the property once you arrive</p>
               </div>
-            )}
-          </>
-        )}
+              <label className="toggle">
+                <input type="checkbox" />
+                <span className="toggle-slider"></span>
+              </label>
+            </div>
+
+            <div className="amenity-item">
+              <FaPaw className="amenity-icon" size={24} />
+              <div>
+                <h4>Allows Pets</h4>
+                <p>Will Bringing a service animal?</p>
+              </div>
+              <label className="toggle">
+                <input type="checkbox" />
+                <span className="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        {/* Facilities */}
+        <section className="filter-section">
+          <h3>Facilities</h3>
+
+          <div className="facilities-grid">
+            <label className="facility-checkbox">
+              <input
+                type="checkbox"
+                checked={selectedFacilities.furnished}
+                onChange={() => toggleFacility('furnished')}
+              />
+              <span className="checkmark">✓</span>
+              <Sofa className="facility-icon" size={24} />
+              <span>Furnished</span>
+            </label>
+
+            <label className="facility-checkbox">
+              <input
+                type="checkbox"
+                checked={selectedFacilities.petAllowed}
+                onChange={() => toggleFacility('petAllowed')}
+              />
+              <span className="checkmark">✓</span>
+              <Dog className="facility-icon" size={24} />
+              <span>Pet Allowed</span>
+            </label>
+
+            <label className="facility-checkbox">
+              <input
+                type="checkbox"
+                checked={selectedFacilities.parkingSlot}
+                onChange={() => toggleFacility('parkingSlot')}
+              />
+              <span className="checkmark">✓</span>
+              <Car className="facility-icon" size={24} />
+              <span>Parking Slot</span>
+            </label>
+
+            <label className="facility-checkbox">
+              <input
+                type="checkbox"
+                checked={selectedFacilities.kitchen}
+                onChange={() => toggleFacility('kitchen')}
+              />
+              <span className="checkmark">✓</span>
+              <UtensilsCrossed className="facility-icon" size={24} />
+              <span>Kitchen</span>
+            </label>
+
+            <label className="facility-checkbox">
+              <input
+                type="checkbox"
+                checked={selectedFacilities.wifi}
+                onChange={() => toggleFacility('wifi')}
+              />
+              <span className="checkmark">✓</span>
+              <Wifi className="facility-icon" size={24} />
+              <span>WiFi</span>
+            </label>
+
+            <label className="facility-checkbox">
+              <input
+                type="checkbox"
+                checked={selectedFacilities.ac}
+                onChange={() => toggleFacility('ac')}
+              />
+              <span className="checkmark">✓</span>
+              <Snowflake className="facility-icon" size={24} />
+              <span>Air Conditioning</span>
+            </label>
+
+            <label className="facility-checkbox">
+              <input
+                type="checkbox"
+                checked={selectedFacilities.swimmingPool}
+                onChange={() => toggleFacility('swimmingPool')}
+              />
+              <span className="checkmark">✓</span>
+              <Waves className="facility-icon" size={24} />
+              <span>Swimming Pool</span>
+            </label>
+
+            <label className="facility-checkbox">
+              <input
+                type="checkbox"
+                checked={selectedFacilities.gym}
+                onChange={() => toggleFacility('gym')}
+              />
+              <span className="checkmark">✓</span>
+              <Dumbbell className="facility-icon" size={24} />
+              <span>Gym</span>
+            </label>
+
+            <label className="facility-checkbox">
+              <input
+                type="checkbox"
+                checked={selectedFacilities.security}
+                onChange={() => toggleFacility('security')}
+              />
+              <span className="checkmark">✓</span>
+              <Lock className="facility-icon" size={24} />
+              <span>24/7 Security</span>
+            </label>
+          </div>
+        </section>
+
+        {/* Property Type Tags */}
+        <section className="filter-section">
+          <h3>Property Type</h3>
+          <div className="tag-group">
+            <span className="tag active">City <button>×</button></span>
+            <span className="tag">House <button>×</button></span>
+            <span className="tag">Residential <button>×</button></span>
+            <span className="tag">Apartment</span>
+          </div>
+        </section>
+
+        {/* Action Buttons */}
+        <div className="filter-actions">
+          <button className="btn-clear" onClick={handleReset}>Clear All</button>
+          <button className="btn-apply" onClick={handleFilterSearch}>Apply Filters</button>
+        </div>
       </div>
+    </div>
+  </div>
+)}
+
+{/* Property Listings Section - NO MAP */}
+<div className='property-listings-section'>
+  {/* Filter Button - Centered */}
+  <button className='open-filter-btn' onClick={openFilter}>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+    Open Filters
+  </button>
+
+  {/* Properties Container */}
+  <div className='properties-container-modern'>
+    {loading ? (
+      <div className='loading-state'>
+        <div className='loader'></div>
+        <h2>Loading properties...</h2>
+        <p>Please wait while we fetch the best options for you</p>
+      </div>
+    ) : properties.length === 0 ? (
+      <div className='no-results-modern'>
+        <h2>No Properties Found</h2>
+        <p>Try adjusting your filters to discover more amazing properties</p>
+        <button className='reset-btn-large' onClick={handleReset}>
+          Reset Filters
+        </button>
+      </div>
+    ) : (
+      <>
+        {/* Properties Header */}
+        <div className='properties-header'>
+          <h2 className='properties-header-title'>
+            More Than Properties<br />We Deliver Prestige
+          </h2>
+          <button className='view-all-properties-btn' onClick={() => navigate('/properties')}>
+            View all Property
+            <span className='arrow-icon'>→</span>
+          </button>
+        </div>
+
+        {/* Properties Grid */}
+        <div className='properties-grid-modern'>
+          {properties.map((property, index) => (
+            <div key={property._id} className='property-card-modern'>
+              <div className='property-image-container'>
+                <img src={property.image} alt={property.title} />
+                <h3 className='property-title-overlay'>{property.title}</h3>
+                
+                <div className='property-info-card'>
+                  <h4 className='property-info-title'>{property.type || 'Luminous Urban Abode'}</h4>
+                  <p className='property-info-description'>
+                    {property.description || 'A peaceful escape with sweeping views of the bustling city'}
+                  </p>
+                  
+                  <div className='property-stats'>
+                    <div className='property-stat-item'>
+                      <span className='property-stat-value'>
+                        {property.area || '645'}
+                        <span className='property-stat-unit'>sq.m.</span>
+                      </span>
+                      <span className='property-stat-label'>Total area</span>
+                    </div>
+                    <div className='property-stat-item'>
+                      <span className='property-stat-value'>{property.bedrooms}-{property.bathrooms}</span>
+                      <span className='property-stat-label'>Room</span>
+                    </div>
+                    <div className='property-stat-item'>
+                      <span className='property-stat-value'>{new Date().getFullYear()}</span>
+                      <span className='property-stat-label'>Year</span>
+                    </div>
+                  </div>
+                  
+                  <button className='learn-more-btn'>
+                    <span>Learn more</span>
+                    <div className='learn-more-icon'>↗</div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Pagination */}
+        {pagination.totalPages > 1 && (
+          <div className='pagination-modern'>
+            <button
+              onClick={() => handlePageChange(pagination.currentPage - 1)}
+              disabled={pagination.currentPage === 1}
+              style={{ opacity: pagination.currentPage === 1 ? 0.5 : 1 }}
+            >
+              ←
+            </button>
+            {Array.from({ length: Math.min(pagination.totalPages, 8) }, (_, i) => {
+              const pageNum = i + 1;
+              if (pageNum === 4 && pagination.totalPages > 8) {
+                return <span key="ellipsis">...</span>;
+              }
+              if (pageNum > 3 && pageNum < pagination.totalPages - 2 && pagination.totalPages > 8) {
+                return null;
+              }
+              return (
+                <button
+                  key={pageNum}
+                  onClick={() => handlePageChange(pageNum)}
+                  className={pagination.currentPage === pageNum ? 'active' : ''}
+                >
+                  {pageNum}
+                </button>
+              );
+            })}
+            {pagination.totalPages > 8 && (
+              <button
+                onClick={() => handlePageChange(pagination.totalPages)}
+                className={pagination.currentPage === pagination.totalPages ? 'active' : ''}
+              >
+                {pagination.totalPages}
+              </button>
+            )}
+            <button
+              onClick={() => handlePageChange(pagination.currentPage + 1)}
+              disabled={pagination.currentPage === pagination.totalPages}
+              style={{ opacity: pagination.currentPage === pagination.totalPages ? 0.5 : 1 }}
+            >
+              →
+            </button>
+          </div>
+        )}
+      </>
+    )}
+  </div>
+</div>
 
       {/* Tailored Solutions Section */}
       <section className="tailored-solutions-section">
