@@ -344,14 +344,6 @@ const Properties = () => {
                 {/* Custom Amount Input */}
                 <div className='search-form-group'>
                   <label className='search-label'>Custom Amount</label>
-                  <div className='search-input-wrapper'>
-                    <FaDollarSign className='input-icon' />
-                    <input
-                      type='text'
-                      placeholder="Enter amount"
-                      className='search-white-input'
-                    />
-                  </div>
                 </div>
 
                 {/* Top-up Button */}
