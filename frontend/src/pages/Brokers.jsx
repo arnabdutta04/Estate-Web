@@ -97,62 +97,39 @@ const Brokers = () => {
       <PageTransition>
         <div className="brokers-page-nestico">
           {/* Nestico Style Hero Section - NO SEARCH FORM */}
-          <div className="brokers-hero-nestico">
-            <div className="hero-left-content-nestico">
-              <div className="hero-label-nestico">
-                <span className="hero-label-square-nestico"></span>
-                <span>FIND YOUR TRUSTED LOCAL AGENT</span>
-              </div>
-              
-              <h1 className="hero-title-nestico">
-                Your perfect <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <FaBuilding style={{ color: '#a3e635', fontSize: '0.9em' }} />
-                </span> home starts with the right <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <FaUserFriends style={{ color: '#6366f1', fontSize: '0.9em' }} />
-                </span> agent
-              </h1>
-              
-              <p className="hero-subtitle-nestico">
-                Need expert help to choose the right property?<br />
-                We've got you covered.
-              </p>
-
-              <div className="hero-divider-nestico"></div>
-
-              <div className="hero-verified-section-nestico">
-                <h3 className="verified-title-nestico">
-                  Work With<br />Verified Experts
-                </h3>
-                <p className="verified-description-nestico">
-                  At Propify, we connect you with experienced, trusted real estate agents 
-                  who know your neighborhood inside and out. Whether you're buying, selling, 
-                  or just exploring, our agents offer personalized guidance every step of the way.
-                </p>
-              </div>
-            </div>
-
-            <div className="hero-right-agents-nestico">
-              <div className="agents-grid-nestico">
-                {heroAgents.map((agent, index) => (
-                  <div key={agent._id} className={`agent-card-nestico agent-card-${index + 1}`}>
-                    {agent.photo ? (
-                      <img src={agent.photo} alt={agent.userId?.name} className="agent-photo-nestico" />
-                    ) : (
-                      <div className="agent-photo-placeholder-nestico" style={{
-                        background: index === 0 ? 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%)' :
-                                    index === 1 ? 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)' :
-                                    index === 2 ? 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)' :
-                                    index === 3 ? 'linear-gradient(135deg, #334155 0%, #1e293b 100%)' :
-                                    'linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%)'
-                      }}>
-                        {agent.userId?.name?.charAt(0)}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
+          {/* Individual Broker Hero Section */}
+<div className="individual-broker-hero">
+  <div className="individual-hero-container">
+    <div className="individual-hero-content">
+      <div className="individual-hero-text">
+        <p className="individual-hero-greeting">Hello! I'm</p>
+        <h1 className="individual-hero-name">Your Agent as</h1>
+        <p className="individual-hero-title"> A Real Estate Broker</p>
+        
+        <div className="individual-hero-stats">
+          <div className="individual-stats-bar"></div>
+          <div className="individual-stats-text">
+            <p>India's Top Real Estate Broker 848M Sold in 2021 Chad Carroll is an area "Power Broker" in every sense. With a wealth of experience in real estate contracts, and negotiation.</p>
           </div>
+        </div>
+
+        <div className="individual-client-info">
+          <p className="individual-client-count">Over <span>12,000+ Client</span> all over the world</p>
+          <div className="individual-client-avatars">
+            <div className="individual-avatar">JD</div>
+            <div className="individual-avatar">SM</div>
+            <div className="individual-avatar">AK</div>
+            <div className="individual-avatar">RB</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="individual-hero-image">
+        <img src="/broker-hero.jpg" alt="Chad Carroll" />
+      </div>
+    </div>
+  </div>
+</div>
 
           {/* MAIN SEARCH SECTION - Grnata Style */}
           <div className="brokers-list-section-grnata">
