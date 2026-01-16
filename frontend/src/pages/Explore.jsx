@@ -797,120 +797,97 @@ const Explore = () => {
         </div>
       </section>
 
-      {/* View Toggle & Results Count */}
-      <section className="explore-controls">
-        <div className="explore-container">
-          <div className="controls-wrapper">
-            <div className="results-count">
-              <strong>{filteredProperties.length}</strong> properties found
-            </div>
+jsx{/* Modern Search Hero Section */}
+<section className="modern-search-hero">
+  {/* ... existing modern search hero code ... */}
+</section>
 
-            <div className="view-toggle">
-              <button
-                className={viewMode === "grid" ? "active" : ""}
-                onClick={() => setViewMode("grid")}
-              >
-                <FaHome /> Grid View
-              </button>
-              <button
-                className={viewMode === "map" ? "active" : ""}
-                onClick={() => setViewMode("map")}
-              >
-                <FaMapMarkedAlt /> Map View
-              </button>
-            </div>
+{/* ADD THIS NEW SECTION HERE */}
+<section className="architecture-showcase-section">
+  <div className="explore-container">
+    <div className="showcase-grid">
+      {/* Rustic Charm */}
+      <div className="showcase-card card-small">
+        <img 
+          src="https://images.unsplash.com/photo-1449844908441-8829872d2607?w=800" 
+          alt="Rustic Charm" 
+          className="card-image"
+        />
+        <div className="card-overlay">
+          <h3 className="card-title">rustic charm</h3>
+        </div>
+      </div>
+
+      {/* Woodland Haven */}
+      <div className="showcase-card card-small">
+        <img 
+          src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800" 
+          alt="Woodland Haven" 
+          className="card-image"
+        />
+        <div className="card-overlay">
+          <h3 className="card-title">Woodland Haven</h3>
+        </div>
+      </div>
+
+      {/* Luminous Urban */}
+      <div className="showcase-card card-large">
+        <img 
+          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800" 
+          alt="Luminous Urban" 
+          className="card-image"
+        />
+        <div className="card-overlay">
+          <h3 className="card-title">Luminous Urban</h3>
+        </div>
+      </div>
+
+      {/* Luminous Urban Abode - Info Card */}
+      <div className="info-card">
+        <h2 className="info-title">Luminous Urban Abode</h2>
+        <p className="info-description">
+          A peaceful escape with sweeping views of the bustling city
+        </p>
+
+        <div className="info-stats">
+          <div className="stat-item">
+            <div className="stat-value">645 <span className="stat-unit">sq.m.</span></div>
+            <div className="stat-label">Total area</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-value">2-3</div>
+            <div className="stat-label">Room</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-value">2024</div>
+            <div className="stat-label">Year</div>
           </div>
         </div>
-      </section>
 
-      {/* Properties Display */}
-      <section className="explore-content">
-        <div className="explore-container">
-          {viewMode === "grid" ? (
-            <div className="properties-grid">
-              {filteredProperties.map((property) => (
-                <div
-                  key={property.id}
-                  className="property-card"
-                  onClick={() => handlePropertyClick(property.id)}
-                >
-                  {property.featured && (
-                    <div className="featured-badge">Featured</div>
-                  )}
+        <button className="learn-more-btn">
+          <span>Learn more</span>
+          <div className="btn-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M7 17L17 7M17 7H7M17 7V17" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+        </button>
+      </div>
 
-                  <div className="property-image">
-                    <img src={property.image} alt={property.title} />
-                    <button className="favorite-btn">
-                      <FaHeart />
-                    </button>
-                  </div>
-
-                  <div className="property-info">
-                    <h3>{property.title}</h3>
-                    <p className="property-location">
-                      <FaMapMarkerAlt /> {property.location}
-                    </p>
-
-                    <div className="property-details">
-                      {property.beds > 0 && (
-                        <span>
-                          <FaBed /> {property.beds} Beds
-                        </span>
-                      )}
-                      {property.baths > 0 && (
-                        <span>
-                          <FaBath /> {property.baths} Baths
-                        </span>
-                      )}
-                      <span>
-                        <FaRulerCombined /> {property.area}
-                      </span>
-                    </div>
-
-                    <div className="property-footer">
-                      <div className="property-price">{property.price}</div>
-                      <div className="property-type">{property.type}</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="map-view">
-              <div className="map-container">
-                <div className="map-placeholder">
-                  <FaMapMarkedAlt size={60} />
-                  <h3>Interactive Map</h3>
-                  <p>Integrate Google Maps or Mapbox here</p>
-                  <p className="map-instruction">
-                    Show property markers at coordinates: lat/lng
-                  </p>
-                </div>
-              </div>
-
-              <div className="map-sidebar">
-                {filteredProperties.map((property) => (
-                  <div
-                    key={property.id}
-                    className="map-property-card"
-                    onClick={() => handlePropertyClick(property.id)}
-                  >
-                    <img src={property.image} alt={property.title} />
-                    <div className="map-property-info">
-                      <h4>{property.title}</h4>
-                      <p className="price">{property.price}</p>
-                      <p className="location">
-                        <FaMapMarkerAlt /> {property.location}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+      {/* Urban Skyline */}
+      <div className="showcase-card card-large">
+        <img 
+          src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800" 
+          alt="Urban Skyline" 
+          className="card-image"
+        />
+        <div className="card-overlay">
+          <h3 className="card-title">Urban Skyline</h3>
         </div>
-      </section>
-
+      </div>
+    </div>
+  </div>
+</section>
       {/* CTA Section */}
       <section className="explore-cta contact-style">
         <div className="explore-container">

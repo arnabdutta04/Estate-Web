@@ -555,18 +555,6 @@
   z-index: 0;
 }
 
-/* Active Track (between thumbs) - Add this dynamically with JS or use pseudo-element */
-.range-track::before {
-  content: '';
-  position: absolute;
-  left: 10%;
-  right: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, #5B7FFF 0%, #7B93FF 100%);
-  border-radius: 10px;
-  transition: all 0.3s ease;
-}
-
 /* Range Input Base */
 .range-input {
   position: absolute;
@@ -701,23 +689,6 @@
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-}
-
-/* Animated Range Fill (Add this for better visual) */
-@keyframes fillAnimation {
-  0% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.5;
-  }
-}
-
-.range-input:active ~ .range-track::before {
-  animation: fillAnimation 0.6s ease-in-out;
 }
 
 /* Value Tooltip (Optional Enhancement) */
