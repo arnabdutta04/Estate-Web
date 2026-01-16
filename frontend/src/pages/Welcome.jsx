@@ -357,65 +357,78 @@ const handleExplorePageClick = () => {
           </div>
         </div>
       </section>
-     {/* ================= MARKET INSIGHTS - CLEAN DESIGN ================= */}
-      <section className="market-insights-clean">
-        <div className="insights-container-clean">
-          {/* Left Side - Content */}
-          <div className="insights-left-clean">
-            <h2 className="insights-title-clean">
-              Real-Time Market Insights<br />
-              and Data Analytics
-            </h2>
-            <p className="insights-description-clean">
-              Access comprehensive market data and property valuations. Make informed 
-              investment decisions backed by real-time trends, growth projections, and detailed 
-              neighborhood analytics across all major cities.
-            </p>
-            <button 
-              className="insights-cta-btn-clean"
-              onClick={handleExplorePageClick}
-            >
-              <FaChartLine /> View Market Data
-            </button>
-          </div>
-
-          {/* Right Side - Stats Card */}
-          <div className="insights-right-clean">
-            <div className="insights-stats-card-clean">
-              {/* Stat 1 */}
-              <div className="stat-item-clean">
-                <div className="stat-icon-clean growth">
-                  <FaChartLine />
+     {/* ================= MARKET INSIGHTS - MODERN DARK STYLE ================= */}
+      <section className="market-insights-modern">
+        <div className="insights-wrapper-modern">
+          <h2 className="insights-main-title">REAL-TIME MARKET INSIGHTS</h2>
+          
+          {/* Stats Cards Grid */}
+          <div className="insights-cards-grid">
+            {/* Card 1 - Featured Card */}
+            <div className="insight-card featured">
+              <div className="card-number">01</div>
+              <div className="card-content">
+                <div className="card-icon-wrapper">
+                  <FaChartLine className="card-icon" />
                 </div>
-                <div className="stat-content-clean">
-                  <div className="stat-value-clean">+18.3%</div>
-                  <div className="stat-label-clean">Avg. Price Growth</div>
-                </div>
+                <h3 className="card-title">Average Price Growth</h3>
+                <div className="card-date">Updated Today</div>
               </div>
-
-              {/* Stat 2 */}
-              <div className="stat-item-clean">
-                <div className="stat-icon-clean verified">
-                  <FaCheckCircle />
-                </div>
-                <div className="stat-content-clean">
-                  <div className="stat-value-clean">9,000+</div>
-                  <div className="stat-label-clean">Verified Listings</div>
-                </div>
+              <div className="card-value">+18.3%</div>
+              <div className="card-arrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </div>
+            </div>
 
-              {/* Stat 3 */}
-              <div className="stat-item-clean">
-                <div className="stat-icon-clean coverage">
-                  <FaMapMarkedAlt />
+            {/* Card 2 */}
+            <div className="insight-card">
+              <div className="card-number">02</div>
+              <div className="card-content">
+                <div className="card-icon-wrapper">
+                  <FaCheckCircle className="card-icon" />
                 </div>
-                <div className="stat-content-clean">
-                  <div className="stat-value-clean">6 Cities</div>
-                  <div className="stat-label-clean">Market Coverage</div>
+                <h3 className="card-title">Verified Listings</h3>
+                <div className="card-date">Updated Today</div>
+              </div>
+              <div className="card-value">9,000+</div>
+              <div className="card-arrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+            </div>
+
+            {/* Card 3 */}
+            <div className="insight-card">
+              <div className="card-number">03</div>
+              <div className="card-content">
+                <div className="card-icon-wrapper">
+                  <FaMapMarkedAlt className="card-icon" />
                 </div>
+                <h3 className="card-title">Market Coverage</h3>
+                <div className="card-date">6 Major Cities</div>
+              </div>
+              <div className="card-value">100%</div>
+              <div className="card-arrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </div>
             </div>
           </div>
+
+          {/* CTA Button */}
+          <button 
+            className="insights-cta-modern"
+            onClick={handleExplorePageClick}
+          >
+            View Complete Market Data
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
         </div>
       </section>
       {/* ================= FEATURES ================= */}
