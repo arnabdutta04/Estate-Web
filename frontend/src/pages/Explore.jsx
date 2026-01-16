@@ -814,11 +814,12 @@ const Explore = () => {
       {/* Team Member 1 */}
       <div className="team-card">
         <div className="team-image-wrapper">
-          <img 
-            src="https://i.pravatar.cc/300?img=12" 
-            alt="Bob Brown" 
-            className="team-image"
-          />
+          <img
+  src={`${process.env.PUBLIC_URL}/arnab.jpg`}
+  alt="Arnab Dutta"
+  className="team-image"
+/>
+
         </div>
         <p className="team-role">creative leader</p>
         <h3 className="team-name">Bob Brown</h3>
@@ -826,20 +827,21 @@ const Explore = () => {
           Glavi amet ritnisl libero molestie ante ut fringilla purus eros quis glavrid from dolor amet iquam lorem bibendum
         </p>
         <div className="team-social">
-          <a href="#" className="social-icon"><FaFacebook /></a>
-          <a href="#" className="social-icon"><FaTwitter /></a>
-          <a href="#" className="social-icon"><FaInstagram /></a>
+          <a href="https://www.facebook.com/arnabdutta780" className="social-icon"><FaFacebook /></a>
+          <a href="https://x.com/arnabdutta453" className="social-icon"><FaTwitter /></a>
+          <a href="https://www.instagram.com/mr.arnab448/" className="social-icon"><FaInstagram /></a>
         </div>
       </div>
 
       {/* Team Member 2 */}
       <div className="team-card">
         <div className="team-image-wrapper">
-          <img 
-            src="https://i.pravatar.cc/300?img=5" 
-            alt="Mary Smith" 
-            className="team-image"
-          />
+          <img
+  src={`${process.env.PUBLIC_URL}/aksh.jpg`}
+  alt="Akash Mandal"
+  className="team-image"
+/>
+
         </div>
         <p className="team-role">sales manager</p>
         <h3 className="team-name">Mary Smith</h3>
