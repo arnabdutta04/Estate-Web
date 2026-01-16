@@ -4,9 +4,9 @@ import api from '../utils/api';
 import PropertyCard from '../components/PropertyCard';
 import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
-import { FaHome, FaBed, FaBath, FaRulerCombined, FaDollarSign, FaPlus, FaMinus, FaParking, FaCheck } from 'react-icons/fa';
+import { FaHome, FaBed, FaBath, FaRulerCombined, FaDollarSign, FaPlus, FaMinus, FaPaw } from 'react-icons/fa';
 import './Properties.css';
-import { Sofa, Dog, Car, UtensilsCrossed, Wifi, Snowflake, Waves, Lock ,Dumbbell, Key, Smartphone, ShowerHead, Paw} from 'lucide-react';
+import { Sofa, Dog, Car, UtensilsCrossed, Wifi, Snowflake, Waves, Lock ,Dumbbell, Key, Smartphone, ShowerHead, } from 'lucide-react';
 const Properties = () => {
   const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
@@ -484,13 +484,13 @@ const Properties = () => {
                     {/* Price Range */}
                     <section className="filter-section half-width">
                       <h3>Price Range</h3>
-                      <p className="section-subtitle">The average nightly price is $600</p>
+                      <p className="section-subtitle">The average nightly price is ₹200000</p>
 
                       <div className="price-slider">
                         <input
                           type="range"
-                          min="300"
-                          max="670000"
+                          min="300000"
+                          max="67000000"
                           value={priceRange[1]}
                           onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
                           className="slider"
@@ -498,11 +498,11 @@ const Properties = () => {
                         <div className="price-values">
                           <div>
                             <label>Minimum</label>
-                            <p className="price">${priceRange[0]}</p>
+                            <p className="price">₹{priceRange[0]}</p>
                           </div>
                           <div>
                             <label>Maximum</label>
-                            <p className="price">${priceRange[1]}</p>
+                            <p className="price">₹{priceRange[1]}</p>
                           </div>
                         </div>
                       </div>
@@ -539,7 +539,7 @@ const Properties = () => {
                       </div>
 
                       <div className="amenity-item">
-                        <Paw className="amenity-icon" size={24} />
+                        <FaPaw className="amenity-icon" size={24} />
                         <div>
                           <h4>Allows Pets</h4>
                           <p>Will Bringing a service animal?</p>
