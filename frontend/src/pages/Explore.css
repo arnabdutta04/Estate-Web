@@ -313,14 +313,6 @@ gap: 30px;
 font-size: 32px;
 }
 }
-/* ==================== MODERN SEARCH HERO ==================== */
-.modern-search-hero {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #9ca7b0 0%, #b4bec7 50%, #9ca7b0 100%);
-  padding: 120px 40px 80px;
-  position: relative;
-  overflow: hidden;
-}
 
 .modern-hero-container {
   max-width: 1400px;
@@ -753,10 +745,6 @@ font-size: 32px;
 }
 
 @media (max-width: 768px) {
-  .modern-search-hero {
-    padding: 100px 20px 60px;
-  }
-
   .hero-main-heading {
     font-size: 50px;
   }
