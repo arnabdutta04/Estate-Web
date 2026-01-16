@@ -4,16 +4,11 @@ import Navbar from "../components/Navbar";
 import { Home, Building2, Crown, MapPin, Globe, RefreshCw, ChevronDown } from 'lucide-react';
 import {
   FaSearch,
-  FaMapMarkerAlt,
-  FaHome,
-  FaBed,
-  FaBath,
-  FaRulerCombined,
-  FaHeart,
-  FaFilter,
-  FaTimes,
-  FaMapMarkedAlt,
+  FaTimes, 
   FaChartLine,
+  FaInstagram,
+  FaTwitter,
+  FaFacebook,
   FaUsers,
   FaHandshake,
   FaShieldAlt,
@@ -797,9 +792,68 @@ const Explore = () => {
         </div>
       </section>
 
-jsx{/* Modern Search Hero Section */}
-<section className="modern-search-hero">
-  {/* ... existing modern search hero code ... */}
+{/* Team Section */}
+<section className="team-section">
+  <div className="explore-container">
+    <div className="team-header">
+      <div className="team-icon">
+        <Building2 size={48} />
+      </div>
+      <h2 className="team-title">Our Team</h2>
+      <p className="team-description">
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <button className="team-learn-more">
+        LEARN MORE
+      </button>
+    </div>
+
+    <div className="team-grid">
+      {/* Team Member 1 */}
+      <div className="team-card">
+        <div className="team-image-wrapper">
+          <img 
+            src="https://i.pravatar.cc/300?img=12" 
+            alt="Bob Brown" 
+            className="team-image"
+          />
+        </div>
+        <p className="team-role">creative leader</p>
+        <h3 className="team-name">Bob Brown</h3>
+        <p className="team-bio">
+          Glavi amet ritnisl libero molestie ante ut fringilla purus eros quis glavrid from dolor amet iquam lorem bibendum
+        </p>
+        <div className="team-social">
+          <a href="#" className="social-icon"><FaFacebook /></a>
+          <a href="#" className="social-icon"><FaTwitter /></a>
+          <a href="#" className="social-icon"><FaInstagram /></a>
+        </div>
+      </div>
+
+      {/* Team Member 2 */}
+      <div className="team-card">
+        <div className="team-image-wrapper">
+          <img 
+            src="https://i.pravatar.cc/300?img=5" 
+            alt="Mary Smith" 
+            className="team-image"
+          />
+        </div>
+        <p className="team-role">sales manager</p>
+        <h3 className="team-name">Mary Smith</h3>
+        <p className="team-bio">
+          Glavi amet ritnisl libero molestie ante ut fringilla purus eros quis glavrid from dolor amet iquam lorem bibendum
+        </p>
+        <div className="team-social">
+          <a href="#" className="social-icon"><FaFacebook /></a>
+          <a href="#" className="social-icon"><FaTwitter /></a>
+          <a href="#" className="social-icon"><FaInstagram /></a>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 {/* ADD THIS NEW SECTION HERE */}
