@@ -341,25 +341,6 @@ const Properties = () => {
                   <p className='balance-subtitle'>Ready to invest in your dream property</p>
                 </div>
 
-                {/* Quick Top-up Amounts */}
-                <div className='search-form-group'>
-                  <label className='search-label'>Quick Top-up</label>
-                  <div className='quick-amounts-grid'>
-                    <button className='quick-amount-btn'>
-                      <span className='amount'>$5,000</span>
-                    </button>
-                    <button className='quick-amount-btn'>
-                      <span className='amount'>$10,000</span>
-                    </button>
-                    <button className='quick-amount-btn'>
-                      <span className='amount'>$25,000</span>
-                    </button>
-                    <button className='quick-amount-btn'>
-                      <span className='amount'>$50,000</span>
-                    </button>
-                  </div>
-                </div>
-
                 {/* Custom Amount Input */}
                 <div className='search-form-group'>
                   <label className='search-label'>Custom Amount</label>
