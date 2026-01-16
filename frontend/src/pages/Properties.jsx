@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
 import { FaHome, FaBed, FaBath, FaRulerCombined, FaDollarSign, FaPlus, FaMinus, FaParking, FaCheck } from 'react-icons/fa';
 import './Properties.css';
-import { Sofa, Dog, Car, UtensilsCrossed, Wifi, Snowflake, Waves, Lock ,Dumbbell, Key, Smartphone, ShowerHead, UtensilsCrossed, Paw} from 'lucide-react';
+import { Sofa, Dog, Car, UtensilsCrossed, Wifi, Snowflake, Waves, Lock ,Dumbbell, Key, Smartphone, ShowerHead, Paw} from 'lucide-react';
 const Properties = () => {
   const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
