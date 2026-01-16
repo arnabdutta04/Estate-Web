@@ -821,8 +821,8 @@ const Explore = () => {
 />
 
         </div>
-        <p className="team-role">creative leader</p>
-        <h3 className="team-name">Bob Brown</h3>
+        <p className="team-role">Desigener</p>
+        <h3 className="team-name">Arnab Dutta</h3>
         <p className="team-bio">
           Glavi amet ritnisl libero molestie ante ut fringilla purus eros quis glavrid from dolor amet iquam lorem bibendum
         </p>
@@ -843,8 +843,8 @@ const Explore = () => {
 />
 
         </div>
-        <p className="team-role">sales manager</p>
-        <h3 className="team-name">Mary Smith</h3>
+        <p className="team-role">Developer</p>
+        <h3 className="team-name">Akash Mandal</h3>
         <p className="team-bio">
           Glavi amet ritnisl libero molestie ante ut fringilla purus eros quis glavrid from dolor amet iquam lorem bibendum
         </p>
