@@ -833,7 +833,7 @@ jsx{/* Modern Search Hero Section */}
       {/* Luminous Urban */}
       <div className="showcase-card card-large">
         <img 
-          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800" 
+          src="https://image.made-in-china.com/202f0j00LpcCQokRbdbV/Innovative-CE-Certified-Space-Capsule-Modular-Prefabricated-House-for-Hotel-and-Residential-Use.webp" 
           alt="Luminous Urban" 
           className="card-image"
         />
