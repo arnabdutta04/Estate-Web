@@ -861,7 +861,7 @@
 
 /* ================= WHY USE OUR AGENTS SECTION ================= */
 .why-use-agents-section {
-  background: #b5b5b5;
+  background: #000000;
   padding: 6rem 2rem;
   position: relative;
 }
@@ -938,7 +938,7 @@
 .feature-icon-wrapper {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background: linear-gradient(135deg, #000000 0%, #000000 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -1196,7 +1196,7 @@
 
 /* ================= HOW IT WORKS SECTION ================= */
 .how-it-works-section {
-  background: #27ae60;
+  background: #000000;
   padding: 6rem 2rem;
 }
 
@@ -1223,7 +1223,7 @@
 .how-it-works-title {
   font-size: 3rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #00ffd2;
   margin: 0 0 1rem 0;
   line-height: 1.2;
 }
