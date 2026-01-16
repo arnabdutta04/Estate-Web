@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { Home, Building2, Crown, MapPin, Globe, RefreshCw, ChevronDown } from 'lucide-react';
 import {
   FaSearch,
   FaMapMarkerAlt,
@@ -444,25 +445,13 @@ const Explore = () => {
 
           <div className="property-location-card dark-card">
             <div className="card-location">
-              <p className="location-name">Moscow,</p>
-              <p className="location-country">Russia</p>
+              <p className="location-name">Kolkata,</p>
+              <p className="location-country">India</p>
             </div>
             <div className="card-size highlight">216 m²</div>
             <div className="card-footer">
               <span className="card-code">MC20K</span>
               <span className="card-floors">5 floor</span>
-            </div>
-          </div>
-
-          <div className="property-location-card dark-card">
-            <div className="card-location">
-              <p className="location-name">Jakarta,</p>
-              <p className="location-country">Indonesia</p>
-            </div>
-            <div className="card-size">928 m²</div>
-            <div className="card-footer">
-              <span className="card-code">JK12K</span>
-              <span className="card-floors">4 floor</span>
             </div>
           </div>
 
@@ -475,8 +464,8 @@ const Explore = () => {
 
           <div className="property-location-card dark-card">
             <div className="card-location">
-              <p className="location-name">Yogyakarta,</p>
-              <p className="location-country">Indonesia</p>
+              <p className="location-name">Mumbai,</p>
+              <p className="location-country">India</p>
             </div>
             <div className="card-size">420 m²</div>
             <div className="card-footer">
@@ -487,8 +476,8 @@ const Explore = () => {
 
           <div className="property-location-card dark-card">
             <div className="card-location">
-              <p className="location-name">Tokyo,</p>
-              <p className="location-country">Japan</p>
+              <p className="location-name">Delhi,</p>
+              <p className="location-country">India</p>
             </div>
             <div className="card-size">548 m²</div>
             <div className="card-footer">
@@ -563,47 +552,223 @@ const Explore = () => {
         )}
       </section>
 
-      {/* Market Insights Section */}
-      <section className="market-insights-section">
-        <div className="explore-container">
-          {/* Market Trend Chart */}
-          <div className="market-trend-chart">
-            <h3>5-Year Property Value Appreciation Trend</h3>
-            <div className="chart-container">
-              <div className="chart-bars">
-                {marketTrends.map((trend, index) => (
-                  <div key={index} className="chart-bar-group">
-                    <div className="chart-bars-wrapper">
-                      <div 
-                        className="chart-bar residential"
-                        style={{ height: `${trend.residential}%` }}
-                        title={`Residential: ${trend.residential}%`}
-                      />
-                      <div 
-                        className="chart-bar commercial"
-                        style={{ height: `${trend.commercial}%` }}
-                        title={`Commercial: ${trend.commercial}%`}
-                      />
-                      <div 
-                        className="chart-bar luxury"
-                        style={{ height: `${trend.luxury}%` }}
-                        title={`Luxury: ${trend.luxury}%`}
-                      />
-                    </div>
-                    <div className="chart-year">{trend.year}</div>
-                    <div className="chart-appreciation">+{trend.appreciation}%</div>
-                  </div>
-                ))}
+{/* Market Insights Section */}
+<section className="market-insights-section">
+  <div className="explore-container">
+    <div className="insights-grid">
+      
+      {/* Left Column - Stats Cards */}
+      <div className="insights-left">
+        {/* Main Stats Card */}
+        <div className="stats-card main-stats">
+          <div className="card-header">
+            <h3>Today's Market Activity</h3>
+          </div>
+          <div className="circular-progress">
+            <svg viewBox="0 0 200 200" className="progress-ring">
+              <circle cx="100" cy="100" r="80" className="progress-bg" />
+              <circle cx="100" cy="100" r="80" className="progress-residential" strokeDasharray="314 188" />
+              <circle cx="100" cy="100" r="80" className="progress-commercial" strokeDasharray="188 314" strokeDashoffset="-314" />
+            </svg>
+            <div className="progress-center">
+              <div className="progress-value">571</div>
+              <div className="progress-label">Total Sales</div>
+            </div>
+          </div>
+          <div className="property-types">
+            <div className="property-type-item">
+              <div className="type-icon residential-icon">
+                <Home size={24} />
               </div>
-              <div className="chart-legend">
-                <span className="legend-item"><span className="legend-color residential"></span> Residential</span>
-                <span className="legend-item"><span className="legend-color commercial"></span> Commercial</span>
-                <span className="legend-item"><span className="legend-color luxury"></span> Luxury</span>
+              <div className="type-label">Residential</div>
+              <div className="type-value">293</div>
+            </div>
+            <div className="property-type-item">
+              <div className="type-icon commercial-icon">
+                <Building2 size={24} />
               </div>
+              <div className="type-label">Commercial</div>
+              <div className="type-value">161</div>
+            </div>
+            <div className="property-type-item">
+              <div className="type-icon luxury-icon">
+                <Crown size={24} />
+              </div>
+              <div className="type-label">Luxury</div>
+              <div className="type-value">117</div>
             </div>
           </div>
         </div>
-      </section>
+
+        {/* Transactions Card */}
+        <div className="stats-card transactions-card">
+          <div className="card-header">
+            <h3>Billing & Transactions</h3>
+            <button className="refresh-btn">
+              <RefreshCw size={14} />
+              Refresh
+            </button>
+          </div>
+          <div className="transaction-list">
+            <div className="transaction-item">
+              <span className="transaction-label">Payment Received</span>
+              <span className="transaction-percentage">94.6%</span>
+              <span className="transaction-value">79,615</span>
+            </div>
+            <div className="transaction-item">
+              <span className="transaction-label">Invoice Created</span>
+              <span className="transaction-percentage">5.1%</span>
+              <span className="transaction-value">4,292</span>
+            </div>
+            <div className="transaction-item">
+              <span className="transaction-label">Cancelled</span>
+              <span className="transaction-percentage">0.3%</span>
+              <span className="transaction-value">253</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Column - Main Dashboard */}
+      <div className="insights-right">
+        {/* Target Sales Breakdown */}
+        <div className="dashboard-card">
+          <div className="dashboard-header">
+            <h2>Target Sales Breakdown</h2>
+            <div className="view-toggle">
+              <button>Daily</button>
+              <button>Weekly</button>
+              <button className="active">Monthly</button>
+              <button>Annually</button>
+            </div>
+          </div>
+          
+          <div className="sales-summary">
+            <div className="total-value">184,160</div>
+            <div className="total-label">Total Ticket Sales</div>
+          </div>
+
+          {/* Property Type Breakdown */}
+          <div className="breakdown-bars">
+            <div className="breakdown-item">
+              <div className="breakdown-label">Residential</div>
+              <div className="breakdown-bar">
+                <div className="bar-fill residential-fill" style={{width: '35.1%'}}></div>
+              </div>
+              <div className="breakdown-stats">35.1% · 64,640 ticket</div>
+            </div>
+            <div className="breakdown-item">
+              <div className="breakdown-label">Commercial</div>
+              <div className="breakdown-bar">
+                <div className="bar-fill commercial-fill" style={{width: '57%'}}></div>
+              </div>
+              <div className="breakdown-stats">57% · 104,971 ticket</div>
+            </div>
+            <div className="breakdown-item">
+              <div className="breakdown-label">Luxury</div>
+              <div className="breakdown-bar">
+                <div className="bar-fill luxury-fill" style={{width: '7.9%'}}></div>
+              </div>
+              <div className="breakdown-stats">7.9% · 14,549 ticket</div>
+            </div>
+          </div>
+
+          {/* Trend Chart */}
+          <div className="trend-chart">
+            <svg viewBox="0 0 800 200" className="line-chart">
+              <polyline 
+                points="0,150 50,140 100,120 150,130 200,110 250,100 300,90 350,85 400,95 450,80 500,70 550,75 600,65 650,60 700,70 750,80 800,75"
+                className="trend-line"
+              />
+              <circle cx="400" cy="95" r="4" className="trend-point" />
+            </svg>
+            <div className="trend-tooltip">
+              <div className="tooltip-date">5 September 2025</div>
+              <div className="tooltip-value">491 <span>tickets sales</span></div>
+              <div className="tooltip-breakdown">
+                <span className="residential-percent">43.2%</span>
+                <span className="commercial-percent">27.5%</span>
+                <span className="luxury-percent">29.3%</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Stats */}
+          <div className="bottom-stats">
+            <div className="stat-item">
+              <div className="stat-label">Residential</div>
+              <div className="stat-value">43.2% · 212 ticket</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-label">Commercial</div>
+              <div className="stat-value">27.5% · 135 ticket</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-label">Luxury</div>
+              <div className="stat-value">29.3% · 144 ticket</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Row */}
+        <div className="bottom-row">
+          {/* Top Performing Locations */}
+          <div className="performing-card">
+            <h3>Top Performing Locations</h3>
+            <div className="location-list">
+              {[
+                { country: 'Mumbai', flag: 'IN', percentage: '23.58%', value: '43,435' },
+                { country: 'Bangalore', flag: 'IN', percentage: '18.72%', value: '34,471' },
+                { country: 'Delhi', flag: 'IN', percentage: '13.89%', value: '25,582' },
+                { country: 'Pune', flag: 'IN', percentage: '10.54%', value: '19,411' },
+                { country: 'Other', flag: 'Globe', percentage: '33.98%', value: '62,579' }
+              ].map((loc, i) => (
+                <div key={i} className="location-item">
+                  <span className="location-flag">
+                    {loc.flag === 'IN' && <MapPin size={18} />}
+                    {loc.flag === 'Globe' && <Globe size={18} />}
+                  </span>
+                  <span className="location-name">{loc.country}</span>
+                  <span className="location-percentage">{loc.percentage}</span>
+                  <span className="location-value">{loc.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* User Retention Cohorts */}
+          <div className="retention-card">
+            <div className="retention-header">
+              <h3>User Retention Cohorts</h3>
+              <button className="report-btn">
+                Get Report for <ChevronDown size={14} />
+              </button>
+            </div>
+            <div className="retention-value">40%</div>
+            <div className="retention-label">After 6 month<br/>February - September</div>
+            <div className="cohort-grid">
+              {Array.from({length: 12}).map((_, i) => (
+                <div key={i} className="cohort-column">
+                  {Array.from({length: 8}).map((_, j) => (
+                    <div 
+                      key={j} 
+                      className={`cohort-cell ${j < 4 ? 'first-time' : 'loyal'}`}
+                      style={{opacity: 0.3 + (Math.random() * 0.7)}}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+            <div className="cohort-legend">
+              <span><span className="legend-box first-time"></span> First-Time Buyers</span>
+              <span><span className="legend-box loyal"></span> Loyal Customers</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Broker Benefits Section */}
       <section className="broker-benefits-section dark-theme">
