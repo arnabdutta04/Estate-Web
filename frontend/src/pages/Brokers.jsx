@@ -96,42 +96,69 @@ const Brokers = () => {
       <Navbar />
       <PageTransition>
         <div className="brokers-page-nestico">
-          {/* Nestico Style Hero Section - NO SEARCH FORM */}
-          {/* Individual Broker Hero Section */}
-<div className="individual-broker-hero">
-  <div className="individual-hero-container">
-    <div className="individual-hero-content">
-      <div className="individual-hero-text">
-        <p className="individual-hero-greeting">Hello! I'm</p>
-        <h1 className="individual-hero-name">Your Agent as</h1>
-        <p className="individual-hero-title"> A Real Estate Broker</p>
-        
-        <div className="individual-hero-stats">
-          <div className="individual-stats-bar"></div>
-          <div className="individual-stats-text">
-            <p>India's Top Real Estate Broker 848M Sold in 2021 Chad Carroll is an area "Power Broker" in every sense. With a wealth of experience in real estate contracts, and negotiation.</p>
+          {/* Individual Broker Hero Section - FIXED */}
+          <div className="individual-broker-hero">
+            <div className="individual-hero-container">
+              <div className="individual-hero-content">
+                <div className="individual-hero-text">
+                  <p className="individual-hero-greeting">Hello! I'm</p>
+                  <h1 className="individual-hero-name">Your Agent as</h1>
+                  <p className="individual-hero-title"> A Real Estate Broker</p>
+                  
+                  <div className="individual-hero-stats">
+                    <div className="individual-stats-bar"></div>
+                    <div className="individual-stats-text">
+                      <p>India's Top Real Estate Broker 848M Sold in 2021 Chad Carroll is an area "Power Broker" in every sense. With a wealth of experience in real estate contracts, and negotiation.</p>
+                    </div>
+                  </div>
+
+                  <div className="individual-client-info">
+                    <p className="individual-client-count">Over <span>12,000+ Client</span> all over the world</p>
+                    <div className="individual-client-avatars">
+                      <div className="individual-avatar">JD</div>
+                      <div className="individual-avatar">SM</div>
+                      <div className="individual-avatar">AK</div>
+                      <div className="individual-avatar">RB</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="individual-hero-image">
+                  {/* FIXED: Use dynamic image or placeholder */}
+                  {brokers[0]?.photo ? (
+                    <img 
+                      src={brokers[0].photo} 
+                      alt="Top Broker" 
+                      loading="lazy"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'flex';
+                      }}
+                    />
+                  ) : null}
+                  <div 
+                    className="hero-image-placeholder"
+                    style={{
+                      display: brokers[0]?.photo ? 'none' : 'flex',
+                      width: '100%',
+                      height: '100%',
+                      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '8rem',
+                      fontWeight: '700',
+                      color: '#fff',
+                      borderRadius: '20px'
+                    }}
+                  >
+                    {brokers[0]?.userId?.name?.charAt(0) || 'B'}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div className="individual-client-info">
-          <p className="individual-client-count">Over <span>12,000+ Client</span> all over the world</p>
-          <div className="individual-client-avatars">
-            <div className="individual-avatar">JD</div>
-            <div className="individual-avatar">SM</div>
-            <div className="individual-avatar">AK</div>
-            <div className="individual-avatar">RB</div>
-          </div>
-        </div>
-      </div>
-
-      <div className="individual-hero-image">
-        <img src="/broker-hero.jpg" alt="Chad Carroll" />
-      </div>
-    </div>
-  </div>
-</div>
-
-          {/* MAIN SEARCH SECTION - Grnata Style */}
+          {/* MAIN SEARCH SECTION */}
           <div className="brokers-list-section-grnata">
             <div className="brokers-list-container-grnata">
               <div className="brokers-list-header-grnata">
@@ -143,7 +170,7 @@ const Brokers = () => {
                 </div>
               </div>
 
-              {/* MAIN SEARCH BAR - This is now the primary search feature */}
+              {/* MAIN SEARCH BAR */}
               <div className="brokers-search-bar-grnata">
                 <select 
                   value={selectedCity} 
@@ -203,7 +230,7 @@ const Brokers = () => {
                 </button>
               </div>
 
-              {/* Brokers Grid */}
+              {/* Brokers Grid - FIXED with lazy loading */}
               {filteredBrokers.length === 0 ? (
                 <div className="no-results-grnata">
                   <h3>No Agents Found</h3>
@@ -215,12 +242,23 @@ const Brokers = () => {
                     <div key={broker._id} className="broker-card-grnata">
                       <div className="broker-image-grnata">
                         {broker.photo ? (
-                          <img src={broker.photo} alt={broker.userId?.name} className="broker-photo-grnata" />
-                        ) : (
-                          <div className="broker-photo-placeholder-grnata">
-                            {broker.userId?.name?.charAt(0)}
-                          </div>
-                        )}
+                          <img 
+                            src={broker.photo} 
+                            alt={broker.userId?.name} 
+                            className="broker-photo-grnata"
+                            loading="lazy"
+                            onError={(e) => {
+                              e.target.style.display = 'none';
+                              e.target.nextSibling.style.display = 'flex';
+                            }}
+                          />
+                        ) : null}
+                        <div 
+                          className="broker-photo-placeholder-grnata"
+                          style={{ display: broker.photo ? 'none' : 'flex' }}
+                        >
+                          {broker.userId?.name?.charAt(0)}
+                        </div>
                       </div>
                       
                       <div className="broker-info-grnata">
@@ -234,7 +272,7 @@ const Brokers = () => {
 
                       <div className="broker-actions-grnata">
                         <button className="btn-view-profile-grnata">View Profile</button>
-                        <button className="btn-message-grnata">Message Emily</button>
+                        <button className="btn-message-grnata">Message {broker.userId?.name?.split(' ')[0]}</button>
                       </div>
                     </div>
                   ))}
@@ -257,7 +295,7 @@ const Brokers = () => {
             </div>
           </div>
           
-          {/* Featured Brokers Sliding Section */}
+          {/* Featured Brokers Sliding Section - FIXED */}
           {featuredBrokers.length > 0 && (
             <div className="featured-brokers-section">
               <div className="featured-section-header">
@@ -271,12 +309,23 @@ const Brokers = () => {
                     <div key={broker._id} className="featured-broker-card">
                       <div className="featured-broker-image">
                         {broker.photo ? (
-                          <img src={broker.photo} alt={broker.userId?.name} className="featured-broker-photo" />
-                        ) : (
-                          <div className="featured-broker-placeholder">
-                            {broker.userId?.name?.charAt(0)}
-                          </div>
-                        )}
+                          <img 
+                            src={broker.photo} 
+                            alt={broker.userId?.name} 
+                            className="featured-broker-photo"
+                            loading="lazy"
+                            onError={(e) => {
+                              e.target.style.display = 'none';
+                              e.target.nextSibling.style.display = 'flex';
+                            }}
+                          />
+                        ) : null}
+                        <div 
+                          className="featured-broker-placeholder"
+                          style={{ display: broker.photo ? 'none' : 'flex' }}
+                        >
+                          {broker.userId?.name?.charAt(0)}
+                        </div>
                         <div className="featured-broker-badge">FEATURED</div>
                         <div className="featured-broker-info">
                           <h3 className="featured-broker-name">{broker.userId?.name}</h3>
@@ -305,7 +354,7 @@ const Brokers = () => {
             </div>
           )}
 
-          {/* Best Agent Section */}
+          {/* Best Agent Section - FIXED */}
           {bestAgent && (
             <div className="best-agent-section">
               <div className="best-agent-container">
@@ -322,22 +371,30 @@ const Brokers = () => {
                   <div className="best-agent-card">
                     <div className="best-agent-image">
                       {bestAgent.photo ? (
-                        <img src={bestAgent.photo} alt={bestAgent.userId?.name} className="best-agent-photo" />
-                      ) : (
-                        <div style={{
-                          width: '100%',
-                          height: '100%',
-                          background: 'linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: '8rem',
-                          fontWeight: '700',
-                          color: '#fff'
-                        }}>
-                          {bestAgent.userId?.name?.charAt(0)}
-                        </div>
-                      )}
+                        <img 
+                          src={bestAgent.photo} 
+                          alt={bestAgent.userId?.name} 
+                          className="best-agent-photo"
+                          loading="lazy"
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                            e.target.nextSibling.style.display = 'flex';
+                          }}
+                        />
+                      ) : null}
+                      <div style={{
+                        display: bestAgent.photo ? 'none' : 'flex',
+                        width: '100%',
+                        height: '100%',
+                        background: 'linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '8rem',
+                        fontWeight: '700',
+                        color: '#fff'
+                      }}>
+                        {bestAgent.userId?.name?.charAt(0)}
+                      </div>
                       <div className="best-agent-badge">BEST AGENT</div>
                     </div>
                     <div className="best-agent-info">
@@ -350,30 +407,38 @@ const Brokers = () => {
             </div>
           )}
 
-          {/* Why Use Our Agents Section */}
+          {/* Why Use Our Agents Section - FIXED */}
           <div className="why-use-agents-section">
             <div className="why-use-container">
               <div className="why-use-image-side">
                 <p className="why-use-section-label">WHY CHOOSE US</p>
                 <div className="why-use-image-wrapper">
                   {brokers[0]?.photo ? (
-                    <img src={brokers[0].photo} alt="Agent" className="why-use-agent-photo" />
-                  ) : (
-                    <div style={{
-                      width: '100%',
-                      height: '500px',
-                      background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '8rem',
-                      fontWeight: '700',
-                      color: '#fff',
-                      borderRadius: '20px'
-                    }}>
-                      {brokers[0]?.userId?.name?.charAt(0) || 'A'}
-                    </div>
-                  )}
+                    <img 
+                      src={brokers[0].photo} 
+                      alt="Agent" 
+                      className="why-use-agent-photo"
+                      loading="lazy"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'flex';
+                      }}
+                    />
+                  ) : null}
+                  <div style={{
+                    display: brokers[0]?.photo ? 'none' : 'flex',
+                    width: '100%',
+                    height: '500px',
+                    background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '8rem',
+                    fontWeight: '700',
+                    color: '#fff',
+                    borderRadius: '20px'
+                  }}>
+                    {brokers[0]?.userId?.name?.charAt(0) || 'A'}
+                  </div>
                 </div>
               </div>
 

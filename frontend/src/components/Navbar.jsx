@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useTransition } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import "./navbar.css"; 
@@ -14,6 +14,7 @@ const Navbar = () => {
   const location = useLocation();
   const { user, loading, logout } = useContext(AuthContext);
   const [scrolled, setScrolled] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   // Scroll detection effect
   useEffect(() => {
@@ -32,6 +33,12 @@ const Navbar = () => {
     };
   }, [scrolled]);
 
+  const handleNavigation = (path) => {
+    startTransition(() => {
+      navigate(path);
+    });
+  };
+
   const handleLogout = () => {
     logout();
     navigate("/");
@@ -43,7 +50,7 @@ const Navbar = () => {
     <nav className={`navbar-glass-modern ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-glass-wrapper">
         {/* Logo Section */}
-        <div className="navbar-logo-glass" onClick={() => navigate("/")}>
+        <div className="navbar-logo-glass" onClick={() => handleNavigation("/")}>
           <span className="logo-text-glass">PROPIFY</span>
         </div>
 
@@ -51,27 +58,27 @@ const Navbar = () => {
         <div className="navbar-links-glass">
           <button
             className={`nav-link-glass ${isActive("/") ? "active" : ""}`}
-            onClick={() => navigate("/")}
+            onClick={() => handleNavigation("/")}
           >
             Home
           </button>
           <button
             className={`nav-link-glass ${isActive("/explore") ? "active" : ""}`}
-            onClick={() => navigate("/explore")}
+            onClick={() => handleNavigation("/explore")}
           >
             Explore
           </button>
 
           <button
             className={`nav-link-glass ${isActive("/properties") ? "active" : ""}`}
-            onClick={() => navigate("/properties")}
+            onClick={() => handleNavigation("/properties")}
           >
             Properties
           </button>
 
           <button
             className={`nav-link-glass ${isActive("/brokers") ? "active" : ""}`}
-            onClick={() => navigate("/brokers")}
+            onClick={() => handleNavigation("/brokers")}
           >
             Broker
           </button>
@@ -83,13 +90,13 @@ const Navbar = () => {
             <>
               <button
                 className="cta-btn-glass"
-                onClick={() => navigate("/Login")}
+                onClick={() => handleNavigation("/Login")}
               >
                 Login <FaArrowRight />
               </button>
               <button
                 className="cta-btn-glass register-btn-glass"
-                onClick={() => navigate("/Register")}
+                onClick={() => handleNavigation("/Register")}
               >
                 Register <FaUserPlus />
               </button>
@@ -98,7 +105,7 @@ const Navbar = () => {
             <>
               <button
                 className="user-profile-glass"
-                onClick={() => navigate("/profile")}
+                onClick={() => handleNavigation("/profile")}
               >
                 <FaUser /> {user.name || "Profile"}
               </button>
