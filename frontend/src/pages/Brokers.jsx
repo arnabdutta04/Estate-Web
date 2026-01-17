@@ -525,66 +525,97 @@ const Brokers = () => {
             </div>
           </div>
 
-          {/* Testimonials Section */}
-          <div className="testimonials-section">
-            <div className="testimonials-container">
-              <div className="testimonials-header">
-                <p className="testimonials-label">Testimonials</p>
-                <h2 className="testimonials-title">Our Client Says</h2>
-              </div>
+          {/* Selling Your Home Section */}
+<div className="selling-home-section">
+  <div className="selling-home-container">
+    <div className="selling-home-content">
+      <h2 className="selling-home-title">Selling Your Home?</h2>
+      <p className="selling-home-subtitle">A 5 Steps, Free Process with Expert Guidance</p>
 
-              <div className="testimonials-slider">
-                <button className="testimonial-nav-btn">
-                  <FaArrowLeft />
-                </button>
-
-                <div className="testimonial-card">
-                  <div className="testimonial-avatar">
-                    <div className="testimonial-avatar-placeholder">L</div>
-                  </div>
-                  <p className="testimonial-quote">
-                    "Good Time is very good in what they're doing and more than happy to challenge and push you to think about your decisions both from usability and design standpoints."
-                  </p>
-                  <div className="testimonial-author">
-                    <h4 className="testimonial-author-name">Leslie Alexander</h4>
-                    <p className="testimonial-author-title">Ceo at Boston</p>
-                  </div>
-                </div>
-
-                <button className="testimonial-nav-btn">
-                  <FaArrowRight />
-                </button>
-              </div>
-            </div>
+      <div className="selling-steps-list">
+        <div className="selling-step-item">
+          <div className="step-number">1</div>
+          <div className="step-content">
+            <h3 className="step-title">Home valuation</h3>
+            <p className="step-description">
+              Get a quick, accurate estimated value for your home and unbiased professional pricing guidance.
+            </p>
           </div>
+        </div>
 
-          {/* Newsletter Section */}
-          <div className="newsletter-section">
-            <div className="newsletter-container">
-              <h2 className="newsletter-title">
-                <span className="newsletter-title-highlight">Our</span> Newsletter
-              </h2>
-              <p className="newsletter-description">
-                Work smarter with this time management and not hard,<br />
-                join our newsletter for a better experience
-              </p>
+        <div className="selling-step-item">
+          <div className="step-number">2</div>
+          <div className="step-content">
+            <h3 className="step-title">Agent matching</h3>
+            <p className="step-description">
+              We'll help you find a real estate agent from a vetted pool to list and sell your home for the most possible.
+            </p>
+          </div>
+        </div>
 
-              <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
-                <input
-                  type="email"
-                  placeholder="Enter your email address"
-                  className="newsletter-input"
-                  required
-                />
-                <button type="submit" className="newsletter-submit-btn">
-                  Subscribe
-                </button>
-              </form>
+        <div className="selling-step-item">
+          <div className="step-number">3</div>
+          <div className="step-content">
+            <h3 className="step-title">Listing preparation</h3>
+            <p className="step-description">
+              From staging tips to professional photography, we'll help you highlight your home in its photos.
+            </p>
+          </div>
+        </div>
 
-              <p className="newsletter-disclaimer">
-                No ads. No trails. No commitments
-              </p>
-            </div>
+        <div className="selling-step-item">
+          <div className="step-number">4</div>
+          <div className="step-content">
+            <h3 className="step-title">Evaluate offers</h3>
+            <p className="step-description">
+              Your agent evaluates bids, schedules tours, and secures the best deal for your home's sale.
+            </p>
+          </div>
+        </div>
+
+        <div className="selling-step-item">
+          <div className="step-number">5</div>
+          <div className="step-content">
+            <h3 className="step-title">Closing</h3>
+            <p className="step-description">
+              We coordinate inspections, appraisals, and legal requirements so you can finish on your own timeline.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <button className="btn-get-started">
+        Let get start
+      </button>
+    </div>
+
+    <div className="selling-home-image">
+      <img 
+        src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=600&fit=crop" 
+        alt="Real estate consultation"
+        className="consultation-image"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</div>
+
+{/* Agent CTA Section */}
+<div className="agent-cta-section">
+  <div className="agent-cta-container">
+    <div className="agent-cta-content">
+      <div className="agent-cta-icon">
+        <FaUserTie />
+      </div>
+      <div className="agent-cta-text">
+        <h3 className="agent-cta-title">Are you an agent or a broker?</h3>
+        <p className="agent-cta-description">Grow your business with the propify Select Network.</p>
+      </div>
+    </div>
+    <button className="btn-agent-cta">
+      Get Started
+    </button>
+  </div>
           </div>
         </div>
       </PageTransition>

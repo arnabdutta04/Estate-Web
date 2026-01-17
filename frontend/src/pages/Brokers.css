@@ -1420,265 +1420,246 @@
     font-size: 1.8rem;
   }
 }
-/* ================= TESTIMONIALS SECTION ================= */
-.testimonials-section {
-  background: #ffffff;
-  padding: 6rem 2rem;
+/* Selling Your Home Section */
+.selling-home-section {
+  background-color: #f9fafb;
+  padding: 80px 20px;
 }
 
-.testimonials-container {
+.selling-home-container {
   max-width: 1200px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
 }
 
-.testimonials-header {
-  text-align: center;
-  margin-bottom: 4rem;
+.selling-home-content {
+  padding-right: 20px;
 }
 
-.testimonials-label {
-  font-size: 0.95rem;
-  color: #666;
-  font-weight: 600;
-  margin: 0 0 1rem 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.testimonials-title {
-  font-size: 3rem;
+.selling-home-title {
+  font-size: 2.5rem;
   font-weight: 700;
-  color: #1a1a1a;
-  margin: 0;
-  font-family: 'Georgia', serif;
+  color: #1f2937;
+  margin-bottom: 8px;
 }
 
-.testimonials-slider {
-  position: relative;
+.selling-home-subtitle {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-bottom: 40px;
+}
+
+.selling-steps-list {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 40px;
 }
 
-.testimonial-nav-btn {
-  width: 50px;
-  height: 50px;
-  background: #ffffff;
-  border: 2px solid #e5e5e5;
+.selling-step-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  background-color: #000;
+  color: #fff;
   border-radius: 50%;
-  color: #666;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
   flex-shrink: 0;
 }
 
-.testimonial-nav-btn:hover {
-  border-color: #1a1a1a;
-  color: #1a1a1a;
-  transform: scale(1.1);
+.step-content {
+  flex: 1;
 }
 
-.testimonial-card {
-  background: linear-gradient(135deg, #c4d600 20%, #a3e635 80%);
-  border-radius: 20px;
-  padding: 3rem;
-  max-width: 700px;
+.step-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 6px;
+}
+
+.step-description {
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.btn-get-started {
+  background-color: #ef4444;
+  color: #fff;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-get-started:hover {
+  background-color: #dc2626;
+}
+
+.selling-home-image {
   position: relative;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-}
-
-.testimonial-avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  height: 500px;
+  border-radius: 12px;
   overflow: hidden;
-  margin: 0 auto 2rem;
-  border: 4px solid #fff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.testimonial-avatar img {
+.consultation-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.testimonial-avatar-placeholder {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+/* Agent CTA Section */
+.agent-cta-section {
+  padding: 60px 20px;
+  background-color: #fff;
+}
+
+.agent-cta-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border-radius: 16px;
+  padding: 40px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.agent-cta-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.agent-cta-icon {
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #fff;
+  font-size: 1.8rem;
+  color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
 }
 
-.testimonial-quote {
-  font-size: 1.1rem;
-  color: #1a1a1a;
-  line-height: 1.8;
-  margin: 0 0 2rem 0;
-  text-align: center;
-}
-
-.testimonial-author {
-  text-align: center;
-}
-
-.testimonial-author-name {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin: 0 0 0.25rem 0;
-  font-family: 'Georgia', serif;
-}
-
-.testimonial-author-title {
-  font-size: 0.95rem;
-  color: #666;
-  margin: 0;
-}
-
-/* ================= NEWSLETTER SECTION ================= */
-.newsletter-section {
-  background: linear-gradient(to bottom, #ff8400 0%, #ff8400 100%);
-  padding: 5rem 2rem 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.newsletter-section::before {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: 0;
-  right: 0;
-  height: 150px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23ffffff' d='M0,0 C240,80 480,80 720,40 C960,0 1200,0 1440,40 L1440,0 L0,0 Z'/%3E%3C/svg%3E") no-repeat;
-  background-size: 100% 100%;
-  background-position: top center;
-}
-
-.newsletter-container {
-  max-width: 700px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  padding-bottom: 5rem;
-}
-
-.newsletter-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin: 0 0 1rem 0;
-  font-family: 'Georgia', serif;
-}
-
-.newsletter-title-highlight {
-  color: #1a1a1a;
-}
-
-.newsletter-description {
-  font-size: 1.05rem;
-  color: #666;
-  line-height: 1.7;
-  margin: 0 0 3rem 0;
-}
-
-.newsletter-form {
+.agent-cta-text {
   display: flex;
-  gap: 0;
-  max-width: 550px;
-  margin: 0 auto 1.5rem;
-  background: #ffffff;
-  border-radius: 50px;
-  padding: 0.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
 }
 
-.newsletter-input {
-  flex: 1;
-  padding: 1rem 1.5rem;
-  background: transparent;
+.agent-cta-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 4px;
+}
+
+.agent-cta-description {
+  font-size: 0.95rem;
+  color: #4b5563;
+}
+
+.btn-agent-cta {
+  background-color: #ef4444;
+  color: #fff;
+  padding: 14px 36px;
   border: none;
-  color: #1a1a1a;
-  font-size: 1rem;
-  outline: none;
-}
-
-.newsletter-input::placeholder {
-  color: #999;
-}
-
-.newsletter-submit-btn {
-  padding: 1rem 2.5rem;
-  background: #1a1a1a;
-  color: #ffffff;
-  border: none;
-  border-radius: 50px;
-  font-size: 1rem;
+  border-radius: 8px;
   font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
-.newsletter-submit-btn:hover {
-  background: #333;
-  transform: scale(1.05);
+.btn-agent-cta:hover {
+  background-color: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
 }
 
-.newsletter-disclaimer {
-  font-size: 0.85rem;
-  color: #666;
-  margin: 0;
-}
-
-/* ================= RESPONSIVE DESIGN FOR NEW SECTIONS ================= */
-@media (max-width: 768px) {
-  .newsletter-section::before {
-    height: 100px;
+/* Responsive Design */
+@media (max-width: 968px) {
+  .selling-home-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 
-  .newsletter-section {
-    padding: 4rem 1.5rem 0;
+  .selling-home-content {
+    padding-right: 0;
   }
 
-  .newsletter-title {
+  .selling-home-title {
     font-size: 2rem;
   }
 
-  .newsletter-form {
-    flex-direction: column;
-    border-radius: 12px;
-    padding: 0.75rem;
+  .selling-home-image {
+    height: 400px;
   }
 
-  .newsletter-submit-btn {
-    width: 100%;
-    border-radius: 8px;
+  .agent-cta-container {
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+    padding: 40px 30px;
+  }
+
+  .agent-cta-content {
+    flex-direction: column;
+    text-align: center;
   }
 }
 
-@media (max-width: 480px) {
-  .newsletter-section::before {
-    height: 80px;
+@media (max-width: 640px) {
+  .selling-home-section {
+    padding: 60px 20px;
   }
 
-  .newsletter-title {
-    font-size: 1.6rem;
+  .selling-home-title {
+    font-size: 1.75rem;
   }
 
-  .newsletter-description {
-    font-size: 0.95rem;
+  .step-title {
+    font-size: 1rem;
+  }
+
+  .step-description {
+    font-size: 0.85rem;
+  }
+
+  .selling-home-image {
+    height: 300px;
+  }
+
+  .agent-cta-container {
+    padding: 30px 20px;
+  }
+
+  .agent-cta-title {
+    font-size: 1.2rem;
+  }
+
+  .btn-agent-cta {
+    width: 100%;
   }
 }
