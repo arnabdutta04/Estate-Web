@@ -97,52 +97,91 @@ const Brokers = () => {
       <PageTransition>
         <div className="brokers-page-nestico">
           {/* Individual Broker Hero Section - FIXED */}
-          <div className="individual-broker-hero">
-            <div className="individual-hero-container">
-              <div className="individual-hero-content">
-                <div className="individual-hero-text">
-                  <p className="individual-hero-greeting">Hello! I'm</p>
-                  <h1 className="individual-hero-name">Your Agent as</h1>
-                  <p className="individual-hero-title"> A Real Estate Broker</p>
-                  
-                  <div className="individual-hero-stats">
-                    <div className="individual-stats-bar"></div>
-                    <div className="individual-stats-text">
-                      <p>India's Top Real Estate Broker 848M Sold in 2021 Chad Carroll is an area "Power Broker" in every sense. With a wealth of experience in real estate contracts, and negotiation.</p>
-                    </div>
-                  </div>
+           {/* Modern Hero Section */}
+          <div className="modern-hero-section">
+            <div className="modern-hero-container">
+              <div className="modern-hero-left">
+                <div className="modern-hero-building-image">
+                  <img
+                    src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=800&fit=crop"
+                    alt="Real Estate Building"
+                    className="building-img"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="modern-hero-content">
+                  <h1 className="modern-hero-title">
+                    <span className="title-yellow">DISCOVER</span>
+                    <span className="title-white">THE PLACE</span>
+                    <span className="title-yellow">YOU WILL</span>
+                    <span className="title-yellow">LOVE</span>
+                    <span className="title-white">TO LIVE</span>
+                  </h1>
+                  <button className="btn-explore-more">
+                    ↗ Explore more
+                  </button>
+                </div>
+                <div className="modern-hero-yellow-accent"></div>
+              </div>
 
-                  <div className="individual-client-info">
-                    <p className="individual-client-count">Over <span>12,000+ Client</span> all over the world</p>
-                    <div className="individual-client-avatars">
-                      <div className="individual-avatar">JD</div>
-                      <div className="individual-avatar">SM</div>
-                      <div className="individual-avatar">AK</div>
-                      <div className="individual-avatar">RB</div>
+              <div className="modern-hero-right">
+                <div className="modern-hero-info-box">
+                  <div className="info-box-header">
+                    <span className="info-box-label">Our achievement</span>
+                    <button className="btn-view-projects">View Projects</button>
+                  </div>
+                  <div className="info-box-stats">
+                    <h2 className="stats-number">500+</h2>
+                    <p className="stats-label">Projects</p>
+                    <p className="stats-description">
+                      Read news, analytical materials and articles about the state and prospects of the market.
+                    </p>
+                  </div>
+                  <div className="info-box-navigation">
+                    <button className="nav-arrow">←</button>
+                    <div className="nav-dots">
+                      <span className="nav-dot active"></span>
+                      <span className="nav-dot"></span>
                     </div>
+                    <button className="nav-arrow">→</button>
                   </div>
                 </div>
+                <div className="modern-hero-disclaimer">
+                  <span className="disclaimer-star">(*)</span>
+                  <p className="disclaimer-text">
+                    Cherdak this is a permanent access to the current database of ads for the sale, 
+                    purchase, rental of apartments, houses, dachas, land plots in cities and villages of Kazakhstan.
+                  </p>
+                </div>
+              </div>
+            </div>
 
-                <div className="individual-hero-image">
-  <img
-    src={
-      brokers[0]?.photo
-        ? brokers[0].photo
-        : "/man-in-suit-holding-a-real-estate-book-with-a-house-picture-on-the-cover-against-white-background-look-at-viewer-free-photo.jpg"
-    }
-    alt="Top Broker"
-    className="hero-agent-img"
-    loading="lazy"
-    onError={(e) => {
-      e.target.src =
-        "/man-in-suit-holding-a-real-estate-book-with-a-house-picture-on-the-cover-against-white-background-look-at-viewer-free-photo.jpg";
-    }}
-  />
+            <div className="modern-hero-bottom">
+              <div className="bottom-section">
+                <div className="bottom-section-item">
+                  <div className="section-badge">8688</div>
+                  <h3 className="section-title">NEWS</h3>
+                  <div className="section-links">
+                    <a href="#" className="section-link">Almaty residents were offered to choose improvement projects</a>
+                    <a href="#" className="section-link">Preferential mortgage for young people will be launched in Almaty</a>
+                    <a href="#" className="section-link">Mortgage "Umai" starts from May 10 in Kazakhstan</a>
+                  </div>
+                </div>
+                <div className="bottom-section-item">
+                  <div className="section-badge">2101</div>
+                  <h3 className="section-title">ARTICLES</h3>
+                  <div className="section-links">
+                    <a href="#" className="section-link">Buy an apartment now or wait</a>
+                    <a href="#" className="section-link">What should be in the contract of sale of housing</a>
+                    <a href="#" className="section-link">How to rent an apartment legally in 2023</a>
+                  </div>
+                </div>
+                <div className="bottom-section-cta">
+                  <button className="btn-to-map">↗ To the Map</button>
                 </div>
               </div>
             </div>
           </div>
-
           {/* MAIN SEARCH SECTION */}
           <div className="brokers-list-section-grnata">
             <div className="brokers-list-container-grnata">

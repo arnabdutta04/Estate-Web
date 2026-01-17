@@ -1,191 +1,335 @@
-/* ================= BROKERS HERO – PROPERTY STYLE ================= */
-.individual-broker-hero {
-  padding: 100px 20px 80px;
-  background: #fff;
+/* Modern Hero Section */
+.modern-hero-section {
+  width: 100%;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  position: relative;
+  overflow: hidden;
 }
 
-.individual-hero-container {
+.modern-hero-container {
   max-width: 1400px;
   margin: 0 auto;
-}
-
-.individual-hero-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
+  gap: 3rem;
+  padding: 4rem 2rem;
+  min-height: 600px;
 }
 
-.individual-hero-text {
+.modern-hero-left {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  justify-content: center;
 }
 
-.individual-hero-greeting {
-  font-size: 28px;
-  color: #64748b;
-  margin: 0;
-  font-weight: 300;
-  letter-spacing: 0.5px;
+.modern-hero-building-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
-.individual-hero-name {
-  font-size: 80px;
-  font-weight: 800;
-  margin: 0;
-  line-height: 0.95;
-  color: #0f172a;
+.building-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+}
+
+.modern-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+}
+
+.modern-hero-title {
+  display: flex;
+  flex-direction: column;
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 2rem;
   letter-spacing: -2px;
 }
 
-.individual-hero-title {
-  font-size: 22px;
-  color: #64748b;
-  margin: 10px 0 0 0;
-  font-weight: 400;
+.title-yellow {
+  color: #FFE500;
 }
 
-.individual-hero-stats {
-  display: flex;
-  gap: 24px;
-  margin-top: 40px;
+.title-white {
+  color: #FFFFFF;
 }
 
-.individual-stats-bar {
-  width: 5px;
-  background: linear-gradient(to bottom, #0f172a 0%, #334155 100%);
-  flex-shrink: 0;
-  border-radius: 3px;
-}
-
-.individual-stats-text {
-  flex: 1;
-}
-
-.individual-stats-text p {
-  font-size: 17px;
-  line-height: 1.7;
-  color: #475569;
-  margin: 0;
-  font-weight: 400;
-}
-
-.individual-client-info {
-  margin-top: 50px;
-  padding-top: 30px;
-  border-top: 1px solid #e2e8f0;
-}
-
-.individual-client-count {
-  font-size: 18px;
-  color: #64748b;
-  margin: 0 0 20px 0;
-  font-weight: 400;
-}
-
-.individual-client-count span {
-  font-weight: 700;
-  color: #0f172a;
-  font-size: 19px;
-}
-
-.individual-client-avatars {
-  display: flex;
-  gap: 0;
-}
-
-.individual-avatar {
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  border: 4px solid #fff;
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
+.btn-explore-more {
+  background: #FFE500;
+  color: #000;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
   font-weight: 600;
-  font-size: 16px;
-  margin-left: -15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.individual-avatar:first-child {
-  margin-left: 0;
-  z-index: 4;
+.btn-explore-more:hover {
+  background: #FFD000;
+  transform: translateY(-2px);
 }
 
-.individual-avatar:nth-child(2) {
-  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+.modern-hero-yellow-accent {
+  position: absolute;
+  bottom: -50px;
+  left: -50px;
+  width: 300px;
+  height: 300px;
+  background: #FFE500;
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
   z-index: 3;
 }
 
-.individual-avatar:nth-child(3) {
-  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+.modern-hero-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  position: relative;
   z-index: 2;
 }
 
-.individual-avatar:nth-child(4) {
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-  z-index: 1;
+.modern-hero-disclaimer {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
 }
 
-.individual-hero-image {
-  position: relative;
-  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 50%, #bfdbfe 100%);
-  border-radius: 30px;
-  overflow: hidden;
-  padding: 50px;
-  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.15);
+.disclaimer-star {
+  color: #FFE500;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
-.individual-hero-image img {
-  width: 100%;
-  height: auto;
-  display: block;
+.disclaimer-text {
+  color: #ffffff;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.modern-hero-info-box {
+  background: #ffffff;
   border-radius: 20px;
-  object-fit: cover;
-  max-height: 600px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .individual-hero-content {
-    gap: 60px;
-  }
-
-  .individual-hero-name {
-    font-size: 64px;
-  }
+.info-box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
-@media (max-width: 768px) {
-  .individual-broker-hero {
-    padding: 80px 20px 60px;
-  }
+.info-box-label {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+}
 
-  .individual-hero-content {
+.btn-view-projects {
+  background: #FFE500;
+  color: #000;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-view-projects:hover {
+  background: #FFD000;
+  transform: translateY(-2px);
+}
+
+.info-box-stats {
+  margin-bottom: 2rem;
+}
+
+.stats-number {
+  font-size: 5rem;
+  font-weight: 900;
+  color: #000;
+  margin: 0;
+  line-height: 1;
+}
+
+.stats-label {
+  font-size: 1.2rem;
+  color: #000;
+  font-weight: 600;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.stats-description {
+  font-size: 0.9rem;
+  color: #999;
+  line-height: 1.6;
+}
+
+.info-box-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.nav-arrow {
+  background: transparent;
+  border: 1px solid #ddd;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.nav-arrow:hover {
+  background: #FFE500;
+  border-color: #FFE500;
+}
+
+.nav-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-dot {
+  width: 40px;
+  height: 4px;
+  background: #ddd;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.nav-dot.active {
+  background: #000;
+}
+
+.modern-hero-bottom {
+  background: #FFE500;
+  padding: 3rem 2rem;
+}
+
+.bottom-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 4rem;
+  align-items: start;
+}
+
+.bottom-section-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.section-badge {
+  background: #000;
+  color: #fff;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+  width: fit-content;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #000;
+  margin: 0;
+}
+
+.section-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.section-link {
+  color: #000;
+  text-decoration: underline;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.section-link:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.bottom-section-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-to-map {
+  background: #000;
+  color: #FFE500;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-to-map:hover {
+  background: #222;
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .modern-hero-container {
     grid-template-columns: 1fr;
-    gap: 50px;
+    gap: 2rem;
   }
 
-  .individual-hero-name {
-    font-size: 52px;
+  .modern-hero-title {
+    font-size: 3rem;
   }
 
-  .individual-hero-greeting {
-    font-size: 24px;
+  .bottom-section {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
-  .individual-hero-image {
-    padding: 30px;
-  }
-
-  .individual-stats-text p {
-    font-size: 16px;
+  .stats-number {
+    font-size: 3.5rem;
   }
 }
 /* ================= GRNATA STYLE BROKERS LIST SECTION ================= */
