@@ -4,6 +4,8 @@
   background: #1a1a1a;
   position: relative;
   overflow: hidden;
+  margin-top: 80px; /* Add space for navbar */
+  z-index: 1;
 }
 
 .modern-hero-container {
