@@ -263,13 +263,13 @@ const Explore = () => {
   return (
     <div className="explore-page">
       <Navbar />
-       {/* Modern Hero Section */}
+       {/* Modern Hero Section with Slider */}
           <div className="modern-hero-section">
             <div className="modern-hero-container">
               <div className="modern-hero-left">
                 <div className="modern-hero-building-image">
                   <img
-                    src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=800&fit=crop"
+                    src={heroSlides[currentSlide].image}
                     alt="Real Estate Building"
                     className="building-img"
                     loading="lazy"
@@ -277,11 +277,14 @@ const Explore = () => {
                 </div>
                 <div className="modern-hero-content">
                   <h1 className="modern-hero-title">
-                    <span className="title-yellow">DISCOVER</span>
-                    <span className="title-white">THE PLACE</span>
-                    <span className="title-yellow">YOU WILL</span>
-                    <span className="title-yellow">LOVE</span>
-                    <span className="title-white">TO LIVE</span>
+                    {heroSlides[currentSlide].title.map((line, index) => (
+                      <span 
+                        key={index} 
+                        className={index % 2 === 0 ? 'title-yellow' : 'title-white'}
+                      >
+                        {line}
+                      </span>
+                    ))}
                   </h1>
                   <button className="btn-explore-more">
                     ↗ Explore more
@@ -297,19 +300,24 @@ const Explore = () => {
                     <button className="btn-view-projects">View Projects</button>
                   </div>
                   <div className="info-box-stats">
-                    <h2 className="stats-number">500+</h2>
-                    <p className="stats-label">Projects</p>
+                    <h2 className="stats-number">{heroSlides[currentSlide].stats.number}</h2>
+                    <p className="stats-label">{heroSlides[currentSlide].stats.label}</p>
                     <p className="stats-description">
                       Read news, analytical materials and articles about the state and prospects of the market.
                     </p>
                   </div>
                   <div className="info-box-navigation">
-                    <button className="nav-arrow">←</button>
+                    <button className="nav-arrow" onClick={prevSlide}>←</button>
                     <div className="nav-dots">
-                      <span className="nav-dot active"></span>
-                      <span className="nav-dot"></span>
+                      {heroSlides.map((_, index) => (
+                        <span 
+                          key={index}
+                          className={`nav-dot ${currentSlide === index ? 'active' : ''}`}
+                          onClick={() => setCurrentSlide(index)}
+                        ></span>
+                      ))}
                     </div>
-                    <button className="nav-arrow">→</button>
+                    <button className="nav-arrow" onClick={nextSlide}>→</button>
                   </div>
                 </div>
                 <div className="modern-hero-disclaimer">
@@ -348,7 +356,6 @@ const Explore = () => {
               </div>
             </div>
           </div>
-
       {/* Modern Search Hero Section */}
       <section className="modern-search-hero">
         <div className="modern-hero-container">
