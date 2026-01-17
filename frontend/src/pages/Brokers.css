@@ -1,7 +1,7 @@
 /* ==================== METRO LIVING HERO SECTION ==================== */
 .hero-container {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #c3c3c3 0%, #3b82f6 100%);
+  background: linear-gradient(to bottom, #468b7e 0%, #3b537a 100%);
   padding: 100px 80px 60px;
   position: relative;
   overflow: hidden;
@@ -315,7 +315,7 @@ font-size: 32px;
 }
 /* ================= GRNATA STYLE BROKERS LIST SECTION ================= */
 .brokers-list-section-grnata {
-  background: #96d600;
+  background: #3e517d;
   padding: 4rem 2rem 6rem;
 }
 

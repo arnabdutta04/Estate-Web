@@ -68,6 +68,52 @@ const Explore = () => {
       appreciation: 18.3
     }
   ];
+    // ===== HERO SLIDER STATE & DATA =====
+  const heroSlides = [
+    {
+      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600",
+      title: ["Find Your", "Dream Home"],
+      stats: {
+        number: "12,450+",
+        label: "Active Listings"
+      }
+    },
+    {
+      image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1600",
+      title: ["Luxury", "Living Spaces"],
+      stats: {
+        number: "3,200+",
+        label: "Luxury Properties"
+      }
+    },
+    {
+      image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600",
+      title: ["Trusted", "Real Estate"],
+      stats: {
+        number: "5,000+",
+        label: "Verified Brokers"
+      }
+    }
+  ];
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) =>
+      prev === heroSlides.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) =>
+      prev === 0 ? heroSlides.length - 1 : prev - 1
+    );
+  };
+
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 6000);
+    return () => clearInterval(interval);
+  }, []);
 
   // City-wise Growth Data
   const cityGrowth = [
