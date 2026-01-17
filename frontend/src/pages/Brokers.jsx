@@ -124,35 +124,20 @@ const Brokers = () => {
                 </div>
 
                 <div className="individual-hero-image">
-                  {/* FIXED: Use dynamic image or placeholder */}
-                  {brokers[0]?.photo ? (
-                    <img 
-                      src={brokers[0].photo} 
-                      alt="Top Broker" 
-                      loading="lazy"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.nextSibling.style.display = 'flex';
-                      }}
-                    />
-                  ) : null}
-                  <div 
-                    className="hero-image-placeholder"
-                    style={{
-                      display: brokers[0]?.photo ? 'none' : 'flex',
-                      width: '100%',
-                      height: '100%',
-                      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '8rem',
-                      fontWeight: '700',
-                      color: '#fff',
-                      borderRadius: '20px'
-                    }}
-                  >
-                    {brokers[0]?.userId?.name?.charAt(0) || 'B'}
-                  </div>
+  <img
+    src={
+      brokers[0]?.photo
+        ? brokers[0].photo
+        : "/man-in-suit-holding-a-real-estate-book-with-a-house-picture-on-the-cover-against-white-background-look-at-viewer-free-photo.jpg"
+    }
+    alt="Top Broker"
+    className="hero-agent-img"
+    loading="lazy"
+    onError={(e) => {
+      e.target.src =
+        "/man-in-suit-holding-a-real-estate-book-with-a-house-picture-on-the-cover-against-white-background-look-at-viewer-free-photo.jpg";
+    }}
+  />
                 </div>
               </div>
             </div>
