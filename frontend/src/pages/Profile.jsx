@@ -10,27 +10,42 @@ import {
   FaUser, 
   FaCamera, 
   FaLock, 
-  FaCog, 
-  FaSun, 
-  FaMoon, 
-  FaDesktop,
-  FaImage 
+  FaCog,
+  FaEdit,
+  FaTimes
 } from 'react-icons/fa';
 
 const Profile = () => {
   const { user, login } = useContext(AuthContext);
-  const [activeTab, setActiveTab] = useState('personal');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
   const { theme, changeTheme } = useTheme();
   
+  // Edit Modal States
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showAddressModal, setShowAddressModal] = useState(false);
+  
   // Personal Info State
   const [personalInfo, setPersonalInfo] = useState({
-    name: user?.name || '',
+    firstName: user?.name?.split(' ')[0] || '',
+    lastName: user?.name?.split(' ').slice(1).join(' ') || '',
     email: user?.email || '',
     phone: user?.phone || '',
-    address: user?.address || ''
+    dateOfBirth: user?.dateOfBirth || '',
+    userRole: user?.role || 'Admin'
   });
+
+  // Address State
+  const [addressInfo, setAddressInfo] = useState({
+    country: user?.country || '',
+    city: user?.city || '',
+    postalCode: user?.postalCode || ''
+  });
+
+  // Balance State
+  const [balance, setBalance] = useState(user?.balance || 0);
+  const [showBalanceModal, setShowBalanceModal] = useState(false);
+  const [topUpAmount, setTopUpAmount] = useState('');
 
   // Password Change State
   const [passwordData, setPasswordData] = useState({
@@ -46,13 +61,11 @@ const Profile = () => {
   const [previewUrl, setPreviewUrl] = useState(user?.profilePicture || null);
 
   useEffect(() => {
-    // Apply theme
     if (theme === 'dark') {
       document.documentElement.classList.add('dark-mode');
     } else if (theme === 'light') {
       document.documentElement.classList.remove('dark-mode');
     } else {
-      // System preference
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       if (prefersDark) {
         document.documentElement.classList.add('dark-mode');
@@ -73,13 +86,78 @@ const Profile = () => {
     setMessage({ type: '', text: '' });
 
     try {
-      const { data } = await api.put('/auth/update-profile', personalInfo);
+      const fullName = `${personalInfo.firstName} ${personalInfo.lastName}`.trim();
+      const { data } = await api.put('/auth/update-profile', {
+        name: fullName,
+        email: personalInfo.email,
+        phone: personalInfo.phone,
+        dateOfBirth: personalInfo.dateOfBirth,
+        role: personalInfo.userRole
+      });
       login(data.user);
       setMessage({ type: 'success', text: 'Profile updated successfully!' });
+      setShowEditModal(false);
     } catch (error) {
       setMessage({ 
         type: 'error', 
         text: error.response?.data?.message || 'Failed to update profile' 
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Handle Address Update
+  const handleAddressChange = (e) => {
+    setAddressInfo({ ...addressInfo, [e.target.name]: e.target.value });
+  };
+
+  const handleAddressSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage({ type: '', text: '' });
+
+    try {
+      const { data } = await api.put('/auth/update-address', addressInfo);
+      login(data.user);
+      setMessage({ type: 'success', text: 'Address updated successfully!' });
+      setShowAddressModal(false);
+    } catch (error) {
+      setMessage({ 
+        type: 'error', 
+        text: error.response?.data?.message || 'Failed to update address' 
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Handle Balance Top Up
+  const handleTopUpSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage({ type: '', text: '' });
+
+    const amount = parseFloat(topUpAmount);
+    if (isNaN(amount) || amount <= 0) {
+      setMessage({ type: 'error', text: 'Please enter a valid amount' });
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const { data } = await api.post('/auth/update-balance', {
+        amount: amount
+      });
+      login(data.user);
+      setBalance(data.user.balance);
+      setMessage({ type: 'success', text: `Successfully added ${amount.toFixed(2)} to your balance!` });
+      setShowBalanceModal(false);
+      setTopUpAmount('');
+    } catch (error) {
+      setMessage({ 
+        type: 'error', 
+        text: error.response?.data?.message || 'Failed to update balance' 
       });
     } finally {
       setLoading(false);
@@ -96,19 +174,19 @@ const Profile = () => {
         setPreviewUrl(reader.result);
       };
       reader.readAsDataURL(file);
+      
+      // Auto upload
+      uploadProfilePicture(file);
     }
   };
 
-  const handleProfilePictureSubmit = async (e) => {
-    e.preventDefault();
-    if (!profilePicture) return;
-
+  const uploadProfilePicture = async (file) => {
     setLoading(true);
     setMessage({ type: '', text: '' });
 
     try {
       const formData = new FormData();
-      formData.append('profilePicture', profilePicture);
+      formData.append('profilePicture', file);
 
       const { data } = await api.post('/auth/upload-profile-picture', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
@@ -126,164 +204,175 @@ const Profile = () => {
     }
   };
 
-  // Handle Password Change
-  const handlePasswordChange = (e) => {
-    setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
-  };
-
-  const handleSendOTP = async () => {
-    if (!passwordData.currentPassword) {
-      setMessage({ type: 'error', text: 'Please enter current password' });
-      return;
-    }
-
-    setLoading(true);
-    try {
-      await api.post('/auth/send-password-otp', {
-        currentPassword: passwordData.currentPassword
-      });
-      setOtpSent(true);
-      setMessage({ type: 'success', text: 'OTP sent to your email!' });
-    } catch (error) {
-      setMessage({ 
-        type: 'error', 
-        text: error.response?.data?.message || 'Failed to send OTP' 
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handlePasswordSubmit = async (e) => {
-    e.preventDefault();
-    
-    if (passwordData.newPassword !== passwordData.confirmPassword) {
-      setMessage({ type: 'error', text: 'Passwords do not match' });
-      return;
-    }
-
-    if (passwordData.newPassword.length < 6) {
-      setMessage({ type: 'error', text: 'Password must be at least 6 characters' });
-      return;
-    }
-
-    setLoading(true);
-    setMessage({ type: '', text: '' });
-
-    try {
-      await api.post('/auth/change-password', {
-        currentPassword: passwordData.currentPassword,
-        newPassword: passwordData.newPassword,
-        otp: passwordData.otp
-      });
-
-      setMessage({ type: 'success', text: 'Password changed successfully!' });
-      setPasswordData({
-        currentPassword: '',
-        newPassword: '',
-        confirmPassword: '',
-        otp: ''
-      });
-      setOtpSent(false);
-    } catch (error) {
-      setMessage({ 
-        type: 'error', 
-        text: error.response?.data?.message || 'Failed to change password' 
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleThemeChange = (newTheme) => {
-    changeTheme(newTheme);
-  };
-
   return (
     <>
       <Navbar />
       <PageTransition>
-        <div className="profile-page">
-          <div className="container">
-            <div className="profile-header">
+        <div className="modern-profile-page">
+          <div className="profile-container">
+            {/* Header Section */}
+            <div className="profile-page-header">
               <h1>My Profile</h1>
-              <p>Manage your account settings and preferences</p>
             </div>
 
-            <div className="profile-layout">
-              {/* Sidebar */}
-              <div className="profile-sidebar">
-                <div className="profile-avatar-section">
-                  <div className="profile-avatar">
-                    {previewUrl ? (
-                      <img src={previewUrl} alt="Profile" />
-                    ) : (
-                      <div className="avatar-placeholder">
-                        {user?.name?.charAt(0)?.toUpperCase() || 'U'}
-                      </div>
-                    )}
-                  </div>
-                  <h3>{user?.name || 'User'}</h3>
-                  <p>{user?.email}</p>
+            {/* Profile Card with Avatar */}
+            <div className="profile-card">
+              <div className="profile-avatar-wrapper">
+                <div className="profile-avatar-large">
+                  {previewUrl ? (
+                    <img src={previewUrl} alt="Profile" />
+                  ) : (
+                    <div className="avatar-placeholder-large">
+                      {personalInfo.firstName?.charAt(0)?.toUpperCase() || 'U'}
+                    </div>
+                  )}
+                  <label htmlFor="avatar-upload" className="avatar-edit-btn">
+                    <FaCamera />
+                    <input
+                      type="file"
+                      id="avatar-upload"
+                      accept="image/*"
+                      onChange={handleProfilePictureChange}
+                      style={{ display: 'none' }}
+                    />
+                  </label>
                 </div>
-
-                <nav className="profile-nav">
-                  <button
-                    className={`profile-nav-item ${activeTab === 'personal' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('personal')}
-                  >
-                    <FaUser className="nav-icon" />
-                    Personal Information
-                  </button>
-                  <button
-                    className={`profile-nav-item ${activeTab === 'picture' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('picture')}
-                  >
-                    <FaCamera className="nav-icon" />
-                    Profile Picture
-                  </button>
-                  <button
-                    className={`profile-nav-item ${activeTab === 'security' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('security')}
-                  >
-                    <FaLock className="nav-icon" />
-                    Security & Password
-                  </button>
-                  <button
-                    className={`profile-nav-item ${activeTab === 'settings' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('settings')}
-                  >
-                    <FaCog className="nav-icon" />
-                    Settings
-                  </button>
-                </nav>
               </div>
 
-              {/* Main Content */}
-              <div className="profile-content">
-                {message.text && (
-                  <div className={`profile-message ${message.type}`}>
-                    {message.text}
+              <div className="profile-card-info">
+                <h2>{`${personalInfo.firstName} ${personalInfo.lastName}`.trim() || 'User'}</h2>
+                <p className="profile-role">{personalInfo.userRole}</p>
+                <p className="profile-location">{addressInfo.city ? `${addressInfo.city}, ${addressInfo.country}` : 'Location not set'}</p>
+              </div>
+            </div>
+
+            {/* Personal Information Section */}
+            <div className="info-section">
+              <div className="section-header">
+                <h3>Personal Information</h3>
+                <button 
+                  className="edit-btn"
+                  onClick={() => setShowEditModal(true)}
+                >
+                  <FaEdit /> Edit
+                </button>
+              </div>
+
+              <div className="info-grid">
+                <div className="info-item">
+                  <label>First Name</label>
+                  <p>{personalInfo.firstName || 'Not set'}</p>
+                </div>
+                <div className="info-item">
+                  <label>Last Name</label>
+                  <p>{personalInfo.lastName || 'Not set'}</p>
+                </div>
+                <div className="info-item">
+                  <label>Date of Birth</label>
+                  <p>{personalInfo.dateOfBirth || 'Not set'}</p>
+                </div>
+                <div className="info-item">
+                  <label>Email Address</label>
+                  <p>{personalInfo.email}</p>
+                </div>
+                <div className="info-item">
+                  <label>Phone Number</label>
+                  <p>{personalInfo.phone || 'Not set'}</p>
+                </div>
+                <div className="info-item">
+                  <label>User Role</label>
+                  <p>{personalInfo.userRole}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Address Section */}
+            <div className="info-section">
+              <div className="section-header">
+                <h3>Address</h3>
+                <button 
+                  className="edit-btn"
+                  onClick={() => setShowAddressModal(true)}
+                >
+                  <FaEdit /> Edit
+                </button>
+              </div>
+
+              <div className="info-grid">
+                <div className="info-item">
+                  <label>Country</label>
+                  <p>{addressInfo.country || 'Not set'}</p>
+                </div>
+                <div className="info-item">
+                  <label>City</label>
+                  <p>{addressInfo.city || 'Not set'}</p>
+                </div>
+                <div className="info-item">
+                  <label>Postal Code</label>
+                  <p>{addressInfo.postalCode || 'Not set'}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Balance Section */}
+            <div className="info-section balance-section">
+              <div className="section-header">
+                <h3>My Balance</h3>
+                <button 
+                  className="edit-btn topup-btn"
+                  onClick={() => setShowBalanceModal(true)}
+                >
+                  <span>+</span> Top Up
+                </button>
+              </div>
+
+              <div className="balance-display">
+                <div className="balance-card">
+                  <label>Current Balance</label>
+                  <div className="balance-amount">
+                    <span className="currency">$</span>
+                    <span className="amount">{balance.toFixed(2)}</span>
                   </div>
-                )}
+                </div>
+              </div>
+            </div>
 
-                {/* Personal Information Tab */}
-                {activeTab === 'personal' && (
-                  <div className="profile-section">
-                    <h2>Personal Information</h2>
-                    <p className="section-description">
-                      Update your personal details and contact information
-                    </p>
+            {/* Edit Personal Information Modal */}
+            {showEditModal && (
+              <div className="modal-overlay" onClick={() => setShowEditModal(false)}>
+                <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                  <div className="modal-header">
+                    <h3>Edit Personal Information</h3>
+                    <button 
+                      className="modal-close"
+                      onClick={() => setShowEditModal(false)}
+                    >
+                      <FaTimes />
+                    </button>
+                  </div>
 
-                    <form onSubmit={handlePersonalInfoSubmit} className="profile-form">
+                  <form onSubmit={handlePersonalInfoSubmit}>
+                    <div className="modal-grid">
                       <div className="form-group">
-                        <label>Full Name</label>
+                        <label>First Name</label>
                         <input
                           type="text"
-                          name="name"
-                          value={personalInfo.name}
+                          name="firstName"
+                          value={personalInfo.firstName}
                           onChange={handlePersonalInfoChange}
-                          placeholder="Enter your full name"
+                          placeholder="Natashia"
+                          required
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label>Last Name</label>
+                        <input
+                          type="text"
+                          name="lastName"
+                          value={personalInfo.lastName}
+                          onChange={handlePersonalInfoChange}
+                          placeholder="Khaleira"
                           required
                         />
                       </div>
@@ -295,7 +384,7 @@ const Profile = () => {
                           name="email"
                           value={personalInfo.email}
                           onChange={handlePersonalInfoChange}
-                          placeholder="Enter your email"
+                          placeholder="info@binary-fusion.com"
                           required
                         />
                       </div>
@@ -307,222 +396,216 @@ const Profile = () => {
                           name="phone"
                           value={personalInfo.phone}
                           onChange={handlePersonalInfoChange}
-                          placeholder="Enter your phone number"
+                          placeholder="(+62) 821 2554-5846"
                         />
                       </div>
 
                       <div className="form-group">
-                        <label>Address</label>
-                        <textarea
-                          name="address"
-                          value={personalInfo.address}
+                        <label>Date of Birth</label>
+                        <input
+                          type="date"
+                          name="dateOfBirth"
+                          value={personalInfo.dateOfBirth}
                           onChange={handlePersonalInfoChange}
-                          placeholder="Enter your address"
-                          rows="3"
                         />
                       </div>
 
+                      <div className="form-group">
+                        <label>User Role</label>
+                        <select
+                          name="userRole"
+                          value={personalInfo.userRole}
+                          onChange={handlePersonalInfoChange}
+                        >
+                          <option value="Admin">Admin</option>
+                          <option value="User">User</option>
+                          <option value="Manager">Manager</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="modal-footer">
                       <button 
                         type="submit" 
-                        className="btn-save" 
+                        className="btn-save"
                         disabled={loading}
                       >
                         {loading ? 'Saving...' : 'Save Changes'}
                       </button>
-                    </form>
-                  </div>
-                )}
-
-                {/* Profile Picture Tab */}
-                {activeTab === 'picture' && (
-                  <div className="profile-section">
-                    <h2>Profile Picture</h2>
-                    <p className="section-description">
-                      Upload a profile picture to personalize your account
-                    </p>
-
-                    <div className="picture-upload-section">
-                      <div className="picture-preview">
-                        {previewUrl ? (
-                          <img src={previewUrl} alt="Preview" />
-                        ) : (
-                          <div className="preview-placeholder">
-                            {user?.name?.charAt(0)?.toUpperCase() || 'U'}
-                          </div>
-                        )}
-                      </div>
-
-                      <form onSubmit={handleProfilePictureSubmit} className="picture-form">
-                        <div className="file-input-wrapper">
-                          <input
-                            type="file"
-                            id="profilePicture"
-                            accept="image/*"
-                            onChange={handleProfilePictureChange}
-                          />
-                          <label htmlFor="profilePicture" className="file-input-label">
-                            <FaImage /> Choose Image
-                          </label>
-                        </div>
-
-                        <button 
-                          type="submit" 
-                          className="btn-save" 
-                          disabled={!profilePicture || loading}
-                        >
-                          {loading ? 'Uploading...' : 'Upload Picture'}
-                        </button>
-                      </form>
-
-                      <div className="picture-guidelines">
-                        <h4>Image Guidelines:</h4>
-                        <ul>
-                          <li>Recommended size: 400x400 pixels</li>
-                          <li>Maximum file size: 5MB</li>
-                          <li>Supported formats: JPG, PNG, GIF</li>
-                        </ul>
-                      </div>
                     </div>
+                  </form>
+                </div>
+              </div>
+            )}
+
+            {/* Edit Address Modal */}
+            {showAddressModal && (
+              <div className="modal-overlay" onClick={() => setShowAddressModal(false)}>
+                <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                  <div className="modal-header">
+                    <h3>Edit Address</h3>
+                    <button 
+                      className="modal-close"
+                      onClick={() => setShowAddressModal(false)}
+                    >
+                      <FaTimes />
+                    </button>
                   </div>
-                )}
 
-                {/* Security & Password Tab */}
-                {activeTab === 'security' && (
-                  <div className="profile-section">
-                    <h2>Security & Password</h2>
-                    <p className="section-description">
-                      Change your password using OTP verification
-                    </p>
-
-                    <form onSubmit={handlePasswordSubmit} className="profile-form">
+                  <form onSubmit={handleAddressSubmit}>
+                    <div className="modal-grid">
                       <div className="form-group">
-                        <label>Current Password</label>
+                        <label>Country</label>
                         <input
-                          type="password"
-                          name="currentPassword"
-                          value={passwordData.currentPassword}
-                          onChange={handlePasswordChange}
-                          placeholder="Enter current password"
+                          type="text"
+                          name="country"
+                          value={addressInfo.country}
+                          onChange={handleAddressChange}
+                          placeholder="United Kingdom"
                           required
                         />
                       </div>
 
-                      {!otpSent && (
-                        <button 
-                          type="button" 
-                          className="btn-send-otp" 
-                          onClick={handleSendOTP}
-                          disabled={loading || !passwordData.currentPassword}
-                        >
-                          {loading ? 'Sending...' : 'Send OTP to Email'}
-                        </button>
-                      )}
+                      <div className="form-group">
+                        <label>City</label>
+                        <input
+                          type="text"
+                          name="city"
+                          value={addressInfo.city}
+                          onChange={handleAddressChange}
+                          placeholder="Leeds, East London"
+                          required
+                        />
+                      </div>
 
-                      {otpSent && (
-                        <>
-                          <div className="form-group">
-                            <label>OTP Code</label>
-                            <input
-                              type="text"
-                              name="otp"
-                              value={passwordData.otp}
-                              onChange={handlePasswordChange}
-                              placeholder="Enter 6-digit OTP"
-                              maxLength="6"
-                              required
-                            />
-                          </div>
-
-                          <div className="form-group">
-                            <label>New Password</label>
-                            <input
-                              type="password"
-                              name="newPassword"
-                              value={passwordData.newPassword}
-                              onChange={handlePasswordChange}
-                              placeholder="Enter new password"
-                              required
-                            />
-                          </div>
-
-                          <div className="form-group">
-                            <label>Confirm New Password</label>
-                            <input
-                              type="password"
-                              name="confirmPassword"
-                              value={passwordData.confirmPassword}
-                              onChange={handlePasswordChange}
-                              placeholder="Confirm new password"
-                              required
-                            />
-                          </div>
-
-                          <button 
-                            type="submit" 
-                            className="btn-save" 
-                            disabled={loading}
-                          >
-                            {loading ? 'Changing...' : 'Change Password'}
-                          </button>
-                        </>
-                      )}
-                    </form>
-                  </div>
-                )}
-
-                {/* Settings Tab */}
-                {activeTab === 'settings' && (
-                  <div className="profile-section">
-                    <h2>Appearance Settings</h2>
-                    <p className="section-description">
-                      Customize your viewing experience
-                    </p>
-
-                    <div className="theme-selector">
-                      <h3>Theme Preference</h3>
-                      
-                      <div className="theme-options">
-                        <div 
-                          className={`theme-option ${theme === 'light' ? 'active' : ''}`}
-                          onClick={() => handleThemeChange('light')}
-                        >
-                          <div className="theme-preview light-preview">
-                            <div className="preview-header"></div>
-                            <div className="preview-content"></div>
-                          </div>
-                          <FaSun className="theme-icon" />
-                          <span className="theme-label">Light</span>
-                        </div>
-
-                        <div 
-                          className={`theme-option ${theme === 'dark' ? 'active' : ''}`}
-                          onClick={() => handleThemeChange('dark')}
-                        >
-                          <div className="theme-preview dark-preview">
-                            <div className="preview-header"></div>
-                            <div className="preview-content"></div>
-                          </div>
-                          <FaMoon className="theme-icon" />
-                          <span className="theme-label">Dark</span>
-                        </div>
-
-                        <div 
-                          className={`theme-option ${theme === 'system' ? 'active' : ''}`}
-                          onClick={() => handleThemeChange('system')}
-                        >
-                          <div className="theme-preview system-preview">
-                            <div className="preview-header"></div>
-                            <div className="preview-content"></div>
-                          </div>
-                          <FaDesktop className="theme-icon" />
-                          <span className="theme-label">System</span>
-                        </div>
+                      <div className="form-group">
+                        <label>Postal Code</label>
+                        <input
+                          type="text"
+                          name="postalCode"
+                          value={addressInfo.postalCode}
+                          onChange={handleAddressChange}
+                          placeholder="ERT 1254"
+                          required
+                        />
                       </div>
                     </div>
-                  </div>
-                )}
+
+                    <div className="modal-footer">
+                      <button 
+                        type="submit" 
+                        className="btn-save"
+                        disabled={loading}
+                      >
+                        {loading ? 'Saving...' : 'Save Changes'}
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
-            </div>
+            )}
+
+            {/* Top Up Balance Modal */}
+            {showBalanceModal && (
+              <div className="modal-overlay" onClick={() => setShowBalanceModal(false)}>
+                <div className="modal-content modal-balance" onClick={(e) => e.stopPropagation()}>
+                  <div className="modal-header">
+                    <h3>Top Up Balance</h3>
+                    <button 
+                      className="modal-close"
+                      onClick={() => setShowBalanceModal(false)}
+                    >
+                      <FaTimes />
+                    </button>
+                  </div>
+
+                  <form onSubmit={handleTopUpSubmit}>
+                    <div className="balance-modal-content">
+                      <div className="current-balance-info">
+                        <label>Current Balance</label>
+                        <div className="balance-value">${balance.toFixed(2)}</div>
+                      </div>
+
+                      <div className="form-group">
+                        <label>Amount to Add</label>
+                        <div className="amount-input-wrapper">
+                          <span className="currency-symbol">$</span>
+                          <input
+                            type="number"
+                            step="0.01"
+                            min="0.01"
+                            value={topUpAmount}
+                            onChange={(e) => setTopUpAmount(e.target.value)}
+                            placeholder="0.00"
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      <div className="quick-amounts">
+                        <label>Quick Add</label>
+                        <div className="quick-amount-buttons">
+                          <button 
+                            type="button" 
+                            className="quick-amount-btn"
+                            onClick={() => setTopUpAmount('10')}
+                          >
+                            $10
+                          </button>
+                          <button 
+                            type="button" 
+                            className="quick-amount-btn"
+                            onClick={() => setTopUpAmount('50')}
+                          >
+                            $50
+                          </button>
+                          <button 
+                            type="button" 
+                            className="quick-amount-btn"
+                            onClick={() => setTopUpAmount('100')}
+                          >
+                            $100
+                          </button>
+                          <button 
+                            type="button" 
+                            className="quick-amount-btn"
+                            onClick={() => setTopUpAmount('500')}
+                          >
+                            $500
+                          </button>
+                        </div>
+                      </div>
+
+                      {topUpAmount && !isNaN(parseFloat(topUpAmount)) && (
+                        <div className="new-balance-preview">
+                          <span>New Balance:</span>
+                          <span className="preview-amount">
+                            ${(balance + parseFloat(topUpAmount)).toFixed(2)}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="modal-footer">
+                      <button 
+                        type="submit" 
+                        className="btn-save btn-topup"
+                        disabled={loading || !topUpAmount}
+                      >
+                        {loading ? 'Processing...' : 'Add Funds'}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            )}
+
+            {/* Message Display */}
+            {message.text && (
+              <div className={`message-toast ${message.type}`}>
+                {message.text}
+              </div>
+            )}
           </div>
         </div>
       </PageTransition>
