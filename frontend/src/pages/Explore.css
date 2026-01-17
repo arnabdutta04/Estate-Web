@@ -4,7 +4,7 @@
   background: #1a1a1a;
   position: relative;
   overflow: hidden;
-  margin-top: 80px; /* Add space for navbar */
+  margin-top: 0;
   z-index: 1;
 }
 
@@ -15,7 +15,7 @@
   grid-template-columns: 1.2fr 0.8fr;
   gap: 2rem;
   padding: 0;
-  min-height: 650px;
+  min-height: 700px;
   position: relative;
 }
 
@@ -24,7 +24,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
   overflow: hidden;
+  padding-top: 100px; /* Space for navbar */
+  padding-bottom: 60px;
 }
 
 .modern-hero-building-image {
@@ -58,18 +61,24 @@
 .modern-hero-content {
   position: relative;
   z-index: 2;
-  padding: 4rem 3rem 4rem 4rem;
+  padding: 2rem 3rem 2rem 4rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .modern-hero-title {
   display: flex;
   flex-direction: column;
-  font-size: 5rem;
+  font-size: 4.5rem;
   font-weight: 900;
   line-height: 0.95;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   letter-spacing: -3px;
   text-transform: uppercase;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .modern-hero-title span {
@@ -147,8 +156,8 @@
   left: 0;
   width: 0;
   height: 0;
-  border-left: 350px solid #FFE500;
-  border-top: 350px solid transparent;
+  border-left: 420px solid #FFE500;
+  border-top: 420px solid transparent;
   z-index: 2;
   pointer-events: none;
 }
@@ -156,11 +165,11 @@
 .modern-hero-right {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1.5rem;
   position: relative;
   z-index: 2;
-  padding: 3rem 3rem 3rem 1rem;
+  padding: 100px 3rem 3rem 1rem; /* Top padding for navbar */
   background: linear-gradient(to right, rgba(26, 26, 26, 0.5), #1a1a1a);
 }
 
