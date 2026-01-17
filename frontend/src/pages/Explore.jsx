@@ -263,77 +263,91 @@ const Explore = () => {
   return (
     <div className="explore-page">
       <Navbar />
+       {/* Modern Hero Section */}
+          <div className="modern-hero-section">
+            <div className="modern-hero-container">
+              <div className="modern-hero-left">
+                <div className="modern-hero-building-image">
+                  <img
+                    src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=800&fit=crop"
+                    alt="Real Estate Building"
+                    className="building-img"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="modern-hero-content">
+                  <h1 className="modern-hero-title">
+                    <span className="title-yellow">DISCOVER</span>
+                    <span className="title-white">THE PLACE</span>
+                    <span className="title-yellow">YOU WILL</span>
+                    <span className="title-yellow">LOVE</span>
+                    <span className="title-white">TO LIVE</span>
+                  </h1>
+                  <button className="btn-explore-more">
+                    ↗ Explore more
+                  </button>
+                </div>
+                <div className="modern-hero-yellow-accent"></div>
+              </div>
 
-      {/* Metro Living Hero Section */}
-      <div className="hero-container">
-        <div className="hero-content">
-          <div className="hero-left">
-            <h1 className="hero-title">
-              METRO<br />LIVING
-            </h1>
-            <button className="cta-button">
-              Get In Touch
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M4 16L16 4M16 4H7M16 4V13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-            <p className="hero-description">
-              Our properties are designed for those who appreciate the vibrancy of metropolitan living
-            </p>
-            <div className="property-icons">
-              <div className="icon-item"></div>
-              <div className="icon-item"></div>
-              <div className="icon-item"></div>
-              <div className="icon-item"></div>
+              <div className="modern-hero-right">
+                <div className="modern-hero-info-box">
+                  <div className="info-box-header">
+                    <span className="info-box-label">Our achievement</span>
+                    <button className="btn-view-projects">View Projects</button>
+                  </div>
+                  <div className="info-box-stats">
+                    <h2 className="stats-number">500+</h2>
+                    <p className="stats-label">Projects</p>
+                    <p className="stats-description">
+                      Read news, analytical materials and articles about the state and prospects of the market.
+                    </p>
+                  </div>
+                  <div className="info-box-navigation">
+                    <button className="nav-arrow">←</button>
+                    <div className="nav-dots">
+                      <span className="nav-dot active"></span>
+                      <span className="nav-dot"></span>
+                    </div>
+                    <button className="nav-arrow">→</button>
+                  </div>
+                </div>
+                <div className="modern-hero-disclaimer">
+                  <span className="disclaimer-star">(*)</span>
+                  <p className="disclaimer-text">
+                    Cherdak this is a permanent access to the current database of ads for the sale, 
+                    purchase, rental of apartments, houses, dachas, land plots in cities and villages of Kazakhstan.
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div className="hero-center">
-            <div className="building-frame">
-              <img 
-                src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800" 
-                alt="Modern Building" 
-                className="building-image"
-              />
-              <div className="arrow-circle">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <path d="M8 24L24 8M24 8H12M24 8V20" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+            <div className="modern-hero-bottom">
+              <div className="bottom-section">
+                <div className="bottom-section-item">
+                  <div className="section-badge">8688</div>
+                  <h3 className="section-title">NEWS</h3>
+                  <div className="section-links">
+                    <a href="#" className="section-link">Almaty residents were offered to choose improvement projects</a>
+                    <a href="#" className="section-link">Preferential mortgage for young people will be launched in Almaty</a>
+                    <a href="#" className="section-link">Mortgage "Umai" starts from May 10 in Kazakhstan</a>
+                  </div>
+                </div>
+                <div className="bottom-section-item">
+                  <div className="section-badge">2101</div>
+                  <h3 className="section-title">ARTICLES</h3>
+                  <div className="section-links">
+                    <a href="#" className="section-link">Buy an apartment now or wait</a>
+                    <a href="#" className="section-link">What should be in the contract of sale of housing</a>
+                    <a href="#" className="section-link">How to rent an apartment legally in 2023</a>
+                  </div>
+                </div>
+                <div className="bottom-section-cta">
+                  <button className="btn-to-map">↗ To the Map</button>
+                </div>
               </div>
             </div>
           </div>
-
-          <div className="hero-right">
-            <div className="testimonial">
-              <div className="stars">★★★★★</div>
-              <div className="reviewer">
-                <img src="https://i.pravatar.cc/150?img=12" alt="Andrew Carlos" className="avatar" />
-                <span className="reviewer-name">Andrew Carlos</span>
-              </div>
-              <p className="review-text">
-                "The tranquility and natural elements integrated into their properties align perfectly with my values"
-              </p>
-            </div>
-
-            <div className="stats">
-              <div className="stat-item">
-                <h3 className="stat-number"><sup>+</sup>500k</h3>
-                <p className="stat-label">Happy user</p>
-              </div>
-              <div className="stat-item">
-                <h3 className="stat-number"><sup>+</sup>100k</h3>
-                <p className="stat-label">Our partner</p>
-              </div>
-            </div>
-
-            <div className="scroll-indicator">↓</div>
-            
-            <div className="qr-code">
-              <div className="qr-placeholder"></div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Modern Search Hero Section */}
       <section className="modern-search-hero">
