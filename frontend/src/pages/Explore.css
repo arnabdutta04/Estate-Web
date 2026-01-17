@@ -5,6 +5,7 @@
   position: relative;
   overflow: hidden;
   margin-top: 0;
+  padding-top: 80px; /* Push content down for navbar */
   z-index: 1;
 }
 
@@ -15,7 +16,7 @@
   grid-template-columns: 1.2fr 0.8fr;
   gap: 2rem;
   padding: 0;
-  min-height: 700px;
+  min-height: calc(100vh - 80px); /* Full viewport minus navbar */
   position: relative;
 }
 
@@ -26,7 +27,7 @@
   justify-content: center;
   align-items: flex-start;
   overflow: hidden;
-  padding-top: 100px; /* Space for navbar */
+  padding-top: 0; /* Remove extra padding */
   padding-bottom: 60px;
 }
 
@@ -169,7 +170,7 @@
   gap: 1.5rem;
   position: relative;
   z-index: 2;
-  padding: 100px 3rem 3rem 1rem; /* Top padding for navbar */
+  padding: 3rem 3rem 3rem 1rem; /* Normal padding, no top offset */
   background: linear-gradient(to right, rgba(26, 26, 26, 0.5), #1a1a1a);
 }
 
@@ -444,9 +445,17 @@
   .section-title {
     font-size: 2.5rem;
   }
+  
+  .modern-hero-container {
+    min-height: 600px;
+  }
 }
 
 @media (max-width: 968px) {
+  .modern-hero-section {
+    padding-top: 70px; /* Smaller navbar on mobile */
+  }
+  
   .modern-hero-container {
     grid-template-columns: 1fr;
     gap: 0;
@@ -496,6 +505,10 @@
 }
 
 @media (max-width: 640px) {
+  .modern-hero-section {
+    padding-top: 60px;
+  }
+  
   .modern-hero-title {
     font-size: 2.2rem;
   }
