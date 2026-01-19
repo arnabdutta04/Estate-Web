@@ -773,7 +773,7 @@
   font-size: 120px;
   font-weight: 300;
   line-height: 0.9;
-  color: white;
+  color: rgb(0, 0, 0);
   letter-spacing: -3px;
 }
 
@@ -793,7 +793,7 @@
 }
 
 .bottom-description {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgb(0, 0, 0);
   font-size: 15px;
   line-height: 1.7;
   text-align: center;
@@ -1496,7 +1496,7 @@
 
 .location-name {
   font-size: 14px;
-  color: #4b5563;
+  color: #44ff00;
 }
 
 .location-percentage {
