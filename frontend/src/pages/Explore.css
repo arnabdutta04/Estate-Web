@@ -625,23 +625,23 @@
 .hero-search-input {
   width: 100%;
   padding: 18px 60px 18px 24px;
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.1);
+  border: 1.5px solid rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.077);
   backdrop-filter: blur(10px);
   border-radius: 35px;
-  color: white;
+  color: rgb(255, 255, 255);
   font-size: 16px;
   outline: none;
   transition: all 0.3s ease;
 }
 
 .hero-search-input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .hero-search-input:focus {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 0, 0, 0.5);
 }
 
 .hero-search-btn {
