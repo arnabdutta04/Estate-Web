@@ -336,7 +336,6 @@ const Explore = () => {
                     ↗ Explore more
                   </button>
                 </div>
-                <div className="modern-hero-yellow-accent"></div>
               </div>
 
               <div className="modern-hero-right">
