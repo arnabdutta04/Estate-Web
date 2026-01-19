@@ -652,7 +652,7 @@
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background: white;
+  background: rgb(0, 0, 0);
   border: none;
   display: flex;
   align-items: center;
@@ -663,14 +663,14 @@
 }
 
 .hero-search-btn:hover {
-  background: #f8f9fa;
+  background: #000000;
   transform: translateY(-50%) scale(1.05);
 }
 
 /* Description Text */
 .hero-description-text {
   max-width: 500px;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(0, 0, 0, 0.85);
   font-size: 15px;
   line-height: 1.7;
   margin-bottom: 30px;
@@ -705,7 +705,7 @@
   background: white;
   border-radius: 24px;
   padding: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 60px rgba(255, 255, 255, 0.15);
   position: relative;
   transform: rotate(-2deg);
   transition: all 0.4s ease;
