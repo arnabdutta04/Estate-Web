@@ -102,7 +102,7 @@ const Brokers = () => {
                    <div className="hero-content">
                      <div className="hero-left">
                        <h1 className="hero-title">
-                         METRO<br />LIVING
+                         YOUR<br />Agent Is Here
                        </h1>
                        <button className="cta-button">
                          Get In Touch
@@ -144,25 +144,19 @@ const Brokers = () => {
                            <span className="reviewer-name">Andrew Carlos</span>
                          </div>
                          <p className="review-text">
-                           "The tranquility and natural elements integrated into their properties align perfectly with my values"
+                           "WE are here to help you for youre best and dream investment."
                          </p>
                        </div>
            
                        <div className="stats">
                          <div className="stat-item">
-                           <h3 className="stat-number"><sup>+</sup>500k</h3>
-                           <p className="stat-label">Happy user</p>
+                           <h3 className="stat-number"><sup>+</sup>50+</h3>
+                           <p className="stat-label">Happy User</p>
                          </div>
                          <div className="stat-item">
-                           <h3 className="stat-number"><sup>+</sup>100k</h3>
+                           <h3 className="stat-number"><sup>+</sup>10+</h3>
                            <p className="stat-label">Our partner</p>
                          </div>
-                       </div>
-           
-                       <div className="scroll-indicator">↓</div>
-                       
-                       <div className="qr-code">
-                         <div className="qr-placeholder"></div>
                        </div>
                      </div>
                    </div>
