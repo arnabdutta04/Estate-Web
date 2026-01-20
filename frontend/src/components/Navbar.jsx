@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect, useTransition } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { FaBriefcase, FaPlus } from 'react-icons/fa';
 import "./navbar.css"; 
 import {
   FaUser,
@@ -104,6 +105,15 @@ const Navbar = () => {
             Broker
             {!user && <FaLock className="lock-icon" />}
           </button>
+          {/* BROKER ONLY - Dashboard Link */}
+  {user && user.role === 'broker' && (
+    <button
+      className={`nav-link-glass ${isActive("/broker/dashboard") ? "active" : ""}`}
+      onClick={() => handleNavigation("/broker/dashboard")}
+    >
+      <FaBriefcase /> My Dashboard
+    </button>
+  )}
         </div>
 
         {/* User / Auth Section */}
@@ -125,6 +135,12 @@ const Navbar = () => {
             </>
           ) : !loading && user ? (
             <>
+              {user.role && (
+        <span className="role-badge-nav">
+          {user.role === 'broker' ? '🏢' : user.role === 'admin' ? '👑' : '👤'} 
+          {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
+        </span>
+      )}
               <button
                 className="user-profile-glass"
                 onClick={() => handleNavigation("/profile")}

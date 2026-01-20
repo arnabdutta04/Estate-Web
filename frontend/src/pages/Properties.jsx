@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
-import PropertyCard from '../components/PropertyCard';
+import { AuthContext } from '../context/AuthContext';
 import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
 import { FaHome, FaBed, FaBath, FaRulerCombined, FaDollarSign, FaPlus, FaMinus, FaPaw } from 'react-icons/fa';
@@ -29,7 +29,7 @@ const Properties = () => {
   const [selectedPropertyType, setSelectedPropertyType] = useState('');
   const [selectedStyle, setSelectedStyle] = useState('');
   const [showFilter, setShowFilter] = useState(false);
-
+  const { user } = useContext(AuthContext);
 const [selectedFacilities, setSelectedFacilities] = useState({
     furnished: false,
     petAllowed: false,
@@ -675,6 +675,14 @@ const [counters, setCounters] = useState({
     </svg>
     Open Filters
   </button>
+   {user && user.role === 'broker' && (
+    <button 
+      className='add-property-btn-broker' 
+      onClick={() => navigate('/broker/add-property')}
+    >
+      <FaPlus /> List Your Property
+    </button>
+  )}
 
   {/* Properties Container */}
   <div className='properties-container-modern'>

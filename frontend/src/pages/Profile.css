@@ -773,3 +773,60 @@
     font-size: 2rem;
   }
 }
+.broker-badge {
+  padding: 4px 12px;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.admin-badge {
+  padding: 4px 12px;
+  background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+  color: white;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.broker-actions-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 30px;
+  border-radius: 16px;
+  margin-top: 20px;
+}
+
+.broker-actions-section .section-header h3 {
+  color: white;
+}
+
+.broker-quick-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.broker-action-btn {
+  flex: 1;
+  padding: 16px 24px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.broker-action-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}

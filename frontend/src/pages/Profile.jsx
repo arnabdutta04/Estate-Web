@@ -279,10 +279,47 @@ const Profile = () => {
                   <label>Phone Number</label>
                   <p>{personalInfo.phone || 'Not set'}</p>
                 </div>
-                <div className="info-item">
-                  <label>User Role</label>
-                  <p>{personalInfo.userRole}</p>
-                </div>
+<div className="info-item">
+  <label>User Role</label>
+  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+    <p>{personalInfo.userRole}</p>
+    {personalInfo.userRole === 'broker' && (
+      <span className="broker-badge">
+        🏢 Broker Account
+      </span>
+    )}
+    {personalInfo.userRole === 'admin' && (
+      <span className="admin-badge">
+        👑 Admin Access
+      </span>
+    )}
+  </div>
+</div>
+
+// ADD NEW SECTION - After the Address Section, add Broker Dashboard Link:
+{/* Broker Quick Actions - ONLY FOR BROKERS */}
+{personalInfo.userRole === 'broker' && (
+  <div className="info-section broker-actions-section">
+    <div className="section-header">
+      <h3>Broker Dashboard</h3>
+    </div>
+    
+    <div className="broker-quick-actions">
+      <button 
+        className="broker-action-btn"
+        onClick={() => window.location.href = '/broker/dashboard'}
+      >
+        <FaBriefcase /> View Dashboard
+      </button>
+      <button 
+        className="broker-action-btn"
+        onClick={() => window.location.href = '/broker/add-property'}
+      >
+        <FaPlus /> Add Property
+      </button>
+    </div>
+  </div>
+)}
               </div>
             </div>
 
