@@ -1,63 +1,40 @@
-const { Pool } = require("pg");
+const { Sequelize } = require("sequelize");
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl:
-    process.env.NODE_ENV === "production"
-      ? { rejectUnauthorized: false }
-      : undefined,
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: "postgres",
+  protocol: "postgres",
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false, // For Render.com hosted databases
+    },
+  },
+  logging: process.env.NODE_ENV === "development" ? console.log : false,
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000,
+  },
 });
 
 const connectDB = async () => {
   try {
-    const result = await pool.query("SELECT NOW()");
-    console.log("✅ Connected to PostgreSQL database");
-    console.log("📅 Database time:", result.rows[0].now);
-    await createTables();
+    await sequelize.authenticate();
+    console.log("✅ PostgreSQL Database connected successfully");
+
+    // Sync models (create tables if they don't exist)
+    if (process.env.NODE_ENV === "development") {
+      await sequelize.sync({ alter: true });
+      console.log("✅ Database tables synchronized");
+    } else {
+      // In production, use migrations instead of sync
+      await sequelize.sync();
+    }
   } catch (error) {
     console.error("❌ Database connection error:", error.message);
     process.exit(1);
   }
 };
 
-const createTables = async () => {
-  const createUsersTable = `
-    CREATE TABLE IF NOT EXISTS users (
-      id SERIAL PRIMARY KEY,
-      name VARCHAR(255) NOT NULL,
-      email VARCHAR(255) UNIQUE NOT NULL,
-      password VARCHAR(255) NOT NULL,
-      role VARCHAR(50) DEFAULT 'user',
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-  `;
-
-  const createPropertiesTable = `
-    CREATE TABLE IF NOT EXISTS properties (
-      id SERIAL PRIMARY KEY,
-      title VARCHAR(255) NOT NULL,
-      description TEXT,
-      price DECIMAL(10, 2) NOT NULL,
-      location VARCHAR(255) NOT NULL,
-      bedrooms INTEGER,
-      bathrooms INTEGER,
-      area DECIMAL(10, 2),
-      property_type VARCHAR(100),
-      status VARCHAR(50) DEFAULT 'available',
-      images TEXT[],
-      amenities TEXT[],
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-  `;
-
-  try {
-    await pool.query(createUsersTable);
-    await pool.query(createPropertiesTable);
-    console.log("✅ Database tables created successfully");
-  } catch (error) {
-    console.error("❌ Error creating tables:", error.message);
-  }
-};
-
-module.exports = { pool, connectDB };
+module.exports = { sequelize, connectDB };

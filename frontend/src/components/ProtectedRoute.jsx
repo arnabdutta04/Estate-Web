@@ -5,16 +5,17 @@ import { AuthContext } from "../context/AuthContext";
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
 
-  // ⏳ wait for auth check
+  // Wait for auth check
   if (loading) {
-    return null; // or a spinner
+    return null;
   }
 
-  // 🔐 not logged in
+  // Redirect to login if not authenticated
   if (!user) {
     return <Navigate to="/login" replace />;
   }
 
+  // Render protected content
   return children;
 };
 

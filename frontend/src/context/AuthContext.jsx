@@ -1,81 +1,113 @@
-import React, { createContext, useState, useEffect } from "react";
-import api from "../utils/api";
+// src/context/AuthContext.js
+import React, { createContext, useState, useEffect } from 'react';
+import api from '../utils/api';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(() => {
-    // ✅ restore user immediately (prevents flicker)
-    const storedUser = localStorage.getItem("user");
-    return storedUser ? JSON.parse(storedUser) : null;
-  });
-
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Check if user is logged in on mount
   useEffect(() => {
-    checkUserLoggedIn();
+    checkAuth();
   }, []);
 
-  const checkUserLoggedIn = async () => {
-    const token = localStorage.getItem("token");
+  const checkAuth = async () => {
+    const token = localStorage.getItem('token');
+    const savedUser = localStorage.getItem('user');
 
-    if (!token) {
-      setUser(null);
-      setLoading(false);
-      return;
-    }
+    if (token && savedUser) {
+      try {
+        // Parse saved user first (faster initial render)
+        const parsedUser = JSON.parse(savedUser);
+        setUser(parsedUser);
 
-    try {
-      const { data } = await api.get("/auth/me");
-      setUser(data);
-      localStorage.setItem("user", JSON.stringify(data));
-    } catch (error) {
-      console.error("Auth check failed:", error);
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      setUser(null);
-    } finally {
-      setLoading(false);
+        // Verify token is still valid in background
+        const { data } = await api.get('/auth/verify');
+        
+        // Update with fresh data from server
+        if (data.user) {
+          setUser(data.user);
+          localStorage.setItem('user', JSON.stringify(data.user));
+        }
+      } catch (error) {
+        console.error('Token verification failed:', error);
+        logout();
+      }
     }
+    setLoading(false);
   };
 
-  const register = async (userData) => {
-    const { data } = await api.post("/auth/register", userData);
-
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(data.user));
-
-    setUser(data.user);
-    return data.user;
-  };
-
+  // Login function
   const login = async (credentials) => {
-    const { data } = await api.post("/auth/login", credentials);
-
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(data.user));
-
-    setUser(data.user);
-    return data.user;
+    try {
+      const { data } = await api.post('/auth/login', credentials);
+      
+      // Save token and user to localStorage
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      
+      // Update state
+      setUser(data.user);
+      
+      return data;
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
+    }
   };
 
+  // Register function
+  const register = async (userData) => {
+    try {
+      const { data } = await api.post('/auth/register', userData);
+      
+      // Save token and user to localStorage
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      
+      // Update state
+      setUser(data.user);
+      
+      return data;
+    } catch (error) {
+      console.error('Registration error:', error);
+      throw error;
+    }
+  };
+
+  // Logout function
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    // Clear localStorage
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    
+    // Clear state
     setUser(null);
   };
 
+  // Update user data (for profile updates)
+  const updateUser = (updatedUser) => {
+    setUser(updatedUser);
+    localStorage.setItem('user', JSON.stringify(updatedUser));
+  };
+
+  const value = {
+    user,
+    loading,
+    login,
+    register,
+    logout,
+    updateUser,
+    setUser
+  };
+
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        loading,
-        register,
-        login,
-        logout,
-      }}
-    >
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+export default AuthContext;

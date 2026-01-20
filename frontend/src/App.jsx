@@ -30,14 +30,13 @@ function AppContent() {
         <Route path="/" element={<Welcome />} />
         <Route path="/home" element={<Navigate to="/" replace />} />
         
-        {/* PUBLIC ROUTE - No login required to view properties */}
-        <Route path="/properties" element={<Properties />} />
-
-        {/* PUBLIC ROUTE - No login required to view property details */}
-        <Route path="/properties/:id" element={<PropertyDetail />} />
-
-        {/* PUBLIC ROUTE - Explore page with market insights */}
+        {/* PUBLIC ROUTES - No login required */}
         <Route path="/explore" element={<Explore />} />
+        <Route path="/properties" element={<Properties />} />
+        <Route path="/property/:id" element={<PropertyDetail />} />
+        
+        {/* Property Preview - redirects to property detail */}
+        <Route path="/property-preview/:id" element={<PropertyDetail />} />
 
         {/* PROTECTED ROUTES - Login required */}
         <Route
@@ -58,20 +57,12 @@ function AppContent() {
           }
         />
 
-        {/* AUTH - Render as modals over Welcome page */}
-        <Route path="/" element={<Welcome />} />
-  <Route path="/login" element={
-    <>
-      <Welcome />
-      <Login />
-    </>
-  } />
-        <Route path="/register" element={
-    <>
-      <Welcome />
-      <Register />
-    </>
-  } />
+        {/* AUTH ROUTES - Render as modals over Welcome page */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        {/* 404 - Redirect to home */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
   );

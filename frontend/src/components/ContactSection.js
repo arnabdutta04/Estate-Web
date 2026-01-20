@@ -16,6 +16,7 @@ const ContactSection = () => {
     phone: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -24,11 +25,31 @@ const ContactSection = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you for contacting us! We will get back to you soon.');
-    setFormData({ firstName: '', lastName: '', email: '', phone: '', message: '' });
+    setIsSubmitting(true);
+
+    try {
+      // Simulate API call - replace with actual API endpoint
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      console.log('Form submitted:', formData);
+      alert('Thank you for contacting us! We will get back to you soon.');
+      
+      // Reset form
+      setFormData({ 
+        firstName: '', 
+        lastName: '', 
+        email: '', 
+        phone: '', 
+        message: '' 
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Sorry, there was an error sending your message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -49,7 +70,7 @@ const ContactSection = () => {
           <div className="contact-form-header">
             <h2 className="contact-form-title">Get In Touch</h2>
             <p className="contact-form-subtitle">
-              Lorem ipsum dolor sit amet consectetur viverra adipiscing elit sed do eiusmod tempor lacus.
+              Have questions about our properties or services? We're here to help you find your perfect home.
             </p>
           </div>
 
@@ -65,6 +86,7 @@ const ContactSection = () => {
                   className="form-input-modern"
                   placeholder="First Name"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -78,6 +100,7 @@ const ContactSection = () => {
                   className="form-input-modern"
                   placeholder="Last Name"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
             </div>
@@ -93,6 +116,7 @@ const ContactSection = () => {
                   className="form-input-modern"
                   placeholder="Email Address"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -105,7 +129,10 @@ const ContactSection = () => {
                   onChange={handleChange}
                   className="form-input-modern"
                   placeholder="Phone Number"
+                  pattern="[0-9]{10}"
+                  maxLength="10"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
             </div>
@@ -120,11 +147,16 @@ const ContactSection = () => {
                 placeholder="Leave Your Message"
                 rows="5"
                 required
+                disabled={isSubmitting}
               ></textarea>
             </div>
 
-            <button type="submit" className="form-submit-btn-modern">
-              Send Message <FaArrowRight />
+            <button 
+              type="submit" 
+              className="form-submit-btn-modern"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Sending...' : 'Send Message'} <FaArrowRight />
             </button>
           </form>
         </div>
@@ -140,7 +172,9 @@ const ContactSection = () => {
               </div>
               <div className="contact-info-content">
                 <h3 className="contact-info-label">Call Us Now:</h3>
-                <p className="contact-info-text">123-456-7890</p>
+                <a href="tel:+1234567890" className="contact-info-text">
+                  +1 (234) 567-890
+                </a>
               </div>
             </div>
 
@@ -163,11 +197,16 @@ const ContactSection = () => {
               </div>
               <div className="contact-info-content">
                 <h3 className="contact-info-label">Mail Us:</h3>
-                <p className="contact-info-text">info@horizonequities.com</p>
+                <a 
+                  href="mailto:info@propify.com" 
+                  className="contact-info-text"
+                >
+                  info@propify.com
+                </a>
               </div>
             </div>
 
-            <a href="#" className="portfolio-link">
+            <a href="/profile" className="portfolio-link">
               Go to Investment Portfolio Portal <FaLock />
             </a>
           </div>

@@ -7,6 +7,8 @@ import PageTransition from '../components/PageTransition';
 import { FaHome, FaBed, FaBath, FaRulerCombined, FaDollarSign, FaPlus, FaMinus, FaPaw } from 'react-icons/fa';
 import './Properties.css';
 import { Sofa, Dog, Car, UtensilsCrossed, Wifi, Snowflake, Waves, Lock ,Dumbbell, Key, Smartphone, ShowerHead, } from 'lucide-react';
+import { indianCities, searchCities } from '../utils/cities';
+
 const Properties = () => {
   const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
@@ -28,7 +30,7 @@ const Properties = () => {
   const [selectedStyle, setSelectedStyle] = useState('');
   const [showFilter, setShowFilter] = useState(false);
 
-  const [selectedFacilities, setSelectedFacilities] = useState({
+const [selectedFacilities, setSelectedFacilities] = useState({
     furnished: false,
     petAllowed: false,
     parkingSlot: false,
@@ -39,8 +41,7 @@ const Properties = () => {
     gym: false,
     security: false
   });
-
-  const [counters, setCounters] = useState({
+const [counters, setCounters] = useState({
     bedrooms: 4,
     dining: 4,
     bathrooms: 4
@@ -61,12 +62,7 @@ const Properties = () => {
   const [citySuggestions, setCitySuggestions] = useState([]);
   const cityDropdownRef = useRef(null);
 
-  const cities = [
-    'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Ahmedabad', 'Chennai',
-    'Kolkata', 'Surat', 'Pune', 'Jaipur', 'Lucknow', 'Kanpur', 'Nagpur',
-    'Indore', 'Thane', 'Bhopal', 'Visakhapatnam', 'Pimpri-Chinchwad',
-    'Patna', 'Vadodara', 'Ghaziabad', 'Ludhiana', 'Agra', 'Nashik'
-  ];
+ const cities = indianCities;
 
   const mockProperties = [
     {

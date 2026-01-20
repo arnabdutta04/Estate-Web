@@ -356,3 +356,30 @@
   margin-top: 0;
   padding-top: 0;
 }
+/* Protected Link Styles */
+.nav-link-glass.protected-link {
+  opacity: 0.7;
+}
+
+.nav-link-glass.protected-link:hover {
+  opacity: 0.9;
+}
+
+.lock-icon {
+  font-size: 0.75rem;
+  margin-left: 6px;
+  opacity: 0.6;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.nav-link-glass.protected-link:hover .lock-icon {
+  opacity: 1;
+  animation: lockShake 0.5s ease;
+}
+
+@keyframes lockShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}

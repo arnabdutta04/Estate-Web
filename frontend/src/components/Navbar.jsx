@@ -6,7 +6,8 @@ import {
   FaUser,
   FaSignOutAlt,
   FaArrowRight,
-  FaUserPlus
+  FaUserPlus,
+  FaLock
 } from "react-icons/fa";
 
 const Navbar = () => {
@@ -39,6 +40,20 @@ const Navbar = () => {
     });
   };
 
+  // Protected navigation - requires login
+  const handleProtectedNavigation = (path) => {
+    if (user) {
+      startTransition(() => {
+        navigate(path);
+      });
+    } else {
+      // Redirect to login with return path
+      startTransition(() => {
+        navigate("/login", { state: { from: path } });
+      });
+    }
+  };
+
   const handleLogout = () => {
     logout();
     navigate("/");
@@ -56,12 +71,15 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <div className="navbar-links-glass">
+          {/* PUBLIC - No login required */}
           <button
             className={`nav-link-glass ${isActive("/") ? "active" : ""}`}
             onClick={() => handleNavigation("/")}
           >
             Home
           </button>
+
+          {/* PUBLIC - No login required */}
           <button
             className={`nav-link-glass ${isActive("/explore") ? "active" : ""}`}
             onClick={() => handleNavigation("/explore")}
@@ -69,18 +87,22 @@ const Navbar = () => {
             Explore
           </button>
 
+          {/* PROTECTED - Requires login */}
           <button
-            className={`nav-link-glass ${isActive("/properties") ? "active" : ""}`}
-            onClick={() => handleNavigation("/properties")}
+            className={`nav-link-glass ${isActive("/properties") ? "active" : ""} ${!user ? "protected-link" : ""}`}
+            onClick={() => handleProtectedNavigation("/properties")}
           >
             Properties
+            {!user && <FaLock className="lock-icon" />}
           </button>
 
+          {/* PROTECTED - Requires login */}
           <button
-            className={`nav-link-glass ${isActive("/brokers") ? "active" : ""}`}
-            onClick={() => handleNavigation("/brokers")}
+            className={`nav-link-glass ${isActive("/brokers") ? "active" : ""} ${!user ? "protected-link" : ""}`}
+            onClick={() => handleProtectedNavigation("/brokers")}
           >
             Broker
+            {!user && <FaLock className="lock-icon" />}
           </button>
         </div>
 
@@ -90,13 +112,13 @@ const Navbar = () => {
             <>
               <button
                 className="cta-btn-glass"
-                onClick={() => handleNavigation("/Login")}
+                onClick={() => handleNavigation("/login")}
               >
                 Login <FaArrowRight />
               </button>
               <button
                 className="cta-btn-glass register-btn-glass"
-                onClick={() => handleNavigation("/Register")}
+                onClick={() => handleNavigation("/register")}
               >
                 Register <FaUserPlus />
               </button>

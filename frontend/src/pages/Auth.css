@@ -418,3 +418,396 @@
     font-size: 0.95rem;
   }
 }
+/* ========================================
+   LOGIN TYPE BADGES
+   ======================================== */
+.login-type-badges {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.login-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.login-badge.customer {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+}
+
+.login-badge.broker {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: white;
+}
+
+.login-badge.admin {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+}
+
+/* ========================================
+   VERIFICATION ALERTS
+   ======================================== */
+.verification-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.verification-alert.pending {
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+  border-left: 4px solid #f39c12;
+}
+
+.verification-alert.rejected {
+  background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+  border-left: 4px solid #e74c3c;
+}
+
+.verification-alert-icon {
+  font-size: 32px;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.verification-alert.pending .verification-alert-icon {
+  color: #f39c12;
+}
+
+.verification-alert.rejected .verification-alert-icon {
+  color: #e74c3c;
+}
+
+.verification-alert-content h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.verification-alert-content p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* ========================================
+   WARNING MESSAGES
+   ======================================== */
+.auth-modal-warning {
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+  color: #856404;
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  border-left: 4px solid #f39c12;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ========================================
+   INFO BOX
+   ======================================== */
+.auth-info-box {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  border-left: 4px solid #2196f3;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.auth-info-box p {
+  margin: 0;
+  font-size: 13px;
+  color: #1565c0;
+  line-height: 1.5;
+}
+
+.auth-info-box strong {
+  font-weight: 700;
+}
+
+/* ========================================
+   FORGOT PASSWORD LINK
+   ======================================== */
+.auth-modal-links {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.forgot-password-link {
+  color: #3498db;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.forgot-password-link:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+/* ========================================
+   LOADING SPINNER
+   ======================================== */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 0.8s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ========================================
+   BROKER INFO ALERT (Registration)
+   ======================================== */
+.broker-info-alert {
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  border: 2px solid #4caf50;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  animation: slideDown 0.4s ease;
+}
+
+.broker-info-alert .info-icon {
+  font-size: 28px;
+  color: #2e7d32;
+  flex-shrink: 0;
+}
+
+.broker-info-alert .info-content h4 {
+  margin: 0 0 12px 0;
+  color: #1b5e20;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.broker-info-alert ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px 0;
+}
+
+.broker-info-alert li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2e7d32;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.broker-info-alert li svg {
+  color: #4caf50;
+}
+
+.broker-info-alert .info-note {
+  margin: 0;
+  font-size: 12px;
+  color: #558b2f;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 8px;
+  border-radius: 6px;
+}
+
+/* ========================================
+   ROLE SELECTION CARDS
+   ======================================== */
+.role-select-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.role-selection-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.role-card {
+  position: relative;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.role-card:hover {
+  border-color: #3498db;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+  transform: translateY(-2px);
+}
+
+.role-card.active {
+  border-color: #3498db;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  box-shadow: 0 6px 16px rgba(52, 152, 219, 0.3);
+}
+
+.role-card input[type="radio"] {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #3498db;
+}
+
+.role-card-content {
+  text-align: center;
+}
+
+.role-card-content .role-icon {
+  font-size: 32px;
+  color: #3498db;
+  margin-bottom: 10px;
+}
+
+.role-card.active .role-icon {
+  color: #2980b9;
+}
+
+.role-card-content h4 {
+  margin: 0 0 6px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.role-card-content p {
+  margin: 0;
+  font-size: 12px;
+  color: #7f8c8d;
+}
+
+.verification-badge-small {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 10px;
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
+
+/* ========================================
+   REGISTER CARD ENHANCEMENTS
+   ======================================== */
+.register-card {
+  max-width: 520px !important;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) {
+  .login-type-badges {
+    gap: 8px;
+  }
+  
+  .login-badge {
+    padding: 4px 10px;
+    font-size: 11px;
+  }
+  
+  .verification-alert {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .verification-alert-icon {
+    font-size: 24px;
+  }
+  
+  .role-selection-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .broker-info-alert {
+    flex-direction: column;
+  }
+  
+  .register-card {
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .verification-alert-content h3 {
+    font-size: 14px;
+  }
+  
+  .verification-alert-content p {
+    font-size: 12px;
+  }
+  
+  .role-card {
+    padding: 15px;
+  }
+  
+  .role-card-content .role-icon {
+    font-size: 28px;
+  }
+  
+  .role-card-content h4 {
+    font-size: 14px;
+  }
+}
