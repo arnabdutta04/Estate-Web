@@ -8,7 +8,10 @@ import {
   FaSignOutAlt,
   FaArrowRight,
   FaUserPlus,
-  FaLock
+  FaLock,
+  FaBuilding,
+  FaCrown,
+  FaUserCircle
 } from "react-icons/fa";
 
 const Navbar = () => {
@@ -62,6 +65,18 @@ const Navbar = () => {
 
   const isActive = (path) => location.pathname === path;
 
+  // Helper function to get role icon
+  const getRoleIcon = (role) => {
+    switch(role) {
+      case 'broker':
+        return <FaBuilding />;
+      case 'admin':
+        return <FaCrown />;
+      default:
+        return <FaUserCircle />;
+    }
+  };
+
   return (
     <nav className={`navbar-glass-modern ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-glass-wrapper">
@@ -106,14 +121,14 @@ const Navbar = () => {
             {!user && <FaLock className="lock-icon" />}
           </button>
           {/* BROKER ONLY - Dashboard Link */}
-  {user && user.role === 'broker' && (
-    <button
-      className={`nav-link-glass ${isActive("/broker/dashboard") ? "active" : ""}`}
-      onClick={() => handleNavigation("/broker/dashboard")}
-    >
-      <FaBriefcase /> My Dashboard
-    </button>
-  )}
+          {user && user.role === 'broker' && (
+            <button
+              className={`nav-link-glass ${isActive("/broker/dashboard") ? "active" : ""}`}
+              onClick={() => handleNavigation("/broker/dashboard")}
+            >
+              <FaBriefcase /> My Dashboard
+            </button>
+          )}
         </div>
 
         {/* User / Auth Section */}
@@ -136,11 +151,11 @@ const Navbar = () => {
           ) : !loading && user ? (
             <>
               {user.role && (
-        <span className="role-badge-nav">
-          {user.role === 'broker' ? '🏢' : user.role === 'admin' ? '👑' : '👤'} 
-          {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
-        </span>
-      )}
+                <span className="role-badge-nav">
+                  {getRoleIcon(user.role)}
+                  {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
+                </span>
+              )}
               <button
                 className="user-profile-glass"
                 onClick={() => handleNavigation("/profile")}

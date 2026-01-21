@@ -1,5 +1,6 @@
 // src/pages/Profile.jsx
 import React, { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import api from '../utils/api';
 import './Profile.css';
@@ -12,11 +13,16 @@ import {
   FaLock, 
   FaCog,
   FaEdit,
-  FaTimes
+  FaTimes,
+  FaBriefcase,
+  FaPlus,
+  FaCrown,
+  FaBuilding
 } from 'react-icons/fa';
 
 const Profile = () => {
   const { user, login } = useContext(AuthContext);
+  const navigate = useNavigate(); // ADD THIS LINE
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
   const { theme, changeTheme } = useTheme();
@@ -32,7 +38,7 @@ const Profile = () => {
     email: user?.email || '',
     phone: user?.phone || '',
     dateOfBirth: user?.dateOfBirth || '',
-    userRole: user?.role || 'Admin'
+    userRole: user?.role || 'customer'
   });
 
   // Address State
@@ -46,15 +52,6 @@ const Profile = () => {
   const [balance, setBalance] = useState(user?.balance || 0);
   const [showBalanceModal, setShowBalanceModal] = useState(false);
   const [topUpAmount, setTopUpAmount] = useState('');
-
-  // Password Change State
-  const [passwordData, setPasswordData] = useState({
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: '',
-    otp: ''
-  });
-  const [otpSent, setOtpSent] = useState(false);
 
   // Profile Picture State
   const [profilePicture, setProfilePicture] = useState(user?.profilePicture || null);
@@ -151,7 +148,7 @@ const Profile = () => {
       });
       login(data.user);
       setBalance(data.user.balance);
-      setMessage({ type: 'success', text: `Successfully added ${amount.toFixed(2)} to your balance!` });
+      setMessage({ type: 'success', text: `Successfully added $${amount.toFixed(2)} to your balance!` });
       setShowBalanceModal(false);
       setTopUpAmount('');
     } catch (error) {
@@ -279,49 +276,48 @@ const Profile = () => {
                   <label>Phone Number</label>
                   <p>{personalInfo.phone || 'Not set'}</p>
                 </div>
-<div className="info-item">
-  <label>User Role</label>
-  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-    <p>{personalInfo.userRole}</p>
-    {personalInfo.userRole === 'broker' && (
-      <span className="broker-badge">
-        🏢 Broker Account
-      </span>
-    )}
-    {personalInfo.userRole === 'admin' && (
-      <span className="admin-badge">
-        👑 Admin Access
-      </span>
-    )}
-  </div>
-</div>
-
-// ADD NEW SECTION - After the Address Section, add Broker Dashboard Link:
-{/* Broker Quick Actions - ONLY FOR BROKERS */}
-{personalInfo.userRole === 'broker' && (
-  <div className="info-section broker-actions-section">
-    <div className="section-header">
-      <h3>Broker Dashboard</h3>
-    </div>
-    
-    <div className="broker-quick-actions">
-      <button 
-        className="broker-action-btn"
-        onClick={() => window.location.href = '/broker/dashboard'}
-      >
-        <FaBriefcase /> View Dashboard
-      </button>
-      <button 
-        className="broker-action-btn"
-        onClick={() => window.location.href = '/broker/add-property'}
-      >
-        <FaPlus /> Add Property
-      </button>
-    </div>
-  </div>
-)}
+                <div className="info-item">
+                  <label>User Role</label>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <p>{personalInfo.userRole}</p>
+                    {personalInfo.userRole === 'broker' && (
+                      <span className="broker-badge">
+                        <FaBuilding /> Broker Account
+                      </span>
+                    )}
+                    {personalInfo.userRole === 'admin' && (
+                      <span className="admin-badge">
+                        <FaCrown /> Admin Access
+                      </span>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
+
+            {/* Broker Quick Actions - ONLY FOR BROKERS */}
+            {personalInfo.userRole === 'broker' && (
+              <div className="info-section broker-actions-section">
+                <div className="section-header">
+                  <h3>Broker Dashboard</h3>
+                </div>
+                
+                <div className="broker-quick-actions">
+                  <button 
+  className="broker-action-btn"
+  onClick={() => navigate('/broker/dashboard')}
+>
+  <FaBriefcase /> View Dashboard
+</button>
+                  <button 
+  className="broker-action-btn"
+  onClick={() => navigate('/broker/add-property')}
+>
+  <FaPlus /> Add Property
+</button>
+                </div>
+              </div>
+            )}
 
             {/* Address Section */}
             <div className="info-section">
@@ -397,7 +393,7 @@ const Profile = () => {
                           name="firstName"
                           value={personalInfo.firstName}
                           onChange={handlePersonalInfoChange}
-                          placeholder="Natashia"
+                          placeholder="First Name"
                           required
                         />
                       </div>
@@ -409,7 +405,7 @@ const Profile = () => {
                           name="lastName"
                           value={personalInfo.lastName}
                           onChange={handlePersonalInfoChange}
-                          placeholder="Khaleira"
+                          placeholder="Last Name"
                           required
                         />
                       </div>
@@ -421,7 +417,7 @@ const Profile = () => {
                           name="email"
                           value={personalInfo.email}
                           onChange={handlePersonalInfoChange}
-                          placeholder="info@binary-fusion.com"
+                          placeholder="email@example.com"
                           required
                         />
                       </div>
@@ -433,7 +429,7 @@ const Profile = () => {
                           name="phone"
                           value={personalInfo.phone}
                           onChange={handlePersonalInfoChange}
-                          placeholder="(+62) 821 2554-5846"
+                          placeholder="+1 234 567 8900"
                         />
                       </div>
 
@@ -453,10 +449,11 @@ const Profile = () => {
                           name="userRole"
                           value={personalInfo.userRole}
                           onChange={handlePersonalInfoChange}
+                          disabled
                         >
-                          <option value="Admin">Admin</option>
-                          <option value="User">User</option>
-                          <option value="Manager">Manager</option>
+                          <option value="customer">Customer</option>
+                          <option value="broker">Broker</option>
+                          <option value="admin">Admin</option>
                         </select>
                       </div>
                     </div>
@@ -498,7 +495,7 @@ const Profile = () => {
                           name="country"
                           value={addressInfo.country}
                           onChange={handleAddressChange}
-                          placeholder="United Kingdom"
+                          placeholder="United States"
                           required
                         />
                       </div>
@@ -510,7 +507,7 @@ const Profile = () => {
                           name="city"
                           value={addressInfo.city}
                           onChange={handleAddressChange}
-                          placeholder="Leeds, East London"
+                          placeholder="New York"
                           required
                         />
                       </div>
@@ -522,7 +519,7 @@ const Profile = () => {
                           name="postalCode"
                           value={addressInfo.postalCode}
                           onChange={handleAddressChange}
-                          placeholder="ERT 1254"
+                          placeholder="10001"
                           required
                         />
                       </div>

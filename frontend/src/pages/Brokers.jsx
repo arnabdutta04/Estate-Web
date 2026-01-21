@@ -16,14 +16,33 @@ const Brokers = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const navigate = useNavigate();
   const sliderRef = useRef(null);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const brokersPerPage = 9;
   const cities = [...new Set(brokers.map(b => b.servingCities).filter(Boolean))];
   const specializations = [...new Set(brokers.flatMap(b => b.specialization || []))];
-
-  // Get featured brokers
+  const indexOfLastBroker = currentPage * brokersPerPage;
+  const indexOfFirstBroker = indexOfLastBroker - brokersPerPage;
+  const currentBrokers = filteredBrokers.slice(indexOfFirstBroker, indexOfLastBroker);
+  const totalPages = Math.ceil(filteredBrokers.length / brokersPerPage);
   const featuredBrokers = brokers.filter(broker => broker.isFeatured);
-  
-  // Get best agent
+ const handlePageChange = (pageNumber) => {
+  setCurrentPage(pageNumber);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+const handlePrevPage = () => {
+  if (currentPage > 1) {
+    setCurrentPage(currentPage - 1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+};
+
+const handleNextPage = () => {
+  if (currentPage < totalPages) {
+    setCurrentPage(currentPage + 1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+};
   const bestAgent = brokers.find(broker => broker.isBestAgent);
 
   // Get hero agents (first 5 verified brokers for grid)
@@ -49,37 +68,47 @@ const Brokers = () => {
       setLoading(false);
     }
   };
-
+  const handleMessage = (broker) => {
+  navigate(`/messages/${broker._id}`);
+};
   const filterBrokers = () => {
-    let filtered = [...brokers];
+  let filtered = [...brokers];
 
-    if (searchTerm) {
-      filtered = filtered.filter(broker => 
-        broker.userId?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        broker.company?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        broker.servingCities?.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
+  if (searchTerm) {
+    filtered = filtered.filter(broker => 
+      broker.userId?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      broker.company?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      broker.servingCities?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
 
-    if (selectedCity) {
-      filtered = filtered.filter(broker => broker.servingCities === selectedCity);
-    }
+  if (selectedCity) {
+    filtered = filtered.filter(broker => broker.servingCities === selectedCity);
+  }
 
-    if (selectedSpecialization) {
-      filtered = filtered.filter(broker => 
-        broker.specialization?.includes(selectedSpecialization)
-      );
-    }
+  if (selectedSpecialization) {
+    filtered = filtered.filter(broker => 
+      broker.specialization?.includes(selectedSpecialization)
+    );
+  }
 
-    setFilteredBrokers(filtered);
-  };
+  if (selectedLanguage) {
+    filtered = filtered.filter(broker => 
+      broker.languages?.includes(selectedLanguage)
+    );
+  }
 
-  const resetFilters = () => {
-    setSearchTerm('');
-    setSelectedCity('');
-    setSelectedSpecialization('');
-    setSelectedLanguage('');
-  };
+  setFilteredBrokers(filtered);
+  setCurrentPage(1); // ADD THIS LINE - Reset to page 1 when filters change
+};
+
+ const resetFilters = () => {
+  setSearchTerm('');
+  setSelectedCity('');
+  setSelectedSpecialization('');
+  setSelectedLanguage('');
+  setCurrentPage(1); // ADD THIS LINE - Reset to page 1
+};
 
   const scrollSlider = (direction) => {
     if (sliderRef.current) {
@@ -104,7 +133,11 @@ const Brokers = () => {
                        <h1 className="hero-title">
                          YOUR<br />Agent Is Here
                        </h1>
-                       <button className="cta-button">
+                       <button 
+                         className="cta-button"
+                           onClick={() => navigate('/contact')}
+                            >
+
                          Get In Touch
                          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                            <path d="M4 16L16 4M16 4H7M16 4V13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -241,7 +274,7 @@ const Brokers = () => {
                 </div>
               ) : (
                 <div className="brokers-grid-grnata">
-                  {filteredBrokers.map((broker) => (
+                  {currentBrokers.map((broker) => (
                     <div key={broker._id} className="broker-card-grnata">
                       <div className="broker-image-grnata">
                         {broker.photo ? (
@@ -274,8 +307,19 @@ const Brokers = () => {
                       </div>
 
                       <div className="broker-actions-grnata">
-                        <button className="btn-view-profile-grnata">View Profile</button>
-                        <button className="btn-message-grnata">Message {broker.userId?.name?.split(' ')[0]}</button>
+                        <button
+  className="btn-view-profile-grnata"
+  onClick={() => navigate(`/brokers/${broker._id}`)}
+>
+  View Profile
+</button>
+
+                       <button 
+  className="btn-message-grnata"
+  onClick={() => handleMessage(broker)}
+>
+  Message {broker.userId?.name?.split(' ')[0]}
+</button>
                       </div>
                     </div>
                   ))}
@@ -283,17 +327,51 @@ const Brokers = () => {
               )}
 
               {/* Pagination */}
-              {filteredBrokers.length > 0 && (
-                <div className="pagination-grnata">
-                  <button className="pagination-arrow-grnata">←</button>
-                  <button className="pagination-number-grnata active">01</button>
-                  <button className="pagination-number-grnata">02</button>
-                  <button className="pagination-number-grnata">03</button>
-                  <button className="pagination-number-grnata">04</button>
-                  <button className="pagination-number-grnata">05</button>
-                  <button className="pagination-number-grnata">06</button>
-                  <button className="pagination-arrow-grnata">→</button>
-                </div>
+              {filteredBrokers.length > 0 && totalPages > 1 && (
+  <div className="pagination-grnata">
+    {/* Previous Arrow */}
+    <button 
+      className="pagination-arrow-grnata"
+      onClick={handlePrevPage}
+      disabled={currentPage === 1}
+      style={{ 
+        opacity: currentPage === 1 ? 0.5 : 1, 
+        cursor: currentPage === 1 ? 'not-allowed' : 'pointer' 
+      }}
+    >
+      ←
+    </button>
+    {/* Page Numbers - Dynamic based on totalPages */}
+    {[...Array(Math.min(totalPages, 6))].map((_, index) => {
+      const pageNumber = index + 1;
+      return (
+        <button 
+          key={pageNumber}
+          className={`pagination-number-grnata ${currentPage === pageNumber ? 'active' : ''}`}
+          onClick={() => handlePageChange(pageNumber)}
+        >
+          {String(pageNumber).padStart(2, '0')}
+        </button>
+      );
+    })}
+    {/* Show ellipsis if more than 6 pages */}
+    {totalPages > 6 && (
+      <span className="pagination-ellipsis">...</span>
+    )}
+    
+    {/* Next Arrow */}
+    <button 
+      className="pagination-arrow-grnata"
+      onClick={handleNextPage}
+      disabled={currentPage === totalPages}
+      style={{ 
+        opacity: currentPage === totalPages ? 0.5 : 1, 
+        cursor: currentPage === totalPages ? 'not-allowed' : 'pointer' 
+      }}
+    >
+      →
+    </button>
+  </div>
               )}
             </div>
           </div>
@@ -601,10 +679,12 @@ const Brokers = () => {
           </div>
         </div>
       </div>
-
-      <button className="btn-get-started">
-        Let get start
-      </button>
+<button 
+  className="btn-get-started"
+  onClick={() => navigate('/register')}
+>
+  Let's get started
+</button>
     </div>
 
     <div className="selling-home-image">
@@ -630,9 +710,12 @@ const Brokers = () => {
         <p className="agent-cta-description">Grow your business with the propify Select Network.</p>
       </div>
     </div>
-    <button className="btn-agent-cta">
-      Get Started
-    </button>
+    <button 
+  className="btn-agent-cta"
+  onClick={() => navigate('/register?role=broker')}
+>
+  Get Started
+</button>
   </div>
           </div>
         </div>

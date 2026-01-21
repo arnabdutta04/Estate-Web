@@ -21,6 +21,8 @@ import {
 import "./Explore.css";
 import { FaArrowTrendUp as FaTrendingUp } from "react-icons/fa6";
 
+const [viewPeriod, setViewPeriod] = useState("Monthly");
+const [selectedCategory, setSelectedCategory] = useState("House");
 const Explore = () => {
   const navigate = useNavigate();
   const [viewMode, setViewMode] = useState("grid");
@@ -332,9 +334,9 @@ const Explore = () => {
                       </span>
                     ))}
                   </h1>
-                  <button className="btn-explore-more">
-                    ↗ Explore more
-                  </button>
+                  <button className="btn-explore-more" onClick={() => window.scrollTo({ top: document.querySelector('.modern-search-hero').offsetTop, behavior: 'smooth' })}>
+  ↗ Explore more
+</button>
                 </div>
               </div>
 
@@ -342,7 +344,7 @@ const Explore = () => {
                 <div className="modern-hero-info-box">
                   <div className="info-box-header">
                     <span className="info-box-label">Our achievement</span>
-                    <button className="btn-view-projects">View Projects</button>
+                    <button className="btn-view-projects" onClick={() => navigate('/properties')}>View Projects</button>
                   </div>
                   <div className="info-box-stats">
                     <h2 className="stats-number">{heroSlides[currentSlide].stats.number}</h2>
@@ -381,22 +383,22 @@ const Explore = () => {
                   <div className="section-badge">8688</div>
                   <h3 className="section-title">NEWS</h3>
                   <div className="section-links">
-                    <a href="#" className="section-link">Almaty residents were offered to choose improvement projects</a>
-                    <a href="#" className="section-link">Preferential mortgage for young people will be launched in Almaty</a>
-                    <a href="#" className="section-link">Mortgage "Umai" starts from May 10 in Kazakhstan</a>
+                   <a href="/news/almaty-improvement" className="section-link">Almaty residents were offered to choose improvement projects</a>
+<a href="/news/preferential-mortgage" className="section-link">Preferential mortgage for young people will be launched in Almaty</a>
+<a href="/news/mortgage-umai" className="section-link">Mortgage "Umai" starts from May 10 in Kazakhstan</a>
                   </div>
                 </div>
                 <div className="bottom-section-item">
                   <div className="section-badge">2101</div>
                   <h3 className="section-title">ARTICLES</h3>
                   <div className="section-links">
-                    <a href="#" className="section-link">Buy an apartment now or wait</a>
-                    <a href="#" className="section-link">What should be in the contract of sale of housing</a>
-                    <a href="#" className="section-link">How to rent an apartment legally in 2023</a>
+                   <a href="/articles/buy-apartment-timing" className="section-link">Buy an apartment now or wait</a>
+<a href="/articles/housing-contract" className="section-link">What should be in the contract of sale of housing</a>
+<a href="/articles/rent-legally" className="section-link">How to rent an apartment legally in 2023</a>
                   </div>
                 </div>
                 <div className="bottom-section-cta">
-                  <button className="btn-to-map">↗ To the Map</button>
+                 <button className="btn-to-map" onClick={() => navigate('/properties?view=map')}>↗ To the Map</button>
                 </div>
               </div>
             </div>
@@ -408,14 +410,29 @@ const Explore = () => {
           <div className="hero-search-content">
             {/* Category Pills */}
             <div className="category-pills">
-              <button className="pill-btn active">House</button>
-              <button className="pill-btn">Appartement</button>
-              <button className="pill-btn">Residential</button>
-              <button className="pill-btn arrow-btn">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
+  <button 
+    className={`pill-btn ${selectedCategory === "House" ? "active" : ""}`}
+    onClick={() => setSelectedCategory("House")}
+  >
+    House
+  </button>
+  <button 
+    className={`pill-btn ${selectedCategory === "Appartement" ? "active" : ""}`}
+    onClick={() => setSelectedCategory("Appartement")}
+  >
+    Appartement
+  </button>
+  <button 
+    className={`pill-btn ${selectedCategory === "Residential" ? "active" : ""}`}
+    onClick={() => setSelectedCategory("Residential")}
+  >
+    Residential
+  </button>
+  <button className="pill-btn arrow-btn" onClick={() => setShowFilters(!showFilters)}>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  </button>
             </div>
 
             {/* Main Heading */}
@@ -465,11 +482,17 @@ const Explore = () => {
                 <h3>1802 (From 1082 to 1899 Odd) Forest City RD, Forest City TWP, ME</h3>
                 <p className="property-card-time">Today, 9 hours ago</p>
               </div>
-              <button className="property-card-add">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M10 5V15M5 10H15" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </button>
+              <button 
+  className="property-card-add"
+  onClick={() => {
+    alert('Property added to favorites!');
+    // Add your favorites logic here
+  }}
+>
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <path d="M10 5V15M5 10H15" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+  </svg>
+</button>
             </div>
 
             {/* Large Aesthetic Text */}
@@ -665,10 +688,13 @@ const Explore = () => {
         <div className="stats-card transactions-card">
           <div className="card-header">
             <h3>Billing & Transactions</h3>
-            <button className="refresh-btn">
-              <RefreshCw size={14} />
-              Refresh
-            </button>
+            <button 
+  className="refresh-btn"
+  onClick={() => window.location.reload()}
+>
+  <RefreshCw size={14} />
+  Refresh
+</button>
           </div>
           <div className="transaction-list">
             <div className="transaction-item">
@@ -697,11 +723,31 @@ const Explore = () => {
           <div className="dashboard-header">
             <h2>Target Sales Breakdown</h2>
             <div className="view-toggle">
-              <button>Daily</button>
-              <button>Weekly</button>
-              <button className="active">Monthly</button>
-              <button>Annually</button>
-            </div>
+  <button 
+    className={viewPeriod === "Daily" ? "active" : ""}
+    onClick={() => setViewPeriod("Daily")}
+  >
+    Daily
+  </button>
+  <button 
+    className={viewPeriod === "Weekly" ? "active" : ""}
+    onClick={() => setViewPeriod("Weekly")}
+  >
+    Weekly
+  </button>
+  <button 
+    className={viewPeriod === "Monthly" ? "active" : ""}
+    onClick={() => setViewPeriod("Monthly")}
+  >
+    Monthly
+  </button>
+  <button 
+    className={viewPeriod === "Annually" ? "active" : ""}
+    onClick={() => setViewPeriod("Annually")}
+  >
+    Annually
+  </button>
+</div>
           </div>
           
           <div className="sales-summary">
@@ -801,9 +847,12 @@ const Explore = () => {
           <div className="retention-card">
             <div className="retention-header">
               <h3>User Retention Cohorts</h3>
-              <button className="report-btn">
-                Get Report for <ChevronDown size={14} />
-              </button>
+              <button 
+  className="report-btn"
+  onClick={() => alert('Generating report...')}
+>
+  Get Report for <ChevronDown size={14} />
+</button>
             </div>
             <div className="retention-value">40%</div>
             <div className="retention-label">After 6 month<br/>February - September</div>
@@ -871,9 +920,12 @@ const Explore = () => {
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </p>
-      <button className="team-learn-more">
-        LEARN MORE
-      </button>
+      <button 
+  className="team-learn-more"
+  onClick={() => navigate('/about-team')}
+>
+  LEARN MORE
+</button>
     </div>
 
     <div className="team-grid">
@@ -915,10 +967,10 @@ const Explore = () => {
           Glavi amet ritnisl libero molestie ante ut fringilla purus eros quis glavrid from dolor amet iquam lorem bibendum
         </p>
         <div className="team-social">
-          <a href="#" className="social-icon"><FaFacebook /></a>
-          <a href="#" className="social-icon"><FaTwitter /></a>
-          <a href="#" className="social-icon"><FaInstagram /></a>
-        </div>
+  <a href="https://www.facebook.com/arnabdutta780" target="_blank" rel="noopener noreferrer" className="social-icon"><FaFacebook /></a>
+  <a href="https://x.com/arnabdutta453" target="_blank" rel="noopener noreferrer" className="social-icon"><FaTwitter /></a>
+  <a href="https://www.instagram.com/mr.arnab448/" target="_blank" rel="noopener noreferrer" className="social-icon"><FaInstagram /></a>
+</div>
       </div>
     </div>
   </div>
@@ -986,14 +1038,17 @@ const Explore = () => {
           </div>
         </div>
 
-        <button className="learn-more-btn">
-          <span>Learn more</span>
-          <div className="btn-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M7 17L17 7M17 7H7M17 7V17" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-        </button>
+        <button 
+  className="learn-more-btn"
+  onClick={() => navigate('/property-details/luminous-urban')}
+>
+  <span>Learn more</span>
+  <div className="btn-icon">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M7 17L17 7M17 7H7M17 7V17" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  </div>
+</button>
       </div>
 
       {/* Urban Skyline */}
