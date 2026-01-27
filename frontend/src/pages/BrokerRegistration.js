@@ -301,4 +301,4 @@ const BrokerDashboard = () => {
   );
 };
 
-export default BrokerDashboard;
+export default BrokerRegistration;

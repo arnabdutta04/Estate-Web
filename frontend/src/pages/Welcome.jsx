@@ -43,7 +43,7 @@ const handlePropertyTypeClick = (propertyType) => {
     navigate("/login", { state: { from: '/properties' } });
   }
 };
-
+const [currentTestimonial, setCurrentTestimonial] = useState(0);
 // PUBLIC - No login required
 const handleExplorePageClick = () => {
   navigate("/explore");
@@ -445,9 +445,9 @@ const handleExplorePageClick = () => {
                 Our verified brokers bring years of experience and deep market insights. 
                 They guide you through every step with transparency and expertise.
               </p>
-              <button className="feature-discover-btn">
-                <FaHandshake /> Discover More
-              </button>
+              <button className="feature-discover-btn" onClick={handleExploreClick}>
+  <FaHandshake /> Discover More
+</button>
             </div>
             <div className="feature-split-images">
               <div className="feature-image-wrapper">
@@ -493,13 +493,13 @@ const handleExplorePageClick = () => {
                 </div>
               </div>
               <div className="feature-navigation-arrows">
-                <button className="feature-nav-arrow left">
-                  <FaArrowRight style={{ transform: 'rotate(180deg)' }} />
-                </button>
-                <button className="feature-nav-arrow right">
-                  <FaArrowRight />
-                </button>
-              </div>
+  <button className="feature-nav-arrow left" onClick={handleExploreClick}>
+    <FaArrowRight style={{ transform: 'rotate(180deg)' }} />
+  </button>
+  <button className="feature-nav-arrow right" onClick={handleExploreClick}>
+    <FaArrowRight />
+  </button>
+</div>
             </div>
           </div>
         </div>
@@ -564,11 +564,15 @@ const handleExplorePageClick = () => {
 
         {/* Dots */}
         <div className="testimonials-dots">
-          <span className="dot active"></span>
-          <span className="dot"></span>
-          <span className="dot"></span>
-          <span className="dot"></span>
-        </div>
+  {[0, 1, 2, 3].map((index) => (
+    <span 
+      key={index}
+      className={`dot ${currentTestimonial === index ? 'active' : ''}`}
+      onClick={() => setCurrentTestimonial(index)}
+      style={{ cursor: 'pointer' }}
+    ></span>
+  ))}
+</div>
       </div>
     </div>
   </div>
