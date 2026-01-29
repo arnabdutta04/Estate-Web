@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import { FaBed, FaBath, FaRuler, FaMapMarkerAlt, FaCalendar, FaPhone, FaEnvelope, FaStar, FaTimes } from 'react-icons/fa';
-import Navbar from './Navbar';
-import PageTransition from './PageTransition';
+import Navbar from '../components/Navbar';
+import PageTransition from '../components/PageTransition';
 
 const PropertyDetail = () => {
   const { id } = useParams();
