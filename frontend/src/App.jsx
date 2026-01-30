@@ -5,7 +5,7 @@ import { AuthProvider } from "./context/AuthContext";
 
 import Welcome from "./pages/Welcome";
 import Properties from "./pages/Properties";
-import PropertyDetail from "./components/PropertyDetail";
+import PropertyDetail from "../components/PropertyDetail";
 import Explore from "./pages/Explore";
 import Brokers from "./pages/Brokers";
 import Login from "./pages/Login";
