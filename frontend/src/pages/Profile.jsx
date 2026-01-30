@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import api from '../utils/api';
 import './Profile.css';
-import { useTheme } from '../context/ThemeContext';
 import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
 import { 

@@ -2,7 +2,6 @@
 import React from "react";
 import { HashRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
-import { ThemeProvider } from "./context/ThemeContext";
 
 import Welcome from "./pages/Welcome";
 import Properties from "./pages/Properties";
@@ -79,12 +78,10 @@ function AppContent() {
 
 export default function App() {
   return (
-    <ThemeProvider>
       <AuthProvider>
         <Router>
           <AppContent />
         </Router>
       </AuthProvider>
-    </ThemeProvider>
   );
 }
