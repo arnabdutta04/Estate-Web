@@ -4,8 +4,10 @@ import {
   FaPhone, 
   FaEnvelope, 
   FaArrowRight,
-  FaLock
+  FaLock,
+  FaCheckCircle
 } from 'react-icons/fa';
+import api from '../utils/api';
 import './ContactSection.css';
 
 const ContactSection = () => {
@@ -17,26 +19,41 @@ const ContactSection = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    // Clear status when user starts typing again
+    if (submitStatus.type) {
+      setSubmitStatus({ type: '', message: '' });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus({ type: '', message: '' });
 
     try {
-      // Simulate API call - replace with actual API endpoint
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // REAL API CALL to backend
+      const { data } = await api.post('/contact', {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message
+      });
       
-      console.log('Form submitted:', formData);
-      alert('Thank you for contacting us! We will get back to you soon.');
+      // Show success message
+      setSubmitStatus({
+        type: 'success',
+        message: data.message || 'Thank you for contacting us! We will get back to you soon.'
+      });
       
-      // Reset form
+      // Reset form after successful submission
       setFormData({ 
         firstName: '', 
         lastName: '', 
@@ -44,9 +61,29 @@ const ContactSection = () => {
         phone: '', 
         message: '' 
       });
+
+      // Clear success message after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus({ type: '', message: '' });
+      }, 5000);
+
     } catch (error) {
-      console.error('Error submitting form:', error);
-      alert('Sorry, there was an error sending your message. Please try again.');
+      console.error('Error submitting contact form:', error);
+      
+      // Show error message
+      const errorMessage = error.response?.data?.message || 
+        'Sorry, there was an error sending your message. Please try again.';
+      
+      setSubmitStatus({
+        type: 'error',
+        message: errorMessage
+      });
+
+      // Clear error message after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus({ type: '', message: '' });
+      }, 5000);
+
     } finally {
       setIsSubmitting(false);
     }
@@ -73,6 +110,18 @@ const ContactSection = () => {
               Have questions about our properties or services? We're here to help you find your perfect home.
             </p>
           </div>
+
+          {/* Success/Error Message */}
+          {submitStatus.type && (
+            <div className={`status-message ${submitStatus.type}`}>
+              {submitStatus.type === 'success' ? (
+                <FaCheckCircle className="status-icon" />
+              ) : (
+                <span className="status-icon">⚠️</span>
+              )}
+              <p>{submitStatus.message}</p>
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="contact-form-modern">
             <div className="form-row">
@@ -156,7 +205,16 @@ const ContactSection = () => {
               className="form-submit-btn-modern"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Sending...' : 'Send Message'} <FaArrowRight />
+              {isSubmitting ? (
+                <>
+                  <span className="spinner"></span>
+                  Sending...
+                </>
+              ) : (
+                <>
+                  Send Message <FaArrowRight />
+                </>
+              )}
             </button>
           </form>
         </div>
