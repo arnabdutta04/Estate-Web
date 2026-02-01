@@ -20,11 +20,10 @@ import {
 } from "react-icons/fa";
 import "./Explore.css";
 import { FaArrowTrendUp as FaTrendingUp } from "react-icons/fa6";
-
-const [viewPeriod, setViewPeriod] = useState("Monthly");
-const [selectedCategory, setSelectedCategory] = useState("House");
 const Explore = () => {
   const navigate = useNavigate();
+  const [viewPeriod, setViewPeriod] = useState("Monthly");
+  const [selectedCategory, setSelectedCategory] = useState("House");
   const [viewMode, setViewMode] = useState("grid");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("all");
