@@ -1,0 +1,356 @@
+.verification-pending-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.loading-container {
+  text-align: center;
+  color: white;
+}
+
+.spinner-large {
+  width: 60px;
+  height: 60px;
+  border: 6px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.verification-container {
+  max-width: 700px;
+  width: 100%;
+}
+
+.verification-card {
+  background: white;
+  border-radius: 20px;
+  padding: 50px 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.status-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+}
+
+.status-icon.pending {
+  color: #f39c12;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.status-icon.verified {
+  color: #2ecc71;
+}
+
+.status-icon.rejected {
+  color: #e74c3c;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+.verification-card h1 {
+  font-size: 28px;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.verification-description {
+  font-size: 16px;
+  color: #7f8c8d;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* Verification Steps */
+.verification-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 30px 0;
+  text-align: left;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.step.completed {
+  background: linear-gradient(135deg, #d4edda, #c3e6cb);
+  border-left: 4px solid #28a745;
+}
+
+.step.active {
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+  border-left: 4px solid #f39c12;
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(243, 156, 18, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(243, 156, 18, 0.3);
+  }
+}
+
+.step-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.step.completed .step-icon {
+  color: #28a745;
+}
+
+.step.active .step-icon {
+  color: #f39c12;
+}
+
+.step .step-icon {
+  color: #bdc3c7;
+}
+
+.step-content h3 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+.step-content p {
+  margin: 0;
+  font-size: 13px;
+  color: #7f8c8d;
+}
+
+/* Info Box */
+.info-box {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  border-left: 4px solid #2196f3;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 25px 0;
+  text-align: left;
+}
+
+.info-box h4 {
+  margin: 0 0 12px 0;
+  color: #1565c0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.info-box ul {
+  margin: 0;
+  padding-left: 20px;
+  color: #1976d2;
+}
+
+.info-box li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Rejection Info */
+.rejection-info {
+  background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+  border-left: 4px solid #e74c3c;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 25px 0;
+  text-align: left;
+}
+
+.rejection-info h3 {
+  margin: 0 0 10px 0;
+  color: #c0392b;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.rejection-info p {
+  margin: 0;
+  color: #721c24;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.rejection-actions {
+  margin: 20px 0;
+}
+
+.btn-resubmit {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-resubmit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+}
+
+/* Contact Support */
+.contact-support {
+  margin: 30px 0 20px;
+  padding-top: 30px;
+  border-top: 2px solid #ecf0f1;
+}
+
+.contact-support h4 {
+  margin: 0 0 15px 0;
+  color: #2c3e50;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.contact-options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #3498db;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background: #e3f2fd;
+  transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+  background: #bbdefb;
+  transform: translateY(-2px);
+}
+
+/* Logout Button */
+.btn-logout {
+  background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+  background: linear-gradient(135deg, #7f8c8d, #6c7a7b);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(127, 140, 141, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .verification-card {
+    padding: 40px 25px;
+  }
+  
+  .verification-card h1 {
+    font-size: 24px;
+  }
+  
+  .status-icon {
+    font-size: 60px;
+  }
+  
+  .contact-options {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .contact-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .verification-card {
+    padding: 30px 20px;
+  }
+  
+  .verification-card h1 {
+    font-size: 20px;
+  }
+  
+  .verification-description {
+    font-size: 14px;
+  }
+  
+  .step {
+    padding: 12px;
+  }
+  
+  .step-icon {
+    font-size: 24px;
+  }
+  
+  .step-content h3 {
+    font-size: 14px;
+  }
+  
+  .step-content p {
+    font-size: 12px;
+  }
+}
