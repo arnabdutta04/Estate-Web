@@ -1,0 +1,713 @@
+/* BrokerRegistration.css - Modern Clean Design */
+
+.broker-registration-page {
+  min-height: 100vh;
+  background-color: #f5f6fa;
+  padding: 2rem 0;
+}
+
+.dark-mode .broker-registration-page {
+  background-color: #1a1d2e;
+}
+
+.broker-registration-page .container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.registration-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.registration-header .close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  background: #ecf0f1;
+  color: #7f8c8d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.25rem;
+}
+
+.dark-mode .registration-header .close-btn {
+  background: #3a3f51;
+  color: #a0a0a0;
+}
+
+.registration-header .close-btn:hover {
+  background: #e74c3c;
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+.registration-header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 0.5rem 0;
+}
+
+.dark-mode .registration-header h1 {
+  color: #ffffff;
+}
+
+.registration-header p {
+  font-size: 1rem;
+  color: #7f8c8d;
+  margin: 0;
+}
+
+.dark-mode .registration-header p {
+  color: #a0a0a0;
+}
+
+
+/* Step Indicator */
+.step-indicator {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.dark-mode .step-indicator {
+  background: #242838;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 60%;
+  width: 80%;
+  height: 2px;
+  background: #ecf0f1;
+  z-index: 0;
+}
+
+.dark-mode .step:not(:last-child)::after {
+  background: #3a3f51;
+}
+
+.step.completed:not(:last-child)::after {
+  background: #ff9500;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ecf0f1;
+  color: #95a5a6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .step-number {
+  background: #3a3f51;
+  color: #6a6a6a;
+}
+
+.step.active .step-number {
+  background: #ff9500;
+  color: #ffffff;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(255, 149, 0, 0.3);
+}
+
+.step.completed .step-number {
+  background: #27ae60;
+  color: #ffffff;
+}
+
+.step-label {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  font-weight: 500;
+  text-align: center;
+}
+
+.dark-mode .step-label {
+  color: #a0a0a0;
+}
+
+.step.active .step-label {
+  color: #ff9500;
+  font-weight: 600;
+}
+
+.dark-mode .step.active .step-label {
+  color: #ffaa33;
+}
+
+
+
+/* Error Alert */
+.error-alert {
+  background: #fee;
+  border: 1px solid #fcc;
+  color: #c33;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.error-alert svg {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* Form */
+.broker-form {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.dark-mode .broker-form {
+  background: #242838;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-step h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.dark-mode .form-step h2 {
+  color: #ffffff;
+  border-bottom-color: #3a3f51;
+}
+
+.form-step h2 svg {
+  color: #ff9500;
+  font-size: 1.75rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.dark-mode .form-group label {
+  color: #ffffff;
+}
+
+.required {
+  color: #e74c3c;
+  margin-left: 0.25rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="number"],
+.form-group input[type="tel"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #2c3e50;
+  background: #ffffff;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.dark-mode .form-group input[type="text"],
+.dark-mode .form-group input[type="email"],
+.dark-mode .form-group input[type="number"],
+.dark-mode .form-group input[type="tel"],
+.dark-mode .form-group select,
+.dark-mode .form-group textarea {
+  background: #1a1d2e;
+  border-color: #3a3f51;
+  color: #ffffff;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #ff9500;
+  box-shadow: 0 0 0 3px rgba(255, 149, 0, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #bdc3c7;
+}
+
+.dark-mode .form-group input::placeholder,
+.dark-mode .form-group textarea::placeholder {
+  color: #6a6a6a;
+}
+
+.form-group small {
+  display: block;
+  margin-top: 0.5rem;
+  color: #7f8c8d;
+  font-size: 0.85rem;
+}
+
+.dark-mode .form-group small {
+  color: #a0a0a0;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+
+
+/* Checkbox Grid */
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  background: #ffffff;
+}
+
+.dark-mode .checkbox-label {
+  background: #1a1d2e;
+  border-color: #3a3f51;
+  color: #ffffff;
+}
+
+.checkbox-label:hover {
+  border-color: #ff9500;
+  background: #fff9f0;
+}
+
+.dark-mode .checkbox-label:hover {
+  background: #2a2e3e;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #ff9500;
+}
+
+.checkbox-label input[type="checkbox"]:checked + span {
+  color: #ff9500;
+  font-weight: 600;
+}
+
+/* File Upload */
+.file-upload-area {
+  border: 2px dashed #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  background: #fafafa;
+}
+
+.dark-mode .file-upload-area {
+  background: #1a1d2e;
+  border-color: #3a3f51;
+}
+
+.file-upload-area:hover {
+  border-color: #ff9500;
+  background: #fff9f0;
+}
+
+.dark-mode .file-upload-area:hover {
+  background: #2a2e3e;
+}
+
+.upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  color: #7f8c8d;
+}
+
+.dark-mode .upload-label {
+  color: #a0a0a0;
+}
+
+.upload-label svg {
+  font-size: 2.5rem;
+  color: #ff9500;
+}
+
+.upload-label span {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.uploaded-file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #27ae60;
+}
+
+.dark-mode .uploaded-file {
+  background: #1a1d2e;
+}
+
+.uploaded-file .success-icon {
+  color: #27ae60;
+  font-size: 1.5rem;
+}
+
+.preview-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.remove-file {
+  padding: 0.5rem 1rem;
+  background: #e74c3c;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.remove-file:hover {
+  background: #c0392b;
+  transform: translateY(-1px);
+}
+
+/* Upload Info Box */
+.upload-info-box {
+  background: #e3f2fd;
+  border: 1px solid #90caf9;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.dark-mode .upload-info-box {
+  background: rgba(33, 150, 243, 0.1);
+  border-color: rgba(144, 202, 249, 0.3);
+}
+
+.upload-info-box svg {
+  color: #2196f3;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.upload-info-box p {
+  margin: 0 0 0.75rem 0;
+  color: #1976d2;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.dark-mode .upload-info-box p {
+  color: #64b5f6;
+}
+
+.upload-info-box ul {
+  margin: 0.75rem 0 0 0;
+  padding-left: 1.25rem;
+}
+
+.upload-info-box li {
+  color: #555;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.dark-mode .upload-info-box li {
+  color: #a0a0a0;
+}
+
+.upload-info-box .note {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: #666;
+  font-style: italic;
+}
+
+.dark-mode .upload-info-box .note {
+  color: #8a8a8a;
+}
+
+
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid #ecf0f1;
+}
+
+.dark-mode .form-actions {
+  border-top-color: #3a3f51;
+}
+
+.btn-prev,
+.btn-next,
+.btn-submit {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-prev {
+  background: #ecf0f1;
+  color: #7f8c8d;
+}
+
+.dark-mode .btn-prev {
+  background: #3a3f51;
+  color: #a0a0a0;
+}
+
+.btn-prev:hover {
+  background: #d5dbdb;
+  transform: translateY(-1px);
+}
+
+.dark-mode .btn-prev:hover {
+  background: #4a4f61;
+}
+
+.btn-next {
+  background: #ff9500;
+  color: #ffffff;
+  margin-left: auto;
+  box-shadow: 0 4px 12px rgba(255, 149, 0, 0.2);
+}
+
+.btn-next:hover {
+  background: #ffaa33;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 149, 0, 0.3);
+}
+
+.btn-submit {
+  background: #27ae60;
+  color: #ffffff;
+  margin-left: auto;
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: #2ecc71;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(39, 174, 96, 0.3);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Help Section */
+.help-section {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1.25rem;
+  background: #ffffff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.dark-mode .help-section {
+  background: #242838;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.help-section svg {
+  color: #ff9500;
+  font-size: 1.25rem;
+}
+
+.help-section p {
+  margin: 0;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.dark-mode .help-section p {
+  color: #a0a0a0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .broker-registration-page {
+    padding: 1.5rem 0;
+  }
+
+  .broker-registration-page .container {
+    padding: 0 1rem;
+  }
+
+  .registration-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .step-indicator {
+    padding: 1.5rem 1rem;
+  }
+
+  .step-label {
+    font-size: 0.75rem;
+  }
+
+  .broker-form {
+    padding: 1.5rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .btn-next,
+  .btn-submit {
+    margin-left: 0;
+  }
+
+  .help-section {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .registration-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .step-number {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+
+  .form-step h2 {
+    font-size: 1.25rem;
+  }
+
+  .broker-form {
+    padding: 1.25rem;
+  }
+
+  .file-upload-area {
+    padding: 1.5rem;
+  }
+
+  .upload-label svg {
+    font-size: 2rem;
+  }
+}
