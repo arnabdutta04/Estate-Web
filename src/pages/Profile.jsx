@@ -1,4 +1,4 @@
-// src/pages/Profile.jsx
+// src/pages/Profile.jsx - FIXED VERSION
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
@@ -21,10 +21,9 @@ import {
 
 const Profile = () => {
   const { user, login } = useContext(AuthContext);
-  const navigate = useNavigate(); // ADD THIS LINE
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
-  const { theme, changeTheme } = useTheme();
   
   // Edit Modal States
   const [showEditModal, setShowEditModal] = useState(false);
@@ -56,20 +55,7 @@ const Profile = () => {
   const [profilePicture, setProfilePicture] = useState(user?.profilePicture || null);
   const [previewUrl, setPreviewUrl] = useState(user?.profilePicture || null);
 
-  useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark-mode');
-    } else if (theme === 'light') {
-      document.documentElement.classList.remove('dark-mode');
-    } else {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (prefersDark) {
-        document.documentElement.classList.add('dark-mode');
-      } else {
-        document.documentElement.classList.remove('dark-mode');
-      }
-    }
-  }, [theme]);
+  // REMOVED: Theme useEffect - Lines 58-69 DELETED!
 
   // Handle Personal Info Update
   const handlePersonalInfoChange = (e) => {
@@ -303,17 +289,17 @@ const Profile = () => {
                 
                 <div className="broker-quick-actions">
                   <button 
-  className="broker-action-btn"
-  onClick={() => navigate('/broker/dashboard')}
->
-  <FaBriefcase /> View Dashboard
-</button>
+                    className="broker-action-btn"
+                    onClick={() => navigate('/broker/dashboard')}
+                  >
+                    <FaBriefcase /> View Dashboard
+                  </button>
                   <button 
-  className="broker-action-btn"
-  onClick={() => navigate('/broker/add-property')}
->
-  <FaPlus /> Add Property
-</button>
+                    className="broker-action-btn"
+                    onClick={() => navigate('/broker/add-property')}
+                  >
+                    <FaPlus /> Add Property
+                  </button>
                 </div>
               </div>
             )}
