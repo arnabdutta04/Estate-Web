@@ -195,17 +195,17 @@ const startServer = async () => {
 
     // Start listening on all network interfaces (required for Render)
     app.listen(PORT, '0.0.0.0', () => {
-      console.log('');
-      console.log('✅ ========================================');
-      console.log('✅  SERVER RUNNING SUCCESSFULLY');
-      console.log('✅ ========================================');
-      console.log(`🌐 Server URL: https://estate-backend-oun8.onrender.com`);
-      console.log(`🏥 Health Check: https://estate-backend-oun8.onrender.com/health`);
-      console.log(`📡 API Base: https://estate-backend-oun8.onrender.com/api`);
-      console.log(`🔐 CORS Allowed: ${process.env.FRONTEND_URL}`);
-      console.log('✅ ========================================');
-      console.log('');
-    });
+  console.log('');
+  console.log('✅ ========================================');
+  console.log('✅  SERVER RUNNING SUCCESSFULLY');
+  console.log('✅ ========================================');
+  console.log(`🌐 Platform: Koyeb + Supabase`);
+  console.log(`🏥 Health Check: /health`);
+  console.log(`📡 API Base: /api`);
+  console.log(`🔐 CORS Allowed: ${process.env.FRONTEND_URL}`);
+  console.log('✅ ========================================');
+  console.log('');
+});
 
   } catch (error) {
     console.error('❌ ========================================');
