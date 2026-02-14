@@ -6,6 +6,7 @@ const api = axios.create({
   headers: { 
     "Content-Type": "application/json" 
   },
+  withCredentials: true, // Add this for CORS with credentials
   timeout: 30000, // 30 seconds timeout
 });
 
@@ -16,6 +17,7 @@ api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    console.log('API Request:', config.method.toUpperCase(), config.baseURL + config.url); // Debug log
     return config;
   },
   (error) => {
