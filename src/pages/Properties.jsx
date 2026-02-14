@@ -346,7 +346,7 @@ const Properties = () => {
         <Navbar />
         
         {/* Hero Section with Search Card */}
-        <div className="hero-section">
+        <div className="properties-hero-modern">
           {/* Left Side - Hero Content */}
           <div className="hero-content">
             <h1 className="hero-title">Buy & Rent Property</h1>
@@ -359,7 +359,7 @@ const Properties = () => {
           </div>
 
           {/* Right Side - Top-up Card */}
-          <div className="wallet-card">
+          <div className="search-card-white">
             <h3>Your Wallet Balance</h3>
             {/* Current Balance Display */}
             <div className="balance-display">
@@ -648,7 +648,7 @@ const Properties = () => {
         )}
 
         {/* Property Listings Section - NO MAP */}
-        <div className="properties-section">
+        <div className="property-listings-section">
           {/* Filter Button - Centered */}
           <div className="filter-button-container">
             <button className="open-filter-btn" onClick={openFilter}>
@@ -665,7 +665,7 @@ const Properties = () => {
           </div>
 
           {/* Properties Container */}
-          <div className="properties-container">
+          <div className="properties-container-modern">
             {loading ? (
               <div className="loading-state">
                 <h3>Loading properties...</h3>
@@ -694,7 +694,7 @@ const Properties = () => {
                   {properties.map((property, index) => (
                     <div
                       key={property._id}
-                      className="property-card"
+                      className="property-card-modern"
                       onClick={() => handlePropertyClick(property._id)}
                     >
                       <div className="property-image">
@@ -778,7 +778,7 @@ const Properties = () => {
         </div>
 
         {/* Tailored Solutions Section */}
-        <div className="solutions-section">
+        <div className="tailored-solutions-section">
           <h2>Tailored Solutions For Every Move</h2>
           <div className="solutions-grid">
             <button onClick={() => navigate('/buying')} className="solution-card">
@@ -794,7 +794,7 @@ const Properties = () => {
         </div>
 
         {/* Ready to Find Section */}
-        <div className="ready-section">
+        <div className="ready-to-find-section">
           <h2>(06) Ready to Find Your Next Home?</h2>
           <p>
             Whether you're buying, browsing, or just getting started — Propify makes it easy to take the next step with confidence.
@@ -805,7 +805,7 @@ const Properties = () => {
         </div>
 
         {/* CTA Section - Orange */}
-        <div className="cta-section">
+        <div className="cta-section-orange">
           <div className="cta-content">
             <h2>Find Your Home</h2>
             <button onClick={() => navigate('/get-started')} className="get-started-btn">
@@ -815,7 +815,7 @@ const Properties = () => {
         </div>
 
         {/* Footer Section - Dark */}
-        <footer className="footer">
+        <footer className="footer-section-dark">
           <div className="footer-content">
             <div className="footer-column">
               <h3>PROPIFY</h3>
