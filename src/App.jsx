@@ -1,8 +1,9 @@
-// App.jsx - CORRECTED VERSION
+// App.jsx - CORRECTED VERSION WITH PROFILE ROUTE
 import React from "react";
-import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 
+// Pages
 import Welcome from "./pages/Welcome";
 import Properties from "./pages/Properties";
 import PropertyDetail from "./pages/PropertyDetail";
@@ -11,6 +12,8 @@ import Brokers from "./pages/Brokers";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
+
+// Components
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import "./App.css";
@@ -24,23 +27,13 @@ function AppContent() {
       
       {/* PUBLIC ROUTES - No login required */}
       <Route path="/properties" element={<Properties />} />
+      <Route path="/property/:id" element={<PropertyDetail />} />
       <Route path="/properties/:id" element={<PropertyDetail />} />
       <Route path="/explore" element={<Explore />} />
 
-      {/* AUTH ROUTES - Render as modals over Welcome page */}
-      <Route path="/login" element={
-        <>
-          <Welcome />
-          <Login />
-        </>
-      } />
-      
-      <Route path="/register" element={
-        <>
-          <Welcome />
-          <Register />
-        </>
-      } />
+      {/* AUTH ROUTES */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
       {/* PROTECTED ROUTES - Login required */}
       <Route
