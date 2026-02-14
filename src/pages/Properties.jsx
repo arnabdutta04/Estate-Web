@@ -4,10 +4,10 @@ import api from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
 import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
-import { FaHome, FaBed, FaBath, FaRulerCombined, FaDollarSign, FaPlus, FaMinus, FaPaw } from 'react-icons/fa';
+import { FaHome, FaBed, FaBath, FaRulerCombined, FaDollarSign, FaPlus, FaMinus } from 'react-icons/fa';
 import './Properties.css';
-import { Sofa, Dog, Car, UtensilsCrossed, Wifi, Snowflake, Waves, Lock, Dumbbell, Key, Smartphone, ShowerHead } from 'lucide-react';
-import { indianCities, searchCities } from '../utils/cities';
+import { Sofa, Dog, Car, UtensilsCrossed, Wifi, Snowflake, Waves, Lock, Dumbbell } from 'lucide-react';
+import { indianCities } from '../utils/cities';
 
 const Properties = () => {
   const navigate = useNavigate();
@@ -20,8 +20,7 @@ const Properties = () => {
   const [selectedAmenities, setSelectedAmenities] = useState({
     furnished: true,
     petAllowed: true,
-    parkingSlot: false,
-    kitchen: false
+    parkingSlot: false
   });
   const [selectedBathrooms, setSelectedBathrooms] = useState('');
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -69,12 +68,10 @@ const Properties = () => {
       title: 'Duplex in La Plata',
       price: 1209,
       image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&q=80',
-      bedrooms: 1.2,
+      bedrooms: 2,
       bathrooms: 2,
-      area: 75,
+      area: 645,
       parking: true,
-      lat: 40.7128,
-      lng: -74.0060,
       type: 'Luxury Duplex',
       description: 'Modern duplex with stunning views'
     },
@@ -83,12 +80,10 @@ const Properties = () => {
       title: 'Sudirman Park Apartment',
       price: 1209,
       image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&q=80',
-      bedrooms: 1.2,
+      bedrooms: 1,
       bathrooms: 1,
-      area: 75,
+      area: 480,
       parking: true,
-      lat: 40.7228,
-      lng: -74.0160,
       type: 'Urban Apartment',
       description: 'Cozy apartment in prime location'
     },
@@ -97,13 +92,11 @@ const Properties = () => {
       title: 'PIK Apart Complex',
       price: 1209,
       image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&q=80',
-      bedrooms: 1.2,
+      bedrooms: 3,
       bathrooms: 2,
-      area: 75,
+      area: 820,
       parking: true,
-      lat: 40.7328,
-      lng: -74.0260,
-      type: 'Complex',
+      type: 'Residential Complex',
       description: 'Spacious complex with amenities'
     }
   ];
@@ -180,19 +173,7 @@ const Properties = () => {
       if (filterParams.keyword && !property.title.toLowerCase().includes(filterParams.keyword.toLowerCase())) {
         matches = false;
       }
-      if (filterParams.city && property.city !== filterParams.city) {
-        matches = false;
-      }
-      if (filterParams.propertyType && property.propertyType !== filterParams.propertyType) {
-        matches = false;
-      }
       if (property.price < filterParams.minPrice || property.price > filterParams.maxPrice) {
-        matches = false;
-      }
-      if (filterParams.bedrooms && property.bedrooms && property.bedrooms.toString() !== filterParams.bedrooms) {
-        matches = false;
-      }
-      if (filterParams.bathrooms && property.bathrooms && property.bathrooms.toString() !== filterParams.bathrooms) {
         matches = false;
       }
       return matches;
@@ -200,7 +181,6 @@ const Properties = () => {
 
     setProperties(filtered);
     setShowFilter(false);
-    console.log('Applied Filters:', filterParams);
   };
 
   const handleCityInputFocus = () => {
@@ -300,11 +280,9 @@ const Properties = () => {
     setShowFilter(true);
   };
 
-  // New functional handlers
   const handleTopUp = () => {
     if (walletAmount && parseFloat(walletAmount) > 0) {
       alert(`Top-up successful! Amount: ₹${walletAmount}`);
-      // Add API call here to process top-up
       setWalletAmount('');
     } else {
       alert('Please enter a valid amount');
@@ -315,7 +293,6 @@ const Properties = () => {
     e.preventDefault();
     if (email) {
       alert(`Subscribed successfully with email: ${email}`);
-      // Add API call here to subscribe
       setEmail('');
     } else {
       alert('Please enter a valid email');
@@ -334,8 +311,7 @@ const Properties = () => {
     const socialLinks = {
       facebook: 'https://facebook.com',
       twitter: 'https://twitter.com',
-      instagram: 'https://instagram.com',
-      linkedin: 'https://linkedin.com'
+      instagram: 'https://instagram.com'
     };
     window.open(socialLinks[platform], '_blank');
   };
@@ -345,11 +321,13 @@ const Properties = () => {
       <PageTransition>
         <Navbar />
         
-        {/* Hero Section with Search Card */}
+        {/* Hero Section with Wallet Card */}
         <div className="properties-hero-modern">
+          <div className="hero-overlay"></div>
+          
           {/* Left Side - Hero Content */}
-          <div className="hero-content">
-            <h1 className="hero-title">Buy & Rent Property</h1>
+          <div className="hero-left-content">
+            <h1 className="hero-title-serif">Buy & Rent Property</h1>
             <button 
               className="explore-btn" 
               onClick={() => navigate('/properties')}
@@ -358,44 +336,64 @@ const Properties = () => {
             </button>
           </div>
 
-          {/* Right Side - Top-up Card */}
-          <div className="search-card-white">
-            <h3>Your Wallet Balance</h3>
-            {/* Current Balance Display */}
-            <div className="balance-display">
-              <p className="balance-label">Available Balance</p>
-              <h2 className="balance-amount">₹25,000</h2>
-              <p className="balance-subtitle">Ready to invest in your dream property</p>
-            </div>
-
-            {/* Custom Amount Input */}
-            <div className="custom-amount">
-              <label>Custom Amount</label>
-              <input
-                type="number"
-                placeholder="Enter amount"
-                value={walletAmount}
-                onChange={(e) => setWalletAmount(e.target.value)}
-              />
-            </div>
-
-            {/* Top-up Button */}
-            <button 
-              className="topup-btn" 
-              onClick={handleTopUp}
-            >
-              Top-up Now
-            </button>
-
-            {/* Quick Stats */}
-            <div className="quick-stats">
-              <div className="stat-item">
-                <span>Total Invested</span>
-                <strong>$125,000</strong>
+          {/* Right Side - Wallet Card */}
+          <div className="search-card-container">
+            <div className="search-card-white">
+              <h3 className="search-card-title">Your Wallet Balance</h3>
+              
+              {/* Balance Display */}
+              <div className="balance-display">
+                <p className="search-label">Available Balance</p>
+                <div className="balance-amount">
+                  <span className="balance-icon">₹</span>
+                  <span className="amount-text">25,000</span>
+                </div>
+                <p className="balance-subtitle">Ready to invest in your dream property</p>
               </div>
-              <div className="stat-item">
-                <span>Properties Owned</span>
-                <strong>3</strong>
+
+              {/* Custom Amount Input */}
+              <div className="search-form-group">
+                <label className="search-label">Custom Amount</label>
+                <div className="search-input-wrapper">
+                  <span className="input-icon">₹</span>
+                  <input
+                    type="number"
+                    className="search-white-input"
+                    placeholder="Enter amount"
+                    value={walletAmount}
+                    onChange={(e) => setWalletAmount(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              {/* Top-up Button */}
+              <button 
+                className="search-btn-orange" 
+                onClick={handleTopUp}
+              >
+                Top-up Now
+              </button>
+
+              {/* Wallet Stats */}
+              <div className="wallet-stats">
+                <div className="stat-item">
+                  <div className="stat-icon-wrapper">
+                    <FaDollarSign />
+                  </div>
+                  <div className="stat-info">
+                    <span className="stat-label">Total Invested</span>
+                    <strong className="stat-value">$125,000</strong>
+                  </div>
+                </div>
+                <div className="stat-item">
+                  <div className="stat-icon-wrapper">
+                    <FaHome />
+                  </div>
+                  <div className="stat-info">
+                    <span className="stat-label">Properties Owned</span>
+                    <strong className="stat-value">3</strong>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -411,271 +409,317 @@ const Properties = () => {
                 <button onClick={closeFilter} className="close-btn">×</button>
               </div>
 
-              {/* Type of Place */}
-              <div className="filter-section">
-                <h3>Type of Place</h3>
-                <p>Search rooms, entire homes, or any type of place.</p>
-                <div className="place-types">
-                  <div className="place-type-card">
-                    <FaHome />
+              <div className="filter-content">
+                {/* Type of Place */}
+                <div className="filter-section">
+                  <h3>Type of Place</h3>
+                  <p className="section-subtitle">Search rooms, entire homes, or any type of place.</p>
+                  <div className="place-types">
+                    <div className="place-card">
+                      <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&q=80" alt="Entire Place" />
+                      <div className="place-info">
+                        <h4>Entire Place</h4>
+                        <p>A place all to yourself</p>
+                      </div>
+                    </div>
+                    <div className="place-card">
+                      <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&q=80" alt="Room" />
+                      <div className="place-info">
+                        <h4>Room</h4>
+                        <p>Your own room, plus shared spaces</p>
+                      </div>
+                    </div>
+                    <div className="place-card">
+                      <img src="https://images.unsplash.com/photo-1556020685-ae41abfc9365?w=400&q=80" alt="Shared Room" />
+                      <div className="place-info">
+                        <h4>Shared Room</h4>
+                        <p>Shared sleeping space</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Rooms And Beds */}
+                <div className="filter-section">
+                  <h3>Rooms And Beds</h3>
+                  
+                  <div className="counter-group">
+                    <div className="counter-item">
+                      <div className="counter-label">
+                        <FaBed className="icon" />
+                        <div>
+                          <h4>Bedrooms</h4>
+                          <p>Select your room for your family</p>
+                        </div>
+                      </div>
+                      <div className="counter-controls">
+                        <button onClick={() => decrement('bedrooms')}>−</button>
+                        <span>{counters.bedrooms}</span>
+                        <button onClick={() => increment('bedrooms')}>+</button>
+                      </div>
+                    </div>
+
+                    <div className="counter-item">
+                      <div className="counter-label">
+                        <Sofa className="icon" />
+                        <div>
+                          <h4>Dining</h4>
+                          <p>Select dining space</p>
+                        </div>
+                      </div>
+                      <div className="counter-controls">
+                        <button onClick={() => decrement('dining')}>−</button>
+                        <span>{counters.dining}</span>
+                        <button onClick={() => increment('dining')}>+</button>
+                      </div>
+                    </div>
+
+                    <div className="counter-item">
+                      <div className="counter-label">
+                        <FaBath className="icon" />
+                        <div>
+                          <h4>Bathrooms</h4>
+                          <p>Select number of bathrooms</p>
+                        </div>
+                      </div>
+                      <div className="counter-controls">
+                        <button onClick={() => decrement('bathrooms')}>−</button>
+                        <span>{counters.bathrooms}</span>
+                        <button onClick={() => increment('bathrooms')}>+</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Price Range */}
+                <div className="filter-section">
+                  <h3>Price Range</h3>
+                  <p className="section-subtitle">The average nightly price is ₹200000</p>
+                  <div className="price-slider">
+                    <input
+                      type="range"
+                      min="0"
+                      max="10000"
+                      value={priceRange[1]}
+                      onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
+                      className="slider"
+                    />
+                  </div>
+                  <div className="price-values">
                     <div>
-                      <h4>Type Of Place</h4>
-                      <p>A place all to yourself</p>
+                      <label>Minimum</label>
+                      <p className="price">₹{priceRange[0]}</p>
                     </div>
-                  </div>
-                  <div className="place-type-card">
-                    <FaBed />
                     <div>
-                      <h4>Room</h4>
-                      <p>Your own room, plus access to shared spaces</p>
-                    </div>
-                  </div>
-                  <div className="place-type-card">
-                    <Sofa />
-                    <div>
-                      <h4>Shared Room</h4>
-                      <p>Your own room, plus access to shared spaces</p>
+                      <label>Maximum</label>
+                      <p className="price">₹{priceRange[1]}</p>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Rooms And Beds */}
-              <div className="filter-section">
-                <h3>Rooms And Beds</h3>
-                
-                <div className="counter-group">
-                  <div className="counter-item">
-                    <h4>Bedrooms</h4>
-                    <p>Select your room for your family</p>
-                    <div className="counter-controls">
-                      <button onClick={() => decrement('bedrooms')}>−</button>
-                      <span>{counters.bedrooms}</span>
-                      <button onClick={() => increment('bedrooms')}>+</button>
+                {/* Amenities */}
+                <div className="filter-section">
+                  <h3>Amenities</h3>
+                  <div className="amenities-grid">
+                    <div className="amenity-item">
+                      <FaHome className="amenity-icon" />
+                      <div>
+                        <h4>Instant Book</h4>
+                        <p>Listings you can book without waiting</p>
+                      </div>
+                      <label className="toggle">
+                        <input 
+                          type="checkbox" 
+                          checked={selectedAmenities.furnished}
+                          onChange={() => toggleAmenity('furnished')}
+                        />
+                        <span className="toggle-slider"></span>
+                      </label>
+                    </div>
+                    <div className="amenity-item">
+                      <FaHome className="amenity-icon" />
+                      <div>
+                        <h4>Self Check-In</h4>
+                        <p>Easy access to the property</p>
+                      </div>
+                      <label className="toggle">
+                        <input 
+                          type="checkbox"
+                          checked={selectedAmenities.petAllowed}
+                          onChange={() => toggleAmenity('petAllowed')}
+                        />
+                        <span className="toggle-slider"></span>
+                      </label>
+                    </div>
+                    <div className="amenity-item">
+                      <Dog className="amenity-icon" />
+                      <div>
+                        <h4>Allows Pets</h4>
+                        <p>Bringing a service animal?</p>
+                      </div>
+                      <label className="toggle">
+                        <input 
+                          type="checkbox"
+                          checked={selectedAmenities.parkingSlot}
+                          onChange={() => toggleAmenity('parkingSlot')}
+                        />
+                        <span className="toggle-slider"></span>
+                      </label>
                     </div>
                   </div>
+                </div>
 
-                  <div className="counter-item">
-                    <h4>Dining</h4>
-                    <p>Select your room for your family</p>
-                    <div className="counter-controls">
-                      <button onClick={() => decrement('dining')}>−</button>
-                      <span>{counters.dining}</span>
-                      <button onClick={() => increment('dining')}>+</button>
-                    </div>
-                  </div>
-
-                  <div className="counter-item">
-                    <h4>Bathrooms</h4>
-                    <p>Select your room for your family</p>
-                    <div className="counter-controls">
-                      <button onClick={() => decrement('bathrooms')}>−</button>
-                      <span>{counters.bathrooms}</span>
-                      <button onClick={() => increment('bathrooms')}>+</button>
-                    </div>
+                {/* Facilities */}
+                <div className="filter-section">
+                  <h3>Facilities</h3>
+                  <div className="facilities-grid">
+                    <label className="facility-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={selectedFacilities.furnished}
+                        onChange={() => toggleFacility('furnished')}
+                      />
+                      <span className="checkmark">✓</span>
+                      <Sofa size={20} className="facility-icon" />
+                      <span>Furnished</span>
+                    </label>
+                    <label className="facility-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={selectedFacilities.petAllowed}
+                        onChange={() => toggleFacility('petAllowed')}
+                      />
+                      <span className="checkmark">✓</span>
+                      <Dog size={20} className="facility-icon" />
+                      <span>Pet Allowed</span>
+                    </label>
+                    <label className="facility-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={selectedFacilities.parkingSlot}
+                        onChange={() => toggleFacility('parkingSlot')}
+                      />
+                      <span className="checkmark">✓</span>
+                      <Car size={20} className="facility-icon" />
+                      <span>Parking Slot</span>
+                    </label>
+                    <label className="facility-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={selectedFacilities.kitchen}
+                        onChange={() => toggleFacility('kitchen')}
+                      />
+                      <span className="checkmark">✓</span>
+                      <UtensilsCrossed size={20} className="facility-icon" />
+                      <span>Kitchen</span>
+                    </label>
+                    <label className="facility-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={selectedFacilities.wifi}
+                        onChange={() => toggleFacility('wifi')}
+                      />
+                      <span className="checkmark">✓</span>
+                      <Wifi size={20} className="facility-icon" />
+                      <span>WiFi</span>
+                    </label>
+                    <label className="facility-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={selectedFacilities.ac}
+                        onChange={() => toggleFacility('ac')}
+                      />
+                      <span className="checkmark">✓</span>
+                      <Snowflake size={20} className="facility-icon" />
+                      <span>Air Conditioning</span>
+                    </label>
+                    <label className="facility-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={selectedFacilities.swimmingPool}
+                        onChange={() => toggleFacility('swimmingPool')}
+                      />
+                      <span className="checkmark">✓</span>
+                      <Waves size={20} className="facility-icon" />
+                      <span>Swimming Pool</span>
+                    </label>
+                    <label className="facility-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={selectedFacilities.gym}
+                        onChange={() => toggleFacility('gym')}
+                      />
+                      <span className="checkmark">✓</span>
+                      <Dumbbell size={20} className="facility-icon" />
+                      <span>Gym</span>
+                    </label>
+                    <label className="facility-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={selectedFacilities.security}
+                        onChange={() => toggleFacility('security')}
+                      />
+                      <span className="checkmark">✓</span>
+                      <Lock size={20} className="facility-icon" />
+                      <span>24/7 Security</span>
+                    </label>
                   </div>
                 </div>
-              </div>
 
-              {/* Price Range */}
-              <div className="filter-section">
-                <h3>Price Range</h3>
-                <p>The average nightly price is ₹200000</p>
-                <input
-                  type="range"
-                  min="0"
-                  max="10000"
-                  value={priceRange[1]}
-                  onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                  className="slider"
-                />
-                <div className="price-labels">
-                  <div>
-                    <span>Minimum</span>
-                    <strong>₹{priceRange[0]}</strong>
-                  </div>
-                  <div>
-                    <span>Maximum</span>
-                    <strong>₹{priceRange[1]}</strong>
+                {/* Property Type Tags */}
+                <div className="filter-section">
+                  <h3>Property Type</h3>
+                  <div className="tag-group">
+                    <span className="tag">City <button>×</button></span>
+                    <span className="tag">House <button>×</button></span>
+                    <span className="tag">Residential <button>×</button></span>
+                    <span className="tag">Apartment</span>
                   </div>
                 </div>
-              </div>
 
-              {/* Amenities */}
-              <div className="filter-section">
-                <h3>Amenities</h3>
-                <div className="amenity-item">
-                  <div>
-                    <h4>Instant Book</h4>
-                    <p>Listings you can book without waiting for Host approval</p>
-                  </div>
-                  <input 
-                    type="checkbox" 
-                    checked={selectedAmenities.furnished}
-                    onChange={() => toggleAmenity('furnished')}
-                  />
+                {/* Action Buttons */}
+                <div className="filter-actions">
+                  <button onClick={handleReset} className="btn-clear">Clear All</button>
+                  <button onClick={handleFilterSearch} className="btn-apply">Apply Filters</button>
                 </div>
-                <div className="amenity-item">
-                  <div>
-                    <h4>Self Check-In</h4>
-                    <p>Easy access to the property once you arrive</p>
-                  </div>
-                  <input 
-                    type="checkbox"
-                    checked={selectedAmenities.petAllowed}
-                    onChange={() => toggleAmenity('petAllowed')}
-                  />
-                </div>
-                <div className="amenity-item">
-                  <div>
-                    <h4>Allows Pets</h4>
-                    <p>Will Bringing a service animal?</p>
-                  </div>
-                  <input 
-                    type="checkbox"
-                    checked={selectedAmenities.parkingSlot}
-                    onChange={() => toggleAmenity('parkingSlot')}
-                  />
-                </div>
-              </div>
-
-              {/* Facilities */}
-              <div className="filter-section">
-                <h3>Facilities</h3>
-                <div className="facilities-grid">
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={selectedFacilities.furnished}
-                      onChange={() => toggleFacility('furnished')}
-                    />
-                    <Sofa size={20} />
-                    <span>✓ Furnished</span>
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={selectedFacilities.petAllowed}
-                      onChange={() => toggleFacility('petAllowed')}
-                    />
-                    <Dog size={20} />
-                    <span>✓ Pet Allowed</span>
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={selectedFacilities.parkingSlot}
-                      onChange={() => toggleFacility('parkingSlot')}
-                    />
-                    <Car size={20} />
-                    <span>✓ Parking Slot</span>
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={selectedFacilities.kitchen}
-                      onChange={() => toggleFacility('kitchen')}
-                    />
-                    <UtensilsCrossed size={20} />
-                    <span>✓ Kitchen</span>
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={selectedFacilities.wifi}
-                      onChange={() => toggleFacility('wifi')}
-                    />
-                    <Wifi size={20} />
-                    <span>✓ WiFi</span>
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={selectedFacilities.ac}
-                      onChange={() => toggleFacility('ac')}
-                    />
-                    <Snowflake size={20} />
-                    <span>✓ Air Conditioning</span>
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={selectedFacilities.swimmingPool}
-                      onChange={() => toggleFacility('swimmingPool')}
-                    />
-                    <Waves size={20} />
-                    <span>✓ Swimming Pool</span>
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={selectedFacilities.gym}
-                      onChange={() => toggleFacility('gym')}
-                    />
-                    <Dumbbell size={20} />
-                    <span>✓ Gym</span>
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={selectedFacilities.security}
-                      onChange={() => toggleFacility('security')}
-                    />
-                    <Lock size={20} />
-                    <span>✓ 24/7 Security</span>
-                  </label>
-                </div>
-              </div>
-
-              {/* Property Type Tags */}
-              <div className="filter-section">
-                <h3>Property Type</h3>
-                <div className="property-tags">
-                  <span className="tag">City ×</span>
-                  <span className="tag">House ×</span>
-                  <span className="tag">Residential ×</span>
-                  <span className="tag">Apartment</span>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="filter-actions">
-                <button onClick={handleReset} className="clear-btn">Clear All</button>
-                <button onClick={handleFilterSearch} className="apply-btn">Apply Filters</button>
               </div>
             </div>
           </div>
         )}
 
-        {/* Property Listings Section - NO MAP */}
+        {/* Property Listings Section */}
         <div className="property-listings-section">
-          {/* Filter Button - Centered */}
-          <div className="filter-button-container">
-            <button className="open-filter-btn" onClick={openFilter}>
-              Open Filters
+          {/* Filter Button */}
+          <button className="open-filter-btn" onClick={openFilter}>
+            <span>Open Filters</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M3 5h10M3 8h6M3 11h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </button>
+
+          {user && user.role === 'broker' && (
+            <button
+              className="add-property-btn-broker"
+              onClick={() => navigate('/broker/add-property')}
+            >
+              <FaPlus />
+              <span>List Your Property</span>
             </button>
-            {user && user.role === 'broker' && (
-              <button
-                className="list-property-btn"
-                onClick={() => navigate('/broker/add-property')}
-              >
-                List Your Property
-              </button>
-            )}
-          </div>
+          )}
 
           {/* Properties Container */}
           <div className="properties-container-modern">
             {loading ? (
               <div className="loading-state">
-                <h3>Loading properties...</h3>
+                <div className="loader"></div>
+                <h2>Loading properties...</h2>
                 <p>Please wait while we fetch the best options for you</p>
               </div>
             ) : properties.length === 0 ? (
-              <div className="empty-state">
-                <h3>No Properties Found</h3>
+              <div className="no-results-modern">
+                <h2>No Properties Found</h2>
                 <p>Try adjusting your filters to discover more amazing properties</p>
-                <button onClick={handleReset} className="reset-btn">
+                <button onClick={handleReset} className="reset-btn-large">
                   Reset Filters
                 </button>
               </div>
@@ -683,45 +727,62 @@ const Properties = () => {
               <>
                 {/* Properties Header */}
                 <div className="properties-header">
-                  <h2>More Than Properties We Deliver Prestige</h2>
-                  <button onClick={() => navigate('/properties')} className="view-all-btn">
-                    View all Property →
+                  <h2 className="properties-header-title">More Than Properties<br />We Deliver Prestige</h2>
+                  <button onClick={() => navigate('/properties')} className="view-all-properties-btn">
+                    <span>View all Property</span>
+                    <span className="arrow-icon">→</span>
                   </button>
                 </div>
 
                 {/* Properties Grid */}
-                <div className="properties-grid">
-                  {properties.map((property, index) => (
+                <div className="properties-grid-modern">
+                  {properties.map((property) => (
                     <div
                       key={property._id}
                       className="property-card-modern"
                       onClick={() => handlePropertyClick(property._id)}
                     >
-                      <div className="property-image">
+                      {/* Property Image */}
+                      <div className="property-image-container">
                         <img src={property.image} alt={property.title} />
-                      </div>
-                      <div className="property-details">
-                        <h3>{property.type || 'Luminous Urban Abode'}</h3>
-                        <p className="property-description">
-                          {property.description || 'A peaceful escape with sweeping views of the bustling city'}
-                        </p>
-                        <div className="property-features">
-                          <div className="feature">
-                            <FaRulerCombined />
-                            <span>{property.area || '645'} sq.m. Total area</span>
+                        
+                        {/* Title Overlay */}
+                        <h3 className="property-title-overlay">
+                          {property.type || 'Luminous Urban Abode'}
+                        </h3>
+
+                        {/* Info Card */}
+                        <div className="property-info-card">
+                          <h4 className="property-info-title">Property Details</h4>
+                          <p className="property-info-description">
+                            {property.description || 'A peaceful escape with sweeping views'}
+                          </p>
+
+                          {/* Stats Grid */}
+                          <div className="property-stats">
+                            <div className="property-stat-item">
+                              <span className="property-stat-value">{property.area || '645'}</span>
+                              <span className="property-stat-unit">sq.m</span>
+                              <span className="property-stat-label">Total Area</span>
+                            </div>
+                            <div className="property-stat-item">
+                              <span className="property-stat-value">{property.bedrooms}</span>
+                              <span className="property-stat-unit">-</span>
+                              <span className="property-stat-value">{property.bathrooms}</span>
+                              <span className="property-stat-label">Bed-Bath</span>
+                            </div>
+                            <div className="property-stat-item">
+                              <span className="property-stat-value">{new Date().getFullYear()}</span>
+                              <span className="property-stat-label">Year Built</span>
+                            </div>
                           </div>
-                          <div className="feature">
-                            <FaBed />
-                            <span>{property.bedrooms}-{property.bathrooms} Room</span>
-                          </div>
-                          <div className="feature">
-                            <span>{new Date().getFullYear()} Year</span>
-                          </div>
+
+                          {/* Learn More Button */}
+                          <button className="learn-more-btn">
+                            <span>Learn more</span>
+                            <span className="learn-more-icon">↗</span>
+                          </button>
                         </div>
-                        <button className="learn-more-btn">
-                          Learn more
-                          <span>↗</span>
-                        </button>
                       </div>
                     </div>
                   ))}
@@ -729,11 +790,10 @@ const Properties = () => {
 
                 {/* Pagination */}
                 {pagination.totalPages > 1 && (
-                  <div className="pagination">
+                  <div className="pagination-modern">
                     <button
                       onClick={() => handlePageChange(pagination.currentPage - 1)}
                       disabled={pagination.currentPage === 1}
-                      style={{ opacity: pagination.currentPage === 1 ? 0.5 : 1 }}
                     >
                       ←
                     </button>
@@ -766,7 +826,6 @@ const Properties = () => {
                     <button
                       onClick={() => handlePageChange(pagination.currentPage + 1)}
                       disabled={pagination.currentPage === pagination.totalPages}
-                      style={{ opacity: pagination.currentPage === pagination.totalPages ? 0.5 : 1 }}
                     >
                       →
                     </button>
@@ -779,101 +838,154 @@ const Properties = () => {
 
         {/* Tailored Solutions Section */}
         <div className="tailored-solutions-section">
-          <h2>Tailored Solutions For Every Move</h2>
-          <div className="solutions-grid">
-            <button onClick={() => navigate('/buying')} className="solution-card">
-              Start Buying
-            </button>
-            <button onClick={() => navigate('/selling')} className="solution-card">
-              Start Selling
-            </button>
-            <button onClick={() => navigate('/renting')} className="solution-card">
-              Start Renting
-            </button>
+          <div className="tailored-solutions-container">
+            <h2 className="tailored-solutions-title">Tailored Solutions For Every Move</h2>
+            <div className="solutions-grid">
+              <div className="solution-card" onClick={() => navigate('/buying')}>
+                <div className="solution-image-wrapper">
+                  <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="Start Buying" className="solution-image" />
+                  <div className="solution-overlay"></div>
+                  <h3 className="solution-title">Start Buying</h3>
+                </div>
+              </div>
+              <div className="solution-card" onClick={() => navigate('/selling')}>
+                <div className="solution-image-wrapper">
+                  <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800&q=80" alt="Start Selling" className="solution-image" />
+                  <div className="solution-overlay"></div>
+                  <h3 className="solution-title">Start Selling</h3>
+                </div>
+              </div>
+              <div className="solution-card" onClick={() => navigate('/renting')}>
+                <div className="solution-image-wrapper">
+                  <img src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?w=800&q=80" alt="Start Renting" className="solution-image" />
+                  <div className="solution-overlay"></div>
+                  <h3 className="solution-title">Start Renting</h3>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Ready to Find Section */}
         <div className="ready-to-find-section">
-          <h2>(06) Ready to Find Your Next Home?</h2>
-          <p>
-            Whether you're buying, browsing, or just getting started — Propify makes it easy to take the next step with confidence.
-          </p>
-          <button onClick={handleBookTour} className="book-tour-btn">
-            → Book A Tour
-          </button>
+          <div className="ready-to-find-container">
+            <div className="ready-to-find-content">
+              <div className="ready-left">
+                <p className="ready-subtitle">(06) Ready to Find Your Next Home?</p>
+                <div className="ready-image-wrapper">
+                  <img 
+                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" 
+                    alt="Modern House" 
+                    className="ready-house-image" 
+                  />
+                </div>
+              </div>
+              <div className="ready-right">
+                <h2 className="ready-title">
+                  Whether you're buying, browsing, or just getting started — Propify makes it easy to take the next step with confidence.
+                </h2>
+                <button onClick={handleBookTour} className="book-tour-btn">
+                  <span>Book A Tour</span>
+                  <span className="arrow-circle">→</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* CTA Section - Orange */}
+        {/* CTA Section */}
         <div className="cta-section-orange">
-          <div className="cta-content">
-            <h2>Find Your Home</h2>
-            <button onClick={() => navigate('/get-started')} className="get-started-btn">
-              → Get Started
-            </button>
+          <div className="cta-content-wrapper">
+            <div className="cta-text">
+              <span>Find Your Home</span>
+              <span className="cta-arrow">→</span>
+              <span className="cta-button-text" onClick={() => navigate('/get-started')}>
+                Get Started
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Footer Section - Dark */}
+        {/* Footer */}
         <footer className="footer-section-dark">
-          <div className="footer-content">
-            <div className="footer-column">
-              <h3>PROPIFY</h3>
-              <p>Helping you discover and secure your dream property with ease, expertise, and unmatched service in Dubai.</p>
+          <div className="footer-container">
+            <div className="footer-top">
+              <div className="footer-brand">
+                <div className="footer-logo">
+                  <span className="footer-logo-text">PROPIFY</span>
+                </div>
+                <p className="footer-description">
+                  Helping you discover and secure your dream property with ease, expertise, and unmatched service.
+                </p>
+              </div>
+
+              <div className="footer-column">
+                <h3>Navigation</h3>
+                <ul className="footer-links">
+                  <li onClick={() => navigate('/')}>Home</li>
+                  <li onClick={() => navigate('/about')}>About Us</li>
+                  <li onClick={() => navigate('/properties')}>Property</li>
+                  <li onClick={() => navigate('/events')}>Event</li>
+                  <li onClick={() => navigate('/contact')}>Contact Us</li>
+                </ul>
+              </div>
+
+              <div className="footer-column">
+                <h3>Resource</h3>
+                <ul className="footer-links">
+                  <li onClick={() => navigate('/blog')}>Blog</li>
+                  <li onClick={() => navigate('/blog/details')}>Blog Details</li>
+                  <li onClick={() => navigate('/property/details')}>Property Details</li>
+                  <li onClick={() => navigate('/faqs')}>FAQs</li>
+                  <li onClick={() => navigate('/reviews')}>Reviews</li>
+                </ul>
+              </div>
+
+              <div className="footer-column">
+                <h3>Newsletter</h3>
+                <div className="footer-newsletter">
+                  <p>Subscribe to get latest updates</p>
+                  <form onSubmit={handleSubscribe}>
+                    <input
+                      type="email"
+                      className="newsletter-input"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                    <button type="submit" className="newsletter-button">Subscribe</button>
+                  </form>
+                  <ul className="footer-links">
+                    <li onClick={() => navigate('/privacy')}>Privacy Policy</li>
+                    <li onClick={() => navigate('/help')}>Help Center</li>
+                  </ul>
+                </div>
+              </div>
             </div>
 
-            <div className="footer-column">
-              <h4>Navigation</h4>
-              <ul>
-                <li onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>Home</li>
-                <li onClick={() => navigate('/about')} style={{ cursor: 'pointer' }}>About Us</li>
-                <li onClick={() => navigate('/properties')} style={{ cursor: 'pointer' }}>Property</li>
-                <li onClick={() => navigate('/events')} style={{ cursor: 'pointer' }}>Event</li>
-                <li onClick={() => navigate('/contact')} style={{ cursor: 'pointer' }}>Contact Us</li>
+            <div className="footer-bottom">
+              <ul className="footer-links-bottom">
+                <li onClick={() => navigate('/terms')}>Terms of Service</li>
+                <li onClick={() => navigate('/privacy')}>Privacy Policy</li>
+                <li onClick={() => navigate('/cookies')}>Cookies</li>
               </ul>
+              
+              <div className="footer-social">
+                <span className="footer-social-icon" onClick={() => handleSocialClick('facebook')}>f</span>
+                <span className="footer-social-icon" onClick={() => handleSocialClick('twitter')}>𝕏</span>
+                <span className="footer-social-icon" onClick={() => handleSocialClick('instagram')}>in</span>
+              </div>
             </div>
 
-            <div className="footer-column">
-              <h4>Resource</h4>
-              <ul>
-                <li onClick={() => navigate('/blog')} style={{ cursor: 'pointer' }}>Blog</li>
-                <li onClick={() => navigate('/blog/details')} style={{ cursor: 'pointer' }}>Blog Details</li>
-                <li onClick={() => navigate('/property/details')} style={{ cursor: 'pointer' }}>Property Details</li>
-                <li onClick={() => navigate('/faqs')} style={{ cursor: 'pointer' }}>FAQs</li>
-                <li onClick={() => navigate('/reviews')} style={{ cursor: 'pointer' }}>Reviews</li>
-              </ul>
-            </div>
-
-            <div className="footer-column">
-              <h4>Newsletter</h4>
-              <form onSubmit={handleSubscribe}>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <button type="submit">Subscribe</button>
-              </form>
-              <ul className="footer-links">
-                <li onClick={() => navigate('/privacy')} style={{ cursor: 'pointer' }}>Privacy Policy</li>
-                <li onClick={() => navigate('/help')} style={{ cursor: 'pointer' }}>Help Center</li>
-              </ul>
+            <div className="footer-copyright">
+              <p>©2026 PROPIFY, Designed by <a href="#">Arnab</a></p>
             </div>
           </div>
-
-          <div className="footer-bottom">
-            <div className="social-icons">
-              <button onClick={() => handleSocialClick('facebook')}>f</button>
-              <button onClick={() => handleSocialClick('twitter')}>X</button>
-              <button onClick={() => handleSocialClick('instagram')}>in</button>
-            </div>
-              <p>©2026 PROPIFY, Designed by Arnab</p>
-          </div>
-         </footer>
-          </PageTransition>
-        </>
-   );
+        </footer>
+      </PageTransition>
+    </>
+  );
 };
+
 export default Properties;
