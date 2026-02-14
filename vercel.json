@@ -1,16 +1,17 @@
 {
   "version": 2,
+  "rootDirectory": "./",
   "buildCommand": "npm run build",
   "outputDirectory": "build",
   "framework": "create-react-app",
   "installCommand": "npm install",
   "devCommand": "npm start",
   "env": {
-    "REACT_APP_API_URL": "https://estatefrontend-drab.vercel.app"
+    "REACT_APP_FRONTEND_URL": "https://estatefrontend-drab.vercel.app"
   },
   "build": {
     "env": {
-      "REACT_APP_API_URL": "https://estatefrontend-drab.vercel.app",
+      "REACT_APP_FRONTEND_URL": "https://estatefrontend-drab.vercel.app",
       "CI": "false"
     }
   },
