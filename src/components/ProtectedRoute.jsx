@@ -1,4 +1,4 @@
-// ProtectedRoute.jsx - NO SPINNER VERSION
+// ProtectedRoute.jsx - DEBUG VERSION (Temporary)
 import { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
@@ -7,17 +7,24 @@ const ProtectedRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
 
-  // Just return null while loading - no spinner
+  // 🐛 DEBUG LOGS - Check browser console!
+  console.log("=== ProtectedRoute Debug ===");
+  console.log("Loading:", loading);
+  console.log("User:", user);
+  console.log("Path:", location.pathname);
+  console.log("============================");
+
   if (loading) {
+    console.log("⏳ Still loading, returning null");
     return null;
   }
 
-  // Redirect to login if not authenticated
   if (!user) {
+    console.log("❌ No user, redirecting to login");
     return <Navigate to="/login" state={{ from: location.pathname }} replace />;
   }
 
-  // User is authenticated, render the protected content
+  console.log("✅ Rendering protected content");
   return children;
 };
 
