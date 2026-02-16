@@ -21,9 +21,9 @@ import {
   FaClock,
   FaTimesCircle
 } from 'react-icons/fa';
-import './BrokerDashboardEnhanced.css';
+import './BrokerDashboard.css';
 
-const BrokerDashboardEnhanced = () => {
+const BrokerDashboard = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [brokerProfile, setBrokerProfile] = useState(null);
@@ -386,4 +386,4 @@ const BrokerDashboardEnhanced = () => {
   );
 };
 
-export default BrokerDashboardEnhanced;
+export default BrokerDashboard;
