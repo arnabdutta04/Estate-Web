@@ -20,7 +20,7 @@ import {
 } from 'react-icons/fa';
 
 const Profile = () => {
-  const { user, login } = useContext(AuthContext);
+  const { user, updateUser } = useContext(AuthContext); // ✅ Use updateUser instead of login
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
@@ -55,8 +55,6 @@ const Profile = () => {
   const [profilePicture, setProfilePicture] = useState(user?.profilePicture || null);
   const [previewUrl, setPreviewUrl] = useState(user?.profilePicture || null);
 
-  // REMOVED: Theme useEffect - Lines 58-69 DELETED!
-
   // Handle Personal Info Update
   const handlePersonalInfoChange = (e) => {
     setPersonalInfo({ ...personalInfo, [e.target.name]: e.target.value });
@@ -76,7 +74,10 @@ const Profile = () => {
         dateOfBirth: personalInfo.dateOfBirth,
         role: personalInfo.userRole
       });
-      login(data.user);
+      
+      // ✅ FIXED: Use updateUser instead of login
+      updateUser(data.user);
+      
       setMessage({ type: 'success', text: 'Profile updated successfully!' });
       setShowEditModal(false);
     } catch (error) {
@@ -101,7 +102,10 @@ const Profile = () => {
 
     try {
       const { data } = await api.put('/auth/update-address', addressInfo);
-      login(data.user);
+      
+      // ✅ FIXED: Use updateUser instead of login
+      updateUser(data.user);
+      
       setMessage({ type: 'success', text: 'Address updated successfully!' });
       setShowAddressModal(false);
     } catch (error) {
@@ -131,8 +135,11 @@ const Profile = () => {
       const { data } = await api.post('/auth/update-balance', {
         amount: amount
       });
-      login(data.user);
+      
+      // ✅ FIXED: Use updateUser instead of login
+      updateUser(data.user);
       setBalance(data.user.balance);
+      
       setMessage({ type: 'success', text: `Successfully added $${amount.toFixed(2)} to your balance!` });
       setShowBalanceModal(false);
       setTopUpAmount('');
@@ -174,7 +181,9 @@ const Profile = () => {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 
-      login(data.user);
+      // ✅ FIXED: Use updateUser instead of login
+      updateUser(data.user);
+      
       setMessage({ type: 'success', text: 'Profile picture updated!' });
     } catch (error) {
       setMessage({ 

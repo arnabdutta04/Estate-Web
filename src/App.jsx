@@ -1,4 +1,4 @@
-// App.jsx - UPDATED VERSION USING YOUR EXISTING RoleRoute
+// App.jsx - FIXED VERSION (Uses only RoleRoute)
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
@@ -16,8 +16,7 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 
 // Components
-import ProtectedRoute from "./components/ProtectedRoute";
-import RoleRoute from "./components/RoleRoute"; // ✅ Using your existing RoleRoute
+import RoleRoute from "./components/RoleRoute";
 
 import "./App.css";
 
@@ -29,44 +28,68 @@ function AppContent() {
       <Route path="/home" element={<Navigate to="/" replace />} />
       
       {/* PUBLIC ROUTES - No login required */}
-      <Route path="/properties" element={<Properties />} />
-      <Route path="/property/:id" element={<PropertyDetail />} />
-      <Route path="/properties/:id" element={<PropertyDetail />} />
       <Route path="/explore" element={<Explore />} />
 
       {/* AUTH ROUTES */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      {/* PROTECTED ROUTES - Login required */}
+      {/* PROTECTED ROUTES - Login required (all roles allowed) */}
+      <Route
+        path="/properties"
+        element={
+          <RoleRoute allowedRoles={['customer', 'broker', 'admin']}>
+            <Properties />
+          </RoleRoute>
+        }
+      />
+
+      <Route
+        path="/property/:id"
+        element={
+          <RoleRoute allowedRoles={['customer', 'broker', 'admin']}>
+            <PropertyDetail />
+          </RoleRoute>
+        }
+      />
+
+      <Route
+        path="/properties/:id"
+        element={
+          <RoleRoute allowedRoles={['customer', 'broker', 'admin']}>
+            <PropertyDetail />
+          </RoleRoute>
+        }
+      />
+
       <Route
         path="/brokers"
         element={
-          <ProtectedRoute>
+          <RoleRoute allowedRoles={['customer', 'broker', 'admin']}>
             <Brokers />
-          </ProtectedRoute>
+          </RoleRoute>
         }
       />
 
       <Route
         path="/brokers/:id"
         element={
-          <ProtectedRoute>
+          <RoleRoute allowedRoles={['customer', 'broker', 'admin']}>
             <BrokerDetail />
-          </ProtectedRoute>
+          </RoleRoute>
         }
       />
 
       <Route
         path="/profile"
         element={
-          <ProtectedRoute>
+          <RoleRoute allowedRoles={['customer', 'broker', 'admin']}>
             <Profile />
-          </ProtectedRoute>
+          </RoleRoute>
         }
       />
 
-      {/* BROKER-ONLY ROUTES - Using RoleRoute with allowedRoles=['broker'] */}
+      {/* BROKER-ONLY ROUTES */}
       <Route
         path="/broker/dashboard"
         element={
@@ -80,7 +103,6 @@ function AppContent() {
         path="/broker/edit-profile"
         element={
           <RoleRoute allowedRoles={['broker']}>
-            {/* TODO: Create EditBrokerProfile component */}
             <div style={{padding: '100px', textAlign: 'center'}}>
               <h2>Edit Broker Profile Page</h2>
               <p>Create EditBrokerProfile.jsx component</p>
@@ -93,7 +115,6 @@ function AppContent() {
         path="/broker/complete-profile"
         element={
           <RoleRoute allowedRoles={['broker']}>
-            {/* TODO: Create CompleteBrokerProfile component */}
             <div style={{padding: '100px', textAlign: 'center'}}>
               <h2>Complete Broker Profile Page</h2>
               <p>Create CompleteBrokerProfile.jsx component</p>
@@ -103,10 +124,9 @@ function AppContent() {
       />
 
       <Route
-        path="/properties/add"
+        path="/broker/add-property"
         element={
           <RoleRoute allowedRoles={['broker']}>
-            {/* TODO: Create AddProperty component */}
             <div style={{padding: '100px', textAlign: 'center'}}>
               <h2>Add Property Page</h2>
               <p>Create AddProperty.jsx component</p>
@@ -119,7 +139,6 @@ function AppContent() {
         path="/properties/edit/:id"
         element={
           <RoleRoute allowedRoles={['broker']}>
-            {/* TODO: Create EditProperty component */}
             <div style={{padding: '100px', textAlign: 'center'}}>
               <h2>Edit Property Page</h2>
               <p>Create EditProperty.jsx component</p>
@@ -128,25 +147,13 @@ function AppContent() {
         }
       />
 
-      {/* ADMIN-ONLY ROUTES (Optional - if you have admin functionality) */}
+      {/* ADMIN-ONLY ROUTES (Optional) */}
       {/* 
       <Route
         path="/admin/dashboard"
         element={
           <RoleRoute allowedRoles={['admin']}>
             <AdminDashboard />
-          </RoleRoute>
-        }
-      />
-      */}
-
-      {/* MULTI-ROLE ROUTES (Example: both broker and admin can access) */}
-      {/* 
-      <Route
-        path="/analytics"
-        element={
-          <RoleRoute allowedRoles={['broker', 'admin']}>
-            <Analytics />
           </RoleRoute>
         }
       />

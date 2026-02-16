@@ -6,7 +6,11 @@ import Navbar from "../components/Navbar";
 import PageTransition from '../components/PageTransition';
 import { FaHome, FaBed, FaBath, FaRulerCombined, FaDollarSign, FaPlus, FaMinus } from 'react-icons/fa';
 import './Properties.css';
-import { Sofa, Dog, Car, UtensilsCrossed, Wifi, Snowflake, Waves, Lock, Dumbbell } from 'lucide-react';
+import { 
+  Sofa, Dog, Car, UtensilsCrossed, Wifi, Snowflake, 
+  Waves, Lock, Dumbbell, Building2, Home, TreePine, 
+  Crown, ShoppingCart, Receipt 
+} from 'lucide-react';
 import { indianCities } from '../utils/cities';
 
 const Properties = () => {
@@ -15,20 +19,25 @@ const Properties = () => {
   const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState({ currentPage: 1, totalPages: 1 });
   const [activeTab, setActiveTab] = useState('rent');
-  const [priceRange, setPriceRange] = useState([1000, 5000]);
-  const [selectedBedrooms, setSelectedBedrooms] = useState('1');
-  const [selectedAmenities, setSelectedAmenities] = useState({
-    furnished: true,
-    petAllowed: true,
-    parkingSlot: false
-  });
+  
+  // Updated price range state - manual input
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  
+  // Property type state
+  const [selectedPropertyType, setSelectedPropertyType] = useState('');
+  
+  // Purchase method
+  const [purchaseMethod, setPurchaseMethod] = useState('rent'); // 'rent' or 'buy'
+  
+  const [selectedBedrooms, setSelectedBedrooms] = useState('');
   const [selectedBathrooms, setSelectedBathrooms] = useState('');
   const [searchKeyword, setSearchKeyword] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('');
-  const [selectedPropertyType, setSelectedPropertyType] = useState('');
   const [selectedStyle, setSelectedStyle] = useState('');
   const [showFilter, setShowFilter] = useState(false);
   const { user } = useContext(AuthContext);
+  
   const [selectedFacilities, setSelectedFacilities] = useState({
     furnished: false,
     petAllowed: false,
@@ -40,11 +49,13 @@ const Properties = () => {
     gym: false,
     security: false
   });
+  
   const [counters, setCounters] = useState({
-    bedrooms: 4,
-    dining: 4,
-    bathrooms: 4
+    bedrooms: 0,
+    dining: 0,
+    bathrooms: 0
   });
+  
   const [filters, setFilters] = useState({
     propertyType: '',
     city: '',
@@ -54,6 +65,7 @@ const Properties = () => {
     bathrooms: '',
     propertyFor: 'rent'
   });
+  
   const [cityInput, setCityInput] = useState('');
   const [showCitySuggestions, setShowCitySuggestions] = useState(false);
   const [citySuggestions, setCitySuggestions] = useState([]);
@@ -61,6 +73,57 @@ const Properties = () => {
   const [email, setEmail] = useState('');
   const cityDropdownRef = useRef(null);
   const cities = indianCities;
+
+  // Property types with icons
+  const propertyTypes = [
+    { value: 'residential', label: 'Residential', icon: Home },
+    { value: 'commercial', label: 'Commercial', icon: Building2 },
+    { value: 'land', label: 'Land & Plot', icon: TreePine },
+    { value: 'luxury', label: 'Luxury', icon: Crown }
+  ];
+
+  // Dynamic amenities based on property type
+  const getAmenitiesForType = (type) => {
+    const commonAmenities = [
+      { key: 'parkingSlot', label: 'Parking', icon: Car },
+      { key: 'wifi', label: 'WiFi', icon: Wifi },
+      { key: 'security', label: '24/7 Security', icon: Lock }
+    ];
+
+    const typeSpecificAmenities = {
+      residential: [
+        { key: 'furnished', label: 'Furnished', icon: Sofa },
+        { key: 'petAllowed', label: 'Pet Allowed', icon: Dog },
+        { key: 'kitchen', label: 'Kitchen', icon: UtensilsCrossed },
+        { key: 'ac', label: 'AC', icon: Snowflake },
+        { key: 'swimmingPool', label: 'Swimming Pool', icon: Waves },
+        { key: 'gym', label: 'Gym', icon: Dumbbell }
+      ],
+      commercial: [
+        { key: 'furnished', label: 'Furnished Office', icon: Sofa },
+        { key: 'ac', label: 'Central AC', icon: Snowflake },
+        { key: 'elevator', label: 'Elevator', icon: Building2 },
+        { key: 'conference', label: 'Conference Room', icon: Building2 }
+      ],
+      land: [
+        { key: 'gated', label: 'Gated Community', icon: Lock },
+        { key: 'waterSupply', label: 'Water Supply', icon: Waves },
+        { key: 'electricity', label: 'Electricity', icon: Building2 }
+      ],
+      luxury: [
+        { key: 'furnished', label: 'Premium Furnished', icon: Sofa },
+        { key: 'petAllowed', label: 'Pet Allowed', icon: Dog },
+        { key: 'kitchen', label: 'Modular Kitchen', icon: UtensilsCrossed },
+        { key: 'ac', label: 'Central AC', icon: Snowflake },
+        { key: 'swimmingPool', label: 'Private Pool', icon: Waves },
+        { key: 'gym', label: 'Private Gym', icon: Dumbbell },
+        { key: 'homeTheater', label: 'Home Theater', icon: Crown },
+        { key: 'spa', label: 'Spa', icon: Crown }
+      ]
+    };
+
+    return [...commonAmenities, ...(typeSpecificAmenities[type] || [])];
+  };
 
   const mockProperties = [
     {
@@ -73,6 +136,8 @@ const Properties = () => {
       area: 645,
       parking: true,
       type: 'Luxury Duplex',
+      propertyType: 'residential',
+      listingType: 'rent',
       description: 'Modern duplex with stunning views'
     },
     {
@@ -85,6 +150,8 @@ const Properties = () => {
       area: 480,
       parking: true,
       type: 'Urban Apartment',
+      propertyType: 'residential',
+      listingType: 'rent',
       description: 'Cozy apartment in prime location'
     },
     {
@@ -97,6 +164,8 @@ const Properties = () => {
       area: 820,
       parking: true,
       type: 'Residential Complex',
+      propertyType: 'residential',
+      listingType: 'sale',
       description: 'Spacious complex with amenities'
     }
   ];
@@ -156,31 +225,66 @@ const Properties = () => {
 
   const handleFilterSearch = () => {
     const filterParams = {
-      propertyFor: activeTab,
+      propertyFor: purchaseMethod,
       keyword: searchKeyword,
       city: selectedLocation,
       propertyType: selectedPropertyType,
       style: selectedStyle,
-      minPrice: priceRange[0],
-      maxPrice: priceRange[1],
-      bedrooms: selectedBedrooms,
-      bathrooms: selectedBathrooms,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+      bedrooms: counters.bedrooms > 0 ? counters.bedrooms : '',
+      bathrooms: counters.bathrooms > 0 ? counters.bathrooms : '',
       facilities: Object.keys(selectedFacilities).filter(key => selectedFacilities[key])
     };
 
+    // Filter mock properties for demo
     const filtered = mockProperties.filter(property => {
       let matches = true;
+      
+      // Purchase method filter
+      if (purchaseMethod === 'rent' && property.listingType !== 'rent') {
+        matches = false;
+      }
+      if (purchaseMethod === 'buy' && property.listingType !== 'sale') {
+        matches = false;
+      }
+      
+      // Property type filter
+      if (selectedPropertyType && property.propertyType !== selectedPropertyType) {
+        matches = false;
+      }
+      
+      // Keyword filter
       if (filterParams.keyword && !property.title.toLowerCase().includes(filterParams.keyword.toLowerCase())) {
         matches = false;
       }
-      if (property.price < filterParams.minPrice || property.price > filterParams.maxPrice) {
+      
+      // Price filter
+      if (minPrice && property.price < parseFloat(minPrice)) {
         matches = false;
       }
+      if (maxPrice && property.price > parseFloat(maxPrice)) {
+        matches = false;
+      }
+      
+      // Bedroom filter
+      if (counters.bedrooms > 0 && property.bedrooms < counters.bedrooms) {
+        matches = false;
+      }
+      
+      // Bathroom filter
+      if (counters.bathrooms > 0 && property.bathrooms < counters.bathrooms) {
+        matches = false;
+      }
+      
       return matches;
     });
 
     setProperties(filtered);
     setShowFilter(false);
+    
+    // For real API call
+    fetchProperties(filterParams);
   };
 
   const handleCityInputFocus = () => {
@@ -192,6 +296,7 @@ const Properties = () => {
 
   const handleCitySelect = (city) => {
     setCityInput(city);
+    setSelectedLocation(city);
     setFilters({ ...filters, city });
     setShowCitySuggestions(false);
   };
@@ -213,13 +318,15 @@ const Properties = () => {
     };
     setFilters(resetFilters);
     setCityInput('');
-    setPriceRange([1000, 5000]);
-    setSelectedBedrooms('1');
+    setMinPrice('');
+    setMaxPrice('');
+    setSelectedBedrooms('');
     setSelectedBathrooms('');
     setSearchKeyword('');
     setSelectedLocation('');
     setSelectedPropertyType('');
     setSelectedStyle('');
+    setPurchaseMethod('rent');
     setSelectedFacilities({
       furnished: false,
       petAllowed: false,
@@ -232,9 +339,9 @@ const Properties = () => {
       security: false
     });
     setCounters({
-      bedrooms: 4,
-      dining: 4,
-      bathrooms: 4
+      bedrooms: 0,
+      dining: 0,
+      bathrooms: 0
     });
     fetchProperties({});
   };
@@ -242,13 +349,6 @@ const Properties = () => {
   const handlePageChange = (page) => {
     fetchProperties(filters, page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const toggleAmenity = (amenity) => {
-    setSelectedAmenities(prev => ({
-      ...prev,
-      [amenity]: !prev[amenity]
-    }));
   };
 
   const toggleFacility = (facility) => {
@@ -405,35 +505,117 @@ const Properties = () => {
             <div className="filter-container">
               {/* Header */}
               <div className="filter-header">
-                <h2>Filter</h2>
+                <h2>Filter Properties</h2>
                 <button onClick={closeFilter} className="close-btn">×</button>
               </div>
 
               <div className="filter-content">
-                {/* Type of Place */}
+                {/* Purchase Method */}
                 <div className="filter-section">
-                  <h3>Type of Place</h3>
-                  <p className="section-subtitle">Search rooms, entire homes, or any type of place.</p>
-                  <div className="place-types">
-                    <div className="place-card">
-                      <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&q=80" alt="Entire Place" />
-                      <div className="place-info">
-                        <h4>Entire Place</h4>
-                        <p>A place all to yourself</p>
+                  <h3>I Want To</h3>
+                  <div className="purchase-method-tabs">
+                    <button
+                      className={`method-tab ${purchaseMethod === 'rent' ? 'active' : ''}`}
+                      onClick={() => setPurchaseMethod('rent')}
+                    >
+                      <Receipt className="tab-icon" />
+                      <span>Rent</span>
+                    </button>
+                    <button
+                      className={`method-tab ${purchaseMethod === 'buy' ? 'active' : ''}`}
+                      onClick={() => setPurchaseMethod('buy')}
+                    >
+                      <ShoppingCart className="tab-icon" />
+                      <span>Buy</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Property Type */}
+                <div className="filter-section">
+                  <h3>Property Type</h3>
+                  <p className="section-subtitle">Select the type of property you're looking for</p>
+                  <div className="property-type-grid">
+                    {propertyTypes.map((type) => {
+                      const IconComponent = type.icon;
+                      return (
+                        <button
+                          key={type.value}
+                          className={`property-type-card ${selectedPropertyType === type.value ? 'selected' : ''}`}
+                          onClick={() => setSelectedPropertyType(selectedPropertyType === type.value ? '' : type.value)}
+                        >
+                          <IconComponent className="property-type-icon" size={32} />
+                          <span className="property-type-label">{type.label}</span>
+                          {selectedPropertyType === type.value && (
+                            <span className="selected-check">✓</span>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Location */}
+                <div className="filter-section">
+                  <h3>Location</h3>
+                  <div className="search-form-group" ref={cityDropdownRef}>
+                    <label className="search-label">City</label>
+                    <input
+                      type="text"
+                      className="search-white-input"
+                      placeholder="Search city..."
+                      value={cityInput}
+                      onChange={handleCityInputChange}
+                      onFocus={handleCityInputFocus}
+                    />
+                    {showCitySuggestions && citySuggestions.length > 0 && (
+                      <div className="city-suggestions-dropdown">
+                        {citySuggestions.slice(0, 10).map((city, index) => (
+                          <div
+                            key={index}
+                            className="city-suggestion-item"
+                            onClick={() => handleCitySelect(city)}
+                          >
+                            {city}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Price Range - Manual Input */}
+                <div className="filter-section">
+                  <h3>Price Range</h3>
+                  <p className="section-subtitle">
+                    Enter your budget {purchaseMethod === 'rent' ? 'per month' : 'range'}
+                  </p>
+                  <div className="price-inputs-row">
+                    <div className="price-input-group">
+                      <label className="search-label">Minimum Price</label>
+                      <div className="search-input-wrapper">
+                        <span className="input-icon">₹</span>
+                        <input
+                          type="number"
+                          className="search-white-input"
+                          placeholder="Min"
+                          value={minPrice}
+                          onChange={(e) => setMinPrice(e.target.value)}
+                        />
                       </div>
                     </div>
-                    <div className="place-card">
-                      <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&q=80" alt="Room" />
-                      <div className="place-info">
-                        <h4>Room</h4>
-                        <p>Your own room, plus shared spaces</p>
-                      </div>
-                    </div>
-                    <div className="place-card">
-                      <img src="https://images.unsplash.com/photo-1556020685-ae41abfc9365?w=400&q=80" alt="Shared Room" />
-                      <div className="place-info">
-                        <h4>Shared Room</h4>
-                        <p>Shared sleeping space</p>
+                    <div className="price-separator">—</div>
+                    <div className="price-input-group">
+                      <label className="search-label">Maximum Price</label>
+                      <div className="search-input-wrapper">
+                        <span className="input-icon">₹</span>
+                        <input
+                          type="number"
+                          className="search-white-input"
+                          placeholder="Max"
+                          value={maxPrice}
+                          onChange={(e) => setMaxPrice(e.target.value)}
+                        />
                       </div>
                     </div>
                   </div>
@@ -449,28 +631,17 @@ const Properties = () => {
                         <FaBed className="icon" />
                         <div>
                           <h4>Bedrooms</h4>
-                          <p>Select your room for your family</p>
+                          <p>Minimum bedrooms required</p>
                         </div>
                       </div>
                       <div className="counter-controls">
-                        <button onClick={() => decrement('bedrooms')}>−</button>
-                        <span>{counters.bedrooms}</span>
-                        <button onClick={() => increment('bedrooms')}>+</button>
-                      </div>
-                    </div>
-
-                    <div className="counter-item">
-                      <div className="counter-label">
-                        <Sofa className="icon" />
-                        <div>
-                          <h4>Dining</h4>
-                          <p>Select dining space</p>
-                        </div>
-                      </div>
-                      <div className="counter-controls">
-                        <button onClick={() => decrement('dining')}>−</button>
-                        <span>{counters.dining}</span>
-                        <button onClick={() => increment('dining')}>+</button>
+                        <button onClick={() => decrement('bedrooms')} disabled={counters.bedrooms === 0}>
+                          <FaMinus />
+                        </button>
+                        <span>{counters.bedrooms === 0 ? 'Any' : counters.bedrooms}</span>
+                        <button onClick={() => increment('bedrooms')}>
+                          <FaPlus />
+                        </button>
                       </div>
                     </div>
 
@@ -479,203 +650,69 @@ const Properties = () => {
                         <FaBath className="icon" />
                         <div>
                           <h4>Bathrooms</h4>
-                          <p>Select number of bathrooms</p>
+                          <p>Minimum bathrooms required</p>
                         </div>
                       </div>
                       <div className="counter-controls">
-                        <button onClick={() => decrement('bathrooms')}>−</button>
-                        <span>{counters.bathrooms}</span>
-                        <button onClick={() => increment('bathrooms')}>+</button>
+                        <button onClick={() => decrement('bathrooms')} disabled={counters.bathrooms === 0}>
+                          <FaMinus />
+                        </button>
+                        <span>{counters.bathrooms === 0 ? 'Any' : counters.bathrooms}</span>
+                        <button onClick={() => increment('bathrooms')}>
+                          <FaPlus />
+                        </button>
                       </div>
                     </div>
+
+                    {selectedPropertyType === 'residential' && (
+                      <div className="counter-item">
+                        <div className="counter-label">
+                          <Sofa className="icon" />
+                          <div>
+                            <h4>Dining</h4>
+                            <p>Dining space required</p>
+                          </div>
+                        </div>
+                        <div className="counter-controls">
+                          <button onClick={() => decrement('dining')} disabled={counters.dining === 0}>
+                            <FaMinus />
+                          </button>
+                          <span>{counters.dining === 0 ? 'Any' : counters.dining}</span>
+                          <button onClick={() => increment('dining')}>
+                            <FaPlus />
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 
-                {/* Price Range */}
-                <div className="filter-section">
-                  <h3>Price Range</h3>
-                  <p className="section-subtitle">The average nightly price is ₹200000</p>
-                  <div className="price-slider">
-                    <input
-                      type="range"
-                      min="0"
-                      max="10000"
-                      value={priceRange[1]}
-                      onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                      className="slider"
-                    />
-                  </div>
-                  <div className="price-values">
-                    <div>
-                      <label>Minimum</label>
-                      <p className="price">₹{priceRange[0]}</p>
-                    </div>
-                    <div>
-                      <label>Maximum</label>
-                      <p className="price">₹{priceRange[1]}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Amenities */}
-                <div className="filter-section">
-                  <h3>Amenities</h3>
-                  <div className="amenities-grid">
-                    <div className="amenity-item">
-                      <FaHome className="amenity-icon" />
-                      <div>
-                        <h4>Instant Book</h4>
-                        <p>Listings you can book without waiting</p>
-                      </div>
-                      <label className="toggle">
-                        <input 
-                          type="checkbox" 
-                          checked={selectedAmenities.furnished}
-                          onChange={() => toggleAmenity('furnished')}
-                        />
-                        <span className="toggle-slider"></span>
-                      </label>
-                    </div>
-                    <div className="amenity-item">
-                      <FaHome className="amenity-icon" />
-                      <div>
-                        <h4>Self Check-In</h4>
-                        <p>Easy access to the property</p>
-                      </div>
-                      <label className="toggle">
-                        <input 
-                          type="checkbox"
-                          checked={selectedAmenities.petAllowed}
-                          onChange={() => toggleAmenity('petAllowed')}
-                        />
-                        <span className="toggle-slider"></span>
-                      </label>
-                    </div>
-                    <div className="amenity-item">
-                      <Dog className="amenity-icon" />
-                      <div>
-                        <h4>Allows Pets</h4>
-                        <p>Bringing a service animal?</p>
-                      </div>
-                      <label className="toggle">
-                        <input 
-                          type="checkbox"
-                          checked={selectedAmenities.parkingSlot}
-                          onChange={() => toggleAmenity('parkingSlot')}
-                        />
-                        <span className="toggle-slider"></span>
-                      </label>
+                {/* Facilities - Dynamic based on property type */}
+                {selectedPropertyType && (
+                  <div className="filter-section">
+                    <h3>Amenities & Facilities</h3>
+                    <p className="section-subtitle">
+                      Select facilities for {propertyTypes.find(t => t.value === selectedPropertyType)?.label}
+                    </p>
+                    <div className="facilities-grid">
+                      {getAmenitiesForType(selectedPropertyType).map((amenity) => {
+                        const IconComponent = amenity.icon;
+                        return (
+                          <label key={amenity.key} className="facility-checkbox">
+                            <input
+                              type="checkbox"
+                              checked={selectedFacilities[amenity.key] || false}
+                              onChange={() => toggleFacility(amenity.key)}
+                            />
+                            <span className="checkmark">✓</span>
+                            <IconComponent size={20} className="facility-icon" />
+                            <span>{amenity.label}</span>
+                          </label>
+                        );
+                      })}
                     </div>
                   </div>
-                </div>
-
-                {/* Facilities */}
-                <div className="filter-section">
-                  <h3>Facilities</h3>
-                  <div className="facilities-grid">
-                    <label className="facility-checkbox">
-                      <input
-                        type="checkbox"
-                        checked={selectedFacilities.furnished}
-                        onChange={() => toggleFacility('furnished')}
-                      />
-                      <span className="checkmark">✓</span>
-                      <Sofa size={20} className="facility-icon" />
-                      <span>Furnished</span>
-                    </label>
-                    <label className="facility-checkbox">
-                      <input
-                        type="checkbox"
-                        checked={selectedFacilities.petAllowed}
-                        onChange={() => toggleFacility('petAllowed')}
-                      />
-                      <span className="checkmark">✓</span>
-                      <Dog size={20} className="facility-icon" />
-                      <span>Pet Allowed</span>
-                    </label>
-                    <label className="facility-checkbox">
-                      <input
-                        type="checkbox"
-                        checked={selectedFacilities.parkingSlot}
-                        onChange={() => toggleFacility('parkingSlot')}
-                      />
-                      <span className="checkmark">✓</span>
-                      <Car size={20} className="facility-icon" />
-                      <span>Parking Slot</span>
-                    </label>
-                    <label className="facility-checkbox">
-                      <input
-                        type="checkbox"
-                        checked={selectedFacilities.kitchen}
-                        onChange={() => toggleFacility('kitchen')}
-                      />
-                      <span className="checkmark">✓</span>
-                      <UtensilsCrossed size={20} className="facility-icon" />
-                      <span>Kitchen</span>
-                    </label>
-                    <label className="facility-checkbox">
-                      <input
-                        type="checkbox"
-                        checked={selectedFacilities.wifi}
-                        onChange={() => toggleFacility('wifi')}
-                      />
-                      <span className="checkmark">✓</span>
-                      <Wifi size={20} className="facility-icon" />
-                      <span>WiFi</span>
-                    </label>
-                    <label className="facility-checkbox">
-                      <input
-                        type="checkbox"
-                        checked={selectedFacilities.ac}
-                        onChange={() => toggleFacility('ac')}
-                      />
-                      <span className="checkmark">✓</span>
-                      <Snowflake size={20} className="facility-icon" />
-                      <span>Air Conditioning</span>
-                    </label>
-                    <label className="facility-checkbox">
-                      <input
-                        type="checkbox"
-                        checked={selectedFacilities.swimmingPool}
-                        onChange={() => toggleFacility('swimmingPool')}
-                      />
-                      <span className="checkmark">✓</span>
-                      <Waves size={20} className="facility-icon" />
-                      <span>Swimming Pool</span>
-                    </label>
-                    <label className="facility-checkbox">
-                      <input
-                        type="checkbox"
-                        checked={selectedFacilities.gym}
-                        onChange={() => toggleFacility('gym')}
-                      />
-                      <span className="checkmark">✓</span>
-                      <Dumbbell size={20} className="facility-icon" />
-                      <span>Gym</span>
-                    </label>
-                    <label className="facility-checkbox">
-                      <input
-                        type="checkbox"
-                        checked={selectedFacilities.security}
-                        onChange={() => toggleFacility('security')}
-                      />
-                      <span className="checkmark">✓</span>
-                      <Lock size={20} className="facility-icon" />
-                      <span>24/7 Security</span>
-                    </label>
-                  </div>
-                </div>
-
-                {/* Property Type Tags */}
-                <div className="filter-section">
-                  <h3>Property Type</h3>
-                  <div className="tag-group">
-                    <span className="tag">City <button>×</button></span>
-                    <span className="tag">House <button>×</button></span>
-                    <span className="tag">Residential <button>×</button></span>
-                    <span className="tag">Apartment</span>
-                  </div>
-                </div>
+                )}
 
                 {/* Action Buttons */}
                 <div className="filter-actions">
@@ -744,11 +781,21 @@ const Properties = () => {
                     >
                       {/* Property Image */}
                       <div className="property-image-container">
-                        <img src={property.image} alt={property.title} />
+                        <img src={property.image || property.images?.[0]} alt={property.title} />
+                        
+                        {/* Property Type Badge */}
+                        <div className="property-type-badge">
+                          {propertyTypes.find(t => t.value === property.propertyType)?.label || 'Property'}
+                        </div>
+
+                        {/* Listing Type Badge */}
+                        <div className={`listing-type-badge ${property.listingType}`}>
+                          {property.listingType === 'sale' ? 'For Sale' : 'For Rent'}
+                        </div>
                         
                         {/* Title Overlay */}
                         <h3 className="property-title-overlay">
-                          {property.type || 'Luminous Urban Abode'}
+                          {property.title || property.type || 'Luminous Urban Abode'}
                         </h3>
 
                         {/* Info Card */}
@@ -758,27 +805,36 @@ const Properties = () => {
                             {property.description || 'A peaceful escape with sweeping views'}
                           </p>
 
+                          {/* Price */}
+                          <div className="property-price">
+                            <span className="price-amount">₹{parseFloat(property.price).toLocaleString()}</span>
+                            {property.listingType === 'rent' && <span className="price-period">/month</span>}
+                          </div>
+
                           {/* Stats Grid */}
                           <div className="property-stats">
                             <div className="property-stat-item">
-                              <span className="property-stat-value">{property.area || '645'}</span>
-                              <span className="property-stat-unit">sq.m</span>
+                              <span className="property-stat-value">{property.area || property.specifications?.area || '645'}</span>
+                              <span className="property-stat-unit">sq.ft</span>
                               <span className="property-stat-label">Total Area</span>
                             </div>
                             <div className="property-stat-item">
-                              <span className="property-stat-value">{property.bedrooms}</span>
+                              <span className="property-stat-value">{property.bedrooms || property.specifications?.bedrooms}</span>
                               <span className="property-stat-unit">-</span>
-                              <span className="property-stat-value">{property.bathrooms}</span>
+                              <span className="property-stat-value">{property.bathrooms || property.specifications?.bathrooms}</span>
                               <span className="property-stat-label">Bed-Bath</span>
                             </div>
                             <div className="property-stat-item">
-                              <span className="property-stat-value">{new Date().getFullYear()}</span>
+                              <span className="property-stat-value">{property.yearBuilt || new Date().getFullYear()}</span>
                               <span className="property-stat-label">Year Built</span>
                             </div>
                           </div>
 
                           {/* Learn More Button */}
-                          <button className="learn-more-btn">
+                          <button className="learn-more-btn" onClick={(e) => {
+                            e.stopPropagation();
+                            handlePropertyClick(property._id);
+                          }}>
                             <span>Learn more</span>
                             <span className="learn-more-icon">↗</span>
                           </button>
@@ -794,13 +850,14 @@ const Properties = () => {
                     <button
                       onClick={() => handlePageChange(pagination.currentPage - 1)}
                       disabled={pagination.currentPage === 1}
+                      className="pagination-arrow"
                     >
                       ←
                     </button>
                     {Array.from({ length: Math.min(pagination.totalPages, 8) }, (_, i) => {
                       const pageNum = i + 1;
                       if (pageNum === 4 && pagination.totalPages > 8) {
-                        return <span key="ellipsis">...</span>;
+                        return <span key="ellipsis" className="pagination-ellipsis">...</span>;
                       }
                       if (pageNum > 3 && pageNum < pagination.totalPages - 2 && pagination.totalPages > 8) {
                         return null;
@@ -809,7 +866,7 @@ const Properties = () => {
                         <button
                           key={pageNum}
                           onClick={() => handlePageChange(pageNum)}
-                          className={pagination.currentPage === pageNum ? 'active' : ''}
+                          className={`pagination-page ${pagination.currentPage === pageNum ? 'active' : ''}`}
                         >
                           {pageNum}
                         </button>
@@ -818,7 +875,7 @@ const Properties = () => {
                     {pagination.totalPages > 8 && (
                       <button
                         onClick={() => handlePageChange(pagination.totalPages)}
-                        className={pagination.currentPage === pagination.totalPages ? 'active' : ''}
+                        className={`pagination-page ${pagination.currentPage === pagination.totalPages ? 'active' : ''}`}
                       >
                         {pagination.totalPages}
                       </button>
@@ -826,6 +883,7 @@ const Properties = () => {
                     <button
                       onClick={() => handlePageChange(pagination.currentPage + 1)}
                       disabled={pagination.currentPage === pagination.totalPages}
+                      className="pagination-arrow"
                     >
                       →
                     </button>

@@ -1,27 +1,23 @@
-// ProtectedRoute.jsx - CORRECTED VERSION
+// ProtectedRoute.jsx - NO SPINNER VERSION
 import { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
-const ProtectedRoute = ({ children, allowedRoles }) => {
+const ProtectedRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
+  const location = useLocation();
 
-  // Show loading state while checking authentication
-if (loading) {
+  // Just return null while loading - no spinner
+  if (loading) {
     return null;
   }
 
   // Redirect to login if not authenticated
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
   }
 
-  // Check role if allowedRoles is specified
-  if (allowedRoles && !allowedRoles.includes(user.role)) {
-    return <Navigate to="/properties" replace />;
-  }
-
-  // Render protected content
+  // User is authenticated, render the protected content
   return children;
 };
 
