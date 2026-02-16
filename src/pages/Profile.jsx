@@ -47,7 +47,7 @@ const Profile = () => {
   });
 
   // Balance State
-  const [balance, setBalance] = useState(user?.balance || 0);
+  const [balance, setBalance] = useState(Number(user?.balance) || 0);
   const [showBalanceModal, setShowBalanceModal] = useState(false);
   const [topUpAmount, setTopUpAmount] = useState('');
 
@@ -358,7 +358,7 @@ const Profile = () => {
                   <label>Current Balance</label>
                   <div className="balance-amount">
                     <span className="currency">$</span>
-                    <span className="amount">{balance.toFixed(2)}</span>
+                    <span className="amount">{(Number(balance) || 0).toFixed(2)}</span>
                   </div>
                 </div>
               </div>
@@ -551,7 +551,7 @@ const Profile = () => {
                     <div className="balance-modal-content">
                       <div className="current-balance-info">
                         <label>Current Balance</label>
-                        <div className="balance-value">${balance.toFixed(2)}</div>
+                        <div className="balance-value">$${(Number(balance) + parseFloat(topUpAmount)).toFixed(2)}</div>
                       </div>
 
                       <div className="form-group">
