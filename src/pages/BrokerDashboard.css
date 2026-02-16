@@ -1,0 +1,751 @@
+/* BrokerDashboardEnhanced.css - Professional Agent Profile Design */
+
+.broker-dashboard-enhanced {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding: 100px 40px 40px;
+}
+
+.dashboard-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+.loader-enhanced {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e0e0e0;
+  border-top: 4px solid #4CAF50;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Header */
+.dashboard-header-enhanced {
+  max-width: 1400px;
+  margin: 0 auto 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-header-enhanced h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.btn-close {
+  width: 40px;
+  height: 40px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-close:hover {
+  background: #f5f5f5;
+  color: #1a1a1a;
+}
+
+/* Layout */
+.dashboard-layout {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 30px;
+}
+
+/* Left Section - Stats & Properties */
+.dashboard-left {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Stats Row */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.stat-card-enhanced {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 25px;
+  position: relative;
+  display: flex;
+  gap: 18px;
+}
+
+.stat-icon-circle {
+  width: 50px;
+  height: 50px;
+  background: #f3f4f6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #1a1a1a;
+  flex-shrink: 0;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-content h3 {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.stat-number {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.stat-meta {
+  font-size: 14px;
+  font-weight: 400;
+  color: #6b7280;
+}
+
+.stat-progress {
+  margin-top: 12px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #f3f4f6;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #3b82f6;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+.progress-fill.green {
+  background: #10b981;
+}
+
+.progress-text {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.info-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 16px;
+  color: #d1d5db;
+  cursor: pointer;
+}
+
+.info-icon:hover {
+  color: #9ca3af;
+}
+
+/* Properties Section */
+.properties-section-enhanced {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 30px;
+}
+
+.section-title-enhanced {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 25px 0;
+}
+
+.properties-list-enhanced {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Property Item */
+.property-item-enhanced {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.property-item-enhanced:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.property-image-small {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #e5e7eb;
+}
+
+.property-image-small img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.property-placeholder-small {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+}
+
+.property-info-compact {
+  flex: 1;
+}
+
+.property-price-compact {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 5px 0;
+}
+
+.property-location-compact {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-badge-compact {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.status-badge-compact.status-active {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge-compact.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge-compact.status-sold {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-badge-compact.status-wpa {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.btn-view-arrow {
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #6b7280;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.btn-view-arrow:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+  color: #1a1a1a;
+}
+
+/* Empty State */
+.empty-properties {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-icon {
+  font-size: 60px;
+  color: #d1d5db;
+  margin-bottom: 20px;
+}
+
+.empty-properties h3 {
+  font-size: 20px;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.empty-properties p {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 25px;
+}
+
+.btn-add-first {
+  padding: 12px 28px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-add-first:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+/* Right Section - Agent Profile */
+.dashboard-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Profile Tabs */
+.profile-tabs {
+  display: flex;
+  gap: 0;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 15px 20px;
+  background: white;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+  color: #1a1a1a;
+  border-bottom-color: #1a1a1a;
+  background: #fafafa;
+}
+
+.tab-btn:hover:not(.active) {
+  background: #f9fafb;
+}
+
+/* Agent Profile Card */
+.agent-profile-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 30px;
+  text-align: center;
+}
+
+.agent-image-section {
+  margin-bottom: 20px;
+}
+
+.agent-avatar-large {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #f3f4f6;
+}
+
+.agent-avatar-placeholder {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: 700;
+  color: white;
+  margin: 0 auto;
+  border: 4px solid #f3f4f6;
+}
+
+.agent-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 10px 0;
+}
+
+.verification-badge-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.verification-badge-inline.verified {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.verification-badge-inline.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.verification-badge-inline.rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Agent Info List */
+.agent-info-list {
+  text-align: left;
+  margin-top: 25px;
+}
+
+.info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 15px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.info-value {
+  font-size: 15px;
+  color: #1a1a1a;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-value svg {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.info-row.clickable {
+  cursor: pointer;
+}
+
+.info-row.clickable:hover {
+  background: #f9fafb;
+  margin: 0 -15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 8px;
+}
+
+.info-value.link {
+  color: #3b82f6;
+  justify-content: space-between;
+}
+
+/* Earnings Section */
+.earnings-section {
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: 1px solid #f3f4f6;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.earnings-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.earnings-label {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.earnings-value-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.earnings-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.earnings-value-large {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.btn-edit-small {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #6b7280;
+  transition: all 0.3s ease;
+}
+
+.btn-edit-small:hover {
+  background: #f3f4f6;
+  color: #1a1a1a;
+}
+
+/* Delete Agent Button */
+.btn-delete-agent {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid #ef4444;
+  border-radius: 8px;
+  color: #ef4444;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 25px;
+  transition: all 0.3s ease;
+}
+
+.btn-delete-agent:hover {
+  background: #fef2f2;
+}
+
+/* Quick Actions Card */
+.quick-actions-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action-btn-full {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.action-btn-full.primary {
+  background: #4CAF50;
+  color: white;
+}
+
+.action-btn-full.primary:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.action-btn-full.secondary {
+  background: transparent;
+  color: #1a1a1a;
+  border: 1px solid #e5e7eb;
+}
+
+.action-btn-full.secondary:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+/* No Profile Container */
+.no-profile-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  background: #f8f9fa;
+}
+
+.no-profile-container h2 {
+  font-size: 32px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 15px;
+}
+
+.no-profile-container p {
+  font-size: 16px;
+  color: #6b7280;
+  margin-bottom: 30px;
+}
+
+.btn-complete-profile {
+  padding: 14px 32px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-complete-profile:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .dashboard-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-right {
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .broker-dashboard-enhanced {
+    padding: 90px 20px 40px;
+  }
+
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-layout {
+    gap: 20px;
+  }
+
+  .properties-section-enhanced {
+    padding: 20px;
+  }
+
+  .agent-profile-card {
+    padding: 25px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-header-enhanced h1 {
+    font-size: 22px;
+  }
+
+  .stat-card-enhanced {
+    padding: 20px;
+  }
+
+  .property-item-enhanced {
+    flex-wrap: wrap;
+  }
+
+  .btn-view-arrow {
+    order: 3;
+    flex-basis: 100%;
+  }
+}

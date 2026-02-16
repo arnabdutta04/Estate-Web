@@ -1,17 +1,14 @@
 import React, { useContext, useState, useEffect, useTransition } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { FaBriefcase, FaPlus } from 'react-icons/fa';
+import { FaBriefcase } from 'react-icons/fa';
 import "./navbar.css"; 
 import {
   FaUser,
   FaSignOutAlt,
   FaArrowRight,
   FaUserPlus,
-  FaLock,
-  FaBuilding,
-  FaCrown,
-  FaUserCircle
+  FaLock
 } from "react-icons/fa";
 
 const Navbar = () => {
@@ -65,18 +62,6 @@ const Navbar = () => {
 
   const isActive = (path) => location.pathname === path;
 
-  // Helper function to get role icon
-  const getRoleIcon = (role) => {
-    switch(role) {
-      case 'broker':
-        return <FaBuilding />;
-      case 'admin':
-        return <FaCrown />;
-      default:
-        return <FaUserCircle />;
-    }
-  };
-
   return (
     <nav className={`navbar-glass-modern ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-glass-wrapper">
@@ -112,23 +97,30 @@ const Navbar = () => {
             {!user && <FaLock className="lock-icon" />}
           </button>
 
-          {/* PROTECTED - Requires login */}
+          {/* PROTECTED - Requires login - Changed label based on user role */}
           <button
-            className={`nav-link-glass ${isActive("/brokers") ? "active" : ""} ${!user ? "protected-link" : ""}`}
-            onClick={() => handleProtectedNavigation("/brokers")}
+            className={`nav-link-glass ${isActive("/brokers") || isActive("/broker/dashboard") ? "active" : ""} ${!user ? "protected-link" : ""}`}
+            onClick={() => {
+              if (user && user.role === 'broker') {
+                // Broker users go to their dashboard
+                handleNavigation("/broker/dashboard");
+              } else {
+                // Regular users go to brokers listing page
+                handleProtectedNavigation("/brokers");
+              }
+            }}
           >
-            Broker
-            {!user && <FaLock className="lock-icon" />}
+            {user && user.role === 'broker' ? (
+              <>
+                <FaBriefcase /> My Dashboard
+              </>
+            ) : (
+              <>
+                Brokers
+                {!user && <FaLock className="lock-icon" />}
+              </>
+            )}
           </button>
-          {/* BROKER ONLY - Dashboard Link */}
-          {user && user.role === 'broker' && (
-            <button
-              className={`nav-link-glass ${isActive("/broker/dashboard") ? "active" : ""}`}
-              onClick={() => handleNavigation("/broker/dashboard")}
-            >
-              <FaBriefcase /> My Dashboard
-            </button>
-          )}
         </div>
 
         {/* User / Auth Section */}
@@ -150,12 +142,6 @@ const Navbar = () => {
             </>
           ) : !loading && user ? (
             <>
-              {user.role && (
-                <span className="role-badge-nav">
-                  {getRoleIcon(user.role)}
-                  {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
-                </span>
-              )}
               <button
                 className="user-profile-glass"
                 onClick={() => handleNavigation("/profile")}
