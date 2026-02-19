@@ -105,13 +105,12 @@
   background: #c4d600;
 }
 
-/* Hero Content */
 .hero-content-modern {
   position: relative;
   z-index: 10;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 12rem 3rem 6rem;
+  padding: 120px 5% 60px; 
   display: flex;
   flex-direction: column;
   gap: 3rem;
@@ -226,7 +225,8 @@
   }
 
   .hero-content-modern {
-    padding: 3rem 2rem 5rem;
+    padding: 100px 5% 40px;   /* ← enough clearance on mobile */
+    gap: 1.75rem;
   }
 
   .hero-trust-badges {
@@ -272,7 +272,7 @@
 
   /* Hero content: push down enough to clear navbar properly */
   .hero-content-modern {
-    padding: 7rem 1.25rem 3rem; /* ← KEY FIX: top padding clears navbar */
+    padding: 100px 5% 40px;   /* ← enough clearance on mobile */
     gap: 1.75rem;
   }
 
@@ -342,7 +342,7 @@
   }
 
   .hero-content-modern {
-    padding: 6.5rem 1rem 2.5rem;
+    padding: 90px 4% 30px;
     gap: 1.5rem;
   }
 
