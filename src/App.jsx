@@ -1,4 +1,4 @@
-// App.jsx - FIXED VERSION (Uses only RoleRoute)
+// App.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
@@ -13,7 +13,7 @@ import BrokerDetail from "./pages/BrokerDetail";
 import BrokerDashboard from "./pages/BrokerDashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Profile from "./pages/Profile";
+// ✅ REMOVED: Profile import — profile is now a panel in Navbar, not a page
 
 // Components
 import RoleRoute from "./components/RoleRoute";
@@ -27,14 +27,14 @@ function AppContent() {
       <Route path="/" element={<Welcome />} />
       <Route path="/home" element={<Navigate to="/" replace />} />
       
-      {/* PUBLIC ROUTES - No login required */}
+      {/* PUBLIC ROUTES */}
       <Route path="/explore" element={<Explore />} />
 
       {/* AUTH ROUTES */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      {/* PROTECTED ROUTES - Login required (all roles allowed) */}
+      {/* PROTECTED ROUTES */}
       <Route
         path="/properties"
         element={
@@ -43,7 +43,6 @@ function AppContent() {
           </RoleRoute>
         }
       />
-
       <Route
         path="/property/:id"
         element={
@@ -52,7 +51,6 @@ function AppContent() {
           </RoleRoute>
         }
       />
-
       <Route
         path="/properties/:id"
         element={
@@ -61,7 +59,6 @@ function AppContent() {
           </RoleRoute>
         }
       />
-
       <Route
         path="/brokers"
         element={
@@ -70,7 +67,6 @@ function AppContent() {
           </RoleRoute>
         }
       />
-
       <Route
         path="/brokers/:id"
         element={
@@ -80,14 +76,8 @@ function AppContent() {
         }
       />
 
-      <Route
-        path="/profile"
-        element={
-          <RoleRoute allowedRoles={['customer', 'broker', 'admin']}>
-            <Profile />
-          </RoleRoute>
-        }
-      />
+      {/* ✅ CHANGED: /profile now redirects to home — panel opens from navbar button */}
+      <Route path="/profile" element={<Navigate to="/" replace />} />
 
       {/* BROKER-ONLY ROUTES */}
       <Route
@@ -98,7 +88,6 @@ function AppContent() {
           </RoleRoute>
         }
       />
-
       <Route
         path="/broker/edit-profile"
         element={
@@ -110,7 +99,6 @@ function AppContent() {
           </RoleRoute>
         }
       />
-
       <Route
         path="/broker/complete-profile"
         element={
@@ -122,7 +110,6 @@ function AppContent() {
           </RoleRoute>
         }
       />
-
       <Route
         path="/broker/add-property"
         element={
@@ -134,7 +121,6 @@ function AppContent() {
           </RoleRoute>
         }
       />
-
       <Route
         path="/properties/edit/:id"
         element={
@@ -146,18 +132,6 @@ function AppContent() {
           </RoleRoute>
         }
       />
-
-      {/* ADMIN-ONLY ROUTES (Optional) */}
-      {/* 
-      <Route
-        path="/admin/dashboard"
-        element={
-          <RoleRoute allowedRoles={['admin']}>
-            <AdminDashboard />
-          </RoleRoute>
-        }
-      />
-      */}
 
       {/* 404 FALLBACK */}
       <Route path="*" element={<Navigate to="/" replace />} />
