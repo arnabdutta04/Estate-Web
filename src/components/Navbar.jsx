@@ -10,7 +10,7 @@ import {
   FaUserPlus,
   FaLock
 } from "react-icons/fa";
-import ProfilePanel from "./ProfilePanel"; // ✅ CHANGE 1: import panel
+import ProfilePanel from "./Profilepanel"; // ✅ matches your actual filename
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -18,9 +18,8 @@ const Navbar = () => {
   const { user, loading, logout } = useContext(AuthContext);
   const [scrolled, setScrolled] = useState(false);
   const [isPending, startTransition] = useTransition();
-  const [profileOpen, setProfileOpen] = useState(false); // ✅ CHANGE 2: panel state
+  const [profileOpen, setProfileOpen] = useState(false);
 
-  // Scroll detection effect
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 50;
@@ -28,30 +27,20 @@ const Navbar = () => {
         setScrolled(isScrolled);
       }
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [scrolled]);
 
   const handleNavigation = (path) => {
-    startTransition(() => {
-      navigate(path);
-    });
+    startTransition(() => navigate(path));
   };
 
   const handleProtectedNavigation = (path) => {
     if (user) {
-      startTransition(() => {
-        navigate(path);
-      });
+      startTransition(() => navigate(path));
     } else {
-      startTransition(() => {
-        navigate("/login", { state: { from: path } });
-      });
+      startTransition(() => navigate("/login", { state: { from: path } }));
     }
   };
 
@@ -66,12 +55,12 @@ const Navbar = () => {
     <>
       <nav className={`navbar-glass-modern ${scrolled ? 'scrolled' : ''}`}>
         <div className="navbar-glass-wrapper">
-          {/* Logo Section */}
+          {/* Logo */}
           <div className="navbar-logo-glass" onClick={() => handleNavigation("/")}>
             <span className="logo-text-glass">PROPIFY</span>
           </div>
 
-          {/* Navigation Links */}
+          {/* Nav Links */}
           <div className="navbar-links-glass">
             <button
               className={`nav-link-glass ${isActive("/") ? "active" : ""}`}
@@ -106,45 +95,30 @@ const Navbar = () => {
               }}
             >
               {user && user.role === 'broker' ? (
-                <>
-                  <FaBriefcase /> My Dashboard
-                </>
+                <><FaBriefcase /> My Dashboard</>
               ) : (
-                <>
-                  Brokers
-                  {!user && <FaLock className="lock-icon" />}
-                </>
+                <>Brokers {!user && <FaLock className="lock-icon" />}</>
               )}
             </button>
           </div>
 
-          {/* User / Auth Section */}
+          {/* Auth / User */}
           <div className="navbar-actions-glass">
             {!loading && !user ? (
               <>
-                <button
-                  className="cta-btn-glass"
-                  onClick={() => handleNavigation("/login")}
-                >
+                <button className="cta-btn-glass" onClick={() => handleNavigation("/login")}>
                   Login <FaArrowRight />
                 </button>
-                <button
-                  className="cta-btn-glass register-btn-glass"
-                  onClick={() => handleNavigation("/register")}
-                >
+                <button className="cta-btn-glass register-btn-glass" onClick={() => handleNavigation("/register")}>
                   Register <FaUserPlus />
                 </button>
               </>
             ) : !loading && user ? (
               <>
-                {/* ✅ CHANGE 3: onClick opens panel instead of navigating to /profile */}
-                <button
-                  className="user-profile-glass"
-                  onClick={() => setProfileOpen(true)}
-                >
+                {/* Opens panel instead of navigating */}
+                <button className="user-profile-glass" onClick={() => setProfileOpen(true)}>
                   <FaUser /> {user.name || "Profile"}
                 </button>
-
                 <button className="logout-btn-glass" onClick={handleLogout}>
                   <FaSignOutAlt /> Logout
                 </button>
@@ -154,7 +128,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* ✅ CHANGE 4: ProfilePanel renders here — over whatever page is open */}
+      {/* Profile panel — renders over the current page */}
       <ProfilePanel isOpen={profileOpen} onClose={() => setProfileOpen(false)} />
     </>
   );
