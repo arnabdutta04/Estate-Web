@@ -95,9 +95,11 @@ const Login = ({ onClose, onSuccess, onSwitchToRegister }) => {  // ← ONLY CHA
     if (onClose) { onClose(); } else { navigate("/"); }  // ← ONLY CHANGE
   };
 
-  return (
-    <div className="auth-modal-overlay">
-      <div className="auth-modal-container">
+  // ← FIXED: when used as modal (onClose exists), skip the overlay wrapper
+  // Welcome.jsx already provides the overlay — rendering it again causes double black background
+  if (onClose) {
+    return (
+      <>
         <button className="auth-close-btn" onClick={handleClose}>
           <FaTimes />
         </button>
@@ -188,6 +190,63 @@ const Login = ({ onClose, onSuccess, onSwitchToRegister }) => {  // ← ONLY CHA
             }
           </p>
 
+          <div className="auth-info-box">
+            <p><strong>Note:</strong> Brokers must be verified by admin before accessing the dashboard.</p>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  // Standalone page rendering (when navigating directly to /login)
+  return (
+    <div className="auth-modal-overlay">
+      <div className="auth-modal-container">
+        <button className="auth-close-btn" onClick={handleClose}>
+          <FaTimes />
+        </button>
+
+        <div className="auth-modal-card">
+          <h1 className="auth-modal-title">USER LOGIN</h1>
+          <div className="login-type-badges">
+            <span className="login-badge customer"><FaUser /> Customer</span>
+            <span className="login-badge broker"><FaCheckCircle /> Broker</span>
+            <span className="login-badge admin"><FaShieldAlt /> Admin</span>
+          </div>
+          {error && <div className="auth-modal-error"><FaExclamationTriangle /> {error}</div>}
+          {warning && <div className="auth-modal-warning"><FaClock /> {warning}</div>}
+          {verificationStatus && (
+            <div className={`verification-alert ${verificationStatus.type}`}>
+              <div className="verification-alert-icon">{verificationStatus.icon}</div>
+              <div className="verification-alert-content">
+                <h3>{verificationStatus.type === "pending" ? "Verification Pending" : "Verification Rejected"}</h3>
+                <p>{verificationStatus.message}</p>
+              </div>
+            </div>
+          )}
+          <form onSubmit={handleSubmit} className="auth-modal-form">
+            <div className="auth-form-group">
+              <div className="auth-input-container">
+                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required disabled={loading} />
+                <div className="auth-input-icon"><FaUser /></div>
+              </div>
+            </div>
+            <div className="auth-form-group">
+              <div className="auth-input-container">
+                <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required disabled={loading} />
+                <div className="auth-input-icon"><FaLock /></div>
+              </div>
+            </div>
+            <button type="submit" className="auth-modal-submit" disabled={loading || verificationStatus?.type === "rejected"}>
+              {loading ? (<><span className="spinner"></span>LOGGING IN...</>) : ("LOGIN")}
+            </button>
+          </form>
+          <div className="auth-modal-links">
+            <Link to="/forgot-password" className="forgot-password-link">Forgot Password?</Link>
+          </div>
+          <p className="auth-modal-footer">
+            Don't have an account? <Link to="/register">Register here</Link>
+          </p>
           <div className="auth-info-box">
             <p><strong>Note:</strong> Brokers must be verified by admin before accessing the dashboard.</p>
           </div>
