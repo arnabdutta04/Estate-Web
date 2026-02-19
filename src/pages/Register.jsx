@@ -1,10 +1,15 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { FaTimes, FaUser, FaEnvelope, FaPhone, FaLock, FaUserTag, FaInfoCircle, FaCheckCircle } from "react-icons/fa";
+import {
+  FaTimes, FaUser, FaEnvelope, FaPhone, FaLock,
+  FaUserTag, FaInfoCircle, FaCheckCircle
+} from "react-icons/fa";
 import "./Auth.css";
 
-const Register = () => {
+// ✅ Accepts optional props when used as modal overlay
+// When used as standalone page, all props are undefined and it works as before
+const Register = ({ onClose, onSuccess, onSwitchToLogin }) => {
   const navigate = useNavigate();
   const { register } = useContext(AuthContext);
 
@@ -20,17 +25,15 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [showBrokerInfo, setShowBrokerInfo] = useState(false);
 
+  // Are we running inside a modal or as a standalone page?
+  const isModal = !!onClose;
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    
-    // Show broker info when broker role is selected
-    if (name === "role" && value === "broker") {
-      setShowBrokerInfo(true);
-    } else if (name === "role") {
-      setShowBrokerInfo(false);
+    if (name === "role") {
+      setShowBrokerInfo(value === "broker");
     }
-    
     setError("");
   };
 
@@ -40,23 +43,25 @@ const Register = () => {
     setLoading(true);
 
     try {
-      // Combine country code with phone number
       const phoneWithCode = countryCode + formData.phone;
-      const response = await register({ ...formData, phone: phoneWithCode });
-      
-      // Check if user registered as broker
+      await register({ ...formData, phone: phoneWithCode });
+
       if (formData.role === "broker") {
-        // Redirect to broker profile completion page
         alert("Registration successful! Please complete your broker profile for verification.");
+        if (isModal) { onClose(); }
         navigate("/broker/complete-profile");
       } else if (formData.role === "admin") {
-        // Admin registration (if allowed)
         alert("Admin registration successful!");
+        if (isModal) { onClose(); }
         navigate("/admin/dashboard");
       } else {
-        // Customer registration - direct to properties
-        alert("Registration successful! Welcome to our platform.");
-        navigate("/properties");
+        // Customer success
+        if (isModal) {
+          onSuccess?.(); // close modal
+        } else {
+          alert("Registration successful! Welcome to our platform.");
+          navigate("/properties");
+        }
       }
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed. Please try again.");
@@ -65,13 +70,18 @@ const Register = () => {
     }
   };
 
+  // Close handler: modal -> call onClose, standalone page -> navigate("/")
   const handleClose = () => {
-    navigate("/");
+    if (isModal) {
+      onClose();
+    } else {
+      navigate("/");
+    }
   };
 
   return (
-    <div className="auth-modal-overlay">
-      <div className="auth-modal-container">
+    <div className={isModal ? "" : "auth-modal-overlay"}>
+      <div className={isModal ? "" : "auth-modal-container"}>
         <button className="auth-close-btn" onClick={handleClose}>
           <FaTimes />
         </button>
@@ -113,9 +123,7 @@ const Register = () => {
                   required
                   disabled={loading}
                 />
-                <div className="auth-input-icon">
-                  <FaUser />
-                </div>
+                <div className="auth-input-icon"><FaUser /></div>
               </div>
             </div>
 
@@ -130,15 +138,13 @@ const Register = () => {
                   required
                   disabled={loading}
                 />
-                <div className="auth-input-icon">
-                  <FaEnvelope />
-                </div>
+                <div className="auth-input-icon"><FaEnvelope /></div>
               </div>
             </div>
 
             <div className="auth-form-group">
               <div className="phone-input-wrapper">
-                <select 
+                <select
                   className="country-select"
                   value={countryCode}
                   onChange={(e) => setCountryCode(e.target.value)}
@@ -180,16 +186,14 @@ const Register = () => {
                   required
                   disabled={loading}
                 />
-                <div className="auth-input-icon">
-                  <FaLock />
-                </div>
+                <div className="auth-input-icon"><FaLock /></div>
               </div>
             </div>
 
             <div className="auth-form-group">
               <label className="role-select-label">Select Account Type</label>
               <div className="role-selection-cards">
-                <div 
+                <div
                   className={`role-card ${formData.role === 'customer' ? 'active' : ''}`}
                   onClick={() => !loading && handleChange({ target: { name: 'role', value: 'customer' } })}
                 >
@@ -208,7 +212,7 @@ const Register = () => {
                   </div>
                 </div>
 
-                <div 
+                <div
                   className={`role-card ${formData.role === 'broker' ? 'active' : ''}`}
                   onClick={() => !loading && handleChange({ target: { name: 'role', value: 'broker' } })}
                 >
@@ -230,24 +234,25 @@ const Register = () => {
               </div>
             </div>
 
-            <button 
-              type="submit" 
-              className="auth-modal-submit" 
+            <button
+              type="submit"
+              className="auth-modal-submit"
               disabled={loading}
             >
-              {loading ? (
-                <>
-                  <span className="spinner"></span>
-                  CREATING ACCOUNT...
-                </>
-              ) : (
-                "REGISTER"
-              )}
+              {loading ? <><span className="spinner"></span>CREATING ACCOUNT...</> : "REGISTER"}
             </button>
           </form>
 
           <p className="auth-modal-footer">
-            Already have an account? <Link to="/login">Login here</Link>
+            Already have an account?{" "}
+            {/* ✅ In modal mode: switch to login modal. In page mode: navigate */}
+            {isModal ? (
+              <a href="#" onClick={(e) => { e.preventDefault(); onSwitchToLogin?.(); }}>
+                Login here
+              </a>
+            ) : (
+              <Link to="/login">Login here</Link>
+            )}
           </p>
         </div>
       </div>

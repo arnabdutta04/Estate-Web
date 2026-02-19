@@ -11,14 +11,13 @@ import {
   FaLock
 } from "react-icons/fa";
 
-const Navbar = () => {
+const Navbar = ({ onLoginClick, onRegisterClick }) => {  // ← ONLY CHANGE: added props
   const navigate = useNavigate();
   const location = useLocation();
   const { user, loading, logout } = useContext(AuthContext);
   const [scrolled, setScrolled] = useState(false);
   const [isPending, startTransition] = useTransition();
 
-  // Scroll detection effect
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 50;
@@ -26,10 +25,8 @@ const Navbar = () => {
         setScrolled(isScrolled);
       }
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -41,17 +38,19 @@ const Navbar = () => {
     });
   };
 
-  // Protected navigation - requires login
   const handleProtectedNavigation = (path) => {
     if (user) {
       startTransition(() => {
         navigate(path);
       });
     } else {
-      // Redirect to login with return path
-      startTransition(() => {
-        navigate("/login", { state: { from: path } });
-      });
+      if (onLoginClick) {
+        onLoginClick();  // ← ONLY CHANGE: open modal if prop exists
+      } else {
+        startTransition(() => {
+          navigate("/login", { state: { from: path } });
+        });
+      }
     }
   };
 
@@ -65,14 +64,11 @@ const Navbar = () => {
   return (
     <nav className={`navbar-glass-modern ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-glass-wrapper">
-        {/* Logo Section */}
         <div className="navbar-logo-glass" onClick={() => handleNavigation("/")}>
           <span className="logo-text-glass">PROPIFY</span>
         </div>
 
-        {/* Navigation Links */}
         <div className="navbar-links-glass">
-          {/* PUBLIC - No login required */}
           <button
             className={`nav-link-glass ${isActive("/") ? "active" : ""}`}
             onClick={() => handleNavigation("/")}
@@ -80,7 +76,6 @@ const Navbar = () => {
             Home
           </button>
 
-          {/* PUBLIC - No login required */}
           <button
             className={`nav-link-glass ${isActive("/explore") ? "active" : ""}`}
             onClick={() => handleNavigation("/explore")}
@@ -88,7 +83,6 @@ const Navbar = () => {
             Explore
           </button>
 
-          {/* PROTECTED - Requires login */}
           <button
             className={`nav-link-glass ${isActive("/properties") ? "active" : ""} ${!user ? "protected-link" : ""}`}
             onClick={() => handleProtectedNavigation("/properties")}
@@ -97,45 +91,36 @@ const Navbar = () => {
             {!user && <FaLock className="lock-icon" />}
           </button>
 
-          {/* PROTECTED - Requires login - Changed label based on user role */}
           <button
             className={`nav-link-glass ${isActive("/brokers") || isActive("/broker/dashboard") ? "active" : ""} ${!user ? "protected-link" : ""}`}
             onClick={() => {
               if (user && user.role === 'broker') {
-                // Broker users go to their dashboard
                 handleNavigation("/broker/dashboard");
               } else {
-                // Regular users go to brokers listing page
                 handleProtectedNavigation("/brokers");
               }
             }}
           >
             {user && user.role === 'broker' ? (
-              <>
-                <FaBriefcase /> My Dashboard
-              </>
+              <><FaBriefcase /> My Dashboard</>
             ) : (
-              <>
-                Brokers
-                {!user && <FaLock className="lock-icon" />}
-              </>
+              <>Brokers {!user && <FaLock className="lock-icon" />}</>
             )}
           </button>
         </div>
 
-        {/* User / Auth Section */}
         <div className="navbar-actions-glass">
           {!loading && !user ? (
             <>
               <button
                 className="cta-btn-glass"
-                onClick={() => handleNavigation("/login")}
+                onClick={() => onLoginClick ? onLoginClick() : handleNavigation("/login")}  // ← ONLY CHANGE
               >
                 Login <FaArrowRight />
               </button>
               <button
                 className="cta-btn-glass register-btn-glass"
-                onClick={() => handleNavigation("/register")}
+                onClick={() => onRegisterClick ? onRegisterClick() : handleNavigation("/register")}  // ← ONLY CHANGE
               >
                 Register <FaUserPlus />
               </button>

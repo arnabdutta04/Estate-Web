@@ -4,14 +4,11 @@ import { AuthContext } from "../context/AuthContext";
 import { FaTimes, FaUser, FaLock, FaExclamationTriangle, FaClock, FaCheckCircle, FaShieldAlt } from "react-icons/fa";
 import "./Auth.css";
 
-const Login = () => {
+const Login = ({ onClose, onSuccess, onSwitchToRegister }) => {  // ← ONLY CHANGE: added props
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [warning, setWarning] = useState("");
   const [verificationStatus, setVerificationStatus] = useState(null);
@@ -33,43 +30,35 @@ const Login = () => {
 
     try {
       const response = await login(formData);
-      
-      // Extract user data from response
       const userData = response?.data?.user || response?.user;
       const role = userData?.role;
       
-      // Admin Login - Direct access
       if (role === "admin") {
+        if (onClose) onClose();  // ← ONLY CHANGE: close modal before navigating
         navigate("/admin/dashboard");
         return;
       }
 
-      // Broker Login - Check verification status
       if (role === "broker") {
         const brokerStatus = userData?.brokerProfile?.verificationStatus || userData?.verificationStatus;
-        
         switch (brokerStatus) {
           case "verified":
-            // Verified broker - allow access
+            if (onClose) onClose();  // ← ONLY CHANGE
             navigate("/broker/dashboard");
             break;
-            
           case "pending":
-            // Pending verification - show warning
             setVerificationStatus({
               type: "pending",
               message: "Your broker account is under verification. Please wait for admin approval.",
               icon: <FaClock />
             });
             setLoading(false);
-            // Optionally redirect to a waiting page
             setTimeout(() => {
+              if (onClose) onClose();  // ← ONLY CHANGE
               navigate("/broker/verification-pending");
             }, 3000);
             return;
-            
           case "rejected":
-            // Rejected - show error with reason
             const rejectionReason = userData?.brokerProfile?.rejectionReason || "Your verification was rejected.";
             setVerificationStatus({
               type: "rejected",
@@ -78,23 +67,20 @@ const Login = () => {
             });
             setLoading(false);
             return;
-            
           default:
-            // No broker profile found
             setWarning("Please complete your broker registration first.");
             setTimeout(() => {
+              if (onClose) onClose();  // ← ONLY CHANGE
               navigate("/broker/register");
             }, 2000);
             return;
         }
       }
 
-      // Customer Login - Normal flow
       if (role === "customer") {
-        navigate("/properties");
+        if (onSuccess) { onSuccess(); } else { navigate("/properties"); }  // ← ONLY CHANGE
       } else {
-        // Fallback for any other role
-        navigate("/properties");
+        if (onSuccess) { onSuccess(); } else { navigate("/properties"); }  // ← ONLY CHANGE
       }
       
     } catch (err) {
@@ -106,7 +92,7 @@ const Login = () => {
   };
 
   const handleClose = () => {
-    navigate("/");
+    if (onClose) { onClose(); } else { navigate("/"); }  // ← ONLY CHANGE
   };
 
   return (
@@ -120,15 +106,9 @@ const Login = () => {
           <h1 className="auth-modal-title">USER LOGIN</h1>
           
           <div className="login-type-badges">
-            <span className="login-badge customer">
-              <FaUser /> Customer
-            </span>
-            <span className="login-badge broker">
-              <FaCheckCircle /> Broker
-            </span>
-            <span className="login-badge admin">
-              <FaShieldAlt /> Admin
-            </span>
+            <span className="login-badge customer"><FaUser /> Customer</span>
+            <span className="login-badge broker"><FaCheckCircle /> Broker</span>
+            <span className="login-badge admin"><FaShieldAlt /> Admin</span>
           </div>
 
           {error && (
@@ -145,9 +125,7 @@ const Login = () => {
 
           {verificationStatus && (
             <div className={`verification-alert ${verificationStatus.type}`}>
-              <div className="verification-alert-icon">
-                {verificationStatus.icon}
-              </div>
+              <div className="verification-alert-icon">{verificationStatus.icon}</div>
               <div className="verification-alert-content">
                 <h3>
                   {verificationStatus.type === "pending" ? "Verification Pending" : "Verification Rejected"}
@@ -169,9 +147,7 @@ const Login = () => {
                   required
                   disabled={loading}
                 />
-                <div className="auth-input-icon">
-                  <FaUser />
-                </div>
+                <div className="auth-input-icon"><FaUser /></div>
               </div>
             </div>
 
@@ -186,9 +162,7 @@ const Login = () => {
                   required
                   disabled={loading}
                 />
-                <div className="auth-input-icon">
-                  <FaLock />
-                </div>
+                <div className="auth-input-icon"><FaLock /></div>
               </div>
             </div>
 
@@ -197,25 +171,21 @@ const Login = () => {
               className="auth-modal-submit" 
               disabled={loading || verificationStatus?.type === "rejected"}
             >
-              {loading ? (
-                <>
-                  <span className="spinner"></span>
-                  LOGGING IN...
-                </>
-              ) : (
-                "LOGIN"
-              )}
+              {loading ? (<><span className="spinner"></span>LOGGING IN...</>) : ("LOGIN")}
             </button>
           </form>
 
           <div className="auth-modal-links">
-            <Link to="/forgot-password" className="forgot-password-link">
-              Forgot Password?
-            </Link>
+            <Link to="/forgot-password" className="forgot-password-link">Forgot Password?</Link>
           </div>
 
           <p className="auth-modal-footer">
-            Don't have an account? <Link to="/register">Register here</Link>
+            Don't have an account?{" "}
+            {/* ← ONLY CHANGE: switch to register modal if prop exists */}
+            {onSwitchToRegister
+              ? <a href="#" onClick={(e) => { e.preventDefault(); onSwitchToRegister(); }}>Register here</a>
+              : <Link to="/register">Register here</Link>
+            }
           </p>
 
           <div className="auth-info-box">

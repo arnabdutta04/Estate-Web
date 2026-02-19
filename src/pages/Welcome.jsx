@@ -4,6 +4,10 @@ import { AuthContext } from "../context/AuthContext";
 import ContactSection from "../components/ContactSection";
 import Navbar from "../components/Navbar";
 
+// ✅ Only addition: import Login and Register
+import Login from "./Login";
+import Register from "./Register";
+
 import {
   FaHome,
   FaKey,
@@ -26,12 +30,19 @@ const Welcome = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
+  // ✅ Only addition: modal state
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+  const openLogin = () => { setShowRegister(false); setShowLogin(true); };
+  const openRegister = () => { setShowLogin(false); setShowRegister(true); };
+  const closeModals = () => { setShowLogin(false); setShowRegister(false); };
+
 // PROTECTED - Requires login
 const handleExploreClick = () => {
   if (user) {
     navigate('/properties');
   } else {
-    navigate('/login', { state: { from: '/properties' } });
+    openLogin(); // ✅ was: navigate('/login', { state: { from: '/properties' } });
   }
 };
 
@@ -40,7 +51,7 @@ const handlePropertyTypeClick = (propertyType) => {
   if (user) {
     navigate("/properties", { state: { filter: propertyType } });
   } else {
-    navigate("/login", { state: { from: '/properties' } });
+    openLogin(); // ✅ was: navigate("/login", { state: { from: '/properties' } });
   }
 };
 const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -52,7 +63,8 @@ const handleExplorePageClick = () => {
   return (
     <div className="welcome-page">
       {/* NAVBAR - ALWAYS VISIBLE */}
-      <Navbar />
+      {/* ✅ Only change: pass modal openers as props */}
+      <Navbar onLoginClick={openLogin} onRegisterClick={openRegister} />
 {/* ================= MODERN HERO SECTION ================= */}
 <section className="hero-modern-full">
   {/* Background Image */}
@@ -152,9 +164,9 @@ const handleExplorePageClick = () => {
 
             <div className="header-right-text">
               <p className="description-text">
-                It’s not about the money, though that’s nice to have. At the end of the day, 
-                it’s really about matching the right buyer to the right seller.
-                We’re matchmakers—real estate matchmakers.
+                It's not about the money, though that's nice to have. At the end of the day, 
+                it's really about matching the right buyer to the right seller.
+                We're matchmakers—real estate matchmakers.
               </p>
             </div>
           </div>
@@ -578,6 +590,25 @@ const handleExplorePageClick = () => {
   </div>
 </section>
       <ContactSection />
+
+      {/* ✅ LOGIN MODAL — only addition at bottom, overlays hero */}
+      {showLogin && (
+        <div className="auth-modal-overlay" onClick={closeModals}>
+          <div className="auth-modal-container" onClick={(e) => e.stopPropagation()}>
+            <Login onClose={closeModals} onSuccess={closeModals} onSwitchToRegister={openRegister} />
+          </div>
+        </div>
+      )}
+
+      {/* ✅ REGISTER MODAL — only addition at bottom, overlays hero */}
+      {showRegister && (
+        <div className="auth-modal-overlay" onClick={closeModals}>
+          <div className="auth-modal-container" onClick={(e) => e.stopPropagation()}>
+            <Register onClose={closeModals} onSuccess={closeModals} onSwitchToLogin={openLogin} />
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
