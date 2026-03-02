@@ -3,6 +3,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { FaBriefcase } from 'react-icons/fa';
 import "./navbar.css";
+import "../pages/Auth.css";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 import {
   FaUser, FaSignOutAlt, FaArrowRight, FaUserPlus, FaLock,
   FaCamera, FaEdit, FaTimes, FaPlus, FaCrown, FaBuilding,
@@ -1062,19 +1065,27 @@ useEffect(() => {
 
       {/* ✅ Auth modals — render ON TOP of current page, no route change */}
       {authModal === 'login' && (
-        <LoginModal
-          onClose={() => setAuthModal(null)}
-          onSwitch={() => setAuthModal('register')}
-          onSuccess={handleAuthSuccess}
-        />
-      )}
-      {authModal === 'register' && (
-        <RegisterModal
-          onClose={() => setAuthModal(null)}
-          onSwitch={() => setAuthModal('login')}
-          onSuccess={handleAuthSuccess}
-        />
-      )}
+  <div className="auth-modal-overlay" onClick={() => setAuthModal(null)}>
+    <div className="auth-modal-container" onClick={e => e.stopPropagation()}>
+      <Login
+        onClose={() => setAuthModal(null)}
+        onSuccess={() => setAuthModal(null)}
+        onSwitchToRegister={() => setAuthModal('register')}
+      />
+    </div>
+  </div>
+)}
+{authModal === 'register' && (
+  <div className="auth-modal-overlay" onClick={() => setAuthModal(null)}>
+    <div className="auth-modal-container" onClick={e => e.stopPropagation()}>
+      <Register
+        onClose={() => setAuthModal(null)}
+        onSuccess={() => setAuthModal(null)}
+        onSwitchToLogin={() => setAuthModal('login')}
+      />
+    </div>
+  </div>
+)}
     </>
   );
 };
