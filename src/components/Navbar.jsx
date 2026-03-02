@@ -963,6 +963,15 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrolled]);
 
+  // ✅ Listen for custom events fired by Welcome.jsx (and any other page)
+  // so buttons like "Explore Properties" or "Discover More" open this modal
+  // instead of navigating to /login or /register
+  useEffect(() => {
+    const handler = (e) => setAuthModal(e.detail); // e.detail = 'login' | 'register'
+    window.addEventListener('open-auth-modal', handler);
+    return () => window.removeEventListener('open-auth-modal', handler);
+  }, []);
+
   const handleNavigation = (path) => startTransition(() => navigate(path));
 
   // Protected routes: open login modal instead of navigating away
@@ -974,7 +983,7 @@ const Navbar = () => {
   const handleLogout = () => { logout(); navigate("/"); };
   const isActive = (path) => location.pathname === path;
 
-  // Close auth modal and optionally navigate somewhere after login/register
+  // Close auth modal after successful login/register
   const handleAuthSuccess = () => setAuthModal(null);
 
   return (
@@ -1049,7 +1058,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Profile panel (existing) */}
+      {/* Profile panel */}
       <ProfilePanel isOpen={profileOpen} onClose={() => setProfileOpen(false)} />
 
       {/* ✅ Auth modals — render ON TOP of current page, no route change */}
