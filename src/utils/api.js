@@ -2,7 +2,7 @@ import axios from "axios";
 
 // API Configuration
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || "https://shrill-amphibian-estate-backend-f9bf3bf3.koyeb.app/api",
+  baseURL: process.env.REACT_APP_API_URL || "https://estate-backend-oun8.onrender.com/api",
   headers: { 
     "Content-Type": "application/json" 
   },
