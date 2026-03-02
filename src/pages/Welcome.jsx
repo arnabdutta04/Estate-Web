@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import ContactSection from "../components/ContactSection";
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 
 // ✅ REMOVED: Login and Register imports — no longer needed here
 // ✅ REMOVED: showLogin / showRegister state — modal is now handled by Navbar
