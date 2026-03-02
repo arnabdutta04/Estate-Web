@@ -957,6 +957,9 @@ const Navbar = () => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 50;
       if (isScrolled !== scrolled) setScrolled(isScrolled);
+    const handler = (e) => setAuthModal(e.detail); // 'login' or 'register'
+      window.addEventListener('open-auth-modal', handler);
+      return () => window.removeEventListener('open-auth-modal', handler);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();

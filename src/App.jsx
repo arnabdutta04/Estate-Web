@@ -1,4 +1,3 @@
-// App.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
@@ -11,10 +10,9 @@ import Explore from "./pages/Explore";
 import Brokers from "./pages/Brokers";
 import BrokerDetail from "./pages/BrokerDetail";
 import BrokerDashboard from "./pages/BrokerDashboard";
-
-// ✅ REMOVED: Login and Register page imports
-// Login and Register are now modals inside Navbar.jsx — not standalone pages.
-// Navigating to /login or /register will redirect to "/" where the modal can be opened.
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+// ✅ REMOVED: Profile import — profile is now a panel in Navbar, not a page
 
 // Components
 import RoleRoute from "./components/RoleRoute";
@@ -27,12 +25,11 @@ function AppContent() {
       {/* HOME/WELCOME PAGE */}
       <Route path="/" element={<Welcome />} />
       <Route path="/home" element={<Navigate to="/" replace />} />
-
+      
       {/* PUBLIC ROUTES */}
       <Route path="/explore" element={<Explore />} />
 
-      {/* ✅ AUTH ROUTES — redirect to home instead of blank page */}
-      {/* The login/register modals open automatically via Navbar's custom event system */}
+      {/* AUTH ROUTES */}
       <Route path="/login" element={<Navigate to="/" replace />} />
       <Route path="/register" element={<Navigate to="/" replace />} />
 
@@ -78,7 +75,7 @@ function AppContent() {
         }
       />
 
-      {/* /profile redirects to home — profile panel opens from navbar button */}
+      {/* ✅ CHANGED: /profile now redirects to home — panel opens from navbar button */}
       <Route path="/profile" element={<Navigate to="/" replace />} />
 
       {/* BROKER-ONLY ROUTES */}
