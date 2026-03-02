@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import ContactSection from "../components/ContactSection";
 import Navbar from "../components/Navbar";
+
 import {
   FaHome,
   FaKey,
@@ -24,8 +25,9 @@ const Welcome = () => {
   const [scrollY] = useState(0);
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  const openLogin = () => window.dispatchEvent(new CustomEvent('open-auth-modal', { detail: 'login' }));
-  const openRegister = () => window.dispatchEvent(new CustomEvent('open-auth-modal', { detail: 'register' }));
+const openLogin = () => window.dispatchEvent(new CustomEvent('open-auth-modal', { detail: 'login' }));
+const openRegister = () => window.dispatchEvent(new CustomEvent('open-auth-modal', { detail: 'register' }));
+
 // PROTECTED - Requires login
 const handleExploreClick = () => {
   if (user) {

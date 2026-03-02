@@ -953,18 +953,23 @@ const Navbar = () => {
   // 'login' | 'register' | null
   const [authModal, setAuthModal] = useState(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 50;
-      if (isScrolled !== scrolled) setScrolled(isScrolled);
-    const handler = (e) => setAuthModal(e.detail); // 'login' or 'register'
-      window.addEventListener('open-auth-modal', handler);
-      return () => window.removeEventListener('open-auth-modal', handler);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [scrolled]);
+ // existing scroll useEffect (don't touch this)
+useEffect(() => {
+  const handleScroll = () => {
+    const isScrolled = window.scrollY > 50;
+    if (isScrolled !== scrolled) setScrolled(isScrolled);
+  };
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
+  return () => window.removeEventListener('scroll', handleScroll);
+}, [scrolled]);
+
+// ✅ ADD THIS NEW useEffect right below it
+useEffect(() => {
+  const handler = (e) => setAuthModal(e.detail); // listens for 'login' or 'register'
+  window.addEventListener('open-auth-modal', handler);
+  return () => window.removeEventListener('open-auth-modal', handler);
+}, []);
 
   const handleNavigation = (path) => startTransition(() => navigate(path));
 
