@@ -1065,18 +1065,26 @@ useEffect(() => {
 
       {/* ✅ Auth modals — render ON TOP of current page, no route change */}
       {authModal === 'login' && (
-  <LoginModal
-    onClose={() => setAuthModal(null)}
-    onSwitch={() => setAuthModal('register')}
-    onSuccess={handleAuthSuccess}
-  />
+  <div className="auth-modal-overlay" onClick={() => setAuthModal(null)}>
+    <div className="auth-modal-container" onClick={e => e.stopPropagation()}>
+      <Login
+        onClose={() => setAuthModal(null)}
+        onSuccess={() => setAuthModal(null)}
+        onSwitchToRegister={() => setAuthModal('register')}
+      />
+    </div>
+  </div>
 )}
 {authModal === 'register' && (
-  <RegisterModal
-    onClose={() => setAuthModal(null)}
-    onSwitch={() => setAuthModal('login')}
-    onSuccess={handleAuthSuccess}
-  />
+  <div className="auth-modal-overlay" onClick={() => setAuthModal(null)}>
+    <div className="auth-modal-container" onClick={e => e.stopPropagation()}>
+      <Register
+        onClose={() => setAuthModal(null)}
+        onSuccess={() => setAuthModal(null)}
+        onSwitchToLogin={() => setAuthModal('login')}
+      />
+    </div>
+  </div>
 )}
     </>
   );
