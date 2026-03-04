@@ -61,7 +61,7 @@ const handleExplorePageClick = () => {
   {/* Background Image */}
   <div className="hero-background-image">
     <img 
-      src="https://i.pinimg.com/1200x/0c/4b/ec/0c4bec65dc195d3528f64fdb55e7bb60.jpg" 
+      src="https://i.pinimg.com/736x/80/69/44/806944f0f3c1ecd9b0869d23a683a53e.jpg" 
       alt="Luxury Property Aerial View"
     />
     <div className="hero-overlay"></div>
