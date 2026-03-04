@@ -347,16 +347,16 @@ function LoginModal({ onClose, onSwitch, onSuccess }) {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true); setError('');
-    try {
-      await login(form.email, form.password);
-      onSuccess();
-    } catch (err) {
-      setError(err.response?.data?.message || 'Invalid email or password');
-    } finally { setLoading(false); }
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true); setError('');
+  try {
+    await login({ email: form.email, password: form.password });  // ✅ FIXED
+    onSuccess();
+  } catch (err) {
+    setError(err.response?.data?.message || 'Invalid email or password');
+  } finally { setLoading(false); }
+};
 
   return (
     <div style={S.authOverlay} onClick={onClose}>
@@ -1065,26 +1065,18 @@ useEffect(() => {
 
       {/* ✅ Auth modals — render ON TOP of current page, no route change */}
       {authModal === 'login' && (
-  <div className="auth-modal-overlay" onClick={() => setAuthModal(null)}>
-    <div className="auth-modal-container" onClick={e => e.stopPropagation()}>
-      <Login
-        onClose={() => setAuthModal(null)}
-        onSuccess={() => setAuthModal(null)}
-        onSwitchToRegister={() => setAuthModal('register')}
-      />
-    </div>
-  </div>
+  <LoginModal
+    onClose={() => setAuthModal(null)}
+    onSwitch={() => setAuthModal('register')}
+    onSuccess={handleAuthSuccess}
+  />
 )}
 {authModal === 'register' && (
-  <div className="auth-modal-overlay" onClick={() => setAuthModal(null)}>
-    <div className="auth-modal-container" onClick={e => e.stopPropagation()}>
-      <Register
-        onClose={() => setAuthModal(null)}
-        onSuccess={() => setAuthModal(null)}
-        onSwitchToLogin={() => setAuthModal('login')}
-      />
-    </div>
-  </div>
+  <RegisterModal
+    onClose={() => setAuthModal(null)}
+    onSwitch={() => setAuthModal('login')}
+    onSuccess={handleAuthSuccess}
+  />
 )}
     </>
   );
