@@ -142,10 +142,10 @@
 
 /* Trust Badges Section - Perfect Transparent Glassmorphism */
 .hero-trust-badges {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.866);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.851);
   border-radius: 20px;
   padding: 2rem 3rem;
   display: flex;
@@ -153,7 +153,7 @@
   align-items: center;
   gap: 2rem;
   flex-wrap: wrap;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0);
 }
 
 .trust-badge-item {
@@ -181,9 +181,9 @@
 .trust-badge-text {
   font-size: 1rem;
   font-weight: 600;
-  color: #fff;
+  color: #000000;
   white-space: nowrap;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0);
 }
 
 /* Suggestions */
