@@ -56,7 +56,7 @@
 .nav-link-glass {
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgb(0, 0, 0);
   font-size: 0.95rem;
   font-weight: 400;
   padding: 0.5rem 0;
@@ -72,7 +72,7 @@
 }
 
 .nav-link-glass.active {
-  color: #40ff00;
+  color: #b3ff00;
   font-weight: 600;
 }
 
@@ -218,10 +218,10 @@
 
 /* Scrolled State */
 .navbar-glass-modern.scrolled .navbar-glass-wrapper {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgb(255, 255, 255);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 32px rgb(255, 255, 255);
 }
 
 /* Responsive Design */
