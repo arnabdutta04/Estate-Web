@@ -67,12 +67,12 @@
 }
 
 .nav-link-glass:hover {
-  color: #fff;
+  color: #000000;
   transform: translateY(-2px);
 }
 
 .nav-link-glass.active {
-  color: #fff;
+  color: #40ff00;
   font-weight: 600;
 }
 
