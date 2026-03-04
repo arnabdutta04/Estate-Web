@@ -63,7 +63,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0);
 }
 
 .nav-link-glass:hover {
@@ -72,7 +72,7 @@
 }
 
 .nav-link-glass.active {
-  color: #b3ff00;
+  color: #c4d600;
   font-weight: 600;
 }
 
@@ -156,8 +156,8 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  background:#c4d600;
+  border: 2px solid rgba(255, 255, 255, 0);
   color: rgba(255, 255, 255, 0.9);
   padding: 0.6rem 1.2rem;
   border-radius: 25px;
